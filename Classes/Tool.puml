@@ -1,0 +1,19 @@
+@startuml
+class Tool {
+.. metadata ..
+    Instantiability : Concrete
+    SubclassOf : Entity
+    name : Tool
+.. properties ..
+}
+note right of Tool
+<b>Summary</b>
+An element of hardware and/or software utilized to carry out a
+particular function.
+<b>Description</b>
+A Tool is an element of hardware and/or software utilized to carry out a
+particular function.
+
+end note
+"Entity" --|> "Tool"
+@enduml

@@ -1,0 +1,9 @@
+@startuml
+!include_once ../Vocabularies/AnnotationType.puml
+note right of AnnotationType::other
+    TODOdescription
+end note
+note right of AnnotationType::review
+    TODOdescription
+end note
+@enduml

@@ -1,0 +1,19 @@
+@startuml
+class Organization {
+.. metadata ..
+    Instantiability : Concrete
+    SubclassOf : Identity
+    name : Organization
+.. properties ..
+}
+note right of Organization
+<b>Summary</b>
+A group of people who work together in an organized way for a shared
+purpose.
+<b>Description</b>
+An Organization is a group of people who work together in an organized
+way for a shared purpose.
+
+end note
+"Identity" --|> "Organization"
+@enduml

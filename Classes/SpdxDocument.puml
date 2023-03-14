@@ -1,0 +1,18 @@
+@startuml
+class SpdxDocument {
+.. metadata ..
+    Instantiability : Concrete
+    SubclassOf : Bundle
+    name : SpdxDocument
+.. properties ..
+    name : xsd:string
+}
+note right of SpdxDocument
+<b>Summary</b>
+TODO
+<b>Description</b>
+TODO
+
+end note
+"Bundle" --|> "SpdxDocument"
+@enduml

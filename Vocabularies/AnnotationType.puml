@@ -1,0 +1,13 @@
+@startuml
+enum AnnotationType {
+    other
+    review
+}
+note top of AnnotationType
+<b>Summary</b>
+TODO
+<b>Description</b>
+TODO
+
+end note
+@enduml

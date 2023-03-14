@@ -1,0 +1,15 @@
+@startuml
+class ProfileIdentifier {
+.. metadata ..
+    SubclassOf : xsd:string
+    name : ProfileIdentifier
+.. properties ..
+}
+note right of ProfileIdentifier
+<b>Summary</b>
+TODO
+<b>Description</b>
+TODO
+
+end note
+@enduml

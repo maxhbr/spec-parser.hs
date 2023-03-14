@@ -1,0 +1,19 @@
+@startuml
+class ExternalIdentifier {
+.. metadata ..
+    Instantiability : Concrete
+    name : ExternalIdentifier
+.. properties ..
+    comment : xsd:string
+    externalIdentifierType
+    identifier : xsd:string
+}
+note right of ExternalIdentifier
+<b>Summary</b>
+TODO
+<b>Description</b>
+TODO
+
+end note
+"ExternalIdentifierType" <-- "ExternalIdentifier::externalIdentifierType"
+@enduml

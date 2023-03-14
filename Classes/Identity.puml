@@ -1,0 +1,18 @@
+@startuml
+class Identity {
+.. metadata ..
+    Instantiability : Concrete
+    SubclassOf : Entity
+    name : Identity
+.. properties ..
+}
+note right of Identity
+<b>Summary</b>
+An individual or organization.
+<b>Description</b>
+An Identity is a grouping of identifying characteristics unique to an
+individual or organization.
+
+end note
+"Entity" --|> "Identity"
+@enduml

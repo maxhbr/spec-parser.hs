@@ -1,0 +1,17 @@
+@startuml
+enum ExternalReferenceType {
+    altDownloadLocation
+    altWebPage
+    other
+    securityAdvisory
+    securityFix
+    securityOther
+}
+note top of ExternalReferenceType
+<b>Summary</b>
+TODO
+<b>Description</b>
+TODO
+
+end note
+@enduml

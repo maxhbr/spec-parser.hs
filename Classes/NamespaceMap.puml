@@ -1,0 +1,17 @@
+@startuml
+class NamespaceMap {
+.. metadata ..
+    Instantiability : Concrete
+    name : NamespaceMap
+.. properties ..
+    namespace : anyURI
+    prefix : xsd:string
+}
+note right of NamespaceMap
+<b>Summary</b>
+TODO
+<b>Description</b>
+TODO
+
+end note
+@enduml

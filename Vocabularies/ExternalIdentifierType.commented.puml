@@ -1,0 +1,30 @@
+@startuml
+!include_once ../Vocabularies/ExternalIdentifierType.puml
+note right of ExternalIdentifierType::cpe22
+    TODOdescription
+end note
+note right of ExternalIdentifierType::cpe23
+    TODOdescription
+end note
+note right of ExternalIdentifierType::email
+    TODOdescription
+end note
+note right of ExternalIdentifierType::gitoid
+    TODOdescription
+end note
+note right of ExternalIdentifierType::other
+    TODOdescription
+end note
+note right of ExternalIdentifierType::pkgUrl
+    TODOdescription
+end note
+note right of ExternalIdentifierType::swhid
+    TODOdescription
+end note
+note right of ExternalIdentifierType::swid
+    TODOdescription
+end note
+note right of ExternalIdentifierType::urlScheme
+    TODOdescription
+end note
+@enduml

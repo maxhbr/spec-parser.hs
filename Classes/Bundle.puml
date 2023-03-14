@@ -1,0 +1,18 @@
+@startuml
+class Bundle {
+.. metadata ..
+    Instantiability : Concrete
+    SubclassOf : ElementCollection
+    name : Bundle
+.. properties ..
+    context : xsd:string
+}
+note right of Bundle
+<b>Summary</b>
+TODO
+<b>Description</b>
+TODO
+
+end note
+"ElementCollection" --|> "Bundle"
+@enduml

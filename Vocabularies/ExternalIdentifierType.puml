@@ -1,0 +1,20 @@
+@startuml
+enum ExternalIdentifierType {
+    cpe22
+    cpe23
+    email
+    gitoid
+    other
+    pkgUrl
+    swhid
+    swid
+    urlScheme
+}
+note top of ExternalIdentifierType
+<b>Summary</b>
+TODO
+<b>Description</b>
+TODO
+
+end note
+@enduml

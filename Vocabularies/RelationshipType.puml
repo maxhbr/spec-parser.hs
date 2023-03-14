@@ -1,0 +1,51 @@
+@startuml
+enum RelationshipType {
+    amends
+    ancestor
+    buildDependency
+    buildTool
+    contains
+    copy
+    dataFile
+    dependencyManifest
+    dependsOn
+    descendant
+    describes
+    devDependency
+    devTool
+    distributionArtifact
+    documentation
+    dynamicLink
+    example
+    expandedFromArchive
+    fileAdded
+    fileDeleted
+    fileModified
+    generates
+    metafile
+    optionalComponent
+    optionalDependency
+    other
+    packages
+    patch
+    prerequisite
+    providedDependency
+    requirementFor
+    runtimeDependency
+    specificationFor
+    staticLink
+    suppliedBy
+    test
+    testCase
+    testDependency
+    testTool
+    variant
+}
+note top of RelationshipType
+<b>Summary</b>
+TODO
+<b>Description</b>
+TODO
+
+end note
+@enduml

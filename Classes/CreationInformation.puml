@@ -1,0 +1,23 @@
+@startuml
+class CreationInformation {
+.. metadata ..
+    Instantiability : Concrete
+    name : CreationInformation
+.. properties ..
+    created : xsd:dateTime
+    createdBy
+    dataLicense : xsd:string
+    profile
+    specVersion
+}
+note right of CreationInformation
+<b>Summary</b>
+TODO
+<b>Description</b>
+TODO
+
+end note
+"Entity" <-- "CreationInformation::createdBy"
+"ProfileIdentifier" <-- "CreationInformation::profile"
+"SemVer" <-- "CreationInformation::specVersion"
+@enduml

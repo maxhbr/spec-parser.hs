@@ -1,0 +1,63 @@
+@startuml
+!include_once ../Vocabularies/HashAlgorithm.puml
+note right of HashAlgorithm::blake2b256
+    TODOdescription
+end note
+note right of HashAlgorithm::blake2b384
+    TODOdescription
+end note
+note right of HashAlgorithm::blake2b512
+    TODOdescription
+end note
+note right of HashAlgorithm::blake3
+    TODOdescription
+end note
+note right of HashAlgorithm::md2
+    TODOdescription
+end note
+note right of HashAlgorithm::md4
+    TODOdescription
+end note
+note right of HashAlgorithm::md5
+    TODOdescription
+end note
+note right of HashAlgorithm::md6
+    TODOdescription
+end note
+note right of HashAlgorithm::other
+    TODOdescription
+end note
+note right of HashAlgorithm::sha1
+    TODOdescription
+end note
+note right of HashAlgorithm::sha224
+    TODOdescription
+end note
+note right of HashAlgorithm::sha256
+    TODOdescription
+end note
+note right of HashAlgorithm::sha384
+    TODOdescription
+end note
+note right of HashAlgorithm::sha3_224
+    TODOdescription
+end note
+note right of HashAlgorithm::sha3_256
+    TODOdescription
+end note
+note right of HashAlgorithm::sha3_384
+    TODOdescription
+end note
+note right of HashAlgorithm::sha3_512
+    TODOdescription
+end note
+note right of HashAlgorithm::sha512
+    TODOdescription
+end note
+note right of HashAlgorithm::spdxPvcSha1
+    TODOdescription
+end note
+note right of HashAlgorithm::spdxPvcSha256
+    TODOdescription
+end note
+@enduml

@@ -1,0 +1,15 @@
+@startuml
+class MediaType {
+.. metadata ..
+    SubclassOf : xsd:string
+    name : MediaType
+.. properties ..
+}
+note right of MediaType
+<b>Summary</b>
+TODO
+<b>Description</b>
+TODO
+
+end note
+@enduml

@@ -1,0 +1,17 @@
+@startuml
+class Person {
+.. metadata ..
+    Instantiability : Concrete
+    SubclassOf : Identity
+    name : Person
+.. properties ..
+}
+note right of Person
+<b>Summary</b>
+An individual human being.
+<b>Description</b>
+A Person is an individual human being.
+
+end note
+"Identity" --|> "Person"
+@enduml

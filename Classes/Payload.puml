@@ -1,0 +1,22 @@
+@startuml
+class Payload {
+.. metadata ..
+    Instantiability : Abstract
+    SubclassOf : none
+    name : Payload
+.. properties ..
+    creationInfo
+    imports
+    namespaces
+}
+note right of Payload
+<b>Summary</b>
+TODO
+<b>Description</b>
+TODO
+
+end note
+"CreationInformation" <-- "Payload::creationInfo"
+"ExternalMap" <-- "Payload::imports"
+"NamespaceMap" <-- "Payload::namespaces"
+@enduml

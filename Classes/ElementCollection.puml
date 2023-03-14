@@ -1,0 +1,25 @@
+@startuml
+class ElementCollection {
+.. metadata ..
+    Instantiability : Abstract
+    SubclassOf : Element
+    name : ElementCollection
+.. properties ..
+    element
+    imports
+    namespaces
+    rootElement
+}
+note right of ElementCollection
+<b>Summary</b>
+TODO
+<b>Description</b>
+TODO
+
+end note
+"Element" --|> "ElementCollection"
+"Element" <-- "ElementCollection::element"
+"ExternalMap" <-- "ElementCollection::imports"
+"NamespaceMap" <-- "ElementCollection::namespaces"
+"Element" <-- "ElementCollection::rootElement"
+@enduml

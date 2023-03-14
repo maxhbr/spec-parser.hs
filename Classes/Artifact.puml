@@ -1,0 +1,21 @@
+@startuml
+class Artifact {
+.. metadata ..
+    Instantiability : Abstract
+    SubclassOf : Element
+    name : Artifact
+.. properties ..
+    originatedBy
+}
+note right of Artifact
+<b>Summary</b>
+A distinct article or unit within the digital domain.
+<b>Description</b>
+An artifact is a distinct article or unit within the digital domain,
+such as an electronic file, a software package, a device or an element
+of data.
+
+end note
+"Element" --|> "Artifact"
+"Identity" <-- "Artifact::originatedBy"
+@enduml

@@ -1,0 +1,26 @@
+@startuml
+class Relationship {
+.. metadata ..
+    Instantiability : Concrete
+    SubclassOf : Element
+    name : Relationship
+.. properties ..
+    completeness
+    from
+    relationshipType
+    to
+}
+note right of Relationship
+<b>Summary</b>
+Describes a relationship between one or more elements.
+<b>Description</b>
+A Relationship is a grouping of characteristics unique to an assertion
+that one Element is related to one or more other Elements in some way.
+
+end note
+"Element" --|> "Relationship"
+"RelationshipCompleteness" <-- "Relationship::completeness"
+"Element" <-- "Relationship::from"
+"RelationshipType" <-- "Relationship::relationshipType"
+"Element" <-- "Relationship::to"
+@enduml

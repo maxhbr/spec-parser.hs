@@ -1,0 +1,37 @@
+@startuml
+class Element {
+.. metadata ..
+    Instantiability : Abstract
+    SubclassOf : Payload
+    name : Element
+.. properties ..
+    comment : xsd:string
+    creationInfo
+    description : xsd:string
+    extensions
+    externalIdentifiers
+    externalReferences
+    name : xsd:string
+    spdxId : anyURI
+    summary : xsd:string
+    verifiedUsing
+}
+note right of Element
+<b>Summary</b>
+Base domain class from which all other SPDX-3.0 domain classes derive.
+<b>Description</b>
+An Element is a representation of a fundamental concept either directly
+inherent to the Bill of Materials (BOM) domain or indirectly related to
+the BOM domain and necessary for contextually characterizing BOM
+concepts and relationships. Within SPDX-3.0 structure this is the base
+class acting as a consistent, unifying, and interoperable foundation for
+all explicit and inter-relatable content objects.
+
+end note
+"Payload" --|> "Element"
+"CreationInformation" <-- "Element::creationInfo"
+"Extension" <-- "Element::extensions"
+"ExternalIdentifier" <-- "Element::externalIdentifiers"
+"ExternalReference" <-- "Element::externalReferences"
+"IntegrityMethod" <-- "Element::verifiedUsing"
+@enduml

@@ -1,0 +1,17 @@
+@startuml
+class Entity {
+.. metadata ..
+    Instantiability : Concrete
+    SubclassOf : Element
+    name : Entity
+.. properties ..
+}
+note right of Entity
+<b>Summary</b>
+TODO
+<b>Description</b>
+TODO
+
+end note
+"Element" --|> "Entity"
+@enduml

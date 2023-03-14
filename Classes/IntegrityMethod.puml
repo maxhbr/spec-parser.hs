@@ -1,0 +1,16 @@
+@startuml
+class IntegrityMethod {
+.. metadata ..
+    Instantiability : Abstract
+    name : IntegrityMethod
+.. properties ..
+    comment : xsd:string
+}
+note right of IntegrityMethod
+<b>Summary</b>
+TODO
+<b>Description</b>
+TODO
+
+end note
+@enduml

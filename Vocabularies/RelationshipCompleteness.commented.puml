@@ -1,0 +1,12 @@
+@startuml
+!include_once ../Vocabularies/RelationshipCompleteness.puml
+note right of RelationshipCompleteness::incomplete
+    TODOdescription
+end note
+note right of RelationshipCompleteness::known
+    TODOdescription
+end note
+note right of RelationshipCompleteness::unknown
+    TODOdescription
+end note
+@enduml

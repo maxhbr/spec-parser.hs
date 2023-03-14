@@ -1,0 +1,23 @@
+@startuml
+class AnonymousPayload {
+.. metadata ..
+    Instantiability : Concrete
+    SubclassOf : Payload
+    name : AnonymousPayload
+.. properties ..
+    creationInfo
+    imports
+    namespaces
+}
+note right of AnonymousPayload
+<b>Summary</b>
+TODO
+<b>Description</b>
+TODO
+
+end note
+"Payload" --|> "AnonymousPayload"
+"CreationInformation" <-- "AnonymousPayload::creationInfo"
+"ExternalMap" <-- "AnonymousPayload::imports"
+"NamespaceMap" <-- "AnonymousPayload::namespaces"
+@enduml

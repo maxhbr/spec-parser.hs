@@ -15,5 +15,5 @@ An Organization is a group of people who work together in an organized
 way for a shared purpose.
 
 end note
-"Identity" <|-- "Organization"
+"Identity" <|-[thickness=4]- "Organization"
 @enduml

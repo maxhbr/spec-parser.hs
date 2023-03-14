@@ -16,6 +16,6 @@ such as an electronic file, a software package, a device or an element
 of data.
 
 end note
-"Element" <|-- "Artifact"
-"Identity" <-- "Artifact::originatedBy"
+"Element" <|-[thickness=4]- "Artifact"
+"Identity" <--- "Artifact::originatedBy"
 @enduml

@@ -13,5 +13,5 @@ TODO
 TODO
 
 end note
-"Element" <|-- "Entity"
+"Element" <|-[thickness=4]- "Entity"
 @enduml

@@ -14,5 +14,5 @@ TODO
 TODO
 
 end note
-"ElementCollection" <|-- "Bundle"
+"ElementCollection" <|-[thickness=4]- "Bundle"
 @enduml

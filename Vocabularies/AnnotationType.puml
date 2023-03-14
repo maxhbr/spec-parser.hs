@@ -1,7 +1,7 @@
 @startuml
 enum AnnotationType {
-    other
-    review
+    other : TODOdescription
+    review : TODOdescription
 }
 note top of AnnotationType
 <b>Summary</b>

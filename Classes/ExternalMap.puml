@@ -20,5 +20,5 @@ provides details about the externally-defined Element such as its
 provenance, where to retrieve it, and how to verify its integrity.
 
 end note
-"IntegrityMethod" <-- "ExternalMap::verifiedUsing"
+"IntegrityMethod" <--- "ExternalMap::verifiedUsing"
 @enduml

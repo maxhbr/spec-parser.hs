@@ -17,8 +17,8 @@ An assertion made in relation to one or more elements.
 An Annotation is an assertion made in relation to one or more elements.
 
 end note
-"Element" <|-- "Annotation"
-"AnnotationType" <-- "Annotation::annotationType"
-"MediaType" <-- "Annotation::contentType"
-"Element" <-- "Annotation::subject"
+"Element" <|-[thickness=4]- "Annotation"
+"AnnotationType" <--- "Annotation::annotationType"
+"MediaType" <--- "Annotation::contentType"
+"Element" <--- "Annotation::subject"
 @enduml

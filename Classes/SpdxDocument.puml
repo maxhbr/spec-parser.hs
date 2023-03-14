@@ -14,5 +14,5 @@ TODO
 TODO
 
 end note
-"Bundle" <|-- "SpdxDocument"
+"Bundle" <|-[thickness=4]- "SpdxDocument"
 @enduml

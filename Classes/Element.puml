@@ -28,10 +28,10 @@ class acting as a consistent, unifying, and interoperable foundation for
 all explicit and inter-relatable content objects.
 
 end note
-"Payload" <|-- "Element"
-"CreationInformation" <-- "Element::creationInfo"
-"Extension" <-- "Element::extensions"
-"ExternalIdentifier" <-- "Element::externalIdentifiers"
-"ExternalReference" <-- "Element::externalReferences"
-"IntegrityMethod" <-- "Element::verifiedUsing"
+"Payload" <|-[thickness=4]- "Element"
+"CreationInformation" <--- "Element::creationInfo"
+"Extension" <--- "Element::extensions"
+"ExternalIdentifier" <--- "Element::externalIdentifiers"
+"ExternalReference" <--- "Element::externalReferences"
+"IntegrityMethod" <--- "Element::verifiedUsing"
 @enduml

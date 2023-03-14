@@ -16,7 +16,7 @@ TODO
 TODO
 
 end note
-"CreationInformation" <-- "Payload::creationInfo"
-"ExternalMap" <-- "Payload::imports"
-"NamespaceMap" <-- "Payload::namespaces"
+"CreationInformation" <--- "Payload::creationInfo"
+"ExternalMap" <--- "Payload::imports"
+"NamespaceMap" <--- "Payload::namespaces"
 @enduml

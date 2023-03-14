@@ -1,11 +1,11 @@
 @startuml
 enum ExternalReferenceType {
-    altDownloadLocation
-    altWebPage
-    other
-    securityAdvisory
-    securityFix
-    securityOther
+    altDownloadLocation : TODOdescription
+    altWebPage : TODOdescription
+    other : TODOdescription
+    securityAdvisory : TODOdescription
+    securityFix : TODOdescription
+    securityOther : TODOdescription
 }
 note top of ExternalReferenceType
 <b>Summary</b>

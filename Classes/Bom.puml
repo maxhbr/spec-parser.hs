@@ -18,5 +18,5 @@ details of the product and/or its composition, licensing information,
 known quality or security issues, etc.
 
 end note
-"Bundle" <|-- "Bom"
+"Bundle" <|-[thickness=4]- "Bom"
 @enduml

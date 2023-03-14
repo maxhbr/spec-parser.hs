@@ -16,8 +16,8 @@ TODO
 TODO
 
 end note
-"Payload" <|-- "AnonymousPayload"
-"CreationInformation" <-- "AnonymousPayload::creationInfo"
-"ExternalMap" <-- "AnonymousPayload::imports"
-"NamespaceMap" <-- "AnonymousPayload::namespaces"
+"Payload" <|-[thickness=4]- "AnonymousPayload"
+"CreationInformation" <--- "AnonymousPayload::creationInfo"
+"ExternalMap" <--- "AnonymousPayload::imports"
+"NamespaceMap" <--- "AnonymousPayload::namespaces"
 @enduml

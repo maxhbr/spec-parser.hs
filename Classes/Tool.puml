@@ -15,5 +15,5 @@ A Tool is an element of hardware and/or software utilized to carry out a
 particular function.
 
 end note
-"Entity" <|-- "Tool"
+"Entity" <|-[thickness=4]- "Tool"
 @enduml

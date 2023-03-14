@@ -1,45 +1,45 @@
 @startuml
 enum RelationshipType {
-    amends
-    ancestor
-    buildDependency
-    buildTool
-    contains
-    copy
-    dataFile
-    dependencyManifest
-    dependsOn
-    descendant
-    describes
-    devDependency
-    devTool
-    distributionArtifact
-    documentation
-    dynamicLink
-    example
-    expandedFromArchive
-    fileAdded
-    fileDeleted
-    fileModified
-    generates
-    metafile
-    optionalComponent
-    optionalDependency
-    other
-    packages
-    patch
-    prerequisite
-    providedDependency
-    requirementFor
-    runtimeDependency
-    specificationFor
-    staticLink
-    suppliedBy
-    test
-    testCase
-    testDependency
-    testTool
-    variant
+    amends : TODOdescription
+    ancestor : TODOdescription
+    buildDependency : TODOdescription
+    buildTool : TODOdescription
+    contains : TODOdescription
+    copy : TODOdescription
+    dataFile : TODOdescription
+    dependencyManifest : TODOdescription
+    dependsOn : TODOdescription
+    descendant : TODOdescription
+    describes : TODOdescription
+    devDependency : TODOdescription
+    devTool : TODOdescription
+    distributionArtifact : TODOdescription
+    documentation : TODOdescription
+    dynamicLink : TODOdescription
+    example : TODOdescription
+    expandedFromArchive : TODOdescription
+    fileAdded : TODOdescription
+    fileDeleted : TODOdescription
+    fileModified : TODOdescription
+    generates : TODOdescription
+    metafile : TODOdescription
+    optionalComponent : TODOdescription
+    optionalDependency : TODOdescription
+    other : TODOdescription
+    packages : TODOdescription
+    patch : TODOdescription
+    prerequisite : TODOdescription
+    providedDependency : TODOdescription
+    requirementFor : TODOdescription
+    runtimeDependency : TODOdescription
+    specificationFor : TODOdescription
+    staticLink : TODOdescription
+    suppliedBy : TODOdescription
+    test : TODOdescription
+    testCase : TODOdescription
+    testDependency : TODOdescription
+    testTool : TODOdescription
+    variant : TODOdescription
 }
 note top of RelationshipType
 <b>Summary</b>

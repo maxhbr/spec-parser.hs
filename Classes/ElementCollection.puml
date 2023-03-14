@@ -17,9 +17,9 @@ TODO
 TODO
 
 end note
-"Element" <|-- "ElementCollection"
-"Element" <-- "ElementCollection::element"
-"ExternalMap" <-- "ElementCollection::imports"
-"NamespaceMap" <-- "ElementCollection::namespaces"
-"Element" <-- "ElementCollection::rootElement"
+"Element" <|-[thickness=4]- "ElementCollection"
+"Element" <--- "ElementCollection::element"
+"ExternalMap" <--- "ElementCollection::imports"
+"NamespaceMap" <--- "ElementCollection::namespaces"
+"Element" <--- "ElementCollection::rootElement"
 @enduml

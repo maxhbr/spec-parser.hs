@@ -13,5 +13,5 @@ An individual human being.
 A Person is an individual human being.
 
 end note
-"Identity" <|-- "Person"
+"Identity" <|-[thickness=4]- "Person"
 @enduml

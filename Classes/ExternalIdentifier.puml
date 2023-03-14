@@ -15,5 +15,5 @@ TODO
 TODO
 
 end note
-"ExternalIdentifierType" <-- "ExternalIdentifier::externalIdentifierType"
+"ExternalIdentifierType" <--- "ExternalIdentifier::externalIdentifierType"
 @enduml

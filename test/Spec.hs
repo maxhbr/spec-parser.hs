@@ -18,7 +18,7 @@ main = do
     spec <- parseSpecIO "spdx-3-model/model/Core/"
     print spec
 
-    specToPuml "_out" spec
-    BSL.writeFile "_out/index.json" (encodePretty spec)
+    specToPuml "gh-pages" spec
+    BSL.writeFile "gh-pages/index.json" (encodePretty spec)
 
     putStrLn "done smoketests"

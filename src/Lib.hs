@@ -274,7 +274,7 @@ vocabularyToPuml root context@(Spec{vocabularies = vocabularies}) key = let
                     T.hPutStrLn h ("enum " <> commonName <> " {")
                     mapM_ (\(k,_) -> T.hPutStrLn h ("    " <> k)) (Map.toList custom) 
                     hPutStrLn h "}"
-                    T.hPutStrLn h ("note right of " <> commonName)
+                    T.hPutStrLn h ("note top of " <> commonName)
                     T.hPutStrLn h (T.unlines ["<b>Summary</b>", commonSummary, "<b>Description</b>", commonDescription])
                     T.hPutStrLn h "end note"
             hPutStrLn h "@enduml"
@@ -345,7 +345,9 @@ classToPuml root context@(Spec{classes = classes}) key = let
                         , commonMetadata = commonMetadata
                         , custom = custom
                 }) -> do
-                    T.hPutStrLn h ("class " <> commonName <> " {")
+                    if Map.lookup "Instantiability" commonMetadata == Just "Abstract"
+                        then T.hPutStrLn h ("abstract " <> commonName <> " {")
+                        else T.hPutStrLn h ("class " <> commonName <> " {")
                     hPutStrLn h ".. metadata .."
                     mapM_ (\(k,v) -> T.hPutStrLn h ("    " <> k <> " : " <> v)) (Map.toList commonMetadata) 
                     hPutStrLn h ".. properties .."
@@ -361,13 +363,14 @@ classToPuml root context@(Spec{classes = classes}) key = let
                             T.hPutStrLn h ("    " <> k <> plainTypeText)
                         ) (Map.toList custom) 
                     hPutStrLn h "}"
-                    T.hPutStrLn h ("note right of " <> commonName)
+                    T.hPutStrLn h ("note top of " <> commonName)
                     T.hPutStrLn h (T.unlines ["<b>Summary</b>", commonSummary, "<b>Description</b>", commonDescription])
                     T.hPutStrLn h "end note"
                     case Map.lookup "SubclassOf" commonMetadata of
                         Just sco ->
                             unless (sco == "none" || isBasicType sco) $
-                                T.hPutStrLn h ("\"" <> nameToIdentifier sco <> "\" --|> \"" <> commonName <> "\"")
+                                T.hPutStrLn h ("\"" <> nameToIdentifier sco <> "\" <|-- \"" <> commonName <> "\"")
+
                         Nothing -> pure ()
 
                     mapM_ (\(k,v) -> do

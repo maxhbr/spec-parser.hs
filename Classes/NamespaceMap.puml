@@ -7,7 +7,7 @@ class NamespaceMap {
     namespace : anyURI
     prefix : xsd:string
 }
-note right of NamespaceMap
+note top of NamespaceMap
 <b>Summary</b>
 TODO
 <b>Description</b>

@@ -8,7 +8,7 @@ class ExternalIdentifier {
     externalIdentifierType
     identifier : xsd:string
 }
-note right of ExternalIdentifier
+note top of ExternalIdentifier
 <b>Summary</b>
 TODO
 <b>Description</b>

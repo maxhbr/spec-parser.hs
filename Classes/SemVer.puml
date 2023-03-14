@@ -5,7 +5,7 @@ class SemVer {
     name : SemVer
 .. properties ..
 }
-note right of SemVer
+note top of SemVer
 <b>Summary</b>
 TODO
 <b>Description</b>

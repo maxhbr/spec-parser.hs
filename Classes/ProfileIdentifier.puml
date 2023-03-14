@@ -5,7 +5,7 @@ class ProfileIdentifier {
     name : ProfileIdentifier
 .. properties ..
 }
-note right of ProfileIdentifier
+note top of ProfileIdentifier
 <b>Summary</b>
 TODO
 <b>Description</b>

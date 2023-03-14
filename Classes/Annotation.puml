@@ -10,14 +10,14 @@ class Annotation {
     statement : xsd:string
     subject
 }
-note right of Annotation
+note top of Annotation
 <b>Summary</b>
 An assertion made in relation to one or more elements.
 <b>Description</b>
 An Annotation is an assertion made in relation to one or more elements.
 
 end note
-"Element" --|> "Annotation"
+"Element" <|-- "Annotation"
 "AnnotationType" <-- "Annotation::annotationType"
 "MediaType" <-- "Annotation::contentType"
 "Element" <-- "Annotation::subject"

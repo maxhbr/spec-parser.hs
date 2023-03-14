@@ -7,12 +7,12 @@ class SpdxDocument {
 .. properties ..
     name : xsd:string
 }
-note right of SpdxDocument
+note top of SpdxDocument
 <b>Summary</b>
 TODO
 <b>Description</b>
 TODO
 
 end note
-"Bundle" --|> "SpdxDocument"
+"Bundle" <|-- "SpdxDocument"
 @enduml

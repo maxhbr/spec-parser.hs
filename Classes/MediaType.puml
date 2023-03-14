@@ -5,7 +5,7 @@ class MediaType {
     name : MediaType
 .. properties ..
 }
-note right of MediaType
+note top of MediaType
 <b>Summary</b>
 TODO
 <b>Description</b>

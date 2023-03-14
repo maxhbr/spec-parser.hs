@@ -9,14 +9,14 @@ class AnonymousPayload {
     imports
     namespaces
 }
-note right of AnonymousPayload
+note top of AnonymousPayload
 <b>Summary</b>
 TODO
 <b>Description</b>
 TODO
 
 end note
-"Payload" --|> "AnonymousPayload"
+"Payload" <|-- "AnonymousPayload"
 "CreationInformation" <-- "AnonymousPayload::creationInfo"
 "ExternalMap" <-- "AnonymousPayload::imports"
 "NamespaceMap" <-- "AnonymousPayload::namespaces"

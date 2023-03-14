@@ -1,5 +1,5 @@
 @startuml
-class Payload {
+abstract Payload {
 .. metadata ..
     Instantiability : Abstract
     SubclassOf : none
@@ -9,7 +9,7 @@ class Payload {
     imports
     namespaces
 }
-note right of Payload
+note top of Payload
 <b>Summary</b>
 TODO
 <b>Description</b>

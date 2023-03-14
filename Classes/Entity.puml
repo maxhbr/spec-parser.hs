@@ -6,12 +6,12 @@ class Entity {
     name : Entity
 .. properties ..
 }
-note right of Entity
+note top of Entity
 <b>Summary</b>
 TODO
 <b>Description</b>
 TODO
 
 end note
-"Element" --|> "Entity"
+"Element" <|-- "Entity"
 @enduml

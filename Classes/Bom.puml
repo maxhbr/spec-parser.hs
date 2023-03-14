@@ -6,7 +6,7 @@ class Bom {
     name : Bom
 .. properties ..
 }
-note right of Bom
+note top of Bom
 <b>Summary</b>
 A container for a grouping of SPDX-3.0 content characterizing details
 (provenence, composition, licensing, etc.) about a product.
@@ -18,5 +18,5 @@ details of the product and/or its composition, licensing information,
 known quality or security issues, etc.
 
 end note
-"Bundle" --|> "Bom"
+"Bundle" <|-- "Bom"
 @enduml

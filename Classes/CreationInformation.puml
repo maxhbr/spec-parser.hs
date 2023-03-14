@@ -10,7 +10,7 @@ class CreationInformation {
     profile
     specVersion
 }
-note right of CreationInformation
+note top of CreationInformation
 <b>Summary</b>
 TODO
 <b>Description</b>

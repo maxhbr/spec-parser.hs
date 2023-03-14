@@ -9,7 +9,7 @@ class ExternalMap {
     locationHint : anyURI
     verifiedUsing
 }
-note right of ExternalMap
+note top of ExternalMap
 <b>Summary</b>
 A map of Element identifiers that are used within a Document but defined
 external to that Document.

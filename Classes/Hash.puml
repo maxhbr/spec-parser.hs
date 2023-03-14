@@ -7,7 +7,7 @@ class Hash {
     algorithm
     hashValue : xsd:string
 }
-note right of Hash
+note top of Hash
 <b>Summary</b>
 A mathematically calculated representation of a grouping of data.
 <b>Description</b>
@@ -18,6 +18,6 @@ is practically infeasible to invert. This is commonly used for integrity
 checking of data.
 
 end note
-"IntegrityMethod" --|> "Hash"
+"IntegrityMethod" <|-- "Hash"
 "HashAlgorithm" <-- "Hash::algorithm"
 @enduml

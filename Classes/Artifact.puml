@@ -1,5 +1,5 @@
 @startuml
-class Artifact {
+abstract Artifact {
 .. metadata ..
     Instantiability : Abstract
     SubclassOf : Element
@@ -7,7 +7,7 @@ class Artifact {
 .. properties ..
     originatedBy
 }
-note right of Artifact
+note top of Artifact
 <b>Summary</b>
 A distinct article or unit within the digital domain.
 <b>Description</b>
@@ -16,6 +16,6 @@ such as an electronic file, a software package, a device or an element
 of data.
 
 end note
-"Element" --|> "Artifact"
+"Element" <|-- "Artifact"
 "Identity" <-- "Artifact::originatedBy"
 @enduml

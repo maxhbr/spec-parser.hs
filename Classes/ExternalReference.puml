@@ -10,7 +10,7 @@ class ExternalReference {
     externalReferenceType
     locator : anyURI
 }
-note right of ExternalReference
+note top of ExternalReference
 <b>Summary</b>
 A reference to a resource outside of the scope of SPDX-3.0 content.
 <b>Description</b>

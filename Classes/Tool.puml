@@ -6,7 +6,7 @@ class Tool {
     name : Tool
 .. properties ..
 }
-note right of Tool
+note top of Tool
 <b>Summary</b>
 An element of hardware and/or software utilized to carry out a
 particular function.
@@ -15,5 +15,5 @@ A Tool is an element of hardware and/or software utilized to carry out a
 particular function.
 
 end note
-"Entity" --|> "Tool"
+"Entity" <|-- "Tool"
 @enduml

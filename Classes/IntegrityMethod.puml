@@ -1,12 +1,12 @@
 @startuml
-class IntegrityMethod {
+abstract IntegrityMethod {
 .. metadata ..
     Instantiability : Abstract
     name : IntegrityMethod
 .. properties ..
     comment : xsd:string
 }
-note right of IntegrityMethod
+note top of IntegrityMethod
 <b>Summary</b>
 TODO
 <b>Description</b>

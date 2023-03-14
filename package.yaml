@@ -21,6 +21,19 @@ description:         Please see the README on GitHub at <https://github.com/maxh
 
 dependencies:
 - base >= 4.7 && < 5
+- pandoc
+- text
+- vector
+- hashable
+- containers
+- unordered-containers
+- filepath
+- Glob
+- directory
+- bytestring
+- process
+- aeson
+- aeson-pretty
 
 ghc-options:
 - -Wall

@@ -4,9 +4,9 @@ class ExternalIdentifier {
     Instantiability : Concrete
     name : ExternalIdentifier
 .. properties ..
-    comment : xsd:string
-    externalIdentifierType
-    identifier : xsd:string
+    comment : xsd:string [0..1]
+    externalIdentifierType : ExternalIdentifierType [1..1]
+    identifier : xsd:string [1..1]
 }
 note top of ExternalIdentifier
 <b>Summary</b>

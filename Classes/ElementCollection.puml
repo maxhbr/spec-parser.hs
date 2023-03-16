@@ -5,10 +5,10 @@ abstract ElementCollection {
     SubclassOf : Element
     name : ElementCollection
 .. properties ..
-    element
-    imports
-    namespaces
-    rootElement
+    element : Element [1..]
+    imports : ExternalMap [..]
+    namespaces : NamespaceMap [..]
+    rootElement : Element [1..]
 }
 note top of ElementCollection
 <b>Summary</b>

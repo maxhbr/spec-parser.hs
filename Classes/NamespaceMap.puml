@@ -4,8 +4,8 @@ class NamespaceMap {
     Instantiability : Concrete
     name : NamespaceMap
 .. properties ..
-    namespace : anyURI
-    prefix : xsd:string
+    namespace : anyURI [..1]
+    prefix : xsd:string [..1]
 }
 note top of NamespaceMap
 <b>Summary</b>

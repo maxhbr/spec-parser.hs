@@ -5,10 +5,10 @@ class Relationship {
     SubclassOf : Element
     name : Relationship
 .. properties ..
-    completeness
-    from
-    relationshipType
-    to
+    completeness : RelationshipCompleteness [0..1]
+    from : Element [1..1]
+    relationshipType : RelationshipType [..1]
+    to : Element [1..]
 }
 note top of Relationship
 <b>Summary</b>

@@ -4,7 +4,7 @@ abstract IntegrityMethod {
     Instantiability : Abstract
     name : IntegrityMethod
 .. properties ..
-    comment : xsd:string
+    comment : xsd:string [..1]
 }
 note top of IntegrityMethod
 <b>Summary</b>

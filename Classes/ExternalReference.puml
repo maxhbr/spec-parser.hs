@@ -5,10 +5,10 @@ class ExternalReference {
     SubclassOf : none
     name : ExternalReference
 .. properties ..
-    comment : xsd:string
-    contentType
-    externalReferenceType
-    locator : anyURI
+    comment : xsd:string [..1]
+    contentType : MediaType [..1]
+    externalReferenceType : ExternalReferenceType [..1]
+    locator : anyURI [..]
 }
 note top of ExternalReference
 <b>Summary</b>

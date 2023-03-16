@@ -5,9 +5,9 @@ abstract Payload {
     SubclassOf : none
     name : Payload
 .. properties ..
-    creationInfo
-    imports
-    namespaces
+    creationInfo : CreationInformation [0..1]
+    imports : ExternalMap [..]
+    namespaces : NamespaceMap [..]
 }
 note top of Payload
 <b>Summary</b>

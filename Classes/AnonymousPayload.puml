@@ -5,9 +5,9 @@ class AnonymousPayload {
     SubclassOf : Payload
     name : AnonymousPayload
 .. properties ..
-    creationInfo
-    imports
-    namespaces
+    creationInfo : CreationInformation [0..1]
+    imports : ExternalMap [..]
+    namespaces : NamespaceMap [..]
 }
 note top of AnonymousPayload
 <b>Summary</b>

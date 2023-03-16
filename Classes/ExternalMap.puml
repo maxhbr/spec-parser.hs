@@ -5,9 +5,9 @@ class ExternalMap {
     SubclassOf : none
     name : ExternalMap
 .. properties ..
-    externalId : anyURI
-    locationHint : anyURI
-    verifiedUsing
+    externalId : anyURI [1..1]
+    locationHint : anyURI [..1]
+    verifiedUsing : IntegrityMethod [..]
 }
 note top of ExternalMap
 <b>Summary</b>

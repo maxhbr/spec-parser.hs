@@ -5,7 +5,7 @@ class Bundle {
     SubclassOf : ElementCollection
     name : Bundle
 .. properties ..
-    context : xsd:string
+    context : xsd:string [..1]
 }
 note top of Bundle
 <b>Summary</b>

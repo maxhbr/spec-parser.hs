@@ -4,8 +4,8 @@ class Hash {
     SubclassOf : IntegrityMethod
     name : Hash
 .. properties ..
-    algorithm
-    hashValue : xsd:string
+    algorithm : HashAlgorithm [1..1]
+    hashValue : xsd:string [1..1]
 }
 note top of Hash
 <b>Summary</b>

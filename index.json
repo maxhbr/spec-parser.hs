@@ -1,1108 +1,1262 @@
 {
-    "classes": {
-        "Annotation": {
-            "commonDescription": "An Annotation is an assertion made in relation to one or more elements.",
-            "commonMetadata": {
-                "Instantiability": "Concrete",
-                "SubclassOf": "Element",
-                "name": "Annotation"
-            },
-            "commonName": "Annotation",
-            "commonStart": "SPDX-License-Identifier: Community-Spec-1.0",
-            "commonSummary": "An assertion made in relation to one or more elements.",
-            "custom": {
-                "annotationType": {
-                    "maxCount": "1",
-                    "minCount": "1",
-                    "type": "AnnotationType"
-                },
-                "contentType": {
-                    "type": "MediaType"
-                },
-                "statement": {
-                    "maxCount": "1",
-                    "minCount": "0",
-                    "type": "xsd:string"
-                },
-                "subject": {
-                    "maxCount": "1",
-                    "minCount": "1",
-                    "type": "Element"
-                }
-            }
+    "AI": {
+        "Classes": {},
+        "Description": "The AI profile namespace defines concepts related to AI application and\nmodel artifacts.",
+        "Metadata": {
+            "id": "https://rdf.spdx.org/v3#AI",
+            "name": "AI"
         },
-        "AnonymousPayload": {
-            "commonDescription": "TODO",
-            "commonMetadata": {
-                "Instantiability": "Concrete",
-                "SubclassOf": "Payload",
-                "name": "AnonymousPayload"
-            },
-            "commonName": "AnonymousPayload",
-            "commonStart": "SPDX-License-Identifier: Community-Spec-1.0",
-            "commonSummary": "TODO",
-            "custom": {
-                "creationInfo": {
-                    "maxCount": "1",
-                    "minCount": "0",
-                    "type": "CreationInformation"
-                },
-                "imports": {
-                    "type": "ExternalMap"
-                },
-                "namespaces": {
-                    "type": "NamespaceMap"
-                }
-            }
-        },
-        "Artifact": {
-            "commonDescription": "An artifact is a distinct article or unit within the digital domain,\nsuch as an electronic file, a software package, a device or an element\nof data.",
-            "commonMetadata": {
-                "Instantiability": "Abstract",
-                "SubclassOf": "Element",
-                "name": "Artifact"
-            },
-            "commonName": "Artifact",
-            "commonStart": "SPDX-License-Identifier: Community-Spec-1.0",
-            "commonSummary": "A distinct article or unit within the digital domain.",
-            "custom": {
-                "originatedBy": {
-                    "minCount": "0",
-                    "type": "Identity"
-                }
-            }
-        },
-        "Bom": {
-            "commonDescription": "A Bill Of Materials (BOM) is a container for a grouping of SPDX-3.0\ncontent characterizing details about a product. This could include\ndetails of the content and composition of the product, provenence\ndetails of the product and/or its composition, licensing information,\nknown quality or security issues, etc.",
-            "commonMetadata": {
-                "Instantiability": "Concrete",
-                "SubclassOf": "Bundle",
-                "name": "Bom"
-            },
-            "commonName": "Bom",
-            "commonStart": "SPDX-License-Identifier: Community-Spec-1.0",
-            "commonSummary": "A container for a grouping of SPDX-3.0 content characterizing details\n(provenence, composition, licensing, etc.) about a product.",
-            "custom": {}
-        },
-        "Bundle": {
-            "commonDescription": "TODO",
-            "commonMetadata": {
-                "Instantiability": "Concrete",
-                "SubclassOf": "ElementCollection",
-                "name": "Bundle"
-            },
-            "commonName": "Bundle",
-            "commonStart": "SPDX-License-Identifier: Community-Spec-1.0",
-            "commonSummary": "TODO",
-            "custom": {
-                "context": {
-                    "maxCount": "1",
-                    "type": "xsd:string"
-                }
-            }
-        },
-        "CreationInformation": {
-            "commonDescription": "TODO",
-            "commonMetadata": {
-                "Instantiability": "Concrete",
-                "name": "CreationInformation"
-            },
-            "commonName": "CreationInformation",
-            "commonStart": "SPDX-License-Identifier: Community-Spec-1.0",
-            "commonSummary": "TODO",
-            "custom": {
-                "created": {
-                    "type": "xsd:dateTime"
-                },
-                "createdBy": {
-                    "minCount": "1",
-                    "type": "Entity"
-                },
-                "dataLicense": {
-                    "type": "xsd:string"
-                },
-                "profile": {
-                    "minCount": "1",
-                    "type": "ProfileIdentifier"
-                },
-                "specVersion": {
-                    "type": "SemVer"
-                }
-            }
-        },
-        "Element": {
-            "commonDescription": "An Element is a representation of a fundamental concept either directly\ninherent to the Bill of Materials (BOM) domain or indirectly related to\nthe BOM domain and necessary for contextually characterizing BOM\nconcepts and relationships. Within SPDX-3.0 structure this is the base\nclass acting as a consistent, unifying, and interoperable foundation for\nall explicit and inter-relatable content objects.",
-            "commonMetadata": {
-                "Instantiability": "Abstract",
-                "SubclassOf": "Payload",
-                "name": "Element"
-            },
-            "commonName": "Element",
-            "commonStart": "SPDX-License-Identifier: Community-Spec-1.0",
-            "commonSummary": "Base domain class from which all other SPDX-3.0 domain classes derive.",
-            "custom": {
-                "comment": {
-                    "maxCount": "1",
-                    "type": "xsd:string"
-                },
-                "creationInfo": {
-                    "maxCount": "1",
-                    "minCount": "1",
-                    "type": "CreationInformation"
-                },
-                "description": {
-                    "maxCount": "1",
-                    "type": "xsd:string"
-                },
-                "extensions": {
-                    "type": "Extension"
-                },
-                "externalIdentifiers": {
-                    "type": "ExternalIdentifier"
-                },
-                "externalReferences": {
-                    "type": "ExternalReference"
-                },
-                "name": {
-                    "maxCount": "1",
-                    "type": "xsd:string"
-                },
-                "spdxId": {
-                    "maxCount": "1",
-                    "minCount": "1",
-                    "type": "anyURI"
-                },
-                "summary": {
-                    "maxCount": "1",
-                    "type": "xsd:string"
-                },
-                "verifiedUsing": {
-                    "type": "IntegrityMethod"
-                }
-            }
-        },
-        "ElementCollection": {
-            "commonDescription": "TODO",
-            "commonMetadata": {
-                "Instantiability": "Abstract",
-                "SubclassOf": "Element",
-                "name": "ElementCollection"
-            },
-            "commonName": "ElementCollection",
-            "commonStart": "SPDX-License-Identifier: Community-Spec-1.0",
-            "commonSummary": "TODO",
-            "custom": {
-                "element": {
-                    "minCount": "1",
-                    "type": "Element"
-                },
-                "imports": {
-                    "type": "ExternalMap"
-                },
-                "namespaces": {
-                    "type": "NamespaceMap"
-                },
-                "rootElement": {
-                    "minCount": "1",
-                    "type": "Element"
-                }
-            }
-        },
-        "Entity": {
-            "commonDescription": "TODO",
-            "commonMetadata": {
-                "Instantiability": "Concrete",
-                "SubclassOf": "Element",
-                "name": "Entity"
-            },
-            "commonName": "Entity",
-            "commonStart": "SPDX-License-Identifier: Community-Spec-1.0",
-            "commonSummary": "TODO",
-            "custom": {}
-        },
-        "ExternalIdentifier": {
-            "commonDescription": "TODO",
-            "commonMetadata": {
-                "Instantiability": "Concrete",
-                "name": "ExternalIdentifier"
-            },
-            "commonName": "ExternalIdentifier",
-            "commonStart": "SPDX-License-Identifier: Community-Spec-1.0",
-            "commonSummary": "TODO",
-            "custom": {
-                "comment": {
-                    "maxCount": "1",
-                    "minCount": "0",
-                    "type": "xsd:string"
-                },
-                "externalIdentifierType": {
-                    "maxCount": "1",
-                    "minCount": "1",
-                    "type": "ExternalIdentifierType"
-                },
-                "identifier": {
-                    "maxCount": "1",
-                    "minCount": "1",
-                    "type": "xsd:string"
-                }
-            }
-        },
-        "ExternalMap": {
-            "commonDescription": "An External Map is a map of Element identifiers that are used within a\nDocument but defined external to that Document. The external map\nprovides details about the externally-defined Element such as its\nprovenance, where to retrieve it, and how to verify its integrity.",
-            "commonMetadata": {
-                "Instantiability": "Concrete",
-                "SubclassOf": "none",
-                "name": "ExternalMap"
-            },
-            "commonName": "ExternalMap",
-            "commonStart": "SPDX-License-Identifier: Community-Spec-1.0",
-            "commonSummary": "A map of Element identifiers that are used within a Document but defined\nexternal to that Document.",
-            "custom": {
-                "externalId": {
-                    "maxCount": "1",
-                    "minCount": "1",
-                    "type": "anyURI"
-                },
-                "locationHint": {
-                    "maxCount": "1",
-                    "type": "anyURI"
-                },
-                "verifiedUsing": {
-                    "type": "IntegrityMethod"
-                }
-            }
-        },
-        "ExternalReference": {
-            "commonDescription": "An External Reference is a grouping of characteristics unique to the\nidentity, location and context of a resource outside of the scope of\nSPDX-3.0 content.",
-            "commonMetadata": {
-                "Instantiability": "Concrete",
-                "SubclassOf": "none",
-                "name": "ExternalReference"
-            },
-            "commonName": "ExternalReference",
-            "commonStart": "SPDX-License-Identifier: Community-Spec-1.0",
-            "commonSummary": "A reference to a resource outside of the scope of SPDX-3.0 content.",
-            "custom": {
-                "comment": {
-                    "maxCount": "1",
-                    "type": "xsd:string"
-                },
-                "contentType": {
-                    "maxCount": "1",
-                    "type": "MediaType"
-                },
-                "externalReferenceType": {
-                    "maxCount": "1",
-                    "type": "ExternalReferenceType"
-                },
-                "locator": {
-                    "type": "anyURI"
-                }
-            }
-        },
-        "Hash": {
-            "commonDescription": "A hash is a grouping of characteristics unique to the result of applying\na mathematical algorithm that maps data of arbitrary size to a bit\nstring (the hash) and is a one-way function, that is, a function which\nis practically infeasible to invert. This is commonly used for integrity\nchecking of data.",
-            "commonMetadata": {
-                "SubclassOf": "IntegrityMethod",
-                "name": "Hash"
-            },
-            "commonName": "Hash",
-            "commonStart": "SPDX-License-Identifier: Community-Spec-1.0",
-            "commonSummary": "A mathematically calculated representation of a grouping of data.",
-            "custom": {
-                "algorithm": {
-                    "maxCount": "1",
-                    "minCount": "1",
-                    "type": "HashAlgorithm"
-                },
-                "hashValue": {
-                    "maxCount": "1",
-                    "minCount": "1",
-                    "type": "xsd:string"
-                }
-            }
-        },
-        "Identity": {
-            "commonDescription": "An Identity is a grouping of identifying characteristics unique to an\nindividual or organization.",
-            "commonMetadata": {
-                "Instantiability": "Concrete",
-                "SubclassOf": "Entity",
-                "name": "Identity"
-            },
-            "commonName": "Identity",
-            "commonStart": "SPDX-License-Identifier: Community-Spec-1.0",
-            "commonSummary": "An individual or organization.",
-            "custom": {}
-        },
-        "IntegrityMethod": {
-            "commonDescription": "TODO",
-            "commonMetadata": {
-                "Instantiability": "Abstract",
-                "name": "IntegrityMethod"
-            },
-            "commonName": "IntegrityMethod",
-            "commonStart": "SPDX-License-Identifier: Community-Spec-1.0",
-            "commonSummary": "TODO",
-            "custom": {
-                "comment": {
-                    "maxCount": "1",
-                    "type": "xsd:string"
-                }
-            }
-        },
-        "MediaType": {
-            "commonDescription": "TODO",
-            "commonMetadata": {
-                "SubclassOf": "xsd:string",
-                "name": "MediaType"
-            },
-            "commonName": "MediaType",
-            "commonStart": "SPDX-License-Identifier: Community-Spec-1.0",
-            "commonSummary": "TODO",
-            "custom": {}
-        },
-        "NamespaceMap": {
-            "commonDescription": "TODO",
-            "commonMetadata": {
-                "Instantiability": "Concrete",
-                "name": "NamespaceMap"
-            },
-            "commonName": "NamespaceMap",
-            "commonStart": "SPDX-License-Identifier: Community-Spec-1.0",
-            "commonSummary": "TODO",
-            "custom": {
-                "namespace": {
-                    "maxCount": "1",
-                    "type": "anyURI"
-                },
-                "prefix": {
-                    "maxCount": "1",
-                    "type": "xsd:string"
-                }
-            }
-        },
-        "Organization": {
-            "commonDescription": "An Organization is a group of people who work together in an organized\nway for a shared purpose.",
-            "commonMetadata": {
-                "Instantiability": "Concrete",
-                "SubclassOf": "Identity",
-                "name": "Organization"
-            },
-            "commonName": "Organization",
-            "commonStart": "SPDX-License-Identifier: Community-Spec-1.0",
-            "commonSummary": "A group of people who work together in an organized way for a shared\npurpose.",
-            "custom": {}
-        },
-        "Payload": {
-            "commonDescription": "TODO",
-            "commonMetadata": {
-                "Instantiability": "Abstract",
-                "SubclassOf": "none",
-                "name": "Payload"
-            },
-            "commonName": "Payload",
-            "commonStart": "SPDX-License-Identifier: Community-Spec-1.0",
-            "commonSummary": "TODO",
-            "custom": {
-                "creationInfo": {
-                    "maxCount": "1",
-                    "minCount": "0",
-                    "type": "CreationInformation"
-                },
-                "imports": {
-                    "type": "ExternalMap"
-                },
-                "namespaces": {
-                    "type": "NamespaceMap"
-                }
-            }
-        },
-        "Person": {
-            "commonDescription": "A Person is an individual human being.",
-            "commonMetadata": {
-                "Instantiability": "Concrete",
-                "SubclassOf": "Identity",
-                "name": "Person"
-            },
-            "commonName": "Person",
-            "commonStart": "SPDX-License-Identifier: Community-Spec-1.0",
-            "commonSummary": "An individual human being.",
-            "custom": {}
-        },
-        "ProfileIdentifier": {
-            "commonDescription": "TODO",
-            "commonMetadata": {
-                "SubclassOf": "xsd:string",
-                "name": "ProfileIdentifier"
-            },
-            "commonName": "ProfileIdentifier",
-            "commonStart": "SPDX-License-Identifier: Community-Spec-1.0",
-            "commonSummary": "TODO",
-            "custom": {}
-        },
-        "Relationship": {
-            "commonDescription": "A Relationship is a grouping of characteristics unique to an assertion\nthat one Element is related to one or more other Elements in some way.",
-            "commonMetadata": {
-                "Instantiability": "Concrete",
-                "SubclassOf": "Element",
-                "name": "Relationship"
-            },
-            "commonName": "Relationship",
-            "commonStart": "SPDX-License-Identifier: Community-Spec-1.0",
-            "commonSummary": "Describes a relationship between one or more elements.",
-            "custom": {
-                "completeness": {
-                    "maxCount": "1",
-                    "minCount": "0",
-                    "type": "RelationshipCompleteness"
-                },
-                "from": {
-                    "maxCount": "1",
-                    "minCount": "1",
-                    "type": "Element"
-                },
-                "relationshipType": {
-                    "maxCount": "1",
-                    "type": "RelationshipType"
-                },
-                "to": {
-                    "minCount": "1",
-                    "type": "Element"
-                }
-            }
-        },
-        "SemVer": {
-            "commonDescription": "TODO",
-            "commonMetadata": {
-                "SubclassOf": "xsd:string",
-                "name": "SemVer"
-            },
-            "commonName": "SemVer",
-            "commonStart": "SPDX-License-Identifier: Community-Spec-1.0",
-            "commonSummary": "TODO",
-            "custom": {}
-        },
-        "SpdxDocument": {
-            "commonDescription": "TODO",
-            "commonMetadata": {
-                "Instantiability": "Concrete",
-                "SubclassOf": "Bundle",
-                "name": "SpdxDocument"
-            },
-            "commonName": "SpdxDocument",
-            "commonStart": "SPDX-License-Identifier: Community-Spec-1.0",
-            "commonSummary": "TODO",
-            "custom": {
-                "name": {
-                    "maxCount": "1",
-                    "minCount": "1",
-                    "type": "xsd:string"
-                }
-            }
-        },
-        "Tool": {
-            "commonDescription": "A Tool is an element of hardware and/or software utilized to carry out a\nparticular function.",
-            "commonMetadata": {
-                "Instantiability": "Concrete",
-                "SubclassOf": "Entity",
-                "name": "Tool"
-            },
-            "commonName": "Tool",
-            "commonStart": "SPDX-License-Identifier: Community-Spec-1.0",
-            "commonSummary": "An element of hardware and/or software utilized to carry out a\nparticular function.",
-            "custom": {}
-        }
+        "Properties": {},
+        "Summary": "Additional metadata based on software profile, that is useful for ai\napplications and models.",
+        "Vocabularies": {},
+        "_title": "AI Profile"
     },
-    "properties": {
-        "algorithm": {
-            "commonDescription": "A algorithm is TODO",
-            "commonMetadata": {
-                "Nature": "DataProperty",
-                "Range": "HashAlgorithm",
-                "name": "algorithm"
+    "Core": {
+        "Classes": {
+            "Annotation": {
+                "Description": "An Annotation is an assertion made in relation to one or more elements.",
+                "Metadata": {
+                    "Instantiability": "Concrete",
+                    "SubclassOf": "Element",
+                    "name": "Annotation"
+                },
+                "Properties": {
+                    "annotationType": {
+                        "maxCount": "1",
+                        "minCount": "1",
+                        "type": "AnnotationType"
+                    },
+                    "contentType": {
+                        "type": "MediaType"
+                    },
+                    "statement": {
+                        "maxCount": "1",
+                        "minCount": "0",
+                        "type": "xsd:string"
+                    },
+                    "subject": {
+                        "maxCount": "1",
+                        "minCount": "1",
+                        "type": "Element"
+                    }
+                },
+                "Summary": "An assertion made in relation to one or more elements.",
+                "_title": "Annotation"
             },
-            "commonName": "algorithm",
-            "commonStart": "SPDX-License-Identifier: Community-Spec-1.0",
-            "commonSummary": "TODO",
-            "custom": []
+            "AnonymousPayload": {
+                "Description": "TODO",
+                "Metadata": {
+                    "Instantiability": "Concrete",
+                    "SubclassOf": "Payload",
+                    "name": "AnonymousPayload"
+                },
+                "Properties": {
+                    "creationInfo": {
+                        "maxCount": "1",
+                        "minCount": "0",
+                        "type": "CreationInformation"
+                    },
+                    "imports": {
+                        "type": "ExternalMap"
+                    },
+                    "namespaces": {
+                        "type": "NamespaceMap"
+                    }
+                },
+                "Summary": "TODO",
+                "_title": "AnonymousPayload"
+            },
+            "Artifact": {
+                "Description": "An artifact is a distinct article or unit within the digital domain,\nsuch as an electronic file, a software package, a device or an element\nof data.",
+                "Metadata": {
+                    "Instantiability": "Abstract",
+                    "SubclassOf": "Element",
+                    "name": "Artifact"
+                },
+                "Properties": {
+                    "originatedBy": {
+                        "minCount": "0",
+                        "type": "Identity"
+                    }
+                },
+                "Summary": "A distinct article or unit within the digital domain.",
+                "_title": "Artifact"
+            },
+            "Bom": {
+                "Description": "A Bill Of Materials (BOM) is a container for a grouping of SPDX-3.0\ncontent characterizing details about a product. This could include\ndetails of the content and composition of the product, provenence\ndetails of the product and/or its composition, licensing information,\nknown quality or security issues, etc.",
+                "Metadata": {
+                    "Instantiability": "Concrete",
+                    "SubclassOf": "Bundle",
+                    "name": "Bom"
+                },
+                "Properties": {},
+                "Summary": "A container for a grouping of SPDX-3.0 content characterizing details\n(provenence, composition, licensing, etc.) about a product.",
+                "_title": "Bom"
+            },
+            "Bundle": {
+                "Description": "TODO",
+                "Metadata": {
+                    "Instantiability": "Concrete",
+                    "SubclassOf": "ElementCollection",
+                    "name": "Bundle"
+                },
+                "Properties": {
+                    "context": {
+                        "maxCount": "1",
+                        "type": "xsd:string"
+                    }
+                },
+                "Summary": "TODO",
+                "_title": "Bundle"
+            },
+            "CreationInformation": {
+                "Description": "TODO",
+                "Metadata": {
+                    "Instantiability": "Concrete",
+                    "name": "CreationInformation"
+                },
+                "Properties": {
+                    "created": {
+                        "type": "xsd:dateTime"
+                    },
+                    "createdBy": {
+                        "minCount": "1",
+                        "type": "Entity"
+                    },
+                    "dataLicense": {
+                        "type": "xsd:string"
+                    },
+                    "profile": {
+                        "minCount": "1",
+                        "type": "ProfileIdentifier"
+                    },
+                    "specVersion": {
+                        "type": "SemVer"
+                    }
+                },
+                "Summary": "TODO",
+                "_title": "CreationInformation"
+            },
+            "Element": {
+                "Description": "An Element is a representation of a fundamental concept either directly\ninherent to the Bill of Materials (BOM) domain or indirectly related to\nthe BOM domain and necessary for contextually characterizing BOM\nconcepts and relationships. Within SPDX-3.0 structure this is the base\nclass acting as a consistent, unifying, and interoperable foundation for\nall explicit and inter-relatable content objects.",
+                "Metadata": {
+                    "Instantiability": "Abstract",
+                    "SubclassOf": "Payload",
+                    "name": "Element"
+                },
+                "Properties": {
+                    "comment": {
+                        "maxCount": "1",
+                        "type": "xsd:string"
+                    },
+                    "creationInfo": {
+                        "maxCount": "1",
+                        "minCount": "1",
+                        "type": "CreationInformation"
+                    },
+                    "description": {
+                        "maxCount": "1",
+                        "type": "xsd:string"
+                    },
+                    "extensions": {
+                        "type": "Extension"
+                    },
+                    "externalIdentifiers": {
+                        "type": "ExternalIdentifier"
+                    },
+                    "externalReferences": {
+                        "type": "ExternalReference"
+                    },
+                    "name": {
+                        "maxCount": "1",
+                        "type": "xsd:string"
+                    },
+                    "spdxId": {
+                        "maxCount": "1",
+                        "minCount": "1",
+                        "type": "anyURI"
+                    },
+                    "summary": {
+                        "maxCount": "1",
+                        "type": "xsd:string"
+                    },
+                    "verifiedUsing": {
+                        "type": "IntegrityMethod"
+                    }
+                },
+                "Summary": "Base domain class from which all other SPDX-3.0 domain classes derive.",
+                "_title": "Element"
+            },
+            "ElementCollection": {
+                "Description": "TODO",
+                "Metadata": {
+                    "Instantiability": "Abstract",
+                    "SubclassOf": "Element",
+                    "name": "ElementCollection"
+                },
+                "Properties": {
+                    "element": {
+                        "minCount": "1",
+                        "type": "Element"
+                    },
+                    "imports": {
+                        "type": "ExternalMap"
+                    },
+                    "namespaces": {
+                        "type": "NamespaceMap"
+                    },
+                    "rootElement": {
+                        "minCount": "1",
+                        "type": "Element"
+                    }
+                },
+                "Summary": "TODO",
+                "_title": "ElementCollection"
+            },
+            "Entity": {
+                "Description": "TODO",
+                "Metadata": {
+                    "Instantiability": "Concrete",
+                    "SubclassOf": "Element",
+                    "name": "Entity"
+                },
+                "Properties": {},
+                "Summary": "TODO",
+                "_title": "Entity"
+            },
+            "ExternalIdentifier": {
+                "Description": "TODO",
+                "Metadata": {
+                    "Instantiability": "Concrete",
+                    "name": "ExternalIdentifier"
+                },
+                "Properties": {
+                    "comment": {
+                        "maxCount": "1",
+                        "minCount": "0",
+                        "type": "xsd:string"
+                    },
+                    "externalIdentifierType": {
+                        "maxCount": "1",
+                        "minCount": "1",
+                        "type": "ExternalIdentifierType"
+                    },
+                    "identifier": {
+                        "maxCount": "1",
+                        "minCount": "1",
+                        "type": "xsd:string"
+                    }
+                },
+                "Summary": "TODO",
+                "_title": "ExternalIdentifier"
+            },
+            "ExternalMap": {
+                "Description": "An External Map is a map of Element identifiers that are used within a\nDocument but defined external to that Document. The external map\nprovides details about the externally-defined Element such as its\nprovenance, where to retrieve it, and how to verify its integrity.",
+                "Metadata": {
+                    "Instantiability": "Concrete",
+                    "SubclassOf": "none",
+                    "name": "ExternalMap"
+                },
+                "Properties": {
+                    "externalId": {
+                        "maxCount": "1",
+                        "minCount": "1",
+                        "type": "anyURI"
+                    },
+                    "locationHint": {
+                        "maxCount": "1",
+                        "type": "anyURI"
+                    },
+                    "verifiedUsing": {
+                        "type": "IntegrityMethod"
+                    }
+                },
+                "Summary": "A map of Element identifiers that are used within a Document but defined\nexternal to that Document.",
+                "_title": "ExternalMap"
+            },
+            "ExternalReference": {
+                "Description": "An External Reference is a grouping of characteristics unique to the\nidentity, location and context of a resource outside of the scope of\nSPDX-3.0 content.",
+                "Metadata": {
+                    "Instantiability": "Concrete",
+                    "SubclassOf": "none",
+                    "name": "ExternalReference"
+                },
+                "Properties": {
+                    "comment": {
+                        "maxCount": "1",
+                        "type": "xsd:string"
+                    },
+                    "contentType": {
+                        "maxCount": "1",
+                        "type": "MediaType"
+                    },
+                    "externalReferenceType": {
+                        "maxCount": "1",
+                        "type": "ExternalReferenceType"
+                    },
+                    "locator": {
+                        "type": "anyURI"
+                    }
+                },
+                "Summary": "A reference to a resource outside of the scope of SPDX-3.0 content.",
+                "_title": "ExternalReference"
+            },
+            "Hash": {
+                "Description": "A hash is a grouping of characteristics unique to the result of applying\na mathematical algorithm that maps data of arbitrary size to a bit\nstring (the hash) and is a one-way function, that is, a function which\nis practically infeasible to invert. This is commonly used for integrity\nchecking of data.",
+                "Metadata": {
+                    "SubclassOf": "IntegrityMethod",
+                    "name": "Hash"
+                },
+                "Properties": {
+                    "algorithm": {
+                        "maxCount": "1",
+                        "minCount": "1",
+                        "type": "HashAlgorithm"
+                    },
+                    "hashValue": {
+                        "maxCount": "1",
+                        "minCount": "1",
+                        "type": "xsd:string"
+                    }
+                },
+                "Summary": "A mathematically calculated representation of a grouping of data.",
+                "_title": "Hash"
+            },
+            "Identity": {
+                "Description": "An Identity is a grouping of identifying characteristics unique to an\nindividual or organization.",
+                "Metadata": {
+                    "Instantiability": "Concrete",
+                    "SubclassOf": "Entity",
+                    "name": "Identity"
+                },
+                "Properties": {},
+                "Summary": "An individual or organization.",
+                "_title": "Identity"
+            },
+            "IntegrityMethod": {
+                "Description": "TODO",
+                "Metadata": {
+                    "Instantiability": "Abstract",
+                    "name": "IntegrityMethod"
+                },
+                "Properties": {
+                    "comment": {
+                        "maxCount": "1",
+                        "type": "xsd:string"
+                    }
+                },
+                "Summary": "TODO",
+                "_title": "IntegrityMethod"
+            },
+            "MediaType": {
+                "Description": "TODO",
+                "Metadata": {
+                    "SubclassOf": "xsd:string",
+                    "name": "MediaType"
+                },
+                "Properties": {},
+                "Summary": "TODO",
+                "_title": "MediaType"
+            },
+            "NamespaceMap": {
+                "Description": "TODO",
+                "Metadata": {
+                    "Instantiability": "Concrete",
+                    "name": "NamespaceMap"
+                },
+                "Properties": {
+                    "namespace": {
+                        "maxCount": "1",
+                        "type": "anyURI"
+                    },
+                    "prefix": {
+                        "maxCount": "1",
+                        "type": "xsd:string"
+                    }
+                },
+                "Summary": "TODO",
+                "_title": "NamespaceMap"
+            },
+            "Organization": {
+                "Description": "An Organization is a group of people who work together in an organized\nway for a shared purpose.",
+                "Metadata": {
+                    "Instantiability": "Concrete",
+                    "SubclassOf": "Identity",
+                    "name": "Organization"
+                },
+                "Properties": {},
+                "Summary": "A group of people who work together in an organized way for a shared\npurpose.",
+                "_title": "Organization"
+            },
+            "Payload": {
+                "Description": "TODO",
+                "Metadata": {
+                    "Instantiability": "Abstract",
+                    "SubclassOf": "none",
+                    "name": "Payload"
+                },
+                "Properties": {
+                    "creationInfo": {
+                        "maxCount": "1",
+                        "minCount": "0",
+                        "type": "CreationInformation"
+                    },
+                    "imports": {
+                        "type": "ExternalMap"
+                    },
+                    "namespaces": {
+                        "type": "NamespaceMap"
+                    }
+                },
+                "Summary": "TODO",
+                "_title": "Payload"
+            },
+            "Person": {
+                "Description": "A Person is an individual human being.",
+                "Metadata": {
+                    "Instantiability": "Concrete",
+                    "SubclassOf": "Identity",
+                    "name": "Person"
+                },
+                "Properties": {},
+                "Summary": "An individual human being.",
+                "_title": "Person"
+            },
+            "ProfileIdentifier": {
+                "Description": "TODO",
+                "Metadata": {
+                    "SubclassOf": "xsd:string",
+                    "name": "ProfileIdentifier"
+                },
+                "Properties": {},
+                "Summary": "TODO",
+                "_title": "ProfileIdentifier"
+            },
+            "Relationship": {
+                "Description": "A Relationship is a grouping of characteristics unique to an assertion\nthat one Element is related to one or more other Elements in some way.",
+                "Metadata": {
+                    "Instantiability": "Concrete",
+                    "SubclassOf": "Element",
+                    "name": "Relationship"
+                },
+                "Properties": {
+                    "completeness": {
+                        "maxCount": "1",
+                        "minCount": "0",
+                        "type": "RelationshipCompleteness"
+                    },
+                    "from": {
+                        "maxCount": "1",
+                        "minCount": "1",
+                        "type": "Element"
+                    },
+                    "relationshipType": {
+                        "maxCount": "1",
+                        "type": "RelationshipType"
+                    },
+                    "to": {
+                        "minCount": "1",
+                        "type": "Element"
+                    }
+                },
+                "Summary": "Describes a relationship between one or more elements.",
+                "_title": "Relationship"
+            },
+            "SemVer": {
+                "Description": "TODO",
+                "Metadata": {
+                    "SubclassOf": "xsd:string",
+                    "name": "SemVer"
+                },
+                "Properties": {},
+                "Summary": "TODO",
+                "_title": "SemVer"
+            },
+            "SpdxDocument": {
+                "Description": "TODO",
+                "Metadata": {
+                    "Instantiability": "Concrete",
+                    "SubclassOf": "Bundle",
+                    "name": "SpdxDocument"
+                },
+                "Properties": {
+                    "name": {
+                        "maxCount": "1",
+                        "minCount": "1",
+                        "type": "xsd:string"
+                    }
+                },
+                "Summary": "TODO",
+                "_title": "SpdxDocument"
+            },
+            "Tool": {
+                "Description": "A Tool is an element of hardware and/or software utilized to carry out a\nparticular function.",
+                "Metadata": {
+                    "Instantiability": "Concrete",
+                    "SubclassOf": "Entity",
+                    "name": "Tool"
+                },
+                "Properties": {},
+                "Summary": "An element of hardware and/or software utilized to carry out a\nparticular function.",
+                "_title": "Tool"
+            }
         },
-        "annotationType": {
-            "commonDescription": "A annotationType is TODO",
-            "commonMetadata": {
-                "Nature": "DataProperty",
-                "Range": "AnnotationType",
-                "name": "annotationType"
-            },
-            "commonName": "annotationType",
-            "commonStart": "SPDX-License-Identifier: Community-Spec-1.0",
-            "commonSummary": "TODO",
-            "custom": []
+        "Description": "The Core namespace defines foundational concepts serving as the basis\nfor all SPDX-3.0 profiles.",
+        "Metadata": {
+            "id": "https://rdf.spdx.org/v3#Core",
+            "name": "Core"
         },
-        "comment": {
-            "commonDescription": "A comment is TODO",
-            "commonMetadata": {
-                "Nature": "DataProperty",
-                "Range": "xsd:string",
-                "name": "comment"
+        "Properties": {
+            "algorithm": {
+                "Description": "A algorithm is TODO",
+                "Metadata": {
+                    "Nature": "DataProperty",
+                    "Range": "HashAlgorithm",
+                    "name": "algorithm"
+                },
+                "Summary": "TODO",
+                "_title": "algorithm"
             },
-            "commonName": "comment",
-            "commonStart": "SPDX-License-Identifier: Community-Spec-1.0",
-            "commonSummary": "TODO",
-            "custom": []
+            "annotationType": {
+                "Description": "A annotationType is TODO",
+                "Metadata": {
+                    "Nature": "DataProperty",
+                    "Range": "AnnotationType",
+                    "name": "annotationType"
+                },
+                "Summary": "TODO",
+                "_title": "annotationType"
+            },
+            "comment": {
+                "Description": "A comment is TODO",
+                "Metadata": {
+                    "Nature": "DataProperty",
+                    "Range": "xsd:string",
+                    "name": "comment"
+                },
+                "Summary": "TODO",
+                "_title": "comment"
+            },
+            "completeness": {
+                "Description": "A completeness is TODO",
+                "Metadata": {
+                    "Nature": "DataProperty",
+                    "Range": "RelationshipCompleteness",
+                    "name": "completeness"
+                },
+                "Summary": "TODO",
+                "_title": "completeness"
+            },
+            "contentType": {
+                "Description": "A contentType is TODO",
+                "Metadata": {
+                    "Nature": "DataProperty",
+                    "Range": "MediaType",
+                    "name": "contentType"
+                },
+                "Summary": "TODO",
+                "_title": "contentType"
+            },
+            "context": {
+                "Description": "A context is TODO",
+                "Metadata": {
+                    "Nature": "DataProperty",
+                    "Range": "xsd:string",
+                    "name": "context"
+                },
+                "Summary": "TODO",
+                "_title": "context"
+            },
+            "created": {
+                "Description": "A created is TODO",
+                "Metadata": {
+                    "Nature": "DataProperty",
+                    "Range": "xsd:dateTime",
+                    "name": "created"
+                },
+                "Summary": "TODO",
+                "_title": "created"
+            },
+            "createdBy": {
+                "Description": "A createdBy is TODO",
+                "Metadata": {
+                    "Nature": "ObjectProperty",
+                    "Range": "Entity",
+                    "name": "createdBy"
+                },
+                "Summary": "TODO",
+                "_title": "createdBy"
+            },
+            "creationInfo": {
+                "Description": "A creationInfo is TODO",
+                "Metadata": {
+                    "Nature": "DataProperty",
+                    "Range": "CreationInformation",
+                    "name": "creationInfo"
+                },
+                "Summary": "TODO",
+                "_title": "creationInfo"
+            },
+            "dataLicense": {
+                "Description": "A dataLicense is TODO",
+                "Metadata": {
+                    "Nature": "DataProperty",
+                    "Range": "xsd:string",
+                    "name": "dataLicense"
+                },
+                "Summary": "TODO",
+                "_title": "dataLicense"
+            },
+            "description": {
+                "Description": "A description is TODO",
+                "Metadata": {
+                    "Nature": "DataProperty",
+                    "Range": "xsd:string",
+                    "name": "description"
+                },
+                "Summary": "TODO",
+                "_title": "description"
+            },
+            "element": {
+                "Description": "A element is TODO",
+                "Metadata": {
+                    "Nature": "ObjectProperty",
+                    "Range": "Element",
+                    "name": "element"
+                },
+                "Summary": "TODO",
+                "_title": "element"
+            },
+            "extensions": {
+                "Description": "TODO",
+                "Metadata": {
+                    "name": "extensions"
+                },
+                "Summary": "TODO",
+                "_title": "extensions"
+            },
+            "externalId": {
+                "Description": "A externalId is TODO",
+                "Metadata": {
+                    "Nature": "DataProperty",
+                    "Range": "anyURI",
+                    "name": "externalId"
+                },
+                "Summary": "TODO",
+                "_title": "externalId"
+            },
+            "externalIdentifiers": {
+                "Description": "TODO",
+                "Metadata": {
+                    "Nature": "ObjectProperty",
+                    "Range": "ExternaIdentifier",
+                    "name": "externalIdentifiers"
+                },
+                "Summary": "TODO",
+                "_title": "externalIdentifiers"
+            },
+            "externalReferenceType": {
+                "Description": "A externalReferenceType is TODO",
+                "Metadata": {
+                    "Nature": "DataProperty",
+                    "Range": "ExternalReferenceType",
+                    "name": "externalReferenceType"
+                },
+                "Summary": "TODO",
+                "_title": "externalReferenceType"
+            },
+            "externalReferences": {
+                "Description": "TODO",
+                "Metadata": {
+                    "Nature": "ObjectProperty",
+                    "Range": "ExternalReference",
+                    "name": "externalReferences"
+                },
+                "Summary": "TODO",
+                "_title": "externalReferences"
+            },
+            "from": {
+                "Description": "A from is TODO",
+                "Metadata": {
+                    "Nature": "ObjectProperty",
+                    "Range": "Element",
+                    "name": "from"
+                },
+                "Summary": "TODO",
+                "_title": "from"
+            },
+            "hashValue": {
+                "Description": "A hashValue is TODO",
+                "Metadata": {
+                    "Nature": "DataProperty",
+                    "Range": "xsd:string",
+                    "name": "hashValue"
+                },
+                "Summary": "TODO",
+                "_title": "hashValue"
+            },
+            "imports": {
+                "Description": "A imports is TODO",
+                "Metadata": {
+                    "Nature": "DataProperty",
+                    "Range": "ExternalMap",
+                    "name": "imports"
+                },
+                "Summary": "TODO",
+                "_title": "imports"
+            },
+            "locationHint": {
+                "Description": "A locationHint is TODO",
+                "Metadata": {
+                    "Nature": "DataProperty",
+                    "Range": "anyURI",
+                    "name": "locationHint"
+                },
+                "Summary": "TODO",
+                "_title": "locationHint"
+            },
+            "locator": {
+                "Description": "A locator is TODO",
+                "Metadata": {
+                    "Nature": "DataProperty",
+                    "Range": "anyURI",
+                    "name": "locator"
+                },
+                "Summary": "TODO",
+                "_title": "locator"
+            },
+            "name": {
+                "Description": "A name is TODO",
+                "Metadata": {
+                    "Nature": "DataProperty",
+                    "Range": "xsd:string",
+                    "name": "name"
+                },
+                "Summary": "TODO",
+                "_title": "name"
+            },
+            "namespace": {
+                "Description": "A namespace is TODO",
+                "Metadata": {
+                    "Nature": "DataProperty",
+                    "Range": "anyURI",
+                    "name": "namespace"
+                },
+                "Summary": "TODO",
+                "_title": "namespace"
+            },
+            "namespaces": {
+                "Description": "A namespaces is TODO",
+                "Metadata": {
+                    "Nature": "DataProperty",
+                    "Range": "NamespaceMap",
+                    "name": "namespaces"
+                },
+                "Summary": "TODO",
+                "_title": "namespaces"
+            },
+            "originatedBy": {
+                "Description": "A originatedBy is TODO",
+                "Metadata": {
+                    "Nature": "ObjectProperty",
+                    "Range": "Identity",
+                    "name": "originatedBy"
+                },
+                "Summary": "TODO",
+                "_title": "originatedBy"
+            },
+            "prefix": {
+                "Description": "A prefix is TODO",
+                "Metadata": {
+                    "Nature": "DataProperty",
+                    "Range": "xsd:string",
+                    "name": "prefix"
+                },
+                "Summary": "TODO",
+                "_title": "prefix"
+            },
+            "profile": {
+                "Description": "A profile is TODO",
+                "Metadata": {
+                    "Nature": "DataProperty",
+                    "Range": "ProfileIdentifier",
+                    "name": "profile"
+                },
+                "Summary": "TODO",
+                "_title": "profile"
+            },
+            "relationshipType": {
+                "Description": "A relationshipType is TODO",
+                "Metadata": {
+                    "Nature": "DataProperty",
+                    "Range": "RelationshipType",
+                    "name": "relationshipType"
+                },
+                "Summary": "TODO",
+                "_title": "relationshipType"
+            },
+            "rootElement": {
+                "Description": "A rootElement is TODO",
+                "Metadata": {
+                    "Nature": "ObjectProperty",
+                    "Range": "Element",
+                    "name": "rootElement"
+                },
+                "Summary": "TODO",
+                "_title": "rootElement"
+            },
+            "spdxId": {
+                "Description": "A spdxId is TODO",
+                "Metadata": {
+                    "Nature": "DataProperty",
+                    "Range": "anyURI",
+                    "name": "spdxId"
+                },
+                "Summary": "TODO",
+                "_title": "spdxId"
+            },
+            "specVersion": {
+                "Description": "A specVersion is TODO",
+                "Metadata": {
+                    "Nature": "DataProperty",
+                    "Range": "SemVer",
+                    "name": "specVersion"
+                },
+                "Summary": "TODO",
+                "_title": "specVersion"
+            },
+            "statement": {
+                "Description": "A statement is TODO",
+                "Metadata": {
+                    "Nature": "DataProperty",
+                    "Range": "xsd:string",
+                    "name": "statement"
+                },
+                "Summary": "TODO",
+                "_title": "statement"
+            },
+            "subject": {
+                "Description": "A subject is TODO",
+                "Metadata": {
+                    "Nature": "ObjectProperty",
+                    "Range": "Element",
+                    "name": "subject"
+                },
+                "Summary": "TODO",
+                "_title": "subject"
+            },
+            "summary": {
+                "Description": "A summary is TODO",
+                "Metadata": {
+                    "Nature": "DataProperty",
+                    "Range": "xsd:string",
+                    "name": "summary"
+                },
+                "Summary": "TODO",
+                "_title": "summary"
+            },
+            "to": {
+                "Description": "A to is TODO",
+                "Metadata": {
+                    "Nature": "ObjectProperty",
+                    "Range": "Element",
+                    "name": "to"
+                },
+                "Summary": "TODO",
+                "_title": "to"
+            },
+            "verifiedUsing": {
+                "Description": "A verifiedUsing is TODO",
+                "Metadata": {
+                    "Nature": "ObjectProperty",
+                    "Range": "IntegrityMethod",
+                    "name": "verifiedUsing"
+                },
+                "Summary": "TODO",
+                "_title": "verifiedUsing"
+            }
         },
-        "completeness": {
-            "commonDescription": "A completeness is TODO",
-            "commonMetadata": {
-                "Nature": "DataProperty",
-                "Range": "RelationshipCompleteness",
-                "name": "completeness"
+        "Summary": "The basis for all SPDX profiles.",
+        "Vocabularies": {
+            "AnnotationType": {
+                "Description": "TODO",
+                "Entries": {
+                    "other": "TODOdescription",
+                    "review": "TODOdescription"
+                },
+                "Metadata": {
+                    "name": "AnnotationType"
+                },
+                "Summary": "TODO",
+                "_title": "AnnotationType"
             },
-            "commonName": "completeness",
-            "commonStart": "SPDX-License-Identifier: Community-Spec-1.0",
-            "commonSummary": "TODO",
-            "custom": []
+            "ExternalIdentifierType": {
+                "Description": "TODO",
+                "Entries": {
+                    "cpe22": "TODOdescription",
+                    "cpe23": "TODOdescription",
+                    "email": "TODOdescription",
+                    "gitoid": "TODOdescription",
+                    "other": "TODOdescription",
+                    "pkgUrl": "TODOdescription",
+                    "swhid": "TODOdescription",
+                    "swid": "TODOdescription",
+                    "urlScheme": "TODOdescription"
+                },
+                "Metadata": {
+                    "name": "ExternalIdentifierType"
+                },
+                "Summary": "TODO",
+                "_title": "ExternalIdentifierType"
+            },
+            "ExternalReferenceType": {
+                "Description": "TODO",
+                "Entries": {
+                    "altDownloadLocation": "TODOdescription",
+                    "altWebPage": "TODOdescription",
+                    "other": "TODOdescription",
+                    "securityAdvisory": "TODOdescription",
+                    "securityFix": "TODOdescription",
+                    "securityOther": "TODOdescription"
+                },
+                "Metadata": {
+                    "name": "ExternalReferenceType"
+                },
+                "Summary": "TODO",
+                "_title": "ExternalReferenceType"
+            },
+            "HashAlgorithm": {
+                "Description": "TODO",
+                "Entries": {
+                    "blake2b256": "TODOdescription",
+                    "blake2b384": "TODOdescription",
+                    "blake2b512": "TODOdescription",
+                    "blake3": "TODOdescription",
+                    "md2": "TODOdescription",
+                    "md4": "TODOdescription",
+                    "md5": "TODOdescription",
+                    "md6": "TODOdescription",
+                    "other": "TODOdescription",
+                    "sha1": "TODOdescription",
+                    "sha224": "TODOdescription",
+                    "sha256": "TODOdescription",
+                    "sha384": "TODOdescription",
+                    "sha3_224": "TODOdescription",
+                    "sha3_256": "TODOdescription",
+                    "sha3_384": "TODOdescription",
+                    "sha3_512": "TODOdescription",
+                    "sha512": "TODOdescription",
+                    "spdxPvcSha1": "TODOdescription",
+                    "spdxPvcSha256": "TODOdescription"
+                },
+                "Metadata": {
+                    "name": "HashAlgorithm"
+                },
+                "Summary": "TODO",
+                "_title": "HashAlgorithm"
+            },
+            "RelationshipCompleteness": {
+                "Description": "TODO",
+                "Entries": {
+                    "incomplete": "TODOdescription",
+                    "known": "TODOdescription",
+                    "unknown": "TODOdescription"
+                },
+                "Metadata": {
+                    "name": "RelationshipCompleteness"
+                },
+                "Summary": "TODO",
+                "_title": "RelationshipCompleteness"
+            },
+            "RelationshipType": {
+                "Description": "TODO",
+                "Entries": {
+                    "amends": "TODOdescription",
+                    "ancestor": "TODOdescription",
+                    "buildDependency": "TODOdescription",
+                    "buildTool": "TODOdescription",
+                    "contains": "TODOdescription",
+                    "copy": "TODOdescription",
+                    "dataFile": "TODOdescription",
+                    "dependencyManifest": "TODOdescription",
+                    "dependsOn": "TODOdescription",
+                    "descendant": "TODOdescription",
+                    "describes": "TODOdescription",
+                    "devDependency": "TODOdescription",
+                    "devTool": "TODOdescription",
+                    "distributionArtifact": "TODOdescription",
+                    "documentation": "TODOdescription",
+                    "dynamicLink": "TODOdescription",
+                    "example": "TODOdescription",
+                    "expandedFromArchive": "TODOdescription",
+                    "fileAdded": "TODOdescription",
+                    "fileDeleted": "TODOdescription",
+                    "fileModified": "TODOdescription",
+                    "generates": "TODOdescription",
+                    "metafile": "TODOdescription",
+                    "optionalComponent": "TODOdescription",
+                    "optionalDependency": "TODOdescription",
+                    "other": "TODOdescription",
+                    "packages": "TODOdescription",
+                    "patch": "TODOdescription",
+                    "prerequisite": "TODOdescription",
+                    "providedDependency": "TODOdescription",
+                    "requirementFor": "TODOdescription",
+                    "runtimeDependency": "TODOdescription",
+                    "specificationFor": "TODOdescription",
+                    "staticLink": "TODOdescription",
+                    "suppliedBy": "TODOdescription",
+                    "test": "TODOdescription",
+                    "testCase": "TODOdescription",
+                    "testDependency": "TODOdescription",
+                    "testTool": "TODOdescription",
+                    "variant": "TODOdescription"
+                },
+                "Metadata": {
+                    "name": "RelationshipType"
+                },
+                "Summary": "TODO",
+                "_title": "RelationshipType"
+            }
         },
-        "contentType": {
-            "commonDescription": "A contentType is TODO",
-            "commonMetadata": {
-                "Nature": "DataProperty",
-                "Range": "MediaType",
-                "name": "contentType"
-            },
-            "commonName": "contentType",
-            "commonStart": "SPDX-License-Identifier: Community-Spec-1.0",
-            "commonSummary": "TODO",
-            "custom": []
-        },
-        "context": {
-            "commonDescription": "A context is TODO",
-            "commonMetadata": {
-                "Nature": "DataProperty",
-                "Range": "xsd:string",
-                "name": "context"
-            },
-            "commonName": "context",
-            "commonStart": "SPDX-License-Identifier: Community-Spec-1.0",
-            "commonSummary": "TODO",
-            "custom": []
-        },
-        "created": {
-            "commonDescription": "A created is TODO",
-            "commonMetadata": {
-                "Nature": "DataProperty",
-                "Range": "xsd:dateTime",
-                "name": "created"
-            },
-            "commonName": "created",
-            "commonStart": "SPDX-License-Identifier: Community-Spec-1.0",
-            "commonSummary": "TODO",
-            "custom": []
-        },
-        "createdBy": {
-            "commonDescription": "A createdBy is TODO",
-            "commonMetadata": {
-                "Nature": "ObjectProperty",
-                "Range": "Entity",
-                "name": "createdBy"
-            },
-            "commonName": "createdBy",
-            "commonStart": "SPDX-License-Identifier: Community-Spec-1.0",
-            "commonSummary": "TODO",
-            "custom": []
-        },
-        "creationInfo": {
-            "commonDescription": "A creationInfo is TODO",
-            "commonMetadata": {
-                "Nature": "DataProperty",
-                "Range": "CreationInformation",
-                "name": "creationInfo"
-            },
-            "commonName": "creationInfo",
-            "commonStart": "SPDX-License-Identifier: Community-Spec-1.0",
-            "commonSummary": "TODO",
-            "custom": []
-        },
-        "dataLicense": {
-            "commonDescription": "A dataLicense is TODO",
-            "commonMetadata": {
-                "Nature": "DataProperty",
-                "Range": "xsd:string",
-                "name": "dataLicense"
-            },
-            "commonName": "dataLicense",
-            "commonStart": "SPDX-License-Identifier: Community-Spec-1.0",
-            "commonSummary": "TODO",
-            "custom": []
-        },
-        "description": {
-            "commonDescription": "A description is TODO",
-            "commonMetadata": {
-                "Nature": "DataProperty",
-                "Range": "xsd:string",
-                "name": "description"
-            },
-            "commonName": "description",
-            "commonStart": "SPDX-License-Identifier: Community-Spec-1.0",
-            "commonSummary": "TODO",
-            "custom": []
-        },
-        "element": {
-            "commonDescription": "A element is TODO",
-            "commonMetadata": {
-                "Nature": "ObjectProperty",
-                "Range": "Element",
-                "name": "element"
-            },
-            "commonName": "element",
-            "commonStart": "SPDX-License-Identifier: Community-Spec-1.0",
-            "commonSummary": "TODO",
-            "custom": []
-        },
-        "extensions": {
-            "commonDescription": "TODO",
-            "commonMetadata": {
-                "name": "extensions"
-            },
-            "commonName": "extensions",
-            "commonStart": "SPDX-License-Identifier: Community-Spec-1.0",
-            "commonSummary": "TODO",
-            "custom": []
-        },
-        "externalId": {
-            "commonDescription": "A externalId is TODO",
-            "commonMetadata": {
-                "Nature": "DataProperty",
-                "Range": "anyURI",
-                "name": "externalId"
-            },
-            "commonName": "externalId",
-            "commonStart": "SPDX-License-Identifier: Community-Spec-1.0",
-            "commonSummary": "TODO",
-            "custom": []
-        },
-        "externalIdentifiers": {
-            "commonDescription": "TODO",
-            "commonMetadata": {
-                "Nature": "ObjectProperty",
-                "Range": "ExternaIdentifier",
-                "name": "externalIdentifiers"
-            },
-            "commonName": "externalIdentifiers",
-            "commonStart": "SPDX-License-Identifier: Community-Spec-1.0",
-            "commonSummary": "TODO",
-            "custom": []
-        },
-        "externalReferenceType": {
-            "commonDescription": "A externalReferenceType is TODO",
-            "commonMetadata": {
-                "Nature": "DataProperty",
-                "Range": "ExternalReferenceType",
-                "name": "externalReferenceType"
-            },
-            "commonName": "externalReferenceType",
-            "commonStart": "SPDX-License-Identifier: Community-Spec-1.0",
-            "commonSummary": "TODO",
-            "custom": []
-        },
-        "externalReferences": {
-            "commonDescription": "TODO",
-            "commonMetadata": {
-                "Nature": "ObjectProperty",
-                "Range": "ExternalReference",
-                "name": "externalReferences"
-            },
-            "commonName": "externalReferences",
-            "commonStart": "SPDX-License-Identifier: Community-Spec-1.0",
-            "commonSummary": "TODO",
-            "custom": []
-        },
-        "from": {
-            "commonDescription": "A from is TODO",
-            "commonMetadata": {
-                "Nature": "ObjectProperty",
-                "Range": "Element",
-                "name": "from"
-            },
-            "commonName": "from",
-            "commonStart": "SPDX-License-Identifier: Community-Spec-1.0",
-            "commonSummary": "TODO",
-            "custom": []
-        },
-        "hashValue": {
-            "commonDescription": "A hashValue is TODO",
-            "commonMetadata": {
-                "Nature": "DataProperty",
-                "Range": "xsd:string",
-                "name": "hashValue"
-            },
-            "commonName": "hashValue",
-            "commonStart": "SPDX-License-Identifier: Community-Spec-1.0",
-            "commonSummary": "TODO",
-            "custom": []
-        },
-        "imports": {
-            "commonDescription": "A imports is TODO",
-            "commonMetadata": {
-                "Nature": "DataProperty",
-                "Range": "ExternalMap",
-                "name": "imports"
-            },
-            "commonName": "imports",
-            "commonStart": "SPDX-License-Identifier: Community-Spec-1.0",
-            "commonSummary": "TODO",
-            "custom": []
-        },
-        "locationHint": {
-            "commonDescription": "A locationHint is TODO",
-            "commonMetadata": {
-                "Nature": "DataProperty",
-                "Range": "anyURI",
-                "name": "locationHint"
-            },
-            "commonName": "locationHint",
-            "commonStart": "SPDX-License-Identifier: Community-Spec-1.0",
-            "commonSummary": "TODO",
-            "custom": []
-        },
-        "locator": {
-            "commonDescription": "A locator is TODO",
-            "commonMetadata": {
-                "Nature": "DataProperty",
-                "Range": "anyURI",
-                "name": "locator"
-            },
-            "commonName": "locator",
-            "commonStart": "SPDX-License-Identifier: Community-Spec-1.0",
-            "commonSummary": "TODO",
-            "custom": []
-        },
-        "name": {
-            "commonDescription": "A name is TODO",
-            "commonMetadata": {
-                "Nature": "DataProperty",
-                "Range": "xsd:string",
-                "name": "name"
-            },
-            "commonName": "name",
-            "commonStart": "SPDX-License-Identifier: Community-Spec-1.0",
-            "commonSummary": "TODO",
-            "custom": []
-        },
-        "namespace": {
-            "commonDescription": "A namespace is TODO",
-            "commonMetadata": {
-                "Nature": "DataProperty",
-                "Range": "anyURI",
-                "name": "namespace"
-            },
-            "commonName": "namespace",
-            "commonStart": "SPDX-License-Identifier: Community-Spec-1.0",
-            "commonSummary": "TODO",
-            "custom": []
-        },
-        "namespaces": {
-            "commonDescription": "A namespaces is TODO",
-            "commonMetadata": {
-                "Nature": "DataProperty",
-                "Range": "NamespaceMap",
-                "name": "namespaces"
-            },
-            "commonName": "namespaces",
-            "commonStart": "SPDX-License-Identifier: Community-Spec-1.0",
-            "commonSummary": "TODO",
-            "custom": []
-        },
-        "originatedBy": {
-            "commonDescription": "A originatedBy is TODO",
-            "commonMetadata": {
-                "Nature": "ObjectProperty",
-                "Range": "Identity",
-                "name": "originatedBy"
-            },
-            "commonName": "originatedBy",
-            "commonStart": "SPDX-License-Identifier: Community-Spec-1.0",
-            "commonSummary": "TODO",
-            "custom": []
-        },
-        "prefix": {
-            "commonDescription": "A prefix is TODO",
-            "commonMetadata": {
-                "Nature": "DataProperty",
-                "Range": "xsd:string",
-                "name": "prefix"
-            },
-            "commonName": "prefix",
-            "commonStart": "SPDX-License-Identifier: Community-Spec-1.0",
-            "commonSummary": "TODO",
-            "custom": []
-        },
-        "profile": {
-            "commonDescription": "A profile is TODO",
-            "commonMetadata": {
-                "Nature": "DataProperty",
-                "Range": "ProfileIdentifier",
-                "name": "profile"
-            },
-            "commonName": "profile",
-            "commonStart": "SPDX-License-Identifier: Community-Spec-1.0",
-            "commonSummary": "TODO",
-            "custom": []
-        },
-        "relationshipType": {
-            "commonDescription": "A relationshipType is TODO",
-            "commonMetadata": {
-                "Nature": "DataProperty",
-                "Range": "RelationshipType",
-                "name": "relationshipType"
-            },
-            "commonName": "relationshipType",
-            "commonStart": "SPDX-License-Identifier: Community-Spec-1.0",
-            "commonSummary": "TODO",
-            "custom": []
-        },
-        "rootElement": {
-            "commonDescription": "A rootElement is TODO",
-            "commonMetadata": {
-                "Nature": "ObjectProperty",
-                "Range": "Element",
-                "name": "rootElement"
-            },
-            "commonName": "rootElement",
-            "commonStart": "SPDX-License-Identifier: Community-Spec-1.0",
-            "commonSummary": "TODO",
-            "custom": []
-        },
-        "spdxId": {
-            "commonDescription": "A spdxId is TODO",
-            "commonMetadata": {
-                "Nature": "DataProperty",
-                "Range": "anyURI",
-                "name": "spdxId"
-            },
-            "commonName": "spdxId",
-            "commonStart": "SPDX-License-Identifier: Community-Spec-1.0",
-            "commonSummary": "TODO",
-            "custom": []
-        },
-        "specVersion": {
-            "commonDescription": "A specVersion is TODO",
-            "commonMetadata": {
-                "Nature": "DataProperty",
-                "Range": "SemVer",
-                "name": "specVersion"
-            },
-            "commonName": "specVersion",
-            "commonStart": "SPDX-License-Identifier: Community-Spec-1.0",
-            "commonSummary": "TODO",
-            "custom": []
-        },
-        "statement": {
-            "commonDescription": "A statement is TODO",
-            "commonMetadata": {
-                "Nature": "DataProperty",
-                "Range": "xsd:string",
-                "name": "statement"
-            },
-            "commonName": "statement",
-            "commonStart": "SPDX-License-Identifier: Community-Spec-1.0",
-            "commonSummary": "TODO",
-            "custom": []
-        },
-        "subject": {
-            "commonDescription": "A subject is TODO",
-            "commonMetadata": {
-                "Nature": "ObjectProperty",
-                "Range": "Element",
-                "name": "subject"
-            },
-            "commonName": "subject",
-            "commonStart": "SPDX-License-Identifier: Community-Spec-1.0",
-            "commonSummary": "TODO",
-            "custom": []
-        },
-        "summary": {
-            "commonDescription": "A summary is TODO",
-            "commonMetadata": {
-                "Nature": "DataProperty",
-                "Range": "xsd:string",
-                "name": "summary"
-            },
-            "commonName": "summary",
-            "commonStart": "SPDX-License-Identifier: Community-Spec-1.0",
-            "commonSummary": "TODO",
-            "custom": []
-        },
-        "to": {
-            "commonDescription": "A to is TODO",
-            "commonMetadata": {
-                "Nature": "ObjectProperty",
-                "Range": "Element",
-                "name": "to"
-            },
-            "commonName": "to",
-            "commonStart": "SPDX-License-Identifier: Community-Spec-1.0",
-            "commonSummary": "TODO",
-            "custom": []
-        },
-        "verifiedUsing": {
-            "commonDescription": "A verifiedUsing is TODO",
-            "commonMetadata": {
-                "Nature": "ObjectProperty",
-                "Range": "IntegrityMethod",
-                "name": "verifiedUsing"
-            },
-            "commonName": "verifiedUsing",
-            "commonStart": "SPDX-License-Identifier: Community-Spec-1.0",
-            "commonSummary": "TODO",
-            "custom": []
-        }
+        "_title": "Core"
     },
-    "vocabularies": {
-        "AnnotationType": {
-            "commonDescription": "TODO",
-            "commonMetadata": {
-                "name": "AnnotationType"
+    "Software": {
+        "Classes": {
+            "File": {
+                "Description": "TODO This is about the File class.",
+                "Metadata": {
+                    "SubclassOf": "Core:Artifact",
+                    "name": "File"
+                },
+                "Properties": {
+                    "contentIdentifier": {
+                        "maxCount": "1",
+                        "minCount": "0",
+                        "type": "anyURI"
+                    },
+                    "contentType": {
+                        "maxCount": "1",
+                        "minCount": "0",
+                        "type": "MediaType"
+                    },
+                    "filePurpose": {
+                        "minCount": "0",
+                        "type": "SoftwarePurpose"
+                    }
+                },
+                "_title": "File"
             },
-            "commonName": "AnnotationType",
-            "commonStart": "SPDX-License-Identifier: Community-Spec-1.0",
-            "commonSummary": "TODO",
-            "custom": {
-                "other": "TODOdescription",
-                "review": "TODOdescription"
+            "Package": {
+                "Description": "TODO",
+                "Metadata": {
+                    "SubclassOf": "Core:Artifact"
+                },
+                "Properties": {
+                    "contentIdentifier": {
+                        "maxCount": "1",
+                        "minCount": "0",
+                        "type": "anyURI"
+                    },
+                    "downloadLocation": {
+                        "maxCount": "1",
+                        "minCount": "0",
+                        "type": "anyURI"
+                    },
+                    "homePage": {
+                        "maxCount": "1",
+                        "minCount": "0",
+                        "type": "anyURI"
+                    },
+                    "packagePurpose": {
+                        "minCount": "0",
+                        "type": "SoftwarePurpose"
+                    },
+                    "packageUrl": {
+                        "maxCount": "1",
+                        "minCount": "0",
+                        "type": "anyURI"
+                    }
+                },
+                "_title": "Package"
+            },
+            "Sbom": {
+                "Description": "A Software Bill of Materials (SBOM) is a container for a grouping of\nSPDX-3.0 content characterizing details about a software product. This\ncould include details of the content and composition of the product,\nprovenence details of the product and/or its composition, licensing\ninformation, known quality or security issues, etc.",
+                "Metadata": {
+                    "SubclassOf": "Core:Bom",
+                    "name": "Sbom"
+                },
+                "Properties": {},
+                "_title": "Sbom"
+            },
+            "Snippet": {
+                "Description": "TODO",
+                "Metadata": {
+                    "SubclassOf": "Core:Artifact"
+                },
+                "Properties": {
+                    "byteRange": {
+                        "maxCount": "1",
+                        "minCount": "0",
+                        "type": "positiveIntegerRange"
+                    },
+                    "contentIdentifier": {
+                        "maxCount": "1",
+                        "minCount": "0",
+                        "type": "anyURI"
+                    },
+                    "lineRange": {
+                        "maxCount": "1",
+                        "minCount": "0",
+                        "type": "positiveIntegerRange"
+                    },
+                    "snippetPurpose": {
+                        "minCount": "0",
+                        "type": "SoftwarePurpose"
+                    }
+                },
+                "_title": "Snippet"
             }
         },
-        "ExternalIdentifierType": {
-            "commonDescription": "TODO",
-            "commonMetadata": {
-                "name": "ExternalIdentifierType"
+        "Description": "The Software namespace defines concepts related to software artifacts.",
+        "Metadata": {
+            "id": "https://rdf.spdx.org/v3#Software",
+            "name": "Software"
+        },
+        "Properties": {
+            "byteRange": {
+                "Description": "A byteRange is TODO",
+                "Metadata": {
+                    "Nature": "DataProperty",
+                    "Range": "positiveIntegerRange",
+                    "name": "byteRange"
+                },
+                "Summary": "TODO",
+                "_title": "byteRange"
             },
-            "commonName": "ExternalIdentifierType",
-            "commonStart": "SPDX-License-Identifier: Community-Spec-1.0",
-            "commonSummary": "TODO",
-            "custom": {
-                "cpe22": "TODOdescription",
-                "cpe23": "TODOdescription",
-                "email": "TODOdescription",
-                "gitoid": "TODOdescription",
-                "other": "TODOdescription",
-                "pkgUrl": "TODOdescription",
-                "swhid": "TODOdescription",
-                "swid": "TODOdescription",
-                "urlScheme": "TODOdescription"
+            "contentIdentifier": {
+                "Description": "A contentIdentifier is TODO",
+                "Metadata": {
+                    "Nature": "DataProperty",
+                    "Range": "anyURI",
+                    "name": "contentIdentifier"
+                },
+                "Summary": "TODO",
+                "_title": "contentIdentifier"
+            },
+            "contentType": {
+                "Description": "A contentType is TODO",
+                "Metadata": {
+                    "Nature": "DataProperty",
+                    "Range": "mediaType",
+                    "name": "contentType"
+                },
+                "Summary": "TODO",
+                "_title": "contentType"
+            },
+            "downloadLocation": {
+                "Description": "A downloadLocation is TODO",
+                "Metadata": {
+                    "Nature": "DataProperty",
+                    "Range": "anyURI",
+                    "name": "downloadLocation"
+                },
+                "Summary": "TODO",
+                "_title": "downloadLocation"
+            },
+            "filePurpose": {
+                "Description": "A filePurpose is TODO",
+                "Metadata": {
+                    "Nature": "DataProperty",
+                    "Range": "SoftwarePurpose",
+                    "name": "filePurpose"
+                },
+                "Summary": "TODO",
+                "_title": "filePurpose"
+            },
+            "homePage": {
+                "Description": "A homePage is TODO",
+                "Metadata": {
+                    "Nature": "DataProperty",
+                    "Range": "anyURI",
+                    "name": "homePage"
+                },
+                "Summary": "TODO",
+                "_title": "homePage"
+            },
+            "lineRange": {
+                "Description": "A lineRange is TODO",
+                "Metadata": {
+                    "Nature": "DataProperty",
+                    "Range": "positiveIntegerRange",
+                    "name": "lineRange"
+                },
+                "Summary": "TODO",
+                "_title": "lineRange"
+            },
+            "packagePurpose": {
+                "Description": "A packagePurpose is TODO",
+                "Metadata": {
+                    "Nature": "DataProperty",
+                    "Range": "SoftwarePurpose",
+                    "name": "packagePurpose"
+                },
+                "Summary": "TODO",
+                "_title": "packagePurpose"
+            },
+            "packageUrl": {
+                "Description": "A packageUrl is TODO",
+                "Metadata": {
+                    "Nature": "DataProperty",
+                    "Range": "anyURI",
+                    "name": "packageUrl"
+                },
+                "Summary": "TODO",
+                "_title": "packageUrl"
+            },
+            "snippetPurpose": {
+                "Description": "A snippetPurpose is TODO",
+                "Metadata": {
+                    "Nature": "DataProperty",
+                    "Range": "SoftwarePurpose",
+                    "name": "snippetPurpose"
+                },
+                "Summary": "TODO",
+                "_title": "snippetPurpose"
             }
         },
-        "ExternalReferenceType": {
-            "commonDescription": "TODO",
-            "commonMetadata": {
-                "name": "ExternalReferenceType"
-            },
-            "commonName": "ExternalReferenceType",
-            "commonStart": "SPDX-License-Identifier: Community-Spec-1.0",
-            "commonSummary": "TODO",
-            "custom": {
-                "altDownloadLocation": "TODOdescription",
-                "altWebPage": "TODOdescription",
-                "other": "TODOdescription",
-                "securityAdvisory": "TODOdescription",
-                "securityFix": "TODOdescription",
-                "securityOther": "TODOdescription"
+        "Summary": "Everything having to do with software.",
+        "Vocabularies": {
+            "SoftwarePurpose": {
+                "Description": "TODO",
+                "Entries": {
+                    "application": "TODOdescription",
+                    "archive": "TODOdescription",
+                    "bom": "TODOdescription",
+                    "configuration": "TODOdescription",
+                    "container": "TODOdescription",
+                    "data": "TODOdescription",
+                    "device": "TODOdescription",
+                    "documentation": "TODOdescription",
+                    "executable": "TODOdescription",
+                    "file": "TODOdescription",
+                    "firmware": "TODOdescription",
+                    "framework": "TODOdescription",
+                    "install": "TODOdescription",
+                    "library": "TODOdescription",
+                    "module": "TODOdescription",
+                    "operatingSystem": "TODOdescription",
+                    "other": "TODOdescription",
+                    "patch": "TODOdescription",
+                    "source": "TODOdescription"
+                },
+                "Metadata": {
+                    "name": "SoftwarePurpose"
+                },
+                "Summary": "TODO",
+                "_title": "SoftwarePurpose"
             }
         },
-        "HashAlgorithm": {
-            "commonDescription": "TODO",
-            "commonMetadata": {
-                "name": "HashAlgorithm"
-            },
-            "commonName": "HashAlgorithm",
-            "commonStart": "SPDX-License-Identifier: Community-Spec-1.0",
-            "commonSummary": "TODO",
-            "custom": {
-                "blake2b256": "TODOdescription",
-                "blake2b384": "TODOdescription",
-                "blake2b512": "TODOdescription",
-                "blake3": "TODOdescription",
-                "md2": "TODOdescription",
-                "md4": "TODOdescription",
-                "md5": "TODOdescription",
-                "md6": "TODOdescription",
-                "other": "TODOdescription",
-                "sha1": "TODOdescription",
-                "sha224": "TODOdescription",
-                "sha256": "TODOdescription",
-                "sha384": "TODOdescription",
-                "sha3_224": "TODOdescription",
-                "sha3_256": "TODOdescription",
-                "sha3_384": "TODOdescription",
-                "sha3_512": "TODOdescription",
-                "sha512": "TODOdescription",
-                "spdxPvcSha1": "TODOdescription",
-                "spdxPvcSha256": "TODOdescription"
-            }
-        },
-        "RelationshipCompleteness": {
-            "commonDescription": "TODO",
-            "commonMetadata": {
-                "name": "RelationshipCompleteness"
-            },
-            "commonName": "RelationshipCompleteness",
-            "commonStart": "SPDX-License-Identifier: Community-Spec-1.0",
-            "commonSummary": "TODO",
-            "custom": {
-                "incomplete": "TODOdescription",
-                "known": "TODOdescription",
-                "unknown": "TODOdescription"
-            }
-        },
-        "RelationshipType": {
-            "commonDescription": "TODO",
-            "commonMetadata": {
-                "name": "RelationshipType"
-            },
-            "commonName": "RelationshipType",
-            "commonStart": "SPDX-License-Identifier: Community-Spec-1.0",
-            "commonSummary": "TODO",
-            "custom": {
-                "amends": "TODOdescription",
-                "ancestor": "TODOdescription",
-                "buildDependency": "TODOdescription",
-                "buildTool": "TODOdescription",
-                "contains": "TODOdescription",
-                "copy": "TODOdescription",
-                "dataFile": "TODOdescription",
-                "dependencyManifest": "TODOdescription",
-                "dependsOn": "TODOdescription",
-                "descendant": "TODOdescription",
-                "describes": "TODOdescription",
-                "devDependency": "TODOdescription",
-                "devTool": "TODOdescription",
-                "distributionArtifact": "TODOdescription",
-                "documentation": "TODOdescription",
-                "dynamicLink": "TODOdescription",
-                "example": "TODOdescription",
-                "expandedFromArchive": "TODOdescription",
-                "fileAdded": "TODOdescription",
-                "fileDeleted": "TODOdescription",
-                "fileModified": "TODOdescription",
-                "generates": "TODOdescription",
-                "metafile": "TODOdescription",
-                "optionalComponent": "TODOdescription",
-                "optionalDependency": "TODOdescription",
-                "other": "TODOdescription",
-                "packages": "TODOdescription",
-                "patch": "TODOdescription",
-                "prerequisite": "TODOdescription",
-                "providedDependency": "TODOdescription",
-                "requirementFor": "TODOdescription",
-                "runtimeDependency": "TODOdescription",
-                "specificationFor": "TODOdescription",
-                "staticLink": "TODOdescription",
-                "suppliedBy": "TODOdescription",
-                "test": "TODOdescription",
-                "testCase": "TODOdescription",
-                "testDependency": "TODOdescription",
-                "testTool": "TODOdescription",
-                "variant": "TODOdescription"
-            }
-        }
+        "_title": "Software"
     }
 }

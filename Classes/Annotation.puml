@@ -5,10 +5,10 @@ class Annotation {
     SubclassOf : Element
     name : Annotation
 .. properties ..
-    annotationType
-    contentType
-    statement : xsd:string
-    subject
+    annotationType : AnnotationType [1..1]
+    contentType : MediaType [..]
+    statement : xsd:string [0..1]
+    subject : Element [1..1]
 }
 note top of Annotation
 <b>Summary</b>

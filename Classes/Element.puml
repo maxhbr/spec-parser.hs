@@ -5,16 +5,16 @@ abstract Element {
     SubclassOf : Payload
     name : Element
 .. properties ..
-    comment : xsd:string
-    creationInfo
-    description : xsd:string
-    extensions
-    externalIdentifiers
-    externalReferences
-    name : xsd:string
-    spdxId : anyURI
-    summary : xsd:string
-    verifiedUsing
+    comment : xsd:string [..1]
+    creationInfo : CreationInformation [1..1]
+    description : xsd:string [..1]
+    extensions : Extension [..]
+    externalIdentifiers : ExternalIdentifier [..]
+    externalReferences : ExternalReference [..]
+    name : xsd:string [..1]
+    spdxId : anyURI [1..1]
+    summary : xsd:string [..1]
+    verifiedUsing : IntegrityMethod [..]
 }
 note top of Element
 <b>Summary</b>

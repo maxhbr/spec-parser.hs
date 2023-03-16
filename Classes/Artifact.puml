@@ -5,7 +5,7 @@ abstract Artifact {
     SubclassOf : Element
     name : Artifact
 .. properties ..
-    originatedBy
+    originatedBy : Identity [0..]
 }
 note top of Artifact
 <b>Summary</b>

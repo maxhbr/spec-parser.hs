@@ -5,7 +5,7 @@ class SpdxDocument {
     SubclassOf : Bundle
     name : SpdxDocument
 .. properties ..
-    name : xsd:string
+    name : xsd:string [1..1]
 }
 note top of SpdxDocument
 <b>Summary</b>

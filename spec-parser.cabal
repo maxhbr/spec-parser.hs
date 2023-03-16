@@ -25,10 +25,10 @@ source-repository head
 
 library
   exposed-modules:
-      HsDataModel
-      Lib
       MarkdownToJSON
+      MetaModel
       MyPrelude
+      PumlWriter
   other-modules:
       Paths_spec_parser
   hs-source-dirs:

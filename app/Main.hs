@@ -5,7 +5,8 @@ import           Data.Aeson.Encode.Pretty
 import qualified Data.ByteString.Lazy as BSL
 
 import MarkdownToJSON
-import HsDataModel
+import MetaModel
+import PumlWriter
 
 main :: IO ()
 main = do
@@ -17,7 +18,9 @@ main = do
     putStrLn "## start parse JSON"
     case fromJSON json :: (Result Spdx3Model) of 
         Error err -> fail err
-        Success a -> undefined
+        Success a -> do
+            putStrLn "## start generate PUML"
+            writePumlsToDir "gh-pages/puml" a
 
 
     -- putStrLn "start parsing"

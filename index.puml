@@ -1,4 +1,0 @@
-@startuml
-!include_once Vocabularies/index.puml
-!include_once Classes/index.puml
-@enduml

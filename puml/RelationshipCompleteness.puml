@@ -1,0 +1,13 @@
+@startuml
+enum RelationshipCompleteness {
+    incomplete : TODOdescription
+    known : TODOdescription
+    unknown : TODOdescription
+}
+note top of RelationshipCompleteness
+<b>Summary</b>
+TODO
+<b>Description</b>
+TODO
+end note
+@enduml

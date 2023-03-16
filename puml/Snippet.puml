@@ -1,0 +1,22 @@
+@startuml
+class Snippet {
+.. metadata ..
+    SubclassOf : Core:Artifact
+    name : Snippet
+.. properties ..
+    byteRange : positiveIntegerRange [0..1]
+    contentIdentifier : anyURI [0..1]
+    lineRange : positiveIntegerRange [0..1]
+    snippetPurpose : SoftwarePurpose [0..]
+}
+note top of Snippet
+<b>Summary</b>
+MISSING
+<b>Description</b>
+TODO
+end note
+"Core:Artifact" <|-[thickness=4]- "Snippet"
+"positiveIntegerRange" <--- "Snippet::byteRange"
+"positiveIntegerRange" <--- "Snippet::lineRange"
+"SoftwarePurpose" <--- "Snippet::snippetPurpose"
+@enduml

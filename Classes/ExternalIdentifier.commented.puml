@@ -1,3 +1,0 @@
-@startuml
-!include_once ../Classes/ExternalIdentifier.puml
-@enduml

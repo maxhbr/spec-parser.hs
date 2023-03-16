@@ -1,8 +1,0 @@
-@startuml
-!include_once ../Vocabularies/AnnotationType.puml
-!include_once ../Vocabularies/ExternalIdentifierType.puml
-!include_once ../Vocabularies/ExternalReferenceType.puml
-!include_once ../Vocabularies/HashAlgorithm.puml
-!include_once ../Vocabularies/RelationshipCompleteness.puml
-!include_once ../Vocabularies/RelationshipType.puml
-@enduml

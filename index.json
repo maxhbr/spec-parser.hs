@@ -1050,7 +1050,8 @@
             "Package": {
                 "Description": "TODO",
                 "Metadata": {
-                    "SubclassOf": "Core:Artifact"
+                    "SubclassOf": "Core:Artifact",
+                    "name": "Package"
                 },
                 "Properties": {
                     "contentIdentifier": {
@@ -1092,7 +1093,8 @@
             "Snippet": {
                 "Description": "TODO",
                 "Metadata": {
-                    "SubclassOf": "Core:Artifact"
+                    "SubclassOf": "Core:Artifact",
+                    "name": "Snippet"
                 },
                 "Properties": {
                     "byteRange": {

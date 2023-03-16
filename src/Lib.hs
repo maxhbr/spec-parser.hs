@@ -272,7 +272,7 @@ vocabularyToPuml root context@(Spec{vocabularies = vocabularies}) key = let
                         , custom = custom
                 }) -> do
                     T.hPutStrLn h ("enum " <> commonName <> " {")
-                    mapM_ (\(k,_) -> T.hPutStrLn h ("    " <> k)) (Map.toList custom) 
+                    mapM_ (\(k,v) -> T.hPutStrLn h ("    " <> k <> " : " <> v)) (Map.toList custom) 
                     hPutStrLn h "}"
                     T.hPutStrLn h ("note top of " <> commonName)
                     T.hPutStrLn h (T.unlines ["<b>Summary</b>", commonSummary, "<b>Description</b>", commonDescription])
@@ -299,7 +299,7 @@ vocabularyToPuml root context@(Spec{vocabularies = vocabularies}) key = let
                             T.hPutStrLn h "end note"
                         ) (Map.toList custom) 
             hPutStrLn h "@enduml"
-        -- callProcess "plantuml" ["-tsvg", outCommented]
+        callProcess "plantuml" ["-tsvg", outCommented]
 
         return relativePath
 
@@ -321,7 +321,7 @@ vocabulariesToPuml root context@(Spec{vocabularies = vocabularies}) = let
             hPutStrLn h "@startuml"
             mapM_ (\puml -> hPutStrLn h ("!include_once ../" ++ (puml -<.> "commented.puml"))) vPumls
             hPutStrLn h "@enduml"
-        -- callProcess "plantuml" ["-tsvg", outCommented] 
+        callProcess "plantuml" ["-tsvg", outCommented] 
 
         return relativePath
 
@@ -352,15 +352,12 @@ classToPuml root context@(Spec{classes = classes}) key = let
                     mapM_ (\(k,v) -> T.hPutStrLn h ("    " <> k <> " : " <> v)) (Map.toList commonMetadata) 
                     hPutStrLn h ".. properties .."
                     mapM_ (\(k,v) -> do
-                            let plainType = case Map.lookup "type" v of 
-                                        Just t -> if isBasicType t
-                                                  then Just t
-                                                  else Nothing
-                                        _ -> Nothing
-                            let plainTypeText = case plainType of
-                                        Just t -> " : " <> t
-                                        Nothing -> ""
-                            T.hPutStrLn h ("    " <> k <> plainTypeText)
+                            let minCount = Map.findWithDefault "" "minCount" v
+                            let maxCount = Map.findWithDefault "" "maxCount" v
+                            let typeText = case Map.lookup "type" v of 
+                                        Just t -> " : " <> t <> " [" <> minCount <> ".." <> maxCount <> "]"
+                                        _ -> ""
+                            T.hPutStrLn h ("    " <> k <> typeText)
                         ) (Map.toList custom) 
                     hPutStrLn h "}"
                     T.hPutStrLn h ("note top of " <> commonName)
@@ -369,7 +366,7 @@ classToPuml root context@(Spec{classes = classes}) key = let
                     case Map.lookup "SubclassOf" commonMetadata of
                         Just sco ->
                             unless (sco == "none" || isBasicType sco) $
-                                T.hPutStrLn h ("\"" <> nameToIdentifier sco <> "\" <|-- \"" <> commonName <> "\"")
+                                T.hPutStrLn h ("\"" <> nameToIdentifier sco <> "\" <|-[thickness=4]- \"" <> commonName <> "\"")
 
                         Nothing -> pure ()
 
@@ -377,7 +374,7 @@ classToPuml root context@(Spec{classes = classes}) key = let
                             case Map.lookup "type" v of 
                                 Just t -> if isBasicType t
                                           then pure ()
-                                          else T.hPutStrLn h ("\"" <> nameToIdentifier t <> "\" <-- \"" <> commonName <> "::" <> k <> "\"")
+                                          else T.hPutStrLn h ("\"" <> nameToIdentifier t <> "\" <--- \"" <> commonName <> "::" <> k <> "\"")
                                 _ -> pure ()
                             -- T.hPutStrLn h ("note right of " <> commonName <> "::" <> k)
                             -- T.hPutStrLn h ("    " <> T.pack (show v))

@@ -14,11 +14,12 @@ main = do
     json <- profilesToJSON "spdx-3-model/model"
     BSL.writeFile "gh-pages/index.json" (encodePretty json)
     putStrLn "## end MarkdownToJSON"
-
     putStrLn "## start parse JSON"
     case fromJSON json :: (Result Spdx3Model) of 
         Error err -> fail err
         Success a -> do
+            putStrLn "## show model"
+            writeFile "gh-pages/model.show" (show a)
             putStrLn "## start generate PUML"
             writePumlsToDir "gh-pages/puml" a
 

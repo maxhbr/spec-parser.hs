@@ -5,14 +5,16 @@ module MetaModel
 import MyPrelude
 import qualified Data.Map as Map
 
-class BasicSpdx3 a where
+class Show a => BasicSpdx3 a where
     summary :: a -> Text
     description :: a -> Text
     rawMetadata :: a -> Map.Map Text Text
     metadata :: a -> Text -> Maybe Text
     metadata a k = (Map.lookup k . rawMetadata) a
     name :: a -> Text
-    name = fromJust . (`metadata` "name") -- TODO
+    name a = case (`metadata` "name") a of
+        Just n -> n
+        _ -> trace (show a) undefined
 
 data Spdx3Property
     = Spdx3Property

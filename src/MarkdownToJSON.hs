@@ -130,7 +130,7 @@ profilesToJSON dir = do
     updateGlobalLogger rootLoggerName (setLevel DEBUG)
     debugM "profilesToJSON" ("profilesToJSON: parse " ++ dir)
     
-    profiles <- glob (dir </> "*")
+    profiles <- filter (not . (".md" `isSuffixOf`)) <$> glob (dir </> "*")
     jsons <- mapM (\profile -> do
         let name = takeBaseName profile
         json <- profileToJSON profile

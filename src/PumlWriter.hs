@@ -18,9 +18,10 @@ isBasicType :: Text -> Bool
 isBasicType t = T.isPrefixOf "xsd:" t || t == "anyURI"
 
 class Pumlifyable a where
+    getKind :: a -> String
     getPumlFilePath :: a -> FilePath
     default getPumlFilePath :: (BasicSpdx3 a) => a -> FilePath
-    getPumlFilePath = (<.> "puml") . T.unpack . name
+    getPumlFilePath a = ((<.> getKind a <.> "puml") . T.unpack . name) a
     writeInnerPumlToH :: Handle -> a -> IO ()
     writePumlToFile :: a -> IO FilePath
     writePumlToFile a = do
@@ -47,6 +48,7 @@ writeCommentForSummaryAndDescription h a n = do
     T.hPutStrLn h "end note"
 
 instance Pumlifyable Spdx3Vocabulary where
+    getKind _ = "Vocabulary"
     writeInnerPumlToH h vocabulary@Spdx3Vocabulary{_vocabularyEntries = ves } = do
         let vocabularyName = name vocabulary
         T.hPutStrLn h ("enum " <> vocabularyName <> " {")
@@ -55,6 +57,7 @@ instance Pumlifyable Spdx3Vocabulary where
         writeCommentForSummaryAndDescription h vocabulary vocabularyName
 
 instance Pumlifyable Spdx3Class where
+    getKind _ = "Class"
     writeInnerPumlToH h cls@Spdx3Class{_classProperties = props} = do
         let className = name cls
         if cls `metadata` "Instantiability" == Just "Abstract"
@@ -83,10 +86,11 @@ instance Pumlifyable Spdx3Class where
 
         mapM_ (\(k,Spdx3ClassPropertyParameters ty _ _) ->
             unless (isBasicType ty) $
-                T.hPutStrLn h ("\"" <> ty <> "\" <--- \"" <> className <> "::" <> k <> "\"")
+                T.hPutStrLn h ("\"" <> ty <> "\" <-[dotted]-- \"" <> className <> "::" <> k <> "\"")
                 ) (Map.toList props)
 
 instance Pumlifyable Spdx3Profile where
+    getKind _ = "Profile"
     writeInnerPumlToH h profile@Spdx3Profile{ _profileProperties = pps
                                             , _profileVocabularies = pvs
                                             , _profileClasses = pcs
@@ -103,7 +107,8 @@ instance Pumlifyable Spdx3Profile where
                 ) (Map.assocs pcs)
 
 instance Pumlifyable Spdx3Model where
-    getPumlFilePath _ = "spdx3.puml"
+    getKind _ = "Model"
+    getPumlFilePath a = getKind a <.> "puml"
     writeInnerPumlToH h (Spdx3Model profiles) = do
         mapM_ (\(profileName,profile) -> do
             T.hPutStrLn h ("package " <> profileName <> " {")

@@ -6,7 +6,7 @@ import           Control.Monad as X
 import           Data.Aeson as X
 import           Data.Aeson.Encode.Pretty as X
 import           Data.Either as X (fromRight)
-import           Data.List as X (isInfixOf)
+import           Data.List as X (isInfixOf, isSuffixOf)
 import           Data.Maybe as X (fromMaybe, fromJust, isJust)
 import           Data.Text as X (Text)
 import           Debug.Trace as X

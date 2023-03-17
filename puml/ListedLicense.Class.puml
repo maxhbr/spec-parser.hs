@@ -1,0 +1,22 @@
+@startuml
+class ListedLicense {
+.. metadata ..
+    Instantiability : Concrete
+    SubclassOf : License
+    name : ListedLicense
+.. properties ..
+    deprecatedVersion : xsd:string [0..1]
+    listVersionAdded : xsd:string [0..1]
+}
+note top of ListedLicense
+<b>Summary</b>
+A license that is listed on the SPDX License List.
+<b>Description</b>
+A ListedLicense represents a License that is listed on the SPDX License
+List at https://spdx.org/licenses.
+
+**TBD** whether to define the meaning and purpose for each of the
+properties
+end note
+"License" <|-[thickness=4]- "ListedLicense"
+@enduml

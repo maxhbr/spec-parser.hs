@@ -1,0 +1,15 @@
+@startuml
+enum DependencyRequirement {
+    noAssertion : TODOdescription
+    optional : TODOdescription
+    preRequisite : TODOdescription
+    provided : TODOdescription
+    required : TODOdescription
+}
+note top of DependencyRequirement
+<b>Summary</b>
+TODO
+<b>Description</b>
+TODO
+end note
+@enduml

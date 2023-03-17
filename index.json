@@ -1,15 +1,455 @@
 {
     "AI": {
-        "Classes": {},
+        "Classes": {
+            "AIPackage": {
+                "Description": "Metadata information that can be added to a package to describe an AI\napplication or trained AI model.",
+                "Metadata": {
+                    "Instantiability": "Concrete",
+                    "SubclassOf": "Software:Package",
+                    "name": "AIPackage"
+                },
+                "Properties": {
+                    "autonomyType": {
+                        "maxCount": "1",
+                        "minCount": "0",
+                        "type": "PresenceType"
+                    },
+                    "contentIdentifier": {
+                        "maxCount": "1",
+                        "minCount": "0",
+                        "type": "anyURI"
+                    },
+                    "dataPreprocessingSteps": {
+                        "maxCount": "1",
+                        "minCount": "0",
+                        "type": "xsd:string"
+                    },
+                    "domain": {
+                        "minCount": "0",
+                        "type": "xsd:string"
+                    },
+                    "downloadLocation": {
+                        "maxCount": "1",
+                        "minCount": "0",
+                        "type": "anyURI"
+                    },
+                    "energyConsumption": {
+                        "maxCount": "1",
+                        "minCount": "0",
+                        "type": "xsd:string"
+                    },
+                    "homePage": {
+                        "maxCount": "1",
+                        "minCount": "0",
+                        "type": "anyURI"
+                    },
+                    "hyperparameters": {
+                        "minCount": "0",
+                        "type": "xsd:string"
+                    },
+                    "informationAboutApplication": {
+                        "maxCount": "1",
+                        "minCount": "0",
+                        "type": "xsd:string"
+                    },
+                    "informationAboutTraining": {
+                        "maxCount": "1",
+                        "minCount": "0",
+                        "type": "xsd:string"
+                    },
+                    "limitations": {
+                        "maxCount:1": "",
+                        "minCount": "0",
+                        "type": "xsd:string"
+                    },
+                    "metrics": {
+                        "minCount": "0",
+                        "type": "xsd:string"
+                    },
+                    "metricsDecisionThresholds": {
+                        "minCount": "0",
+                        "type": "xsd:string"
+                    },
+                    "modelExplainabilityMechanisms": {
+                        "maxCount": "1",
+                        "minCount": "0",
+                        "type": "xsd:string"
+                    },
+                    "packagePurpose": {
+                        "minCount": "0",
+                        "type": "SoftwarePurpose"
+                    },
+                    "packageUrl": {
+                        "maxCount": "1",
+                        "minCount": "0",
+                        "type": "anyURI"
+                    },
+                    "safetyRiskAssessment": {
+                        "maxCount": "1",
+                        "minCount": "0",
+                        "type": "SafetyRiskAssessmentType"
+                    },
+                    "sensitivePersonalInformation": {
+                        "maxCount": "1",
+                        "minCount": "0",
+                        "type": "PresenceType"
+                    },
+                    "standardsCompliance": {
+                        "minCount": "0",
+                        "type": "xsd:string"
+                    },
+                    "typeOfModel": {
+                        "minCount": "0",
+                        "type": "xsd:string"
+                    }
+                },
+                "_title": "AIPackage"
+            }
+        },
         "Description": "The AI profile namespace defines concepts related to AI application and\nmodel artifacts.",
         "Metadata": {
             "id": "https://rdf.spdx.org/v3#AI",
             "name": "AI"
         },
-        "Properties": {},
+        "Properties": {
+            "autonomyType": {
+                "Description": "It is a field of presence type that indicates if a human is in the loop\nin the AI software for any of the decisions or if it's fully automatic.",
+                "Metadata": {
+                    "Nature": "DataProperty",
+                    "Range": "PresenceType",
+                    "name": "autonomyType"
+                },
+                "Summary": "Field captures if a human is in the in the loop",
+                "_title": "autonomyType"
+            },
+            "dataPreprocessingSteps": {
+                "Description": "This is a free form text field that describes the preprocessing steps\ndone to the data before training the model(s) contained in the AI\nsoftware",
+                "Metadata": {
+                    "Nature": "DataProperty",
+                    "Range": "xsd:string",
+                    "name": "dataPreprocessingSteps"
+                },
+                "Summary": "Field captures Capture all the preprocessing steps done before the model\ntraining",
+                "_title": "dataPreprocessingSteps"
+            },
+            "energyConsumption": {
+                "Description": "Text field that captures the energy consumption during training and\noperation of the AI model. a.k.a training energy consumption, inference\nenergy consumption",
+                "Metadata": {
+                    "Nature": "DataProperty",
+                    "Range": "xsd:string",
+                    "name": "energyConsumption"
+                },
+                "Summary": "Field captures the amount of energy consumed to build this AI package",
+                "_title": "energyConsumption"
+            },
+            "hyperparameters": {
+                "Description": "The field records all or the important hyperparameters of each model.\nThe hyperparmeters are listed as\nhyperparameter1*name:hyperparameter1*value, hyperparameter2*name:\nhyperparameter2*value etc. If there are multiple models, the\nhyperparameters of each model are listed in a separate line.",
+                "Metadata": {
+                    "Nature": "DataProperty",
+                    "Range": "xsd:string",
+                    "name": "hyperparameters"
+                },
+                "Summary": "Field captures the record of the hyperparameters used to build the AI\nmodel contained in the AI package",
+                "_title": "hyperparameters"
+            },
+            "informationAboutApplication": {
+                "Description": "A text field that describes any relevant information in free form about\nhow the AI model is used inside the software, any relevant\npre-processing steps, third party APIs etc.",
+                "Metadata": {
+                    "Nature": "DataProperty",
+                    "Range": "xsd:string",
+                    "name": "informationAboutApplication"
+                },
+                "Summary": "Field describe the features used and other relevant information about\nthe AI software in addition to the model.",
+                "_title": "informationAboutApplication"
+            },
+            "informationAboutTraining": {
+                "Description": "This is a text field that describes in detail about the specific steps\ninvolved during the training of the AI model in free form text. For\nexample, if supervised fine tuning is used, or in active learning is\nused as a part of training the model that is being used in the AI\nsoftware.",
+                "Metadata": {
+                    "Nature": "DataProperty",
+                    "Range": "xsd:string",
+                    "name": "informationAboutTraining"
+                },
+                "Summary": "Field describe the features used and other relevant information about\ndifferent steps of training",
+                "_title": "informationAboutTraining"
+            },
+            "limitations": {
+                "Description": "Text field that captures the limitations of the AI software. The\nlimitations are expressed as free form text.",
+                "Metadata": {
+                    "Nature": "DataProperty",
+                    "Range": "xsd:string",
+                    "name": "limitations"
+                },
+                "Summary": "Field captures any limitations of the AI Package (the AI models\ncontained) one wishes to note down.",
+                "_title": "limitations"
+            },
+            "metrics": {
+                "Description": "The field describes the metrics used to evaluate the AI model used in\nthe AI software. Its a text field where metrics are listed in a comma\nseparated fashion in the following format metric*1: value,\nmetric*2:value, etc. If there are multiple models, metrics are listed in\na new line for each model.",
+                "Metadata": {
+                    "Nature": "DataProperty",
+                    "Range": "xsd:string",
+                    "name": "metrics"
+                },
+                "Summary": "This field records the measurement of prediction quality including\nuncertainty, accuracy, characteristics of of tested population, Quality,\nFairness, explainability, Robustness etc",
+                "_title": "metrics"
+            },
+            "metricsDecisionThresholds": {
+                "Description": "Each metric might be computed based on a decision threshold (for\ninstance precision or recall is typically computed by splitting checking\nif the probability of the outcome is &gt;0.5). This field records the\ndecision threshold in comma separated values. E.g.,\nmetric*1:decsion*threshold, metric\\_2:decision threshold. If there are\nmultiple models each line represents each model’s metrics and decision\nthreshold.",
+                "Metadata": {
+                    "Nature": "DataProperty",
+                    "Range": "xsd:string",
+                    "name": "metricsDecisionThresholds"
+                },
+                "Summary": "Field captures the thresholds that are being used for metric computation\nof the metrics described in the metrics field. Should match with the\nMetrics field and depends on the metrics field",
+                "_title": "metricsDecisionThresholds"
+            },
+            "modelExplainabilityMechanisms": {
+                "Description": "This is a free form text field that lists the different explainability\nmechanisms (such a SHAP, or other model specific explainability\nmechanisms) that can be used to explain the model in a comma separated\nfashion.",
+                "Metadata": {
+                    "Nature": "DataProperty",
+                    "Range": "xsd:string",
+                    "name": "modelExplainabilityMechanisms"
+                },
+                "Summary": "Field captures methods that can be used to explain the model",
+                "_title": "modelExplainabilityMechanisms"
+            },
+            "safetyRiskAssessmentType": {
+                "Description": "It is a field of type safeRiskAssessment and the possible values are\nserious, high, medium, low. These risk types are defined in accordance\nwith Article 20 of EC Regulation  \nNo 765/2008.",
+                "Metadata": {
+                    "Nature": "DataProperty",
+                    "Range": "SafetyRiskAssessmentType",
+                    "name": "safetyRiskAssessment"
+                },
+                "Summary": "Field categorizes safety risk impact of AI software in the terms of\nSerious, high, medium low",
+                "_title": "safetyRiskAssessmentType"
+            },
+            "sensitivePersonalInformationType": {
+                "Description": "This field notes if sensitive personal information like biometric data,\naddress or other personally identifiable data is used in the training or\ninference of the AI models. The possible values are ‘yes’, ‘no’ and\n‘noassertion’.",
+                "Metadata": {
+                    "Nature": "DataProperty",
+                    "Range": "SensitivePersonalInformationType",
+                    "name": "PresenceType"
+                },
+                "Summary": "Field records if sensitive personal information is used in model\ntraining",
+                "_title": "sensitivePersonalInformationType"
+            },
+            "standardsCompliance": {
+                "Description": "Text field that captures the list of standards that the AI software\ncomplies with. This could include both published and unpublished\nstandards including ISO, IEEE, ETSI standards. Each standard is listed\non a separate line or in a single line with each standard being comma\nseparated.",
+                "Metadata": {
+                    "Nature": "DataProperty",
+                    "Range": "xsd:string",
+                    "name": "standardsCompliance"
+                },
+                "Summary": "Field captures What laws and regulations are being adhered to.",
+                "_title": "standardsCompliance"
+            },
+            "typeOfModel": {
+                "Description": "This is a text field that records the type of the AI model(s) used in\nthe software. For instance if its supervised model, unsupervised model\nor if its a reinforcement learning model or a combination. Preferably\nexpressed using AND conjugation if there are multiple models being used\nas a part of the AI software.",
+                "Metadata": {
+                    "Nature": "DataProperty",
+                    "Range": "xsd:string",
+                    "name": "typeOfModel"
+                },
+                "Summary": "Field records the type of the model used in the AI software.",
+                "_title": "typeOfModel"
+            }
+        },
         "Summary": "Additional metadata based on software profile, that is useful for ai\napplications and models.",
-        "Vocabularies": {},
+        "Vocabularies": {
+            "PresenceType": {
+                "Description": "This type is used to indicate if a given field is present or absent or\nunknown",
+                "Entries": {
+                    "no": "Indicates absence of the field",
+                    "noassertion": "Describes no assertion. In other words, unknown.",
+                    "yes": "Indicates presence of the field"
+                },
+                "Metadata": {
+                    "name": "SensitivePersonalInformationType"
+                },
+                "Summary": "Categories of presence or absence",
+                "_title": "PresenceType"
+            },
+            "SafetyRiskAssessmentType": {
+                "Description": "Describes the different safety risk type values that can be used to\ndescribe the safety risk of the AI software",
+                "Entries": {
+                    "high": "The second highest level of risk posed by the AI software as given by\nArticle 20 of EC Regulation No 765/2008.",
+                    "low": "Low/no risk is contained in the AI software.",
+                    "medium": "The third highest level of risk as given by Article 20 of EC\nRegulation  \nNo 765/2008.",
+                    "serious": "The highest level of risk that is contained for a AI software as given\nby Article 20 of Regulation 765/2008/EC"
+                },
+                "Metadata": {
+                    "name": "SafetyRiskAssessmentType"
+                },
+                "Summary": "Categories of safety risk impact of application ie. Serious, high,\nmedium low",
+                "_title": "SafetyRiskAssessmentType"
+            }
+        },
         "_title": "AI Profile"
+    },
+    "Build": {
+        "Classes": {
+            "Build": {
+                "Description": "A build is a representation of the process in which a piece of software\nor artifact is built. It encapsulates information related to a build\nprocess and provides an element from which relationships can be created\nto describe the build's inputs, outputs, and related entities (e.g.\nbuilders, identities, etc.).\n\nDefinitions of \"BuildType\", \"ConfigSource\", \"Parameters\" and\n\"Environment\" follow those defined in [SLSA\nprovenance](https://slsa.dev/provenance/v0.2).\n\nExternalIdentifier of type \"urlScheme\" may be used to identify build\nlogs. Comment should be \"LogReference\".",
+                "Metadata": {
+                    "Instantiability": "Concrete",
+                    "SubclassOf": "Core:Element",
+                    "name": "Build"
+                },
+                "Properties": {
+                    "buildId": {
+                        "maxCount": "1",
+                        "minCount": "0",
+                        "type": "xsd:string"
+                    },
+                    "buildType": {
+                        "maxCount": "1",
+                        "minCount": "1",
+                        "type": "anyURI"
+                    },
+                    "configSourceDigest": {
+                        "minCount": "0",
+                        "type": "Hash"
+                    },
+                    "configSourceEntrypoint": {
+                        "minCount": "0",
+                        "type": "xsd:string"
+                    },
+                    "configSourceUri": {
+                        "minCount": "0",
+                        "type": "anyURI"
+                    },
+                    "endTime": {
+                        "maxCount:1": "",
+                        "minCount:0": "",
+                        "type": "xsd:DateTime"
+                    },
+                    "environment": {
+                        "minCount": "0",
+                        "type": "xsd:map&lt;string&gt;string"
+                    },
+                    "parameters": {
+                        "minCount": "0",
+                        "type": "xsd:map&lt;string&gt;string"
+                    },
+                    "startTime": {
+                        "maxCount:1": "",
+                        "minCount:0": "",
+                        "type": "xsd:DateTime"
+                    }
+                },
+                "Summary": "Class that describes a build instance of software/artifacts.",
+                "_title": "Build"
+            }
+        },
+        "Description": "The Build namespace defines concepts related to building of artifacts.",
+        "Metadata": {
+            "id": "https://rdf.spdx.org/v3#Build",
+            "name": "Build"
+        },
+        "Properties": {
+            "buildId": {
+                "Description": "A buildId is a locally unique identifier to identify a unique instance\nof a build.This identifier differs based on build toolchain, platform,\nor naming convention used by an organization or standard.",
+                "Metadata": {
+                    "Nature": "DataProperty",
+                    "Range": "string",
+                    "name": "buildId"
+                },
+                "Summary": "A buildId is a locally unique identifier used by a builder to identify a\nunique instance of a build produced by it.",
+                "_title": "buildId"
+            },
+            "buildType": {
+                "Description": "A buildType is a URI expressing the toolchain, platform, or\ninfrastructure that the build was invoked on. For example, if the build\nwas invoked on GitHub's CI platform using github actions, the buildType\ncan be expressed as `https://github.com/actions`. In contrast, if the\nbuild was invoked on a local machine, the buildType can be expressed as\n`file://username@host/path/to/build`.",
+                "Metadata": {
+                    "Nature": "DataProperty",
+                    "Range": "anyURI",
+                    "name": "buildId"
+                },
+                "Summary": "A buildType is a hint that is used to indicate the toolchain, platform,\nor infrastructure that the build was invoked on.",
+                "_title": "buildType"
+            },
+            "configSourceDigest": {
+                "Description": "configSourceDigest is the checksum of the build configuration file used\nby a builder to execute a build. This Property uses the Core model's\n[Hash](../../Core/Classes/Hash.md) class.",
+                "Metadata": {
+                    "Nature": "DataProperty",
+                    "Range": "Hash",
+                    "name": "configSourceDigest"
+                },
+                "Summary": "Property that describes the digest of the build configuration file used\nto invoke a build.",
+                "_title": "configSourceDigest"
+            },
+            "configSourceEntrypoint": {
+                "Description": "A build entrypoint is the invoked executable of a build which always\nruns when the build is triggered. For example, when a build is triggered\nby running a shell script, the entrypoint is `script.sh`. In terms of a\ndeclared build, the entrypoint is the position in a configuration file\nor a build declaration which is always run when the build is triggered.\nFor example, in the following configuration file:\n\n\\`\\`\\` name: Publish packages to PyPI\n\non: create: tags: \"\\*\"\n\njobs: publish: runs-on: ubuntu-latest if: startsWith(github.ref,\n'refs/tags/') steps:\n\n... \\`\\`\\`\n\nThe entrypoint of the build is `publish`.",
+                "Metadata": {
+                    "Nature": "DataProperty",
+                    "Range": "string",
+                    "name": "configSourceEntrypoint"
+                },
+                "Summary": "Property describes the invocation entrypoint of a build.",
+                "_title": "configSourceEntrypoint"
+            },
+            "configSourceUri": {
+                "Description": "The configSourceUri of a build is the URI of the build configuration, if\nexisting, used by a toolchain or platform. For example, a build\ntriggered by a github action has a configSourceUri as the URL of the\nYAML file for the GitHub repository.",
+                "Metadata": {
+                    "Nature": "DataProperty",
+                    "Range": "anyURI",
+                    "name": "configSourceUri"
+                },
+                "Summary": "Property that describes the URI of the build configuration source file.",
+                "_title": "configSourceUri"
+            },
+            "endTime": {
+                "Description": "endTime describes the time at which a build stops or finishes. This\nvalue is typically recorded by the builder.",
+                "Metadata": {
+                    "Nature": "DataProperty",
+                    "Range": "DateTime",
+                    "name": "endTime"
+                },
+                "Summary": "Property that describes the time at which a build stops.",
+                "_title": "endTime"
+            },
+            "environment": {
+                "Description": "environment is a map of environment variables and values that are set\nduring a build session. This is different from the\n[parameters](parameters.md) property in that it describes the\nenvironment variables set before a build is invoked rather than the\nvariables provided to the builder.",
+                "Metadata": {
+                    "Nature": "DataProperty",
+                    "Range": "map&lt;string&gt;string",
+                    "name": "environment"
+                },
+                "Summary": "Property describing the session in which a build is invoked.",
+                "_title": "environment"
+            },
+            "parameters": {
+                "Description": "parameters is a key-value map of all build parameters and their values\nthat were provided to the builder for a build instance. This is\ndifferent from [environment](environment.md) property in that the keys\nand values are provided as command line arguments or a configuration\nfile to the builder.",
+                "Metadata": {
+                    "Nature": "DataProperty",
+                    "Range": "map&lt;string&gt;string",
+                    "name": "parameters"
+                },
+                "Summary": "Property describing the parameters used in an instance of a build.",
+                "_title": "parameters"
+            },
+            "startTime": {
+                "Description": "startTime is the time at which a build is triggered. The builder\ntypically records this value.",
+                "Metadata": {
+                    "Nature": "DataProperty",
+                    "Range": "DateTime",
+                    "name": "startTime"
+                },
+                "Summary": "Property describing the start time of a build.",
+                "_title": "startTime"
+            }
+        },
+        "Summary": "Everything having to do with the build profile.",
+        "Vocabularies": {
+            "BuildTypeVocab": {
+                "Description": "This is about the vocabulary of build types.",
+                "Instances": "-   https://cloudbuild.googleapis.com/CloudBuildSteps@v1: build type for\n    Google Cloud Build v1\n-   https://gitlab.com/gitlab-org/gitlab-runner/-/blob/v15.1.0/PROVENANCE.md:\n    build type of gitlab provenance runner v15.1.0\n-   https://github.com/Attestations/GitHubActionsWorkflow@v1: build type\n    for github actions workflow v1",
+                "Metadata": {
+                    "Type": "URI",
+                    "name": "BuildTypeVocab"
+                },
+                "_title": "BuildTypeVocab"
+            }
+        },
+        "_title": "Build"
     },
     "Core": {
         "Classes": {
@@ -94,7 +534,7 @@
                 "_title": "Bom"
             },
             "Bundle": {
-                "Description": "TODO",
+                "Description": "A bundle is a collection of Elements that have a shared context.",
                 "Metadata": {
                     "Instantiability": "Concrete",
                     "SubclassOf": "ElementCollection",
@@ -106,16 +546,21 @@
                         "type": "xsd:string"
                     }
                 },
-                "Summary": "TODO",
+                "Summary": "A collection of Elements that have a shared context.",
                 "_title": "Bundle"
             },
             "CreationInformation": {
-                "Description": "TODO",
+                "Description": "The CreationInformation provides information about who created the\nElement, and when and how it was created.",
                 "Metadata": {
                     "Instantiability": "Concrete",
                     "name": "CreationInformation"
                 },
                 "Properties": {
+                    "comment": {
+                        "maxCount": "1",
+                        "minCount": "0",
+                        "type": "xsd:string"
+                    },
                     "created": {
                         "type": "xsd:dateTime"
                     },
@@ -134,7 +579,7 @@
                         "type": "SemVer"
                     }
                 },
-                "Summary": "TODO",
+                "Summary": "Provides information about the creation of the Element.",
                 "_title": "CreationInformation"
             },
             "Element": {
@@ -188,7 +633,7 @@
                 "_title": "Element"
             },
             "ElementCollection": {
-                "Description": "TODO",
+                "Description": "An SpdxCollection is a collection of Elements, not necessarily with\nunifying context.",
                 "Metadata": {
                     "Instantiability": "Abstract",
                     "SubclassOf": "Element",
@@ -210,7 +655,7 @@
                         "type": "Element"
                     }
                 },
-                "Summary": "TODO",
+                "Summary": "A collection of Elements, not necessarily with unifying context.",
                 "_title": "ElementCollection"
             },
             "Entity": {
@@ -225,7 +670,7 @@
                 "_title": "Entity"
             },
             "ExternalIdentifier": {
-                "Description": "TODO",
+                "Description": "An ExternalIdentifier is a reference to a resource outside the scope of\nSPDX-3.0 content that uniquely identifies an Element.",
                 "Metadata": {
                     "Instantiability": "Concrete",
                     "name": "ExternalIdentifier"
@@ -247,7 +692,7 @@
                         "type": "xsd:string"
                     }
                 },
-                "Summary": "TODO",
+                "Summary": "A reference to a resource outside the scope of SPDX-3.0 content that\nuniquely identifies an Element.",
                 "_title": "ExternalIdentifier"
             },
             "ExternalMap": {
@@ -275,7 +720,7 @@
                 "_title": "ExternalMap"
             },
             "ExternalReference": {
-                "Description": "An External Reference is a grouping of characteristics unique to the\nidentity, location and context of a resource outside of the scope of\nSPDX-3.0 content.",
+                "Description": "An External Reference points to a resource outside the scope of the\nSPDX-3.0 content that provides additional characteristics of an Element.",
                 "Metadata": {
                     "Instantiability": "Concrete",
                     "SubclassOf": "none",
@@ -298,7 +743,7 @@
                         "type": "anyURI"
                     }
                 },
-                "Summary": "A reference to a resource outside of the scope of SPDX-3.0 content.",
+                "Summary": "A reference to a resource outside the scope of SPDX-3.0 content.",
                 "_title": "ExternalReference"
             },
             "Hash": {
@@ -334,7 +779,7 @@
                 "_title": "Identity"
             },
             "IntegrityMethod": {
-                "Description": "TODO",
+                "Description": "An IntegrityMethod provides an independently reproducible mechanism that\npermits identification of a specific Element that correlates to the data\nin this SPDX document. This identifier enables a recipient to determine\nif anything in the original Element has been changed and eliminates\nconfusion over which version or modification of a specific Element is\nreferenced.",
                 "Metadata": {
                     "Instantiability": "Abstract",
                     "name": "IntegrityMethod"
@@ -345,21 +790,21 @@
                         "type": "xsd:string"
                     }
                 },
-                "Summary": "TODO",
+                "Summary": "Provides an independently reproducible mechanism that permits\nidentification of a specific Element.",
                 "_title": "IntegrityMethod"
             },
             "MediaType": {
-                "Description": "TODO",
+                "Description": "The MediaType is a String constrained to the RFC 2046 specification. It\nprovides a standardized way of indicating the type of content of an\nElement. A list of all possible media types is available at\nhttps://www.iana.org/assignments/media-types/media-types.xhtml.",
                 "Metadata": {
                     "SubclassOf": "xsd:string",
                     "name": "MediaType"
                 },
                 "Properties": {},
-                "Summary": "TODO",
+                "Summary": "Standardized way of indicating the type of content of an Element. A\nString constrained to the RFC 2046 specification.",
                 "_title": "MediaType"
             },
             "NamespaceMap": {
-                "Description": "TODO",
+                "Description": "A namespace map allows the creator of a collection of Elements to use\nshorter identifiers (\"prefixes\") instead of URIs to provide a more\nhuman-readable and smaller serialized representation of the Elements.",
                 "Metadata": {
                     "Instantiability": "Concrete",
                     "name": "NamespaceMap"
@@ -374,7 +819,7 @@
                         "type": "xsd:string"
                     }
                 },
-                "Summary": "TODO",
+                "Summary": "A mapping between prefixes and namespace URIs.",
                 "_title": "NamespaceMap"
             },
             "Organization": {
@@ -423,13 +868,13 @@
                 "_title": "Person"
             },
             "ProfileIdentifier": {
-                "Description": "TODO",
+                "Description": "A profile identifier provides the profile that the Element is specified\nin.",
                 "Metadata": {
                     "SubclassOf": "xsd:string",
                     "name": "ProfileIdentifier"
                 },
                 "Properties": {},
-                "Summary": "TODO",
+                "Summary": "Provides the profile that the Element is specified in.",
                 "_title": "ProfileIdentifier"
             },
             "Relationship": {
@@ -463,17 +908,17 @@
                 "_title": "Relationship"
             },
             "SemVer": {
-                "Description": "TODO",
+                "Description": "The semantic version is a String constrained to the SemVer 2.0.0\nspecification.",
                 "Metadata": {
                     "SubclassOf": "xsd:string",
                     "name": "SemVer"
                 },
                 "Properties": {},
-                "Summary": "TODO",
+                "Summary": "A String constrained to the SemVer 2.0.0 specification.",
                 "_title": "SemVer"
             },
             "SpdxDocument": {
-                "Description": "TODO",
+                "Description": "An SpdxDocument assembles a collection of Elements under a common\nstring, the name of the document. Commonly used when representing a unit\nof transfer of SPDX Elements.",
                 "Metadata": {
                     "Instantiability": "Concrete",
                     "SubclassOf": "Bundle",
@@ -486,7 +931,7 @@
                         "type": "xsd:string"
                     }
                 },
-                "Summary": "TODO",
+                "Summary": "Assembles a collection of Elements under a common string, the name of\nthe document.",
                 "_title": "SpdxDocument"
             },
             "Tool": {
@@ -508,103 +953,103 @@
         },
         "Properties": {
             "algorithm": {
-                "Description": "A algorithm is TODO",
+                "Description": "An algorithm specifies the algorithm that was used for calculating the\nhash value.",
                 "Metadata": {
                     "Nature": "DataProperty",
                     "Range": "HashAlgorithm",
                     "name": "algorithm"
                 },
-                "Summary": "TODO",
+                "Summary": "Specifies the algorithm used for calculating the hash value.",
                 "_title": "algorithm"
             },
             "annotationType": {
-                "Description": "A annotationType is TODO",
+                "Description": "An annotationType describes the type of an annotation.",
                 "Metadata": {
                     "Nature": "DataProperty",
                     "Range": "AnnotationType",
                     "name": "annotationType"
                 },
-                "Summary": "TODO",
+                "Summary": "Describes the type of annotation.",
                 "_title": "annotationType"
             },
             "comment": {
-                "Description": "A comment is TODO",
+                "Description": "A comment is an optional field for creators of the Element to provide\ncomments to the readers/reviewers of the document.",
                 "Metadata": {
                     "Nature": "DataProperty",
                     "Range": "xsd:string",
                     "name": "comment"
                 },
-                "Summary": "TODO",
+                "Summary": "Provide consumers with comments by the creator of the Element about the\nElement.",
                 "_title": "comment"
             },
             "completeness": {
-                "Description": "A completeness is TODO",
+                "Description": "Completeness gives information about whether the provided relationships\nare complete, known to be incomplete or if no assertion is made either\nway.",
                 "Metadata": {
                     "Nature": "DataProperty",
                     "Range": "RelationshipCompleteness",
                     "name": "completeness"
                 },
-                "Summary": "TODO",
+                "Summary": "Provides information about the completeness of relationships.",
                 "_title": "completeness"
             },
             "contentType": {
-                "Description": "A contentType is TODO",
+                "Description": "ContentType specifies the media type of an Element.",
                 "Metadata": {
                     "Nature": "DataProperty",
                     "Range": "MediaType",
                     "name": "contentType"
                 },
-                "Summary": "TODO",
+                "Summary": "Specifies the media type of an Element.",
                 "_title": "contentType"
             },
             "context": {
-                "Description": "A context is TODO",
+                "Description": "A context gives information about the circumstances or unifying\nproperties that Elements of the bundle have been assembled under.",
                 "Metadata": {
                     "Nature": "DataProperty",
                     "Range": "xsd:string",
                     "name": "context"
                 },
-                "Summary": "TODO",
+                "Summary": "Gives information about the circumstances or unifying properties that\nElements of the bundle have been assembled under.",
                 "_title": "context"
             },
             "created": {
-                "Description": "A created is TODO",
+                "Description": "Created is a date that identifies when the Element was originally\ncreated. The time stamp can serve as an indication as to whether the\nanalysis needs to be updated.",
                 "Metadata": {
                     "Nature": "DataProperty",
                     "Range": "xsd:dateTime",
                     "name": "created"
                 },
-                "Summary": "TODO",
+                "Summary": "Identifies when the Element was originally created.",
                 "_title": "created"
             },
             "createdBy": {
-                "Description": "A createdBy is TODO",
+                "Description": "CreatedBy identifies who or what created the Element. The generation\nmethod will assist the recipient of the Element in assessing the general\nreliability/accuracy of the analysis information.",
                 "Metadata": {
                     "Nature": "ObjectProperty",
                     "Range": "Entity",
                     "name": "createdBy"
                 },
-                "Summary": "TODO",
+                "Summary": "Identifies who or what created the Element.",
                 "_title": "createdBy"
             },
             "creationInfo": {
-                "Description": "A creationInfo is TODO",
+                "Description": "CreationInfo provides information about the creation of the Element.",
                 "Metadata": {
                     "Nature": "DataProperty",
                     "Range": "CreationInformation",
                     "name": "creationInfo"
                 },
-                "Summary": "TODO",
+                "Summary": "Provides information about the creation of the Element.",
                 "_title": "creationInfo"
             },
             "dataLicense": {
-                "Description": "A dataLicense is TODO",
+                "Description": "The data license provides the license under which the SPDX documentation\nof the Element can be used. This is to alleviate any concern that\ncontent (the data or database) in an SPDX file is subject to any form of\nintellectual property right that could restrict the re-use of the\ninformation or the creation of another SPDX file for the same\nproject(s). This approach avoids intellectual property and related\nrestrictions over the SPDX file, however individuals can still contract\nwith each other to restrict release of specific collections of SPDX\nfiles (which map to software bill of materials) and the identification\nof the supplier of SPDX files. Compliance with this document includes\npopulating the SPDX fields therein with data related to such fields\n(\"SPDX-Metadata\"). This document contains numerous fields where an SPDX\nfile creator may provide relevant explanatory text in SPDX-Metadata.\nWithout opining on the lawfulness of \"database rights\" (in jurisdictions\nwhere applicable), such explanatory text is copyrightable subject matter\nin most Berne Convention countries. By using the SPDX specification, or\nany portion hereof, you hereby agree that any copyright rights (as\ndetermined by your jurisdiction) in any SPDX-Metadata, including without\nlimitation explanatory text, shall be subject to the terms of the\nCreative Commons CC0 1.0 Universal license. For SPDX-Metadata not\ncontaining any copyright rights, you hereby agree and acknowledge that\nthe SPDX-Metadata is provided to you “as-is” and without any\nrepresentations or warranties of any kind concerning the SPDX-Metadata,\nexpress, implied, statutory or otherwise, including without limitation\nwarranties of title, merchantability, fitness for a particular purpose,\nnon-infringement, or the absence of latent or other defects, accuracy,\nor the presence or absence of errors, whether or not discoverable, all\nto the greatest extent permissible under applicable law.",
                 "Metadata": {
                     "Nature": "DataProperty",
                     "Range": "xsd:string",
                     "name": "dataLicense"
                 },
-                "Summary": "TODO",
+                "Summary": "Provides the license under which the SPDX documentation of the Element\ncan be used.",
                 "_title": "dataLicense"
             },
             "description": {
@@ -618,13 +1063,13 @@
                 "_title": "description"
             },
             "element": {
-                "Description": "A element is TODO",
+                "Description": "This field refers to one or more Elements that are part of an\nElementCollection.",
                 "Metadata": {
                     "Nature": "ObjectProperty",
                     "Range": "Element",
                     "name": "element"
                 },
-                "Summary": "TODO",
+                "Summary": "Refers to one or more Elements that are part of an ElementCollection.",
                 "_title": "element"
             },
             "extensions": {
@@ -636,93 +1081,103 @@
                 "_title": "extensions"
             },
             "externalId": {
-                "Description": "A externalId is TODO",
+                "Description": "ExternalId identifies an external Element used within a Document but\ndefined external to that Document.",
                 "Metadata": {
                     "Nature": "DataProperty",
                     "Range": "anyURI",
                     "name": "externalId"
                 },
-                "Summary": "TODO",
+                "Summary": "Identifies an external Element used within a Document but defined\nexternal to that Document.",
                 "_title": "externalId"
             },
+            "externalIdentifierType": {
+                "Description": "An externalIdentifierType specifies the type of the external identifier.",
+                "Metadata": {
+                    "Nature": "DataProperty",
+                    "Range": "ExternalIdentifierType",
+                    "name": "externalIdentifierType"
+                },
+                "Summary": "Specifies the type of the external identifier.",
+                "_title": "externalIdentifierType"
+            },
             "externalIdentifiers": {
-                "Description": "TODO",
+                "Description": "ExternalIdentifier points to a resource outside the scope of SPDX-3.0\ncontent that uniquely identifies an Element.",
                 "Metadata": {
                     "Nature": "ObjectProperty",
-                    "Range": "ExternaIdentifier",
+                    "Range": "ExternalIdentifier",
                     "name": "externalIdentifiers"
                 },
-                "Summary": "TODO",
+                "Summary": "Provides a reference to a resource outside the scope of SPDX-3.0 content\nthat uniquely identifies an Element.",
                 "_title": "externalIdentifiers"
             },
             "externalReferenceType": {
-                "Description": "A externalReferenceType is TODO",
+                "Description": "An externalReferenceType specifies the type of the external reference.",
                 "Metadata": {
                     "Nature": "DataProperty",
                     "Range": "ExternalReferenceType",
                     "name": "externalReferenceType"
                 },
-                "Summary": "TODO",
+                "Summary": "Specifies the type of the external reference.",
                 "_title": "externalReferenceType"
             },
             "externalReferences": {
-                "Description": "TODO",
+                "Description": "This field points to a resource outside the scope of the SPDX-3.0\ncontent that provides additional characteristics of an Element.",
                 "Metadata": {
                     "Nature": "ObjectProperty",
                     "Range": "ExternalReference",
                     "name": "externalReferences"
                 },
-                "Summary": "TODO",
+                "Summary": "Points to a resource outside the scope of the SPDX-3.0 content that\nprovides additional characteristics of an Element.",
                 "_title": "externalReferences"
             },
             "from": {
-                "Description": "A from is TODO",
+                "Description": "This field references the Element on the left-hand side of a\nrelationship.",
                 "Metadata": {
                     "Nature": "ObjectProperty",
                     "Range": "Element",
                     "name": "from"
                 },
-                "Summary": "TODO",
+                "Summary": "References the Element on the left-hand side of a relationship.",
                 "_title": "from"
             },
             "hashValue": {
-                "Description": "A hashValue is TODO",
+                "Description": "HashValue is the result of applying a hash algorithm to an Element.",
                 "Metadata": {
                     "Nature": "DataProperty",
                     "Range": "xsd:string",
                     "name": "hashValue"
                 },
-                "Summary": "TODO",
+                "Summary": "The result of applying a hash algorithm to an Element.",
                 "_title": "hashValue"
             },
             "imports": {
-                "Description": "A imports is TODO",
+                "Description": "Imports provides an ExternalMap of Element identifiers that are used\nwithin a document but defined external to that document.",
                 "Metadata": {
                     "Nature": "DataProperty",
                     "Range": "ExternalMap",
                     "name": "imports"
                 },
-                "Summary": "TODO",
+                "Summary": "Provides an ExternalMap of Element identifiers.",
                 "_title": "imports"
             },
             "locationHint": {
-                "Description": "A locationHint is TODO",
+                "Description": "A locationHint provides an indication of where to retrieve an external\nElement.",
                 "Metadata": {
                     "Nature": "DataProperty",
                     "Range": "anyURI",
                     "name": "locationHint"
                 },
-                "Summary": "TODO",
+                "Summary": "Provides an indication of where to retrieve an external Element.",
                 "_title": "locationHint"
             },
             "locator": {
-                "Description": "A locator is TODO",
+                "Description": "A locator provides the location of an external reference.",
                 "Metadata": {
                     "Nature": "DataProperty",
                     "Range": "anyURI",
                     "name": "locator"
                 },
-                "Summary": "TODO",
+                "Summary": "Provides the location of an external reference.",
                 "_title": "locator"
             },
             "name": {
@@ -736,23 +1191,23 @@
                 "_title": "name"
             },
             "namespace": {
-                "Description": "A namespace is TODO",
+                "Description": "A namespace provides an unambiguous mechanism for other documents to\nreference Elements within this document.",
                 "Metadata": {
                     "Nature": "DataProperty",
                     "Range": "anyURI",
                     "name": "namespace"
                 },
-                "Summary": "TODO",
+                "Summary": "Provides an unambiguous mechanism for other documents to reference\nElements within this document.",
                 "_title": "namespace"
             },
             "namespaces": {
-                "Description": "A namespaces is TODO",
+                "Description": "This field provides a NamespaceMap applicable to an ElementCollection.",
                 "Metadata": {
                     "Nature": "DataProperty",
                     "Range": "NamespaceMap",
                     "name": "namespaces"
                 },
-                "Summary": "TODO",
+                "Summary": "Provides a NamespaceMap applicable to an ElementCollection.",
                 "_title": "namespaces"
             },
             "originatedBy": {
@@ -766,43 +1221,43 @@
                 "_title": "originatedBy"
             },
             "prefix": {
-                "Description": "A prefix is TODO",
+                "Description": "A prefix is a substitute for a URI.",
                 "Metadata": {
                     "Nature": "DataProperty",
                     "Range": "xsd:string",
                     "name": "prefix"
                 },
-                "Summary": "TODO",
+                "Summary": "A substitute for a URI.",
                 "_title": "prefix"
             },
             "profile": {
-                "Description": "A profile is TODO",
+                "Description": "This field provides information about which profiles the Element belongs\nto.",
                 "Metadata": {
                     "Nature": "DataProperty",
                     "Range": "ProfileIdentifier",
                     "name": "profile"
                 },
-                "Summary": "TODO",
+                "Summary": "Provides information about which profiles the Element belongs to.",
                 "_title": "profile"
             },
             "relationshipType": {
-                "Description": "A relationshipType is TODO",
+                "Description": "This field provides information about the relationship between two\nElements. For example, you can represent a relationship between two\ndifferent Files, between a Package and a File, between two Packages, or\nbetween one SPDXDocument and another SPDXDocument.",
                 "Metadata": {
                     "Nature": "DataProperty",
                     "Range": "RelationshipType",
                     "name": "relationshipType"
                 },
-                "Summary": "TODO",
+                "Summary": "Information about the relationship between two Elements.",
                 "_title": "relationshipType"
             },
             "rootElement": {
-                "Description": "A rootElement is TODO",
+                "Description": "A rootElement of a collection is the top level Element from which all\nother Elements are reached via relationships.",
                 "Metadata": {
                     "Nature": "ObjectProperty",
                     "Range": "Element",
                     "name": "rootElement"
                 },
-                "Summary": "TODO",
+                "Summary": "Top level Element from which all other Elements are reached via\nrelationships.",
                 "_title": "rootElement"
             },
             "spdxId": {
@@ -816,33 +1271,33 @@
                 "_title": "spdxId"
             },
             "specVersion": {
-                "Description": "A specVersion is TODO",
+                "Description": "The specVersion provides a reference number that can be used to\nunderstand how to parse and interpret an Element. It will enable both\nfuture changes to the specification and to support backward\ncompatibility. The major version number shall be incremented when\nincompatible changes between versions are made (one or more sections are\ncreated, modified or deleted). The minor version number shall be\nincremented when backwards compatible changes are made.\n\nHere, parties exchanging information in accordance with the SPDX\nspecification need to provide 100% transparency as to which SPDX\nspecification version such information is conforming to.",
                 "Metadata": {
                     "Nature": "DataProperty",
                     "Range": "SemVer",
                     "name": "specVersion"
                 },
-                "Summary": "TODO",
+                "Summary": "Provides a reference number that can be used to understand how to parse\nand interpret an Element.",
                 "_title": "specVersion"
             },
             "statement": {
-                "Description": "A statement is TODO",
+                "Description": "A statement is a commentary on an assertion that an annotator has made.",
                 "Metadata": {
                     "Nature": "DataProperty",
                     "Range": "xsd:string",
                     "name": "statement"
                 },
-                "Summary": "TODO",
+                "Summary": "Commentary on an assertion that an annotator has made.",
                 "_title": "statement"
             },
             "subject": {
-                "Description": "A subject is TODO",
+                "Description": "A subject is an Element an annotator has made an assertion about.",
                 "Metadata": {
                     "Nature": "ObjectProperty",
                     "Range": "Element",
                     "name": "subject"
                 },
-                "Summary": "TODO",
+                "Summary": "An Element an annotator has made an assertion about.",
                 "_title": "subject"
             },
             "summary": {
@@ -856,77 +1311,77 @@
                 "_title": "summary"
             },
             "to": {
-                "Description": "A to is TODO",
+                "Description": "This field references an Element on the right-hand side of a\nrelationship.",
                 "Metadata": {
                     "Nature": "ObjectProperty",
                     "Range": "Element",
                     "name": "to"
                 },
-                "Summary": "TODO",
+                "Summary": "References an Element on the right-hand side of a relationship.",
                 "_title": "to"
             },
             "verifiedUsing": {
-                "Description": "A verifiedUsing is TODO",
+                "Description": "VerifiedUsing provides an IntegrityMethod with which the integrity of an\nElement can be asserted.",
                 "Metadata": {
                     "Nature": "ObjectProperty",
                     "Range": "IntegrityMethod",
                     "name": "verifiedUsing"
                 },
-                "Summary": "TODO",
+                "Summary": "Provides an IntegrityMethod with which the integrity of an Element can\nbe asserted.",
                 "_title": "verifiedUsing"
             }
         },
         "Summary": "The basis for all SPDX profiles.",
         "Vocabularies": {
             "AnnotationType": {
-                "Description": "TODO",
+                "Description": "AnnotationType specifies the type of an annotation.",
                 "Entries": {
-                    "other": "TODOdescription",
-                    "review": "TODOdescription"
+                    "other": "Used to store extra information about an Element which is not part of a\nReview (e.g. extra information provided during the creation of the\nElement).",
+                    "review": "Used when someone reviews the Element."
                 },
                 "Metadata": {
                     "name": "AnnotationType"
                 },
-                "Summary": "TODO",
+                "Summary": "Specifies the type of an annotation.",
                 "_title": "AnnotationType"
             },
             "ExternalIdentifierType": {
-                "Description": "TODO",
+                "Description": "ExteralIdentifierType specifies the type of an external identifier.",
                 "Entries": {
-                    "cpe22": "TODOdescription",
-                    "cpe23": "TODOdescription",
+                    "cpe22": "https://cpe.mitre.org/files/cpe-specification\\_2.2.pdf",
+                    "cpe23": "https://nvlpubs.nist.gov/nistpubs/Legacy/IR/nistir7695.pdf",
                     "email": "TODOdescription",
-                    "gitoid": "TODOdescription",
-                    "other": "TODOdescription",
-                    "pkgUrl": "TODOdescription",
-                    "swhid": "TODOdescription",
-                    "swid": "TODOdescription",
+                    "gitoid": "gitoid stands for Git Object ID. A gitoid of typeblob is a unique hash\nof a software artifact. Git relies on a Merkle Tree to index stored\nobjects. See https://git-scm.com/book/en/v2/Git-Internals-Git-Objects.\nGitBOM is an amalgam of the terms \"Git\" and \"SBOM\". GitBOM is a\nminimalistic schema to describe software dependency graphs using a\nMerkle Tree, and is inspired by Git. A gitoid may refer to either the\nsoftware artifact or its GitBOM document; this ambiguity exists because\nthe GitBOM document is itself an artifact, and the gitoid of that\nartifact is its valid locator.",
+                    "other": "Used when the type doesn't match any of the other options.",
+                    "pkgUrl": "https://github.com/package-url/purl-spec",
+                    "swhid": "https://docs.softwareheritage.org/devel/swh-model/persistent-identifiers.html",
+                    "swid": "https://www.ietf.org/archive/id/draft-ietf-sacm-coswid-21.html#section-2.3",
                     "urlScheme": "TODOdescription"
                 },
                 "Metadata": {
                     "name": "ExternalIdentifierType"
                 },
-                "Summary": "TODO",
+                "Summary": "Specifies the type of an external identifier.",
                 "_title": "ExternalIdentifierType"
             },
             "ExternalReferenceType": {
-                "Description": "TODO",
+                "Description": "ExteralReferenceType specifies the type of an external reference.",
                 "Entries": {
-                    "altDownloadLocation": "TODOdescription",
-                    "altWebPage": "TODOdescription",
-                    "other": "TODOdescription",
-                    "securityAdvisory": "TODOdescription",
-                    "securityFix": "TODOdescription",
-                    "securityOther": "TODOdescription"
+                    "altDownloadLocation": "A reference to an alternative download location.",
+                    "altWebPage": "A reference to an alternative web page.",
+                    "other": "Used when the type doesn't match any of the other options.",
+                    "securityAdvisory": "A reference to the published security advisory (where advisory as\ndefined per ISO 29147:2018). It may contain an impact statement whether\na package (e.g. a product) is or is not affected by vulnerabilities.",
+                    "securityFix": "A reference to the source code with a fix for the vulnerability (e.g., a\nGitHub commit).",
+                    "securityOther": "Used when the reference is security related but doesn't match any of the\nother types."
                 },
                 "Metadata": {
                     "name": "ExternalReferenceType"
                 },
-                "Summary": "TODO",
+                "Summary": "Specifies the type of an external reference.",
                 "_title": "ExternalReferenceType"
             },
             "HashAlgorithm": {
-                "Description": "TODO",
+                "Description": "A HashAlgorithm is a mathematical algorithm that maps data of arbitrary\nsize to a bit string (the hash) and is a one-way function, that is, a\nfunction which is practically infeasible to invert.",
                 "Entries": {
                     "blake2b256": "TODOdescription",
                     "blake2b384": "TODOdescription",
@@ -952,29 +1407,37 @@
                 "Metadata": {
                     "name": "HashAlgorithm"
                 },
-                "Summary": "TODO",
+                "Summary": "A mathematical algorithm that maps data of arbitrary size to a bit\nstring.",
                 "_title": "HashAlgorithm"
             },
             "RelationshipCompleteness": {
-                "Description": "TODO",
+                "Description": "RelationshipCompleteness indicates whether a relationship is complete or\nknown to be incomplete or if there is made no assertion either way.",
                 "Entries": {
-                    "incomplete": "TODOdescription",
-                    "known": "TODOdescription",
-                    "unknown": "TODOdescription"
+                    "complete": "The relationship is known to be exhaustive.",
+                    "incomplete": "The relationship is known not to be exhaustive.",
+                    "unknown": "There can be made no assertion about the completeness of the\nrelationship."
                 },
                 "Metadata": {
                     "name": "RelationshipCompleteness"
                 },
-                "Summary": "TODO",
+                "Summary": "Indicates whether a relationship is complete or known to be incomplete\nor if there is made no assertion either way.",
                 "_title": "RelationshipCompleteness"
             },
             "RelationshipType": {
-                "Description": "TODO",
+                "Description": "Provides information about the relationship between two Elements. For\nexample, you can represent a relationship between two different Files,\nbetween a Package and a File, between two Packages, or between one\nSPDXDocument and another SPDXDocument.\n\nBuild Profile specific RelationshipType descriptions can be found\n[here](https://github.com/spdx/spdx-3-build-profile/blob/main/model/relationships.md)",
                 "Entries": {
                     "amends": "TODOdescription",
                     "ancestor": "TODOdescription",
+                    "buildChildOf": "Build instance that was created from another build instance",
+                    "buildConfigOf": "Build configuration of the build instance",
                     "buildDependency": "TODOdescription",
+                    "buildHostOf": "Element in which the build instance runs on",
+                    "buildInputOf": "Input to the build instance",
+                    "buildInvokedBy": "Agent that invoked the build",
+                    "buildOnBehalfOf": "Person for which buildInvokedBy is acting on behalf of",
+                    "buildOutputOf": "Output of the build instance",
                     "buildTool": "TODOdescription",
+                    "buildToolOf": "Build tool used in the build instance",
                     "contains": "TODOdescription",
                     "copy": "TODOdescription",
                     "dataFile": "TODOdescription",
@@ -1015,11 +1478,358 @@
                 "Metadata": {
                     "name": "RelationshipType"
                 },
-                "Summary": "TODO",
+                "Summary": "Information about the relationship between two Elements.",
                 "_title": "RelationshipType"
             }
         },
         "_title": "Core"
+    },
+    "Licensing": {
+        "Classes": {
+            "ConjunctiveLicenseSet": {
+                "Description": "A ConjunctiveLicenseSet indicates that *each* of its subsidiary\nLicenseExpressions apply. In other words, a ConjunctiveLicenseSet of two\nor more licenses represents a licensing situation where *all* of the\nspecified licenses are to be complied with. It is represented in the\nSPDX License Expression Syntax by the `AND` operator.\n\nIt is syntactically correct to specify a ConjunctiveLicenseSet where the\nsubsidiary LicenseExpressions may be \"incompatible\" according to a\nparticular interpretation of the corresponding Licenses. The SPDX\nLicense Expression Syntax does not take into account interpretation of\nlicense texts, which is left to the consumer of SPDX data to determine\nfor themselves.",
+                "Metadata": {
+                    "Instantiability": "Concrete",
+                    "SubclassOf": "LicenseExpression",
+                    "name": "ConjunctiveLicenseSet"
+                },
+                "Properties": {
+                    "child": {
+                        "minCount": "2",
+                        "type": "LicenseExpression"
+                    }
+                },
+                "Summary": "Portion of a LicenseExpression representing a set of licensing\ninformation where all elements apply.",
+                "_title": "ConjunctiveLicenseSet"
+            },
+            "CopyrightText": {
+                "Description": "A CopyrightText is the primary value that is used by a copyrightText\nfield that indicates copyright text being found, i.e. with a value other\nthan NONE or NOASSERTION.",
+                "Metadata": {
+                    "Instantiability": "Concrete",
+                    "SubclassOf": "CopyrightTextField",
+                    "name": "CopyrightText"
+                },
+                "Properties": {
+                    "text": {
+                        "maxCount": "1",
+                        "minCount": "1",
+                        "type": "xsd:string"
+                    }
+                },
+                "Summary": "Concrete class representing copyright text that has actually been found.",
+                "_title": "CopyrightText"
+            },
+            "CopyrightTextField": {
+                "Description": "A CopyrightTextField is the primary value that is used by a copyright\ntext field for a software Package, File or Snippet. It represents either\nactual text (represented via a concrete CopyrightText), or the values\nNOASSERTION or NONE.\n\n**FIXME** The specific meanings of NOASSERTION or NONE are defined in\nthe copyrightText property description. (**INCORRECT** - change to\nNoAssertionText or NoneText)",
+                "Metadata": {
+                    "Instantiability": "Abstract",
+                    "SubclassOf": "none",
+                    "name": "CopyrightTextField"
+                },
+                "Properties": {},
+                "Summary": "Base abstract class used for the copyrightText field that can take a\nvalue of either a text value (via CopyrightText), NOASSERTION, or NONE.",
+                "_title": "CopyrightTextField"
+            },
+            "CustomLicense": {
+                "Description": "A CustomLicense represents a License that is not listed on the SPDX\nLicense List at https://spdx.org/licenses, and is therefore defined by\nan SPDX data creator.\n\n**TBD** whether to define the meaning and purpose for each of the\nproperties\n\n**TBD** how to indicate that the License ID must have the prefix\n\"LicenseRef-\"",
+                "Metadata": {
+                    "Instantiability": "Concrete",
+                    "SubclassOf": "License",
+                    "name": "CustomLicense"
+                },
+                "Properties": {},
+                "Summary": "A license that is not listed on the SPDX License List.",
+                "_title": "CustomLicense"
+            },
+            "CustomLicenseException": {
+                "Metadata": {
+                    "Instantiability": "Concrete",
+                    "SubclassOf": "LicenseException",
+                    "name": "CustomLicenseException"
+                },
+                "Properties": {},
+                "Summary": "**TBD** Not to be completed until the Change Proposal at\nhttps://github.com/spdx/change-proposal/issues/4 is decided upon. Should\nbe treated as unconfirmed since this class and its name or meaning is\nsubject to change.",
+                "_title": "CustomLicenseException"
+            },
+            "DisjunctiveLicenseSet": {
+                "Description": "A DisjunctiveLicenseSet indicates that *only one* of its subsidiary\nLicenseExpressions is required to apply. In other words, a\nDisjunctiveLicenseSet of two or more licenses represents a licensing\nsituation where *only one* of the specified licenses are to be complied\nwith. A consumer of SPDX data would typically understand this to permit\nthe recipient of the licensed content to choose which of the\ncorresponding license they would prefer to use. It is represented in the\nSPDX License Expression Syntax by the `OR` operator.",
+                "Metadata": {
+                    "Instantiability": "Concrete",
+                    "SubclassOf": "LicenseExpression",
+                    "name": "DisjunctiveLicenseSet"
+                },
+                "Properties": {
+                    "child": {
+                        "minCount": "2",
+                        "type": "LicenseExpression"
+                    }
+                },
+                "Summary": "Portion of a LicenseExpression representing a set of licensing\ninformation where only any one of the elements applies.",
+                "_title": "DisjunctiveLicenseSet"
+            },
+            "License": {
+                "Description": "A License represents a license text, whether listed on the SPDX License\nList (ListedLicense) or defined by an SPDX data creator (CustomLicense).\n\n**TBD** whether to define the meaning and purpose for each of the\nproperties\n\n**TBD** whether licenseID should be a separately defined property,\nrather than xsd:string",
+                "Metadata": {
+                    "Instantiability": "Abstract",
+                    "SubclassOf": "LicenseExpression",
+                    "name": "License"
+                },
+                "Properties": {
+                    "comment": {
+                        "maxCount": "1",
+                        "minCount": "0",
+                        "type": "xsd:string"
+                    },
+                    "example": {
+                        "maxCount": "1",
+                        "minCount": "0",
+                        "type": "xsd:string"
+                    },
+                    "isDeprecatedLicenseId": {
+                        "maxCount": "1",
+                        "minCount": "0",
+                        "type": "boolean"
+                    },
+                    "isFsfLibre": {
+                        "maxCount": "1",
+                        "minCount": "0",
+                        "type": "boolean"
+                    },
+                    "isOsiApproved": {
+                        "maxCount": "1",
+                        "minCount": "0",
+                        "type": "boolean"
+                    },
+                    "licenseId": {
+                        "maxCount": "1",
+                        "minCount": "1",
+                        "type": "xsd:string"
+                    },
+                    "licenseText": {
+                        "maxCount": "1",
+                        "minCount": "1",
+                        "type": "xsd:string"
+                    },
+                    "name": {
+                        "maxCount": "1",
+                        "minCount": "1",
+                        "type": "xsd:string"
+                    },
+                    "obsoletedBy": {
+                        "maxCount": "1",
+                        "minCount": "0",
+                        "type": "xsd:string"
+                    },
+                    "seeAlso": {
+                        "maxCount": "1",
+                        "minCount": "0",
+                        "type": "anyURI"
+                    },
+                    "standardLicenseHeader": {
+                        "maxCount": "1",
+                        "minCount": "0",
+                        "type": "xsd:string"
+                    }
+                },
+                "Summary": "Abstract class for the portion of a LicenseExpression representing a\nlicense.",
+                "_title": "License"
+            },
+            "LicenseException": {
+                "Metadata": {
+                    "Instantiability": "Abstract",
+                    "SubclassOf": "none",
+                    "name": "LicenseException"
+                },
+                "Properties": {},
+                "Summary": "**TBD** Not to be completed until the Change Proposal at\nhttps://github.com/spdx/change-proposal/issues/4 is decided upon. Should\nbe treated as unconfirmed since this class and its name or meaning is\nsubject to change.",
+                "_title": "LicenseException"
+            },
+            "LicenseExpression": {
+                "Description": "A LicenseExpression is used by a licensing field for a software package,\nfile or snippet when its value is not NOASSERTION or NONE. It can be a\nsingle license (either on the SPDX License List or a custom-defined\nlicense); a single license with an \"or later\" operator applied; the\nforegoing with an exception applied; or a set of licenses combined by\napplying \"AND\" and \"OR\" operators recursively.",
+                "Metadata": {
+                    "Instantiability": "Abstract",
+                    "SubclassOf": "LicenseField",
+                    "name": "LicenseExpression"
+                },
+                "Properties": {},
+                "Summary": "Abstract class representing a license expression consisting of one or\nmore licenses (optionally including exceptions), which may be combined\naccording to the SPDX license expression syntax.",
+                "_title": "LicenseExpression"
+            },
+            "LicenseField": {
+                "Description": "A LicenseField is the primary value that is used by a licensing field\nfor a software Package, File or Snippet. It represents either a license\nexpression, or the values NOASSERTION or NONE. The specific meanings of\nNOASSERTION or NONE for the particular licensing field are defined in\nthe corresponding property description.",
+                "Metadata": {
+                    "Instantiability": "Abstract",
+                    "SubclassOf": "none",
+                    "name": "LicenseField"
+                },
+                "Properties": {},
+                "Summary": "Base abstract class used for all fields that can take a value of either\na license expression, NOASSERTION, or NONE.",
+                "_title": "LicenseField"
+            },
+            "ListedLicense": {
+                "Description": "A ListedLicense represents a License that is listed on the SPDX License\nList at https://spdx.org/licenses.\n\n**TBD** whether to define the meaning and purpose for each of the\nproperties",
+                "Metadata": {
+                    "Instantiability": "Concrete",
+                    "SubclassOf": "License",
+                    "name": "ListedLicense"
+                },
+                "Properties": {
+                    "deprecatedVersion": {
+                        "maxCount": "1",
+                        "minCount": "0",
+                        "type": "xsd:string"
+                    },
+                    "listVersionAdded": {
+                        "maxCount": "1",
+                        "minCount": "0",
+                        "type": "xsd:string"
+                    }
+                },
+                "Summary": "A license that is listed on the SPDX License List.",
+                "_title": "ListedLicense"
+            },
+            "ListedLicenseException": {
+                "Metadata": {
+                    "Instantiability": "Concrete",
+                    "SubclassOf": "LicenseException",
+                    "name": "ListedLicenseException"
+                },
+                "Properties": {},
+                "Summary": "**TBD** Not to be completed until the Change Proposal at\nhttps://github.com/spdx/change-proposal/issues/4 is decided upon. Should\nbe treated as unconfirmed since this class and its name or meaning is\nsubject to change.",
+                "_title": "ListedLicenseException"
+            },
+            "NoAssertionLicense": {
+                "Description": "**TBD** whether the meaning of NoAssertionLicense in the context of the\nconcludedLicense and declaredLicense properties should be here rather\nthan in those property definitions\n\nA NoAssertionLicense is the primary value that is used by a\nconcludedLicense or declaredLicense field that indicates that the SPDX\ndata creator is making no assertion about the license information for\nthe corresponding software Package, File or Snippet.\n\nThe specific meaning of NoAssertionLicense in the context of a\nconcludedLicense or declaredLicense field is more fully set forth in the\nProperty definitions for those fields.",
+                "Metadata": {
+                    "Instantiability": "Concrete",
+                    "SubclassOf": "LicenseField",
+                    "name": "NoAssertionLicense"
+                },
+                "Properties": {},
+                "Summary": "Concrete class representing an absence of an assertion about license\ninformation.",
+                "_title": "NoAssertionLicense"
+            },
+            "NoAssertionText": {
+                "Description": "**TBD** whether these details should be defined in the copyrightText\nproperty instead of here\n\nA NoAssertionText is the primary value that is used by a copyrightText\nfield that indicates that the SPDX data creator is making no assertion\nabout whether any copyright information is present, or what its contents\nare if it is present.\n\nIf a copyrightText has a NOASSERTION value, this indicates that one of\nthe following applies: \\* the SPDX data creator has made no attempt to\ndetermine this field; or \\* the SPDX data creator has intentionally\nprovided no information (no meaning should be implied from the absence\nof an assertion).",
+                "Metadata": {
+                    "Instantiability": "Concrete",
+                    "SubclassOf": "CopyrightTextField",
+                    "name": "NoAssertionText"
+                },
+                "Properties": {},
+                "Summary": "Concrete class representing an absence of an assertion about the\npresence of copyright text.",
+                "_title": "NoAssertionText"
+            },
+            "NoneLicense": {
+                "Description": "**TBD** whether the meaning of NoneLicense in the context of the\nconcludedLicense and declaredLicense properties should be here rather\nthan in those property definitions\n\nA NoneLicense is the primary value that is used by a concludedLicense or\ndeclaredLicense field that indicates the absence of license information\nfrom the corresponding software Package, File or Snippet.\n\nThe specific meaning of NoneLicense in the context of a concludedLicense\nor declaredLicense field is more fully set forth in the Property\ndefinitions for those fields.",
+                "Metadata": {
+                    "Instantiability": "Concrete",
+                    "SubclassOf": "LicenseField",
+                    "name": "NoneLicense"
+                },
+                "Properties": {},
+                "Summary": "Concrete class representing an assertion that no license information is\npresent, as applicable.",
+                "_title": "NoneLicense"
+            },
+            "NoneText": {
+                "Description": "**TBD** whether these details should be defined in the copyrightText\nproperty instead of here\n\nA NoneText is the primary value that is used by a copyrightText field\nthat indicates that the corresponding software Package, File or Snippet\ndoes not contain any copyright information.",
+                "Metadata": {
+                    "Instantiability": "Concrete",
+                    "SubclassOf": "CopyrightTextField",
+                    "name": "NoneText"
+                },
+                "Properties": {},
+                "Summary": "Concrete class representing an assertion that no copyright text is\npresent.",
+                "_title": "NoneText"
+            },
+            "OrLaterOperator": {
+                "Description": "An OrLaterOperator indicates that this portion of the LicenseExpression\nrepresents either (1) the specified version of the corresponding\nLicense, or (2) any later version of that License. It is represented in\nthe SPDX License Expression Syntax by the `+` operator.\n\nIt is context-dependent, and unspecified by SPDX, as to what constitutes\na \"later version\" of any particular License. Some Licenses may not be\nversioned, or may not have clearly-defined ordering for versions. The\nconsumer of SPDX data will need to determine for themselves what meaning\nto attribute to a \"later version\" operator for a particular License.",
+                "Metadata": {
+                    "Instantiability": "Concrete",
+                    "SubclassOf": "LicenseExpression",
+                    "name": "OrLaterOperator"
+                },
+                "Properties": {
+                    "license": {
+                        "maxCount": "1",
+                        "minCount": "1",
+                        "type": "License"
+                    }
+                },
+                "Summary": "Portion of a LicenseExpression representing this version, or any later\nversion, of the indicated License.",
+                "_title": "OrLaterOperator"
+            },
+            "WithExceptionOperator": {
+                "Metadata": {
+                    "Instantiability": "Concrete",
+                    "SubclassOf": "LicenseExpression",
+                    "name": "WithExceptionOperator"
+                },
+                "Properties": {},
+                "Summary": "**TBD** Not to be completed until the Change Proposal at\nhttps://github.com/spdx/change-proposal/issues/4 is decided upon. Should\nbe treated as unconfirmed since this class and its name or meaning is\nsubject to change.",
+                "_title": "WithExceptionOperator"
+            }
+        },
+        "Description": "TODO",
+        "Metadata": {
+            "id": "https://rdf.spdx.org/v3#Licensing",
+            "name": "Licensing"
+        },
+        "Properties": {
+            "attributionText": {
+                "Description": "An attributionText for a software Package, File or Snippet provides a\nconsumer of SPDX data with acknowledgement content, to assist\nredistributors of the Package, File or Snippet with reproducing those\nacknowledgements.\n\nFor example, this field may include a statement that is required by a\nparticular license to be reproduced in end-user documentation,\nadvertising materials, or another form.\n\nThis field may describe where, or in which contexts, the\nacknowledgements need to be reproduced, but it is not required to do so.\nThe SPDX data creator may also explain elsewhere (such as in a\nlicenseComment field) how they intend for data in this field to be used.\n\nAn attributionText is is not meant to include the software Package, File\nor Snippet’s actual complete license text (see concludedLicense to\nidentify the corresponding license).",
+                "Metadata": {
+                    "Nature": "DataProperty",
+                    "Range": "xsd:string",
+                    "name": "attributionText"
+                },
+                "Summary": "An attributionText provides a place for the SPDX data creator to record\nacknowledgement text for a software Package, File or Snippet.",
+                "_title": "attributionText"
+            },
+            "concludedLicense": {
+                "Description": "A concludedLicense is the license identified by the SPDX data creator,\nbased on analyzing the license information in the software Package, File\nor Snippet and other information to arrive at a reasonably objective\nconclusion as to what license governs it.\n\nIf a concludedLicense has a NONE value (NoneLicense), this indicates\nthat the SPDX data creator has looked and did not find any license\ninformation for this software Package, File or Snippet.\n\nIf a concludedLicense has a NOASSERTION value (NoAssertionLicense), this\nindicates that one of the following applies: \\* the SPDX data creator\nhas attempted to but cannot reach a reasonable objective determination;\n\\* the SPDX data creator has made no attempt to determine this field; or\n\\* the SPDX data creator has intentionally provided no information (no\nmeaning should be implied by doing so).\n\nA written explanation of a NOASSERTION value (NoAssertionLicense) MAY be\nprovided in the licenseComment field.\n\nIf the concludedLicense for a software Package, File or Snippet is not\nthe same as its declaredLicense, a written explanation SHOULD be\nprovided in the licenseComment field.\n\nIf the declaredLicense for a software Package, File or Snippet is a\nchoice of more than one license (e.g. a license expression combining two\nlicenses through use of the `OR` operator), then the concludedLicense\nmay either retain the license choice or identify which license was\nchosen.",
+                "Metadata": {
+                    "Nature": "ObjectProperty",
+                    "Range": "LicenseField",
+                    "name": "concludedLicense"
+                },
+                "Summary": "A concludedLicense identifies the license that that SPDX data creator\nhas concluded as governing the software Package, File or Snippet.",
+                "_title": "concludedLicense"
+            },
+            "copyrightText": {
+                "Description": "A copyrightText consists of the text(s) of the copyright notice(s) found\nfor a software Package, File or Snippet, if any.\n\nIf a copyrightText contains text, then it may contain any text related\nto one or more copyright notices (even if not complete) for that\nsoftware Package, File or Snippet.\n\nIf a copyrightText has a NONE value, this indicates that the software\nPackage, File or Snippet contains no copyright notice whatsoever.\n\nIf a copyrightText has a NOASSERTION value, this indicates that one of\nthe following applies: \\* the SPDX data creator has attempted to but\ncannot reach a reasonable objective determination; \\* the SPDX data\ncreator has made no attempt to determine this field; or \\* the SPDX data\ncreator has intentionally provided no information (no meaning should be\nimplied by doing so).",
+                "Metadata": {
+                    "Nature": "ObjectProperty",
+                    "Range": "CopyrightTextField",
+                    "name": "copyrightText"
+                },
+                "Summary": "A copyrightText identifies the text of one or more copyright notices for\na software Package, File or Snippet, if any.",
+                "_title": "copyrightText"
+            },
+            "declaredLicense": {
+                "Description": "A declaredLicense is the license identified in text in the software\npackage, file or snippet as the license declared by its authors.\n\nThis field is not intended to capture license information obtained from\nan external source, such as a package's website. Such information can be\nincluded, as needed, in a concludedLicense field.\n\nA declaredLicense may be expressed differently in practice for different\ntypes of artifacts. For example:\n\n-   for Packages:\n    -   would include license info describing the license of the Package\n        as a whole, when it is found in the Package itself (e.g.,\n        LICENSE file, README file, metadata in the repository, etc.)\n    -   would not include any license information that is not in the\n        Package itself (e.g., license information from the project’s\n        website or from a third party repository or website)\n-   for Files:\n    -   would include license info found in the File itself (e.g.,\n        license header or notice, comments, SPDX-License-Identifier\n        expression)\n    -   would not include license info found in a different file (e.g.,\n        LICENSE file in the top directory of a repository)\n-   for Snippets:\n    -   would include license info found in the Snippet itself (e.g.,\n        license notice, comments, SPDX-License-Identifier expression)\n    -   would not include license info found elsewhere in the File or in\n        a different File (e.g., comment at top of File if it is not\n        within the Snippet, LICENSE file in the top directory of a\n        repository)\n\nIf a declaredLicense has a NONE value (NoneLicense), this indicates that\nthe corresponding Package, File or Snippet contains no license\ninformation whatsoever.\n\nIf a declaredLicense has a NOASSERTION value (NoAssertionLicense), this\nindicates that one of the following applies: \\* the SPDX data creator\nhas attempted to but cannot reach a reasonable objective determination;\n\\* the SPDX data creator has made no attempt to determine this field; or\n\\* the SPDX data creator has intentionally provided no information (no\nmeaning should be implied by doing so).",
+                "Metadata": {
+                    "Nature": "ObjectProperty",
+                    "Range": "LicenseField",
+                    "name": "declaredLicense"
+                },
+                "Summary": "A declaredLicense identifies the license information actually found in\nthe software Package, File or Snippet, for example as detected by use of\nautomated tooling.",
+                "_title": "declaredLicense"
+            },
+            "licenseComment": {
+                "Description": "A licenseComment for a software Package, File or Snippet provides a\ndetailed explanation of how the concludedLicense was determined,\nespecially if: \\* the concludedLicense does not match the\ndeclaredLicense; \\* the concludedLicense is NOASSERTION; or \\* the SPDX\ndata creator wants to provide other helpful information relevant to\ndetermining the license of the software Package, File or Snippet.",
+                "Metadata": {
+                    "Nature": "DataProperty",
+                    "Range": "xsd:string",
+                    "name": "licenseComment"
+                },
+                "Summary": "A licenseComment records any background information or analysis relevant\nto determining the concludedLicense for a software Package, File or\nSnippet.",
+                "_title": "licenseComment"
+            }
+        },
+        "Summary": "TODO",
+        "Vocabularies": {},
+        "_title": "Licensing"
     },
     "Software": {
         "Classes": {
@@ -1048,7 +1858,7 @@
                 "_title": "File"
             },
             "Package": {
-                "Description": "TODO",
+                "Description": "If SPDX information is being used to describe packages, then one\ninstance of the package information per package being described shall\nexist. It provides important meta information about the package as a\nwhole. Packages are an abstract concept that can be used to refer to any\ndistribution of software, typically consisting of one or more files and\ncapable of containing sub-packages. Starting with SPDX 2.0, it is not\nnecessary to have a package wrapping a set of files.\n\nA package refers to any unit of content that can be associated with a\ndistribution of software. Typically, a package is composed of one or\nmore files. An SPDX document may, but is not required to, provide\ndetails about the individual files comprising a package (see File.md).\n\nAny of the following non-limiting examples may be (but are not required\nto be) represented in SPDX as a package:\n\n-   a tarball, zip file or other archive\n-   a directory or sub-directory\n-   a separately distributed piece of software which another Package or\n    File uses or depends upon (e.g., a Python package, a Go module, ...)\n-   a container image, and/or each image layer within a container image\n-   a collection of one or more sub-packages\n-   a Git repository snapshot from a particular point in time\n\nNote that some of these could be represented in SPDX as a file as well.\n\nIn an SPDX document, relationship elements can be used to indicate\nrelationships between packages, such as dependency relationships.\n\nCardinality: Optional, zero or many.",
                 "Metadata": {
                     "SubclassOf": "Core:Artifact",
                     "name": "Package"
@@ -1077,6 +1887,11 @@
                         "maxCount": "1",
                         "minCount": "0",
                         "type": "anyURI"
+                    },
+                    "packageVersion": {
+                        "maxCount": "1",
+                        "minCount": "0",
+                        "type": "xsd:string"
                     }
                 },
                 "_title": "Package"
@@ -1118,6 +1933,32 @@
                     }
                 },
                 "_title": "Snippet"
+            },
+            "SoftwareDependencyRelationship": {
+                "Description": "TODO",
+                "Metadata": {
+                    "Instantiability": "Concrete",
+                    "SubclassOf": "Core:Relationship",
+                    "name": "SoftwareDependencyRelationship"
+                },
+                "Properties": {
+                    "linkType": {
+                        "maxCount": "1",
+                        "minCount": "1",
+                        "type": "DependencyLinkType"
+                    },
+                    "requirement": {
+                        "maxCount": "1",
+                        "minCount": "1",
+                        "type": "DependencyRequirement"
+                    },
+                    "scope": {
+                        "maxCount": "1",
+                        "minCount": "1",
+                        "type": "DependencyScope"
+                    }
+                },
+                "_title": "SoftwareDependencyRelationship"
             }
         },
         "Description": "The Software namespace defines concepts related to software artifacts.",
@@ -1216,6 +2057,16 @@
                 "Summary": "TODO",
                 "_title": "packageUrl"
             },
+            "packageVersion": {
+                "Description": "A packageVersion is useful for identification purposes and for\nindicating later changes of the package version.",
+                "Metadata": {
+                    "Nature": "DataProperty",
+                    "Range": "xsd:string",
+                    "name": "packageVersion"
+                },
+                "Summary": "Identify the version of a package.",
+                "_title": "packageVersion"
+            },
             "snippetPurpose": {
                 "Description": "A snippetPurpose is TODO",
                 "Metadata": {
@@ -1229,6 +2080,52 @@
         },
         "Summary": "Everything having to do with software.",
         "Vocabularies": {
+            "DependencyLinkType": {
+                "Description": "TODO",
+                "Entries": {
+                    "dynamic": "TODOdescription",
+                    "noAssertion": "TODOdescription",
+                    "other": "TODOdescription",
+                    "static": "TODOdescription",
+                    "tool": "TODOdescription"
+                },
+                "Metadata": {
+                    "name": "DependencyLinkType"
+                },
+                "Summary": "TODO",
+                "_title": "DependencyLinkType"
+            },
+            "DependencyRequirement": {
+                "Description": "TODO",
+                "Entries": {
+                    "noAssertion": "TODOdescription",
+                    "optional": "TODOdescription",
+                    "preRequisite": "TODOdescription",
+                    "provided": "TODOdescription",
+                    "required": "TODOdescription"
+                },
+                "Metadata": {
+                    "name": "DependencyRequirement"
+                },
+                "Summary": "TODO",
+                "_title": "DependencyRequirement"
+            },
+            "DependencyScope": {
+                "Description": "TODO",
+                "Entries": {
+                    "build": "TODOdescription",
+                    "dev": "TODOdescription",
+                    "noAssertion": "TODOdescription",
+                    "other": "TODOdescription",
+                    "runtime": "TODOdescription",
+                    "test": "TODOdescription"
+                },
+                "Metadata": {
+                    "name": "DependencyScope"
+                },
+                "Summary": "TODO",
+                "_title": "DependencyScope"
+            },
             "SoftwarePurpose": {
                 "Description": "TODO",
                 "Entries": {

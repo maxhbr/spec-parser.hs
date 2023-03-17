@@ -1,0 +1,20 @@
+@startuml
+abstract LicenseField {
+.. metadata ..
+    Instantiability : Abstract
+    SubclassOf : none
+    name : LicenseField
+.. properties ..
+}
+note top of LicenseField
+<b>Summary</b>
+Base abstract class used for all fields that can take a value of either
+a license expression, NOASSERTION, or NONE.
+<b>Description</b>
+A LicenseField is the primary value that is used by a licensing field
+for a software Package, File or Snippet. It represents either a license
+expression, or the values NOASSERTION or NONE. The specific meanings of
+NOASSERTION or NONE for the particular licensing field are defined in
+the corresponding property description.
+end note
+@enduml

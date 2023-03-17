@@ -1,0 +1,22 @@
+@startuml
+class Hash {
+.. metadata ..
+    SubclassOf : IntegrityMethod
+    name : Hash
+.. properties ..
+    algorithm : HashAlgorithm [1..1]
+    hashValue : xsd:string [1..1]
+}
+note top of Hash
+<b>Summary</b>
+A mathematically calculated representation of a grouping of data.
+<b>Description</b>
+A hash is a grouping of characteristics unique to the result of applying
+a mathematical algorithm that maps data of arbitrary size to a bit
+string (the hash) and is a one-way function, that is, a function which
+is practically infeasible to invert. This is commonly used for integrity
+checking of data.
+end note
+"IntegrityMethod" <|-[thickness=4]- "Hash"
+"HashAlgorithm" <-[dotted]-- "Hash::algorithm"
+@enduml

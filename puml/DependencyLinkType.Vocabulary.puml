@@ -1,0 +1,15 @@
+@startuml
+enum DependencyLinkType {
+    dynamic : TODOdescription
+    noAssertion : TODOdescription
+    other : TODOdescription
+    static : TODOdescription
+    tool : TODOdescription
+}
+note top of DependencyLinkType
+<b>Summary</b>
+TODO
+<b>Description</b>
+TODO
+end note
+@enduml

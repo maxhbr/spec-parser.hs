@@ -1,0 +1,23 @@
+@startuml
+class ExternalMap {
+.. metadata ..
+    Instantiability : Concrete
+    SubclassOf : none
+    name : ExternalMap
+.. properties ..
+    externalId : anyURI [1..1]
+    locationHint : anyURI [..1]
+    verifiedUsing : IntegrityMethod 
+}
+note top of ExternalMap
+<b>Summary</b>
+A map of Element identifiers that are used within a Document but defined
+external to that Document.
+<b>Description</b>
+An External Map is a map of Element identifiers that are used within a
+Document but defined external to that Document. The external map
+provides details about the externally-defined Element such as its
+provenance, where to retrieve it, and how to verify its integrity.
+end note
+"IntegrityMethod" <-[dotted]-- "ExternalMap::verifiedUsing"
+@enduml

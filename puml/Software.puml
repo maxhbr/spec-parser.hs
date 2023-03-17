@@ -1,9 +1,0 @@
-@startuml
-' vocabulary
-!include_once SoftwarePurpose.puml
-' classes
-!include_once File.puml
-!include_once Package.puml
-!include_once Sbom.puml
-!include_once Snippet.puml
-@enduml

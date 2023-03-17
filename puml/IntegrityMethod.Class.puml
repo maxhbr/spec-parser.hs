@@ -1,0 +1,21 @@
+@startuml
+abstract IntegrityMethod {
+.. metadata ..
+    Instantiability : Abstract
+    name : IntegrityMethod
+.. properties ..
+    comment : xsd:string [..1]
+}
+note top of IntegrityMethod
+<b>Summary</b>
+Provides an independently reproducible mechanism that permits
+identification of a specific Element.
+<b>Description</b>
+An IntegrityMethod provides an independently reproducible mechanism that
+permits identification of a specific Element that correlates to the data
+in this SPDX document. This identifier enables a recipient to determine
+if anything in the original Element has been changed and eliminates
+confusion over which version or modification of a specific Element is
+referenced.
+end note
+@enduml

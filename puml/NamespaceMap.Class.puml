@@ -1,0 +1,18 @@
+@startuml
+class NamespaceMap {
+.. metadata ..
+    Instantiability : Concrete
+    name : NamespaceMap
+.. properties ..
+    namespace : anyURI [..1]
+    prefix : xsd:string [..1]
+}
+note top of NamespaceMap
+<b>Summary</b>
+A mapping between prefixes and namespace URIs.
+<b>Description</b>
+A namespace map allows the creator of a collection of Elements to use
+shorter identifiers ("prefixes") instead of URIs to provide a more
+human-readable and smaller serialized representation of the Elements.
+end note
+@enduml

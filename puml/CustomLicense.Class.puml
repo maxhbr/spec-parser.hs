@@ -1,0 +1,24 @@
+@startuml
+class CustomLicense {
+.. metadata ..
+    Instantiability : Concrete
+    SubclassOf : License
+    name : CustomLicense
+.. properties ..
+}
+note top of CustomLicense
+<b>Summary</b>
+A license that is not listed on the SPDX License List.
+<b>Description</b>
+A CustomLicense represents a License that is not listed on the SPDX
+License List at https://spdx.org/licenses, and is therefore defined by
+an SPDX data creator.
+
+**TBD** whether to define the meaning and purpose for each of the
+properties
+
+**TBD** how to indicate that the License ID must have the prefix
+"LicenseRef-"
+end note
+"License" <|-[thickness=4]- "CustomLicense"
+@enduml

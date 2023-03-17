@@ -1,0 +1,15 @@
+@startuml
+class ProfileIdentifier {
+.. metadata ..
+    SubclassOf : xsd:string
+    name : ProfileIdentifier
+.. properties ..
+}
+note top of ProfileIdentifier
+<b>Summary</b>
+Provides the profile that the Element is specified in.
+<b>Description</b>
+A profile identifier provides the profile that the Element is specified
+in.
+end note
+@enduml

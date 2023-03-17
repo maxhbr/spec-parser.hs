@@ -1,0 +1,64 @@
+@startuml
+enum RelationshipType {
+    amends : TODOdescription
+    ancestor : TODOdescription
+    buildChildOf : Build instance that was created from another build instance
+    buildConfigOf : Build configuration of the build instance
+    buildDependency : TODOdescription
+    buildHostOf : Element in which the build instance runs on
+    buildInputOf : Input to the build instance
+    buildInvokedBy : Agent that invoked the build
+    buildOnBehalfOf : Person for which buildInvokedBy is acting on behalf of
+    buildOutputOf : Output of the build instance
+    buildTool : TODOdescription
+    buildToolOf : Build tool used in the build instance
+    contains : TODOdescription
+    copy : TODOdescription
+    dataFile : TODOdescription
+    dependencyManifest : TODOdescription
+    dependsOn : TODOdescription
+    descendant : TODOdescription
+    describes : TODOdescription
+    devDependency : TODOdescription
+    devTool : TODOdescription
+    distributionArtifact : TODOdescription
+    documentation : TODOdescription
+    dynamicLink : TODOdescription
+    example : TODOdescription
+    expandedFromArchive : TODOdescription
+    fileAdded : TODOdescription
+    fileDeleted : TODOdescription
+    fileModified : TODOdescription
+    generates : TODOdescription
+    metafile : TODOdescription
+    optionalComponent : TODOdescription
+    optionalDependency : TODOdescription
+    other : TODOdescription
+    packages : TODOdescription
+    patch : TODOdescription
+    prerequisite : TODOdescription
+    providedDependency : TODOdescription
+    requirementFor : TODOdescription
+    runtimeDependency : TODOdescription
+    specificationFor : TODOdescription
+    staticLink : TODOdescription
+    suppliedBy : TODOdescription
+    test : TODOdescription
+    testCase : TODOdescription
+    testDependency : TODOdescription
+    testTool : TODOdescription
+    variant : TODOdescription
+}
+note top of RelationshipType
+<b>Summary</b>
+Information about the relationship between two Elements.
+<b>Description</b>
+Provides information about the relationship between two Elements. For
+example, you can represent a relationship between two different Files,
+between a Package and a File, between two Packages, or between one
+SPDXDocument and another SPDXDocument.
+
+Build Profile specific RelationshipType descriptions can be found
+[here](https://github.com/spdx/spdx-3-build-profile/blob/main/model/relationships.md)
+end note
+@enduml

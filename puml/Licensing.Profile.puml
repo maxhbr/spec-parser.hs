@@ -1,0 +1,22 @@
+@startuml
+' vocabulary
+' classes
+!include_once ConjunctiveLicenseSet.Class.puml
+!include_once CopyrightText.Class.puml
+!include_once CopyrightTextField.Class.puml
+!include_once CustomLicense.Class.puml
+!include_once CustomLicenseException.Class.puml
+!include_once DisjunctiveLicenseSet.Class.puml
+!include_once License.Class.puml
+!include_once LicenseException.Class.puml
+!include_once LicenseExpression.Class.puml
+!include_once LicenseField.Class.puml
+!include_once ListedLicense.Class.puml
+!include_once ListedLicenseException.Class.puml
+!include_once NoAssertionLicense.Class.puml
+!include_once NoAssertionText.Class.puml
+!include_once NoneLicense.Class.puml
+!include_once NoneText.Class.puml
+!include_once OrLaterOperator.Class.puml
+!include_once WithExceptionOperator.Class.puml
+@enduml

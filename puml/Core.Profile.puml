@@ -1,0 +1,35 @@
+@startuml
+' vocabulary
+!include_once AnnotationType.Vocabulary.puml
+!include_once ExternalIdentifierType.Vocabulary.puml
+!include_once ExternalReferenceType.Vocabulary.puml
+!include_once HashAlgorithm.Vocabulary.puml
+!include_once RelationshipCompleteness.Vocabulary.puml
+!include_once RelationshipType.Vocabulary.puml
+' classes
+!include_once Annotation.Class.puml
+!include_once AnonymousPayload.Class.puml
+!include_once Artifact.Class.puml
+!include_once Bom.Class.puml
+!include_once Bundle.Class.puml
+!include_once CreationInformation.Class.puml
+!include_once Element.Class.puml
+!include_once ElementCollection.Class.puml
+!include_once Entity.Class.puml
+!include_once ExternalIdentifier.Class.puml
+!include_once ExternalMap.Class.puml
+!include_once ExternalReference.Class.puml
+!include_once Hash.Class.puml
+!include_once Identity.Class.puml
+!include_once IntegrityMethod.Class.puml
+!include_once MediaType.Class.puml
+!include_once NamespaceMap.Class.puml
+!include_once Organization.Class.puml
+!include_once Payload.Class.puml
+!include_once Person.Class.puml
+!include_once ProfileIdentifier.Class.puml
+!include_once Relationship.Class.puml
+!include_once SemVer.Class.puml
+!include_once SpdxDocument.Class.puml
+!include_once Tool.Class.puml
+@enduml

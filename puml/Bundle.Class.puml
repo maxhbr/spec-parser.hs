@@ -1,0 +1,17 @@
+@startuml
+class Bundle {
+.. metadata ..
+    Instantiability : Concrete
+    SubclassOf : ElementCollection
+    name : Bundle
+.. properties ..
+    context : xsd:string [..1]
+}
+note top of Bundle
+<b>Summary</b>
+A collection of Elements that have a shared context.
+<b>Description</b>
+A bundle is a collection of Elements that have a shared context.
+end note
+"ElementCollection" <|-[thickness=4]- "Bundle"
+@enduml

@@ -1,0 +1,30 @@
+@startuml
+class ConjunctiveLicenseSet {
+.. metadata ..
+    Instantiability : Concrete
+    SubclassOf : LicenseExpression
+    name : ConjunctiveLicenseSet
+.. properties ..
+    child : LicenseExpression [2..]
+}
+note top of ConjunctiveLicenseSet
+<b>Summary</b>
+Portion of a LicenseExpression representing a set of licensing
+information where all elements apply.
+<b>Description</b>
+A ConjunctiveLicenseSet indicates that *each* of its subsidiary
+LicenseExpressions apply. In other words, a ConjunctiveLicenseSet of two
+or more licenses represents a licensing situation where *all* of the
+specified licenses are to be complied with. It is represented in the
+SPDX License Expression Syntax by the `AND` operator.
+
+It is syntactically correct to specify a ConjunctiveLicenseSet where the
+subsidiary LicenseExpressions may be "incompatible" according to a
+particular interpretation of the corresponding Licenses. The SPDX
+License Expression Syntax does not take into account interpretation of
+license texts, which is left to the consumer of SPDX data to determine
+for themselves.
+end note
+"LicenseExpression" <|-[thickness=4]- "ConjunctiveLicenseSet"
+"LicenseExpression" <-[dotted]-- "ConjunctiveLicenseSet::child"
+@enduml

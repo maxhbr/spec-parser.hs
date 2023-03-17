@@ -1,0 +1,22 @@
+@startuml
+class SoftwareDependencyRelationship {
+.. metadata ..
+    Instantiability : Concrete
+    SubclassOf : Core:Relationship
+    name : SoftwareDependencyRelationship
+.. properties ..
+    linkType : DependencyLinkType [1..1]
+    requirement : DependencyRequirement [1..1]
+    scope : DependencyScope [1..1]
+}
+note top of SoftwareDependencyRelationship
+<b>Summary</b>
+MISSING
+<b>Description</b>
+TODO
+end note
+"Core:Relationship" <|-[thickness=4]- "SoftwareDependencyRelationship"
+"DependencyLinkType" <-[dotted]-- "SoftwareDependencyRelationship::linkType"
+"DependencyRequirement" <-[dotted]-- "SoftwareDependencyRelationship::requirement"
+"DependencyScope" <-[dotted]-- "SoftwareDependencyRelationship::scope"
+@enduml

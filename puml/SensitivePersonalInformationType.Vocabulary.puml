@@ -1,0 +1,14 @@
+@startuml
+enum SensitivePersonalInformationType {
+    no : Indicates absence of the field
+    noassertion : Describes no assertion. In other words, unknown.
+    yes : Indicates presence of the field
+}
+note top of SensitivePersonalInformationType
+<b>Summary</b>
+Categories of presence or absence
+<b>Description</b>
+This type is used to indicate if a given field is present or absent or
+unknown
+end note
+@enduml

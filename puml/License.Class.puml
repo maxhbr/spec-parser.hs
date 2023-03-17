@@ -1,0 +1,38 @@
+@startuml
+abstract License {
+.. metadata ..
+    Instantiability : Abstract
+    SubclassOf : LicenseExpression
+    name : License
+.. properties ..
+    comment : xsd:string [0..1]
+    example : xsd:string [0..1]
+    isDeprecatedLicenseId : boolean [0..1]
+    isFsfLibre : boolean [0..1]
+    isOsiApproved : boolean [0..1]
+    licenseId : xsd:string [1..1]
+    licenseText : xsd:string [1..1]
+    name : xsd:string [1..1]
+    obsoletedBy : xsd:string [0..1]
+    seeAlso : anyURI [0..1]
+    standardLicenseHeader : xsd:string [0..1]
+}
+note top of License
+<b>Summary</b>
+Abstract class for the portion of a LicenseExpression representing a
+license.
+<b>Description</b>
+A License represents a license text, whether listed on the SPDX License
+List (ListedLicense) or defined by an SPDX data creator (CustomLicense).
+
+**TBD** whether to define the meaning and purpose for each of the
+properties
+
+**TBD** whether licenseID should be a separately defined property,
+rather than xsd:string
+end note
+"LicenseExpression" <|-[thickness=4]- "License"
+"boolean" <-[dotted]-- "License::isDeprecatedLicenseId"
+"boolean" <-[dotted]-- "License::isFsfLibre"
+"boolean" <-[dotted]-- "License::isOsiApproved"
+@enduml

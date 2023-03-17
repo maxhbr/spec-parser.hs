@@ -1,0 +1,50 @@
+@startuml
+package AI {
+!include_once AI.Profile.puml
+}
+note top of AI
+<b>Summary</b>
+Additional metadata based on software profile, that is useful for ai
+applications and models.
+<b>Description</b>
+The AI profile namespace defines concepts related to AI application and
+model artifacts.
+end note
+package Build {
+!include_once Build.Profile.puml
+}
+note top of Build
+<b>Summary</b>
+Everything having to do with the build profile.
+<b>Description</b>
+The Build namespace defines concepts related to building of artifacts.
+end note
+package Core {
+!include_once Core.Profile.puml
+}
+note top of Core
+<b>Summary</b>
+The basis for all SPDX profiles.
+<b>Description</b>
+The Core namespace defines foundational concepts serving as the basis
+for all SPDX-3.0 profiles.
+end note
+package Licensing {
+!include_once Licensing.Profile.puml
+}
+note top of Licensing
+<b>Summary</b>
+TODO
+<b>Description</b>
+TODO
+end note
+package Software {
+!include_once Software.Profile.puml
+}
+note top of Software
+<b>Summary</b>
+Everything having to do with software.
+<b>Description</b>
+The Software namespace defines concepts related to software artifacts.
+end note
+@enduml

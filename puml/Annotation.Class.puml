@@ -1,0 +1,23 @@
+@startuml
+class Annotation {
+.. metadata ..
+    Instantiability : Concrete
+    SubclassOf : Element
+    name : Annotation
+.. properties ..
+    annotationType : AnnotationType [1..1]
+    contentType : MediaType 
+    statement : xsd:string [0..1]
+    subject : Element [1..1]
+}
+note top of Annotation
+<b>Summary</b>
+An assertion made in relation to one or more elements.
+<b>Description</b>
+An Annotation is an assertion made in relation to one or more elements.
+end note
+"Element" <|-[thickness=4]- "Annotation"
+"AnnotationType" <-[dotted]-- "Annotation::annotationType"
+"MediaType" <-[dotted]-- "Annotation::contentType"
+"Element" <-[dotted]-- "Annotation::subject"
+@enduml

@@ -22,7 +22,7 @@ class Pumlifyable a where
     getPumlFilePath :: a -> FilePath
     default getPumlFilePath :: (BasicSpdx3 a) => a -> FilePath
     getPumlFilePath a = ((<.> getKind a <.> "puml") . T.unpack . name) a
-    writeInnerPumlToH :: Handle -> a -> IO ()
+    writeInnerPumlToH :: Handle -> a -> IO [Text]
     writePumlToFile :: a -> IO FilePath
     writePumlToFile a = do
         let puml = getPumlFilePath a
@@ -31,7 +31,8 @@ class Pumlifyable a where
 
         withFile puml WriteMode $ \h -> do
             hPutStrLn h "@startuml"
-            writeInnerPumlToH h a
+            additionalLines <- writeInnerPumlToH h a
+            mapM_ (T.hPutStrLn h) (nub additionalLines)
             hPutStrLn h "@enduml"
 
         debugM "writePumlToFile" ("writePumlToFile: done write " ++ puml)
@@ -56,6 +57,8 @@ instance Pumlifyable Spdx3Vocabulary where
         hPutStrLn h "}"
         writeCommentForSummaryAndDescription h vocabulary vocabularyName
 
+        return []
+
 instance Pumlifyable Spdx3Class where
     getKind _ = "Class"
     writeInnerPumlToH h cls@Spdx3Class{_classProperties = props} = do
@@ -78,16 +81,20 @@ instance Pumlifyable Spdx3Class where
         hPutStrLn h "}"
         writeCommentForSummaryAndDescription h cls className
 
-        case cls `metadata` "SubclassOf" of
-            Just sco ->
-                unless (sco == "none" || isBasicType sco) $
-                    T.hPutStrLn h ("\"" <> sco <> "\" <|-[thickness=4]- \"" <> className <> "\"")
-            Nothing -> pure ()
+        let additionalLines = case cls `metadata` "SubclassOf" of
+                Just sco -> if sco == "none" || isBasicType sco
+                            then []
+                            else case T.splitOn ":" sco of
+                                [ns, sco'] -> ["\"" <> sco' <> "\" <|-[thickness=4]-- \"" <> className <> "\" : " <> sco]
+                                _ -> ["\"" <> sco <> "\" <|-[thickness=4]- \"" <> className <> "\""]
+                Nothing -> []
 
         mapM_ (\(k,Spdx3ClassPropertyParameters ty _ _) ->
             unless (isBasicType ty) $
-                T.hPutStrLn h ("\"" <> ty <> "\" <-[dotted]-- \"" <> className <> "::" <> k <> "\"")
+                T.hPutStrLn h ("\"" <> ty <> "\" <-[dotted,thickness=4]-- \"" <> className <> "::" <> k <> "\"")
                 ) (Map.toList props)
+
+        return additionalLines
 
 instance Pumlifyable Spdx3Profile where
     getKind _ = "Profile"
@@ -96,26 +103,26 @@ instance Pumlifyable Spdx3Profile where
                                             , _profileClasses = pcs
         } = do
             hPutStrLn h "' vocabulary"
-            mapM_ (\(vocabularyName,vocabulary) -> do
-                puml <- writePumlToFile vocabulary
-                hPutStrLn h ("!include_once " ++ puml)
+            fromPvs <- mapM (\(vocabularyName,vocabulary) -> do
+                writeInnerPumlToH h vocabulary
                 ) (Map.assocs pvs)
             hPutStrLn h "' classes"
-            mapM_ (\(className,cls) -> do
-                puml <- writePumlToFile cls
-                hPutStrLn h ("!include_once " ++ puml)
+            fromPcs <- mapM (\(className,cls) -> do
+                writeInnerPumlToH h cls
                 ) (Map.assocs pcs)
+
+            return (concat $ fromPvs ++ fromPcs)
 
 instance Pumlifyable Spdx3Model where
     getKind _ = "Model"
     getPumlFilePath a = getKind a <.> "puml"
     writeInnerPumlToH h (Spdx3Model profiles) = do
-        mapM_ (\(profileName,profile) -> do
-            T.hPutStrLn h ("package " <> profileName <> " {")
-            profilePuml <- writePumlToFile profile
-            hPutStrLn h ("!include_once " ++ profilePuml)
-            T.hPutStrLn h "}"
-            writeCommentForSummaryAndDescription h profile profileName
+        concat <$> mapM (\(profileName,profile) -> do
+            -- T.hPutStrLn h ("package " <> profileName <> " {")
+            additionalLines <- writeInnerPumlToH h profile
+            -- T.hPutStrLn h "}"
+            -- writeCommentForSummaryAndDescription h profile profileName
+            return additionalLines
             ) (Map.assocs profiles)
 
 writePumlsToDir :: FilePath -> Spdx3Model -> IO ()

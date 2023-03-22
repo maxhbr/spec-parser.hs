@@ -21,7 +21,7 @@ main = do
             putStrLn "## show model"
             writeFile "gh-pages/model.show" (show a)
             putStrLn "## start generate PUML"
-            writePumlsToDir "gh-pages/puml" a
+            writePumlsToDir "gh-pages" a
 
 
     -- putStrLn "start parsing"

@@ -1,4 +1,5 @@
 @startuml
+set separator ::
 class Tool {
 .. metadata ..
     Instantiability : Concrete

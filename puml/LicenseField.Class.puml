@@ -1,4 +1,5 @@
 @startuml
+set separator ::
 abstract LicenseField {
 .. metadata ..
     Instantiability : Abstract

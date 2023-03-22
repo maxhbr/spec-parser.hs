@@ -1,4 +1,5 @@
 @startuml
+set separator ::
 class Build {
 .. metadata ..
     Instantiability : Concrete
@@ -33,5 +34,6 @@ ExternalIdentifier of type "urlScheme" may be used to identify build
 logs. Comment should be "LogReference".
 end note
 "Core:Element" <|-[thickness=4]- "Build"
+"Core::Element" -[thickness=4]-- "Core:Element"
 "Hash" <-[dotted]-- "Build::configSourceDigest"
 @enduml

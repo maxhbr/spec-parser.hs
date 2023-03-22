@@ -1,4 +1,5 @@
 @startuml
+set separator ::
 enum AnnotationType {
     other : Used to store extra information about an Element which is not part of a
 Review (e.g. extra information provided during the creation of the

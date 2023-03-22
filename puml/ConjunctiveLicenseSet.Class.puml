@@ -1,4 +1,5 @@
 @startuml
+set separator ::
 class ConjunctiveLicenseSet {
 .. metadata ..
     Instantiability : Concrete

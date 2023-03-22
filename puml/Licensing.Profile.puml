@@ -1,4 +1,5 @@
 @startuml
+set separator ::
 ' vocabulary
 ' classes
 !include_once ConjunctiveLicenseSet.Class.puml

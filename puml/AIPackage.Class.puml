@@ -1,4 +1,5 @@
 @startuml
+set separator ::
 class AIPackage {
 .. metadata ..
     Instantiability : Concrete
@@ -34,6 +35,7 @@ Metadata information that can be added to a package to describe an AI
 application or trained AI model.
 end note
 "Software:Package" <|-[thickness=4]- "AIPackage"
+"Software::Package" -[thickness=4]-- "Software:Package"
 "PresenceType" <-[dotted]-- "AIPackage::autonomyType"
 "SoftwarePurpose" <-[dotted]-- "AIPackage::packagePurpose"
 "SafetyRiskAssessmentType" <-[dotted]-- "AIPackage::safetyRiskAssessment"

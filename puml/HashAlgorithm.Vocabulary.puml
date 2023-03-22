@@ -1,4 +1,5 @@
 @startuml
+set separator ::
 enum HashAlgorithm {
     blake2b256 : TODOdescription
     blake2b384 : TODOdescription

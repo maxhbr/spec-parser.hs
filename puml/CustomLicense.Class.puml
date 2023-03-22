@@ -1,4 +1,5 @@
 @startuml
+set separator ::
 class CustomLicense {
 .. metadata ..
     Instantiability : Concrete

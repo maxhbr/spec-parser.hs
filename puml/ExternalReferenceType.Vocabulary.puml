@@ -1,4 +1,5 @@
 @startuml
+set separator ::
 enum ExternalReferenceType {
     altDownloadLocation : A reference to an alternative download location.
     altWebPage : A reference to an alternative web page.

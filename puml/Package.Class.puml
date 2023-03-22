@@ -1,4 +1,5 @@
 @startuml
+set separator ::
 class Package {
 .. metadata ..
     SubclassOf : Core:Artifact
@@ -47,5 +48,6 @@ relationships between packages, such as dependency relationships.
 Cardinality: Optional, zero or many.
 end note
 "Core:Artifact" <|-[thickness=4]- "Package"
+"Core::Artifact" -[thickness=4]-- "Core:Artifact"
 "SoftwarePurpose" <-[dotted]-- "Package::packagePurpose"
 @enduml

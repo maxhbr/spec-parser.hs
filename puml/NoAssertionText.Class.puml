@@ -1,4 +1,5 @@
 @startuml
+set separator ::
 class NoAssertionText {
 .. metadata ..
     Instantiability : Concrete

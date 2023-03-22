@@ -1,4 +1,5 @@
 @startuml
+set separator ::
 ' vocabulary
 !include_once AnnotationType.Vocabulary.puml
 !include_once ExternalIdentifierType.Vocabulary.puml

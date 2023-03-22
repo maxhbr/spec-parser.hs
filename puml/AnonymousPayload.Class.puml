@@ -1,4 +1,5 @@
 @startuml
+set separator ::
 class AnonymousPayload {
 .. metadata ..
     Instantiability : Concrete

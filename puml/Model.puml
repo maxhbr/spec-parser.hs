@@ -1,4 +1,5 @@
 @startuml
+set separator ::
 package AI {
 !include_once AI.Profile.puml
 }

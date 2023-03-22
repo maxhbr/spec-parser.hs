@@ -1,4 +1,5 @@
 @startuml
+set separator ::
 class Snippet {
 .. metadata ..
     SubclassOf : Core:Artifact
@@ -16,6 +17,7 @@ MISSING
 TODO
 end note
 "Core:Artifact" <|-[thickness=4]- "Snippet"
+"Core::Artifact" -[thickness=4]-- "Core:Artifact"
 "positiveIntegerRange" <-[dotted]-- "Snippet::byteRange"
 "positiveIntegerRange" <-[dotted]-- "Snippet::lineRange"
 "SoftwarePurpose" <-[dotted]-- "Snippet::snippetPurpose"

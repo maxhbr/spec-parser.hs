@@ -1,4 +1,5 @@
 @startuml
+set separator ::
 abstract Payload {
 .. metadata ..
     Instantiability : Abstract

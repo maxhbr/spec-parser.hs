@@ -1,4 +1,5 @@
 @startuml
+set separator ::
 class CopyrightText {
 .. metadata ..
     Instantiability : Concrete

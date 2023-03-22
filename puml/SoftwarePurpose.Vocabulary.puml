@@ -1,4 +1,5 @@
 @startuml
+set separator ::
 enum SoftwarePurpose {
     application : TODOdescription
     archive : TODOdescription

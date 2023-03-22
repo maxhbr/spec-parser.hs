@@ -1,4 +1,5 @@
 @startuml
+set separator ::
 enum RelationshipCompleteness {
     complete : The relationship is known to be exhaustive.
     incomplete : The relationship is known not to be exhaustive.

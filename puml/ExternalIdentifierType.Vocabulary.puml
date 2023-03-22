@@ -1,4 +1,5 @@
 @startuml
+set separator ::
 enum ExternalIdentifierType {
     cpe22 : https://cpe.mitre.org/files/cpe-specification\_2.2.pdf
     cpe23 : https://nvlpubs.nist.gov/nistpubs/Legacy/IR/nistir7695.pdf

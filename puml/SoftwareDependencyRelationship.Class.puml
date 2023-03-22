@@ -1,4 +1,5 @@
 @startuml
+set separator ::
 class SoftwareDependencyRelationship {
 .. metadata ..
     Instantiability : Concrete
@@ -16,6 +17,7 @@ MISSING
 TODO
 end note
 "Core:Relationship" <|-[thickness=4]- "SoftwareDependencyRelationship"
+"Core::Relationship" -[thickness=4]-- "Core:Relationship"
 "DependencyLinkType" <-[dotted]-- "SoftwareDependencyRelationship::linkType"
 "DependencyRequirement" <-[dotted]-- "SoftwareDependencyRelationship::requirement"
 "DependencyScope" <-[dotted]-- "SoftwareDependencyRelationship::scope"

@@ -1,4 +1,5 @@
 @startuml
+set separator ::
 abstract Element {
 .. metadata ..
     Instantiability : Abstract

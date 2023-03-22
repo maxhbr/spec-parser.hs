@@ -1,4 +1,5 @@
 @startuml
+set separator ::
 class Entity {
 .. metadata ..
     Instantiability : Concrete

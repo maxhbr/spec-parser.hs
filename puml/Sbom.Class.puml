@@ -1,4 +1,5 @@
 @startuml
+set separator ::
 class Sbom {
 .. metadata ..
     SubclassOf : Core:Bom
@@ -16,4 +17,5 @@ provenence details of the product and/or its composition, licensing
 information, known quality or security issues, etc.
 end note
 "Core:Bom" <|-[thickness=4]- "Sbom"
+"Core::Bom" -[thickness=4]-- "Core:Bom"
 @enduml

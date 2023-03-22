@@ -1,4 +1,5 @@
 @startuml
+set separator ::
 abstract IntegrityMethod {
 .. metadata ..
     Instantiability : Abstract

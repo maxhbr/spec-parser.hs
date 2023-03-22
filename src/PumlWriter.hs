@@ -31,6 +31,7 @@ class Pumlifyable a where
 
         withFile puml WriteMode $ \h -> do
             hPutStrLn h "@startuml"
+            hPutStrLn h "set separator ::"
             writeInnerPumlToH h a
             hPutStrLn h "@enduml"
 
@@ -80,8 +81,13 @@ instance Pumlifyable Spdx3Class where
 
         case cls `metadata` "SubclassOf" of
             Just sco ->
-                unless (sco == "none" || isBasicType sco) $
+                unless (sco == "none" || isBasicType sco) $ do
                     T.hPutStrLn h ("\"" <> sco <> "\" <|-[thickness=4]- \"" <> className <> "\"")
+
+                    case T.splitOn ":" sco of
+                        [ns, sco'] -> do
+                            T.hPutStrLn h ("\"" <> ns <> "::" <> sco' <> "\" -[thickness=4]-- \"" <> sco <> "\"")
+                        _ -> pure ()
             Nothing -> pure ()
 
         mapM_ (\(k,Spdx3ClassPropertyParameters ty _ _) ->

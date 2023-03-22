@@ -1,7 +1,0 @@
-@startuml
-set separator ::
-' vocabulary
-!include_once BuildTypeVocab.Vocabulary.puml
-' classes
-!include_once Build.Class.puml
-@enduml

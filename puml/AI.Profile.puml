@@ -1,8 +1,0 @@
-@startuml
-set separator ::
-' vocabulary
-!include_once SensitivePersonalInformationType.Vocabulary.puml
-!include_once SafetyRiskAssessmentType.Vocabulary.puml
-' classes
-!include_once AIPackage.Class.puml
-@enduml

@@ -1,18 +1,13 @@
 @startuml
 ' vocabulary
-enum SensitivePersonalInformationType {
-    no : Indicates absence of the field
-    noassertion : Describes no assertion. In other words, unknown.
-    yes : Indicates presence of the field
-}
-note top of SensitivePersonalInformationType
-<b>Summary</b>
-Categories of presence or absence
-<b>Description</b>
-This type is used to indicate if a given field is present or absent or
-unknown
-end note
 enum SafetyRiskAssessmentType {
+<b>Summary</b>
+Categories of safety risk impact of application ie. Serious, high,
+medium low
+<b>Description</b>
+Describes the different safety risk type values that can be used to
+describe the safety risk of the AI software
+.. entries ..
     high : The second highest level of risk posed by the AI software as given by
 Article 20 of EC Regulation No 765/2008.
     low : Low/no risk is contained in the AI software.
@@ -22,28 +17,34 @@ No 765/2008.
     serious : The highest level of risk that is contained for a AI software as given
 by Article 20 of Regulation 765/2008/EC
 }
-note top of SafetyRiskAssessmentType
+enum SensitivePersonalInformationType {
 <b>Summary</b>
-Categories of safety risk impact of application ie. Serious, high,
-medium low
+Categories of presence or absence
 <b>Description</b>
-Describes the different safety risk type values that can be used to
-describe the safety risk of the AI software
-end note
+This type is used to indicate if a given field is present or absent or
+unknown
+.. entries ..
+    no : Indicates absence of the field
+    noassertion : Describes no assertion. In other words, unknown.
+    yes : Indicates presence of the field
+}
 ' classes
+together {
 class AIPackage {
+<b>Summary</b>
+MISSING
+<b>Description</b>
+Metadata information that can be added to a package to describe an AI
+application or trained AI model.
 .. metadata ..
     Instantiability : Concrete
     SubclassOf : Software:Package
     name : AIPackage
 .. properties ..
     autonomyType : PresenceType [0..1]
-    contentIdentifier : anyURI [0..1]
     dataPreprocessingSteps : xsd:string [0..1]
     domain : xsd:string [0..]
-    downloadLocation : anyURI [0..1]
     energyConsumption : xsd:string [0..1]
-    homePage : anyURI [0..1]
     hyperparameters : xsd:string [0..]
     informationAboutApplication : xsd:string [0..1]
     informationAboutTraining : xsd:string [0..1]
@@ -51,51 +52,26 @@ class AIPackage {
     metrics : xsd:string [0..]
     metricsDecisionThresholds : xsd:string [0..]
     modelExplainabilityMechanisms : xsd:string [0..1]
-    packagePurpose : SoftwarePurpose [0..]
-    packageUrl : anyURI [0..1]
     safetyRiskAssessment : SafetyRiskAssessmentType [0..1]
-    sensitivePersonalInformation : PresenceType [0..1]
+    sensitivePersonalInformation : SensitivePersonalInformationType [0..1]
     standardsCompliance : xsd:string [0..]
     typeOfModel : xsd:string [0..]
 }
-note top of AIPackage
-<b>Summary</b>
-MISSING
-<b>Description</b>
-Metadata information that can be added to a package to describe an AI
-application or trained AI model.
-end note
-"PresenceType" <-[dotted,thickness=4]-- "AIPackage::autonomyType"
-"SoftwarePurpose" <-[dotted,thickness=4]-- "AIPackage::packagePurpose"
-"SafetyRiskAssessmentType" <-[dotted,thickness=4]-- "AIPackage::safetyRiskAssessment"
-"PresenceType" <-[dotted,thickness=4]-- "AIPackage::sensitivePersonalInformation"
+"PresenceType" <-[dashed,thickness=4]-- "AIPackage::autonomyType"
+"SafetyRiskAssessmentType" <-[dashed,thickness=4]-- "AIPackage::safetyRiskAssessment"
+"SensitivePersonalInformationType" <-[dashed,thickness=4]-- "AIPackage::sensitivePersonalInformation"
+}
 ' vocabulary
 enum BuildTypeVocab {
-}
-note top of BuildTypeVocab
 <b>Summary</b>
 MISSING
 <b>Description</b>
 This is about the vocabulary of build types.
-end note
-' classes
-class Build {
-.. metadata ..
-    Instantiability : Concrete
-    SubclassOf : Core:Element
-    name : Build
-.. properties ..
-    buildId : xsd:string [0..1]
-    buildType : anyURI [1..1]
-    configSourceDigest : Hash [0..]
-    configSourceEntrypoint : xsd:string [0..]
-    configSourceUri : anyURI [0..]
-    endTime : xsd:DateTime 
-    environment : xsd:map&lt;string&gt;string [0..]
-    parameters : xsd:map&lt;string&gt;string [0..]
-    startTime : xsd:DateTime 
+.. entries ..
 }
-note top of Build
+' classes
+together {
+class Build {
 <b>Summary</b>
 Class that describes a build instance of software/artifacts.
 <b>Description</b>
@@ -111,22 +87,41 @@ provenance](https://slsa.dev/provenance/v0.2).
 
 ExternalIdentifier of type "urlScheme" may be used to identify build
 logs. Comment should be "LogReference".
-end note
-"Hash" <-[dotted,thickness=4]-- "Build::configSourceDigest"
+.. metadata ..
+    Instantiability : Concrete
+    SubclassOf : Core:Element
+    name : Build
+.. properties ..
+    buildId : xsd:string [0..1]
+    buildType : anyURI [1..1]
+    configSourceDigest : Hash [0..]
+    configSourceEntrypoint : xsd:string [0..]
+    configSourceUri : anyURI [0..]
+    endTime : xsd:DateTime 
+    environment : xsd:map&lt;string&gt;string [0..]
+    parameters : xsd:map&lt;string&gt;string [0..]
+    startTime : xsd:DateTime 
+}
+"Hash" <-[dashed,thickness=4]-- "Build::configSourceDigest"
+}
 ' vocabulary
 enum AnnotationType {
+<b>Summary</b>
+Specifies the type of an annotation.
+<b>Description</b>
+AnnotationType specifies the type of an annotation.
+.. entries ..
     other : Used to store extra information about an Element which is not part of a
 Review (e.g. extra information provided during the creation of the
 Element).
     review : Used when someone reviews the Element.
 }
-note top of AnnotationType
-<b>Summary</b>
-Specifies the type of an annotation.
-<b>Description</b>
-AnnotationType specifies the type of an annotation.
-end note
 enum ExternalIdentifierType {
+<b>Summary</b>
+Specifies the type of an external identifier.
+<b>Description</b>
+ExteralIdentifierType specifies the type of an external identifier.
+.. entries ..
     cpe22 : https://cpe.mitre.org/files/cpe-specification\_2.2.pdf
     cpe23 : https://nvlpubs.nist.gov/nistpubs/Legacy/IR/nistir7695.pdf
     email : TODOdescription
@@ -145,13 +140,12 @@ artifact is its valid locator.
     swid : https://www.ietf.org/archive/id/draft-ietf-sacm-coswid-21.html#section-2.3
     urlScheme : TODOdescription
 }
-note top of ExternalIdentifierType
-<b>Summary</b>
-Specifies the type of an external identifier.
-<b>Description</b>
-ExteralIdentifierType specifies the type of an external identifier.
-end note
 enum ExternalReferenceType {
+<b>Summary</b>
+Specifies the type of an external reference.
+<b>Description</b>
+ExteralReferenceType specifies the type of an external reference.
+.. entries ..
     altDownloadLocation : A reference to an alternative download location.
     altWebPage : A reference to an alternative web page.
     other : Used when the type doesn't match any of the other options.
@@ -163,13 +157,15 @@ GitHub commit).
     securityOther : Used when the reference is security related but doesn't match any of the
 other types.
 }
-note top of ExternalReferenceType
-<b>Summary</b>
-Specifies the type of an external reference.
-<b>Description</b>
-ExteralReferenceType specifies the type of an external reference.
-end note
 enum HashAlgorithm {
+<b>Summary</b>
+A mathematical algorithm that maps data of arbitrary size to a bit
+string.
+<b>Description</b>
+A HashAlgorithm is a mathematical algorithm that maps data of arbitrary
+size to a bit string (the hash) and is a one-way function, that is, a
+function which is practically infeasible to invert.
+.. entries ..
     blake2b256 : TODOdescription
     blake2b384 : TODOdescription
     blake2b512 : TODOdescription
@@ -191,30 +187,31 @@ enum HashAlgorithm {
     spdxPvcSha1 : TODOdescription
     spdxPvcSha256 : TODOdescription
 }
-note top of HashAlgorithm
-<b>Summary</b>
-A mathematical algorithm that maps data of arbitrary size to a bit
-string.
-<b>Description</b>
-A HashAlgorithm is a mathematical algorithm that maps data of arbitrary
-size to a bit string (the hash) and is a one-way function, that is, a
-function which is practically infeasible to invert.
-end note
 enum RelationshipCompleteness {
-    complete : The relationship is known to be exhaustive.
-    incomplete : The relationship is known not to be exhaustive.
-    unknown : There can be made no assertion about the completeness of the
-relationship.
-}
-note top of RelationshipCompleteness
 <b>Summary</b>
 Indicates whether a relationship is complete or known to be incomplete
 or if there is made no assertion either way.
 <b>Description</b>
 RelationshipCompleteness indicates whether a relationship is complete or
 known to be incomplete or if there is made no assertion either way.
-end note
+.. entries ..
+    complete : The relationship is known to be exhaustive.
+    incomplete : The relationship is known not to be exhaustive.
+    unknown : There can be made no assertion about the completeness of the
+relationship.
+}
 enum RelationshipType {
+<b>Summary</b>
+Information about the relationship between two Elements.
+<b>Description</b>
+Provides information about the relationship between two Elements. For
+example, you can represent a relationship between two different Files,
+between a Package and a File, between two Packages, or between one
+SPDXDocument and another SPDXDocument.
+
+Build Profile specific RelationshipType descriptions can be found
+[here](https://github.com/spdx/spdx-3-build-profile/blob/main/model/relationships.md)
+.. entries ..
     amends : TODOdescription
     ancestor : TODOdescription
     buildChildOf : Build instance that was created from another build instance
@@ -264,20 +261,13 @@ enum RelationshipType {
     testTool : TODOdescription
     variant : TODOdescription
 }
-note top of RelationshipType
-<b>Summary</b>
-Information about the relationship between two Elements.
-<b>Description</b>
-Provides information about the relationship between two Elements. For
-example, you can represent a relationship between two different Files,
-between a Package and a File, between two Packages, or between one
-SPDXDocument and another SPDXDocument.
-
-Build Profile specific RelationshipType descriptions can be found
-[here](https://github.com/spdx/spdx-3-build-profile/blob/main/model/relationships.md)
-end note
 ' classes
+together {
 class Annotation {
+<b>Summary</b>
+An assertion made in relation to one or more elements.
+<b>Description</b>
+An Annotation is an assertion made in relation to one or more elements.
 .. metadata ..
     Instantiability : Concrete
     SubclassOf : Element
@@ -288,16 +278,14 @@ class Annotation {
     statement : xsd:string [0..1]
     subject : Element [1..1]
 }
-note top of Annotation
-<b>Summary</b>
-An assertion made in relation to one or more elements.
-<b>Description</b>
-An Annotation is an assertion made in relation to one or more elements.
-end note
-"AnnotationType" <-[dotted,thickness=4]-- "Annotation::annotationType"
-"MediaType" <-[dotted,thickness=4]-- "Annotation::contentType"
-"Element" <-[dotted,thickness=4]-- "Annotation::subject"
+"AnnotationType" <-[dashed,thickness=4]-- "Annotation::annotationType"
+"MediaType" <-[dashed,thickness=4]-- "Annotation::contentType"
+"Element" <-[dashed,thickness=4]-- "Annotation::subject"
 class AnonymousPayload {
+<b>Summary</b>
+TODO
+<b>Description</b>
+TODO
 .. metadata ..
     Instantiability : Concrete
     SubclassOf : Payload
@@ -307,16 +295,16 @@ class AnonymousPayload {
     imports : ExternalMap 
     namespaces : NamespaceMap 
 }
-note top of AnonymousPayload
-<b>Summary</b>
-TODO
-<b>Description</b>
-TODO
-end note
-"CreationInformation" <-[dotted,thickness=4]-- "AnonymousPayload::creationInfo"
-"ExternalMap" <-[dotted,thickness=4]-- "AnonymousPayload::imports"
-"NamespaceMap" <-[dotted,thickness=4]-- "AnonymousPayload::namespaces"
+"CreationInformation" <-[dashed,thickness=4]-- "AnonymousPayload::creationInfo"
+"ExternalMap" <-[dashed,thickness=4]-- "AnonymousPayload::imports"
+"NamespaceMap" <-[dashed,thickness=4]-- "AnonymousPayload::namespaces"
 abstract Artifact {
+<b>Summary</b>
+A distinct article or unit within the digital domain.
+<b>Description</b>
+An artifact is a distinct article or unit within the digital domain,
+such as an electronic file, a software package, a device or an element
+of data.
 .. metadata ..
     Instantiability : Abstract
     SubclassOf : Element
@@ -324,23 +312,8 @@ abstract Artifact {
 .. properties ..
     originatedBy : Identity [0..]
 }
-note top of Artifact
-<b>Summary</b>
-A distinct article or unit within the digital domain.
-<b>Description</b>
-An artifact is a distinct article or unit within the digital domain,
-such as an electronic file, a software package, a device or an element
-of data.
-end note
-"Identity" <-[dotted,thickness=4]-- "Artifact::originatedBy"
+"Identity" <-[dashed,thickness=4]-- "Artifact::originatedBy"
 class Bom {
-.. metadata ..
-    Instantiability : Concrete
-    SubclassOf : Bundle
-    name : Bom
-.. properties ..
-}
-note top of Bom
 <b>Summary</b>
 A container for a grouping of SPDX-3.0 content characterizing details
 (provenence, composition, licensing, etc.) about a product.
@@ -350,8 +323,17 @@ content characterizing details about a product. This could include
 details of the content and composition of the product, provenence
 details of the product and/or its composition, licensing information,
 known quality or security issues, etc.
-end note
+.. metadata ..
+    Instantiability : Concrete
+    SubclassOf : Bundle
+    name : Bom
+.. properties ..
+}
 class Bundle {
+<b>Summary</b>
+A collection of Elements that have a shared context.
+<b>Description</b>
+A bundle is a collection of Elements that have a shared context.
 .. metadata ..
     Instantiability : Concrete
     SubclassOf : ElementCollection
@@ -359,13 +341,12 @@ class Bundle {
 .. properties ..
     context : xsd:string [..1]
 }
-note top of Bundle
-<b>Summary</b>
-A collection of Elements that have a shared context.
-<b>Description</b>
-A bundle is a collection of Elements that have a shared context.
-end note
 class CreationInformation {
+<b>Summary</b>
+Provides information about the creation of the Element.
+<b>Description</b>
+The CreationInformation provides information about who created the
+Element, and when and how it was created.
 .. metadata ..
     Instantiability : Concrete
     name : CreationInformation
@@ -377,17 +358,19 @@ class CreationInformation {
     profile : ProfileIdentifier [1..]
     specVersion : SemVer 
 }
-note top of CreationInformation
-<b>Summary</b>
-Provides information about the creation of the Element.
-<b>Description</b>
-The CreationInformation provides information about who created the
-Element, and when and how it was created.
-end note
-"Entity" <-[dotted,thickness=4]-- "CreationInformation::createdBy"
-"ProfileIdentifier" <-[dotted,thickness=4]-- "CreationInformation::profile"
-"SemVer" <-[dotted,thickness=4]-- "CreationInformation::specVersion"
+"Entity" <-[dashed,thickness=4]-- "CreationInformation::createdBy"
+"ProfileIdentifier" <-[dashed,thickness=4]-- "CreationInformation::profile"
+"SemVer" <-[dashed,thickness=4]-- "CreationInformation::specVersion"
 abstract Element {
+<b>Summary</b>
+Base domain class from which all other SPDX-3.0 domain classes derive.
+<b>Description</b>
+An Element is a representation of a fundamental concept either directly
+inherent to the Bill of Materials (BOM) domain or indirectly related to
+the BOM domain and necessary for contextually characterizing BOM
+concepts and relationships. Within SPDX-3.0 structure this is the base
+class acting as a consistent, unifying, and interoperable foundation for
+all explicit and inter-relatable content objects.
 .. metadata ..
     Instantiability : Abstract
     SubclassOf : Payload
@@ -404,23 +387,17 @@ abstract Element {
     summary : xsd:string [..1]
     verifiedUsing : IntegrityMethod 
 }
-note top of Element
-<b>Summary</b>
-Base domain class from which all other SPDX-3.0 domain classes derive.
-<b>Description</b>
-An Element is a representation of a fundamental concept either directly
-inherent to the Bill of Materials (BOM) domain or indirectly related to
-the BOM domain and necessary for contextually characterizing BOM
-concepts and relationships. Within SPDX-3.0 structure this is the base
-class acting as a consistent, unifying, and interoperable foundation for
-all explicit and inter-relatable content objects.
-end note
-"CreationInformation" <-[dotted,thickness=4]-- "Element::creationInfo"
-"Extension" <-[dotted,thickness=4]-- "Element::extensions"
-"ExternalIdentifier" <-[dotted,thickness=4]-- "Element::externalIdentifiers"
-"ExternalReference" <-[dotted,thickness=4]-- "Element::externalReferences"
-"IntegrityMethod" <-[dotted,thickness=4]-- "Element::verifiedUsing"
+"CreationInformation" <-[dashed,thickness=4]-- "Element::creationInfo"
+"Extension" <-[dashed,thickness=4]-- "Element::extensions"
+"ExternalIdentifier" <-[dashed,thickness=4]-- "Element::externalIdentifiers"
+"ExternalReference" <-[dashed,thickness=4]-- "Element::externalReferences"
+"IntegrityMethod" <-[dashed,thickness=4]-- "Element::verifiedUsing"
 abstract ElementCollection {
+<b>Summary</b>
+A collection of Elements, not necessarily with unifying context.
+<b>Description</b>
+An SpdxCollection is a collection of Elements, not necessarily with
+unifying context.
 .. metadata ..
     Instantiability : Abstract
     SubclassOf : Element
@@ -431,31 +408,28 @@ abstract ElementCollection {
     namespaces : NamespaceMap 
     rootElement : Element [1..]
 }
-note top of ElementCollection
-<b>Summary</b>
-A collection of Elements, not necessarily with unifying context.
-<b>Description</b>
-An SpdxCollection is a collection of Elements, not necessarily with
-unifying context.
-end note
-"Element" <-[dotted,thickness=4]-- "ElementCollection::element"
-"ExternalMap" <-[dotted,thickness=4]-- "ElementCollection::imports"
-"NamespaceMap" <-[dotted,thickness=4]-- "ElementCollection::namespaces"
-"Element" <-[dotted,thickness=4]-- "ElementCollection::rootElement"
+"Element" <-[dashed,thickness=4]-- "ElementCollection::element"
+"ExternalMap" <-[dashed,thickness=4]-- "ElementCollection::imports"
+"NamespaceMap" <-[dashed,thickness=4]-- "ElementCollection::namespaces"
+"Element" <-[dashed,thickness=4]-- "ElementCollection::rootElement"
 class Entity {
+<b>Summary</b>
+TODO
+<b>Description</b>
+TODO
 .. metadata ..
     Instantiability : Concrete
     SubclassOf : Element
     name : Entity
 .. properties ..
 }
-note top of Entity
-<b>Summary</b>
-TODO
-<b>Description</b>
-TODO
-end note
 class ExternalIdentifier {
+<b>Summary</b>
+A reference to a resource outside the scope of SPDX-3.0 content that
+uniquely identifies an Element.
+<b>Description</b>
+An ExternalIdentifier is a reference to a resource outside the scope of
+SPDX-3.0 content that uniquely identifies an Element.
 .. metadata ..
     Instantiability : Concrete
     name : ExternalIdentifier
@@ -464,16 +438,16 @@ class ExternalIdentifier {
     externalIdentifierType : ExternalIdentifierType [1..1]
     identifier : xsd:string [1..1]
 }
-note top of ExternalIdentifier
-<b>Summary</b>
-A reference to a resource outside the scope of SPDX-3.0 content that
-uniquely identifies an Element.
-<b>Description</b>
-An ExternalIdentifier is a reference to a resource outside the scope of
-SPDX-3.0 content that uniquely identifies an Element.
-end note
-"ExternalIdentifierType" <-[dotted,thickness=4]-- "ExternalIdentifier::externalIdentifierType"
+"ExternalIdentifierType" <-[dashed,thickness=4]-- "ExternalIdentifier::externalIdentifierType"
 class ExternalMap {
+<b>Summary</b>
+A map of Element identifiers that are used within a Document but defined
+external to that Document.
+<b>Description</b>
+An External Map is a map of Element identifiers that are used within a
+Document but defined external to that Document. The external map
+provides details about the externally-defined Element such as its
+provenance, where to retrieve it, and how to verify its integrity.
 .. metadata ..
     Instantiability : Concrete
     SubclassOf : none
@@ -483,18 +457,13 @@ class ExternalMap {
     locationHint : anyURI [..1]
     verifiedUsing : IntegrityMethod 
 }
-note top of ExternalMap
-<b>Summary</b>
-A map of Element identifiers that are used within a Document but defined
-external to that Document.
-<b>Description</b>
-An External Map is a map of Element identifiers that are used within a
-Document but defined external to that Document. The external map
-provides details about the externally-defined Element such as its
-provenance, where to retrieve it, and how to verify its integrity.
-end note
-"IntegrityMethod" <-[dotted,thickness=4]-- "ExternalMap::verifiedUsing"
+"IntegrityMethod" <-[dashed,thickness=4]-- "ExternalMap::verifiedUsing"
 class ExternalReference {
+<b>Summary</b>
+A reference to a resource outside the scope of SPDX-3.0 content.
+<b>Description</b>
+An External Reference points to a resource outside the scope of the
+SPDX-3.0 content that provides additional characteristics of an Element.
 .. metadata ..
     Instantiability : Concrete
     SubclassOf : none
@@ -505,24 +474,9 @@ class ExternalReference {
     externalReferenceType : ExternalReferenceType [..1]
     locator : anyURI 
 }
-note top of ExternalReference
-<b>Summary</b>
-A reference to a resource outside the scope of SPDX-3.0 content.
-<b>Description</b>
-An External Reference points to a resource outside the scope of the
-SPDX-3.0 content that provides additional characteristics of an Element.
-end note
-"MediaType" <-[dotted,thickness=4]-- "ExternalReference::contentType"
-"ExternalReferenceType" <-[dotted,thickness=4]-- "ExternalReference::externalReferenceType"
+"MediaType" <-[dashed,thickness=4]-- "ExternalReference::contentType"
+"ExternalReferenceType" <-[dashed,thickness=4]-- "ExternalReference::externalReferenceType"
 class Hash {
-.. metadata ..
-    SubclassOf : IntegrityMethod
-    name : Hash
-.. properties ..
-    algorithm : HashAlgorithm [1..1]
-    hashValue : xsd:string [1..1]
-}
-note top of Hash
 <b>Summary</b>
 A mathematically calculated representation of a grouping of data.
 <b>Description</b>
@@ -531,30 +485,27 @@ a mathematical algorithm that maps data of arbitrary size to a bit
 string (the hash) and is a one-way function, that is, a function which
 is practically infeasible to invert. This is commonly used for integrity
 checking of data.
-end note
-"HashAlgorithm" <-[dotted,thickness=4]-- "Hash::algorithm"
+.. metadata ..
+    SubclassOf : IntegrityMethod
+    name : Hash
+.. properties ..
+    algorithm : HashAlgorithm [1..1]
+    hashValue : xsd:string [1..1]
+}
+"HashAlgorithm" <-[dashed,thickness=4]-- "Hash::algorithm"
 class Identity {
+<b>Summary</b>
+An individual or organization.
+<b>Description</b>
+An Identity is a grouping of identifying characteristics unique to an
+individual or organization.
 .. metadata ..
     Instantiability : Concrete
     SubclassOf : Entity
     name : Identity
 .. properties ..
 }
-note top of Identity
-<b>Summary</b>
-An individual or organization.
-<b>Description</b>
-An Identity is a grouping of identifying characteristics unique to an
-individual or organization.
-end note
 abstract IntegrityMethod {
-.. metadata ..
-    Instantiability : Abstract
-    name : IntegrityMethod
-.. properties ..
-    comment : xsd:string [..1]
-}
-note top of IntegrityMethod
 <b>Summary</b>
 Provides an independently reproducible mechanism that permits
 identification of a specific Element.
@@ -565,14 +516,13 @@ in this SPDX document. This identifier enables a recipient to determine
 if anything in the original Element has been changed and eliminates
 confusion over which version or modification of a specific Element is
 referenced.
-end note
-class MediaType {
 .. metadata ..
-    SubclassOf : xsd:string
-    name : MediaType
+    Instantiability : Abstract
+    name : IntegrityMethod
 .. properties ..
+    comment : xsd:string [..1]
 }
-note top of MediaType
+class MediaType {
 <b>Summary</b>
 Standardized way of indicating the type of content of an Element. A
 String constrained to the RFC 2046 specification.
@@ -581,8 +531,18 @@ The MediaType is a String constrained to the RFC 2046 specification. It
 provides a standardized way of indicating the type of content of an
 Element. A list of all possible media types is available at
 https://www.iana.org/assignments/media-types/media-types.xhtml.
-end note
+.. metadata ..
+    SubclassOf : xsd:string
+    name : MediaType
+.. properties ..
+}
 class NamespaceMap {
+<b>Summary</b>
+A mapping between prefixes and namespace URIs.
+<b>Description</b>
+A namespace map allows the creator of a collection of Elements to use
+shorter identifiers ("prefixes") instead of URIs to provide a more
+human-readable and smaller serialized representation of the Elements.
 .. metadata ..
     Instantiability : Concrete
     name : NamespaceMap
@@ -590,30 +550,24 @@ class NamespaceMap {
     namespace : anyURI [..1]
     prefix : xsd:string [..1]
 }
-note top of NamespaceMap
-<b>Summary</b>
-A mapping between prefixes and namespace URIs.
-<b>Description</b>
-A namespace map allows the creator of a collection of Elements to use
-shorter identifiers ("prefixes") instead of URIs to provide a more
-human-readable and smaller serialized representation of the Elements.
-end note
 class Organization {
-.. metadata ..
-    Instantiability : Concrete
-    SubclassOf : Identity
-    name : Organization
-.. properties ..
-}
-note top of Organization
 <b>Summary</b>
 A group of people who work together in an organized way for a shared
 purpose.
 <b>Description</b>
 An Organization is a group of people who work together in an organized
 way for a shared purpose.
-end note
+.. metadata ..
+    Instantiability : Concrete
+    SubclassOf : Identity
+    name : Organization
+.. properties ..
+}
 abstract Payload {
+<b>Summary</b>
+TODO
+<b>Description</b>
+TODO
 .. metadata ..
     Instantiability : Abstract
     SubclassOf : none
@@ -623,42 +577,37 @@ abstract Payload {
     imports : ExternalMap 
     namespaces : NamespaceMap 
 }
-note top of Payload
-<b>Summary</b>
-TODO
-<b>Description</b>
-TODO
-end note
-"CreationInformation" <-[dotted,thickness=4]-- "Payload::creationInfo"
-"ExternalMap" <-[dotted,thickness=4]-- "Payload::imports"
-"NamespaceMap" <-[dotted,thickness=4]-- "Payload::namespaces"
+"CreationInformation" <-[dashed,thickness=4]-- "Payload::creationInfo"
+"ExternalMap" <-[dashed,thickness=4]-- "Payload::imports"
+"NamespaceMap" <-[dashed,thickness=4]-- "Payload::namespaces"
 class Person {
+<b>Summary</b>
+An individual human being.
+<b>Description</b>
+A Person is an individual human being.
 .. metadata ..
     Instantiability : Concrete
     SubclassOf : Identity
     name : Person
 .. properties ..
 }
-note top of Person
-<b>Summary</b>
-An individual human being.
-<b>Description</b>
-A Person is an individual human being.
-end note
 class ProfileIdentifier {
-.. metadata ..
-    SubclassOf : xsd:string
-    name : ProfileIdentifier
-.. properties ..
-}
-note top of ProfileIdentifier
 <b>Summary</b>
 Provides the profile that the Element is specified in.
 <b>Description</b>
 A profile identifier provides the profile that the Element is specified
 in.
-end note
+.. metadata ..
+    SubclassOf : xsd:string
+    name : ProfileIdentifier
+.. properties ..
+}
 class Relationship {
+<b>Summary</b>
+Describes a relationship between one or more elements.
+<b>Description</b>
+A Relationship is a grouping of characteristics unique to an assertion
+that one Element is related to one or more other Elements in some way.
 .. metadata ..
     Instantiability : Concrete
     SubclassOf : Element
@@ -669,39 +618,22 @@ class Relationship {
     relationshipType : RelationshipType [..1]
     to : Element [1..]
 }
-note top of Relationship
-<b>Summary</b>
-Describes a relationship between one or more elements.
-<b>Description</b>
-A Relationship is a grouping of characteristics unique to an assertion
-that one Element is related to one or more other Elements in some way.
-end note
-"RelationshipCompleteness" <-[dotted,thickness=4]-- "Relationship::completeness"
-"Element" <-[dotted,thickness=4]-- "Relationship::from"
-"RelationshipType" <-[dotted,thickness=4]-- "Relationship::relationshipType"
-"Element" <-[dotted,thickness=4]-- "Relationship::to"
+"RelationshipCompleteness" <-[dashed,thickness=4]-- "Relationship::completeness"
+"Element" <-[dashed,thickness=4]-- "Relationship::from"
+"RelationshipType" <-[dashed,thickness=4]-- "Relationship::relationshipType"
+"Element" <-[dashed,thickness=4]-- "Relationship::to"
 class SemVer {
-.. metadata ..
-    SubclassOf : xsd:string
-    name : SemVer
-.. properties ..
-}
-note top of SemVer
 <b>Summary</b>
 A String constrained to the SemVer 2.0.0 specification.
 <b>Description</b>
 The semantic version is a String constrained to the SemVer 2.0.0
 specification.
-end note
-class SpdxDocument {
 .. metadata ..
-    Instantiability : Concrete
-    SubclassOf : Bundle
-    name : SpdxDocument
+    SubclassOf : xsd:string
+    name : SemVer
 .. properties ..
-    name : xsd:string [1..1]
 }
-note top of SpdxDocument
+class SpdxDocument {
 <b>Summary</b>
 Assembles a collection of Elements under a common string, the name of
 the document.
@@ -709,33 +641,31 @@ the document.
 An SpdxDocument assembles a collection of Elements under a common
 string, the name of the document. Commonly used when representing a unit
 of transfer of SPDX Elements.
-end note
-class Tool {
 .. metadata ..
     Instantiability : Concrete
-    SubclassOf : Entity
-    name : Tool
+    SubclassOf : Bundle
+    name : SpdxDocument
 .. properties ..
+    name : xsd:string [1..1]
 }
-note top of Tool
+class Tool {
 <b>Summary</b>
 An element of hardware and/or software utilized to carry out a
 particular function.
 <b>Description</b>
 A Tool is an element of hardware and/or software utilized to carry out a
 particular function.
-end note
-' vocabulary
-' classes
-class ConjunctiveLicenseSet {
 .. metadata ..
     Instantiability : Concrete
-    SubclassOf : LicenseExpression
-    name : ConjunctiveLicenseSet
+    SubclassOf : Entity
+    name : Tool
 .. properties ..
-    child : LicenseExpression [2..]
 }
-note top of ConjunctiveLicenseSet
+}
+' vocabulary
+' classes
+together {
+class ConjunctiveLicenseSet {
 <b>Summary</b>
 Portion of a LicenseExpression representing a set of licensing
 information where all elements apply.
@@ -752,9 +682,21 @@ particular interpretation of the corresponding Licenses. The SPDX
 License Expression Syntax does not take into account interpretation of
 license texts, which is left to the consumer of SPDX data to determine
 for themselves.
-end note
-"LicenseExpression" <-[dotted,thickness=4]-- "ConjunctiveLicenseSet::child"
+.. metadata ..
+    Instantiability : Concrete
+    SubclassOf : LicenseExpression
+    name : ConjunctiveLicenseSet
+.. properties ..
+    child : LicenseExpression [2..]
+}
+"LicenseExpression" <-[dashed,thickness=4]-- "ConjunctiveLicenseSet::child"
 class CopyrightText {
+<b>Summary</b>
+Concrete class representing copyright text that has actually been found.
+<b>Description</b>
+A CopyrightText is the primary value that is used by a copyrightText
+field that indicates copyright text being found, i.e. with a value other
+than NONE or NOASSERTION.
 .. metadata ..
     Instantiability : Concrete
     SubclassOf : CopyrightTextField
@@ -762,22 +704,7 @@ class CopyrightText {
 .. properties ..
     text : xsd:string [1..1]
 }
-note top of CopyrightText
-<b>Summary</b>
-Concrete class representing copyright text that has actually been found.
-<b>Description</b>
-A CopyrightText is the primary value that is used by a copyrightText
-field that indicates copyright text being found, i.e. with a value other
-than NONE or NOASSERTION.
-end note
 abstract CopyrightTextField {
-.. metadata ..
-    Instantiability : Abstract
-    SubclassOf : none
-    name : CopyrightTextField
-.. properties ..
-}
-note top of CopyrightTextField
 <b>Summary</b>
 Base abstract class used for the copyrightText field that can take a
 value of either a text value (via CopyrightText), NOASSERTION, or NONE.
@@ -790,15 +717,13 @@ NOASSERTION or NONE.
 **FIXME** The specific meanings of NOASSERTION or NONE are defined in
 the copyrightText property description. (**INCORRECT** - change to
 NoAssertionText or NoneText)
-end note
-class CustomLicense {
 .. metadata ..
-    Instantiability : Concrete
-    SubclassOf : License
-    name : CustomLicense
+    Instantiability : Abstract
+    SubclassOf : none
+    name : CopyrightTextField
 .. properties ..
 }
-note top of CustomLicense
+class CustomLicense {
 <b>Summary</b>
 A license that is not listed on the SPDX License List.
 <b>Description</b>
@@ -811,15 +736,13 @@ properties
 
 **TBD** how to indicate that the License ID must have the prefix
 "LicenseRef-"
-end note
-class CustomLicenseException {
 .. metadata ..
     Instantiability : Concrete
-    SubclassOf : LicenseException
-    name : CustomLicenseException
+    SubclassOf : License
+    name : CustomLicense
 .. properties ..
 }
-note top of CustomLicenseException
+class CustomLicenseException {
 <b>Summary</b>
 **TBD** Not to be completed until the Change Proposal at
 https://github.com/spdx/change-proposal/issues/4 is decided upon. Should
@@ -827,16 +750,13 @@ be treated as unconfirmed since this class and its name or meaning is
 subject to change.
 <b>Description</b>
 MISSING
-end note
-class DisjunctiveLicenseSet {
 .. metadata ..
     Instantiability : Concrete
-    SubclassOf : LicenseExpression
-    name : DisjunctiveLicenseSet
+    SubclassOf : LicenseException
+    name : CustomLicenseException
 .. properties ..
-    child : LicenseExpression [2..]
 }
-note top of DisjunctiveLicenseSet
+class DisjunctiveLicenseSet {
 <b>Summary</b>
 Portion of a LicenseExpression representing a set of licensing
 information where only any one of the elements applies.
@@ -849,27 +769,15 @@ with. A consumer of SPDX data would typically understand this to permit
 the recipient of the licensed content to choose which of the
 corresponding license they would prefer to use. It is represented in the
 SPDX License Expression Syntax by the `OR` operator.
-end note
-"LicenseExpression" <-[dotted,thickness=4]-- "DisjunctiveLicenseSet::child"
-abstract License {
 .. metadata ..
-    Instantiability : Abstract
+    Instantiability : Concrete
     SubclassOf : LicenseExpression
-    name : License
+    name : DisjunctiveLicenseSet
 .. properties ..
-    comment : xsd:string [0..1]
-    example : xsd:string [0..1]
-    isDeprecatedLicenseId : boolean [0..1]
-    isFsfLibre : boolean [0..1]
-    isOsiApproved : boolean [0..1]
-    licenseId : xsd:string [1..1]
-    licenseText : xsd:string [1..1]
-    name : xsd:string [1..1]
-    obsoletedBy : xsd:string [0..1]
-    seeAlso : anyURI [0..1]
-    standardLicenseHeader : xsd:string [0..1]
+    child : LicenseExpression [2..]
 }
-note top of License
+"LicenseExpression" <-[dashed,thickness=4]-- "DisjunctiveLicenseSet::child"
+abstract License {
 <b>Summary</b>
 Abstract class for the portion of a LicenseExpression representing a
 license.
@@ -882,18 +790,24 @@ properties
 
 **TBD** whether licenseID should be a separately defined property,
 rather than xsd:string
-end note
-"boolean" <-[dotted,thickness=4]-- "License::isDeprecatedLicenseId"
-"boolean" <-[dotted,thickness=4]-- "License::isFsfLibre"
-"boolean" <-[dotted,thickness=4]-- "License::isOsiApproved"
-abstract LicenseException {
 .. metadata ..
     Instantiability : Abstract
-    SubclassOf : none
-    name : LicenseException
+    SubclassOf : LicenseExpression
+    name : License
 .. properties ..
+    comment : xsd:string [0..1]
+    example : xsd:string [0..1]
+    isDeprecatedLicenseId : xsd:boolean [0..1]
+    isFsfLibre : xsd:boolean [0..1]
+    isOsiApproved : xsd:boolean [0..1]
+    licenseId : xsd:string [1..1]
+    licenseText : xsd:string [1..1]
+    name : xsd:string [1..1]
+    obsoletedBy : xsd:string [0..1]
+    seeAlso : anyURI [0..1]
+    standardLicenseHeader : xsd:string [0..1]
 }
-note top of LicenseException
+abstract LicenseException {
 <b>Summary</b>
 **TBD** Not to be completed until the Change Proposal at
 https://github.com/spdx/change-proposal/issues/4 is decided upon. Should
@@ -901,15 +815,13 @@ be treated as unconfirmed since this class and its name or meaning is
 subject to change.
 <b>Description</b>
 MISSING
-end note
-abstract LicenseExpression {
 .. metadata ..
     Instantiability : Abstract
-    SubclassOf : LicenseField
-    name : LicenseExpression
+    SubclassOf : none
+    name : LicenseException
 .. properties ..
 }
-note top of LicenseExpression
+abstract LicenseExpression {
 <b>Summary</b>
 Abstract class representing a license expression consisting of one or
 more licenses (optionally including exceptions), which may be combined
@@ -921,15 +833,13 @@ single license (either on the SPDX License List or a custom-defined
 license); a single license with an "or later" operator applied; the
 foregoing with an exception applied; or a set of licenses combined by
 applying "AND" and "OR" operators recursively.
-end note
-abstract LicenseField {
 .. metadata ..
     Instantiability : Abstract
-    SubclassOf : none
-    name : LicenseField
+    SubclassOf : LicenseField
+    name : LicenseExpression
 .. properties ..
 }
-note top of LicenseField
+abstract LicenseField {
 <b>Summary</b>
 Base abstract class used for all fields that can take a value of either
 a license expression, NOASSERTION, or NONE.
@@ -939,17 +849,13 @@ for a software Package, File or Snippet. It represents either a license
 expression, or the values NOASSERTION or NONE. The specific meanings of
 NOASSERTION or NONE for the particular licensing field are defined in
 the corresponding property description.
-end note
-class ListedLicense {
 .. metadata ..
-    Instantiability : Concrete
-    SubclassOf : License
-    name : ListedLicense
+    Instantiability : Abstract
+    SubclassOf : none
+    name : LicenseField
 .. properties ..
-    deprecatedVersion : xsd:string [0..1]
-    listVersionAdded : xsd:string [0..1]
 }
-note top of ListedLicense
+class ListedLicense {
 <b>Summary</b>
 A license that is listed on the SPDX License List.
 <b>Description</b>
@@ -958,15 +864,15 @@ List at https://spdx.org/licenses.
 
 **TBD** whether to define the meaning and purpose for each of the
 properties
-end note
-class ListedLicenseException {
 .. metadata ..
     Instantiability : Concrete
-    SubclassOf : LicenseException
-    name : ListedLicenseException
+    SubclassOf : License
+    name : ListedLicense
 .. properties ..
+    deprecatedVersion : xsd:string [0..1]
+    listVersionAdded : xsd:string [0..1]
 }
-note top of ListedLicenseException
+class ListedLicenseException {
 <b>Summary</b>
 **TBD** Not to be completed until the Change Proposal at
 https://github.com/spdx/change-proposal/issues/4 is decided upon. Should
@@ -974,15 +880,13 @@ be treated as unconfirmed since this class and its name or meaning is
 subject to change.
 <b>Description</b>
 MISSING
-end note
-class NoAssertionLicense {
 .. metadata ..
     Instantiability : Concrete
-    SubclassOf : LicenseField
-    name : NoAssertionLicense
+    SubclassOf : LicenseException
+    name : ListedLicenseException
 .. properties ..
 }
-note top of NoAssertionLicense
+class NoAssertionLicense {
 <b>Summary</b>
 Concrete class representing an absence of an assertion about license
 information.
@@ -999,15 +903,13 @@ the corresponding software Package, File or Snippet.
 The specific meaning of NoAssertionLicense in the context of a
 concludedLicense or declaredLicense field is more fully set forth in the
 Property definitions for those fields.
-end note
-class NoAssertionText {
 .. metadata ..
     Instantiability : Concrete
-    SubclassOf : CopyrightTextField
-    name : NoAssertionText
+    SubclassOf : LicenseField
+    name : NoAssertionLicense
 .. properties ..
 }
-note top of NoAssertionText
+class NoAssertionText {
 <b>Summary</b>
 Concrete class representing an absence of an assertion about the
 presence of copyright text.
@@ -1025,15 +927,13 @@ the following applies: \* the SPDX data creator has made no attempt to
 determine this field; or \* the SPDX data creator has intentionally
 provided no information (no meaning should be implied from the absence
 of an assertion).
-end note
-class NoneLicense {
 .. metadata ..
     Instantiability : Concrete
-    SubclassOf : LicenseField
-    name : NoneLicense
+    SubclassOf : CopyrightTextField
+    name : NoAssertionText
 .. properties ..
 }
-note top of NoneLicense
+class NoneLicense {
 <b>Summary</b>
 Concrete class representing an assertion that no license information is
 present, as applicable.
@@ -1049,15 +949,13 @@ from the corresponding software Package, File or Snippet.
 The specific meaning of NoneLicense in the context of a concludedLicense
 or declaredLicense field is more fully set forth in the Property
 definitions for those fields.
-end note
-class NoneText {
 .. metadata ..
     Instantiability : Concrete
-    SubclassOf : CopyrightTextField
-    name : NoneText
+    SubclassOf : LicenseField
+    name : NoneLicense
 .. properties ..
 }
-note top of NoneText
+class NoneText {
 <b>Summary</b>
 Concrete class representing an assertion that no copyright text is
 present.
@@ -1068,16 +966,13 @@ property instead of here
 A NoneText is the primary value that is used by a copyrightText field
 that indicates that the corresponding software Package, File or Snippet
 does not contain any copyright information.
-end note
-class OrLaterOperator {
 .. metadata ..
     Instantiability : Concrete
-    SubclassOf : LicenseExpression
-    name : OrLaterOperator
+    SubclassOf : CopyrightTextField
+    name : NoneText
 .. properties ..
-    license : License [1..1]
 }
-note top of OrLaterOperator
+class OrLaterOperator {
 <b>Summary</b>
 Portion of a LicenseExpression representing this version, or any later
 version, of the indicated License.
@@ -1092,16 +987,15 @@ a "later version" of any particular License. Some Licenses may not be
 versioned, or may not have clearly-defined ordering for versions. The
 consumer of SPDX data will need to determine for themselves what meaning
 to attribute to a "later version" operator for a particular License.
-end note
-"License" <-[dotted,thickness=4]-- "OrLaterOperator::license"
-class WithExceptionOperator {
 .. metadata ..
     Instantiability : Concrete
     SubclassOf : LicenseExpression
-    name : WithExceptionOperator
+    name : OrLaterOperator
 .. properties ..
+    license : License [1..1]
 }
-note top of WithExceptionOperator
+"License" <-[dashed,thickness=4]-- "OrLaterOperator::license"
+class WithExceptionOperator {
 <b>Summary</b>
 **TBD** Not to be completed until the Change Proposal at
 https://github.com/spdx/change-proposal/issues/4 is decided upon. Should
@@ -1109,35 +1003,44 @@ be treated as unconfirmed since this class and its name or meaning is
 subject to change.
 <b>Description</b>
 MISSING
-end note
+.. metadata ..
+    Instantiability : Concrete
+    SubclassOf : LicenseExpression
+    name : WithExceptionOperator
+.. properties ..
+}
+}
 ' vocabulary
 enum DependencyLinkType {
+<b>Summary</b>
+TODO
+<b>Description</b>
+TODO
+.. entries ..
     dynamic : TODOdescription
     noAssertion : TODOdescription
     other : TODOdescription
     static : TODOdescription
     tool : TODOdescription
 }
-note top of DependencyLinkType
+enum DependencyRequirement {
 <b>Summary</b>
 TODO
 <b>Description</b>
 TODO
-end note
-enum DependencyRequirement {
+.. entries ..
     noAssertion : TODOdescription
     optional : TODOdescription
     preRequisite : TODOdescription
     provided : TODOdescription
     required : TODOdescription
 }
-note top of DependencyRequirement
+enum DependencyScope {
 <b>Summary</b>
 TODO
 <b>Description</b>
 TODO
-end note
-enum DependencyScope {
+.. entries ..
     build : TODOdescription
     dev : TODOdescription
     noAssertion : TODOdescription
@@ -1145,13 +1048,12 @@ enum DependencyScope {
     runtime : TODOdescription
     test : TODOdescription
 }
-note top of DependencyScope
+enum SoftwarePurpose {
 <b>Summary</b>
 TODO
 <b>Description</b>
 TODO
-end note
-enum SoftwarePurpose {
+.. entries ..
     application : TODOdescription
     archive : TODOdescription
     bom : TODOdescription
@@ -1172,14 +1074,13 @@ enum SoftwarePurpose {
     patch : TODOdescription
     source : TODOdescription
 }
-note top of SoftwarePurpose
-<b>Summary</b>
-TODO
-<b>Description</b>
-TODO
-end note
 ' classes
+together {
 class File {
+<b>Summary</b>
+MISSING
+<b>Description</b>
+TODO This is about the File class.
 .. metadata ..
     SubclassOf : Core:Artifact
     name : File
@@ -1188,27 +1089,9 @@ class File {
     contentType : MediaType [0..1]
     filePurpose : SoftwarePurpose [0..]
 }
-note top of File
-<b>Summary</b>
-MISSING
-<b>Description</b>
-TODO This is about the File class.
-end note
-"MediaType" <-[dotted,thickness=4]-- "File::contentType"
-"SoftwarePurpose" <-[dotted,thickness=4]-- "File::filePurpose"
+"MediaType" <-[dashed,thickness=4]-- "File::contentType"
+"SoftwarePurpose" <-[dashed,thickness=4]-- "File::filePurpose"
 class Package {
-.. metadata ..
-    SubclassOf : Core:Artifact
-    name : Package
-.. properties ..
-    contentIdentifier : anyURI [0..1]
-    downloadLocation : anyURI [0..1]
-    homePage : anyURI [0..1]
-    packagePurpose : SoftwarePurpose [0..]
-    packageUrl : anyURI [0..1]
-    packageVersion : xsd:string [0..1]
-}
-note top of Package
 <b>Summary</b>
 MISSING
 <b>Description</b>
@@ -1242,15 +1125,19 @@ In an SPDX document, relationship elements can be used to indicate
 relationships between packages, such as dependency relationships.
 
 Cardinality: Optional, zero or many.
-end note
-"SoftwarePurpose" <-[dotted,thickness=4]-- "Package::packagePurpose"
-class Sbom {
 .. metadata ..
-    SubclassOf : Core:Bom
-    name : Sbom
+    SubclassOf : Core:Artifact
+    name : Package
 .. properties ..
+    contentIdentifier : anyURI [0..1]
+    downloadLocation : anyURI [0..1]
+    homePage : anyURI [0..1]
+    packagePurpose : SoftwarePurpose [0..]
+    packageUrl : anyURI [0..1]
+    packageVersion : xsd:string [0..1]
 }
-note top of Sbom
+"SoftwarePurpose" <-[dashed,thickness=4]-- "Package::packagePurpose"
+class Sbom {
 <b>Summary</b>
 MISSING
 <b>Description</b>
@@ -1259,8 +1146,16 @@ SPDX-3.0 content characterizing details about a software product. This
 could include details of the content and composition of the product,
 provenence details of the product and/or its composition, licensing
 information, known quality or security issues, etc.
-end note
+.. metadata ..
+    SubclassOf : Core:Bom
+    name : Sbom
+.. properties ..
+}
 class Snippet {
+<b>Summary</b>
+MISSING
+<b>Description</b>
+TODO
 .. metadata ..
     SubclassOf : Core:Artifact
     name : Snippet
@@ -1270,16 +1165,14 @@ class Snippet {
     lineRange : positiveIntegerRange [0..1]
     snippetPurpose : SoftwarePurpose [0..]
 }
-note top of Snippet
+"positiveIntegerRange" <-[dashed,thickness=4]-- "Snippet::byteRange"
+"positiveIntegerRange" <-[dashed,thickness=4]-- "Snippet::lineRange"
+"SoftwarePurpose" <-[dashed,thickness=4]-- "Snippet::snippetPurpose"
+class SoftwareDependencyRelationship {
 <b>Summary</b>
 MISSING
 <b>Description</b>
 TODO
-end note
-"positiveIntegerRange" <-[dotted,thickness=4]-- "Snippet::byteRange"
-"positiveIntegerRange" <-[dotted,thickness=4]-- "Snippet::lineRange"
-"SoftwarePurpose" <-[dotted,thickness=4]-- "Snippet::snippetPurpose"
-class SoftwareDependencyRelationship {
 .. metadata ..
     Instantiability : Concrete
     SubclassOf : Core:Relationship
@@ -1289,17 +1182,12 @@ class SoftwareDependencyRelationship {
     requirement : DependencyRequirement [1..1]
     scope : DependencyScope [1..1]
 }
-note top of SoftwareDependencyRelationship
-<b>Summary</b>
-MISSING
-<b>Description</b>
-TODO
-end note
-"DependencyLinkType" <-[dotted,thickness=4]-- "SoftwareDependencyRelationship::linkType"
-"DependencyRequirement" <-[dotted,thickness=4]-- "SoftwareDependencyRelationship::requirement"
-"DependencyScope" <-[dotted,thickness=4]-- "SoftwareDependencyRelationship::scope"
-"Package" <|-[thickness=4]-- "AIPackage" : Software:Package
-"Element" <|-[thickness=4]-- "Build" : Core:Element
+"DependencyLinkType" <-[dashed,thickness=4]-- "SoftwareDependencyRelationship::linkType"
+"DependencyRequirement" <-[dashed,thickness=4]-- "SoftwareDependencyRelationship::requirement"
+"DependencyScope" <-[dashed,thickness=4]-- "SoftwareDependencyRelationship::scope"
+}
+"Package" <|-[thickness=4]--- "AIPackage" : Software:Package
+"Element" <|-[thickness=4]--- "Build" : Core:Element
 "Element" <|-[thickness=4]- "Annotation"
 "Payload" <|-[thickness=4]- "AnonymousPayload"
 "Element" <|-[thickness=4]- "Artifact"
@@ -1330,9 +1218,9 @@ end note
 "CopyrightTextField" <|-[thickness=4]- "NoneText"
 "LicenseExpression" <|-[thickness=4]- "OrLaterOperator"
 "LicenseExpression" <|-[thickness=4]- "WithExceptionOperator"
-"Artifact" <|-[thickness=4]-- "File" : Core:Artifact
-"Artifact" <|-[thickness=4]-- "Package" : Core:Artifact
-"Bom" <|-[thickness=4]-- "Sbom" : Core:Bom
-"Artifact" <|-[thickness=4]-- "Snippet" : Core:Artifact
-"Relationship" <|-[thickness=4]-- "SoftwareDependencyRelationship" : Core:Relationship
+"Artifact" <|-[thickness=4]--- "File" : Core:Artifact
+"Artifact" <|-[thickness=4]--- "Package" : Core:Artifact
+"Bom" <|-[thickness=4]--- "Sbom" : Core:Bom
+"Artifact" <|-[thickness=4]--- "Snippet" : Core:Artifact
+"Relationship" <|-[thickness=4]--- "SoftwareDependencyRelationship" : Core:Relationship
 @enduml

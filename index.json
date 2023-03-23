@@ -14,11 +14,6 @@
                         "minCount": "0",
                         "type": "PresenceType"
                     },
-                    "contentIdentifier": {
-                        "maxCount": "1",
-                        "minCount": "0",
-                        "type": "anyURI"
-                    },
                     "dataPreprocessingSteps": {
                         "maxCount": "1",
                         "minCount": "0",
@@ -28,20 +23,10 @@
                         "minCount": "0",
                         "type": "xsd:string"
                     },
-                    "downloadLocation": {
-                        "maxCount": "1",
-                        "minCount": "0",
-                        "type": "anyURI"
-                    },
                     "energyConsumption": {
                         "maxCount": "1",
                         "minCount": "0",
                         "type": "xsd:string"
-                    },
-                    "homePage": {
-                        "maxCount": "1",
-                        "minCount": "0",
-                        "type": "anyURI"
                     },
                     "hyperparameters": {
                         "minCount": "0",
@@ -75,15 +60,6 @@
                         "minCount": "0",
                         "type": "xsd:string"
                     },
-                    "packagePurpose": {
-                        "minCount": "0",
-                        "type": "SoftwarePurpose"
-                    },
-                    "packageUrl": {
-                        "maxCount": "1",
-                        "minCount": "0",
-                        "type": "anyURI"
-                    },
                     "safetyRiskAssessment": {
                         "maxCount": "1",
                         "minCount": "0",
@@ -92,7 +68,7 @@
                     "sensitivePersonalInformation": {
                         "maxCount": "1",
                         "minCount": "0",
-                        "type": "PresenceType"
+                        "type": "SensitivePersonalInformationType"
                     },
                     "standardsCompliance": {
                         "minCount": "0",
@@ -255,19 +231,6 @@
         },
         "Summary": "Additional metadata based on software profile, that is useful for ai\napplications and models.",
         "Vocabularies": {
-            "PresenceType": {
-                "Description": "This type is used to indicate if a given field is present or absent or\nunknown",
-                "Entries": {
-                    "no": "Indicates absence of the field",
-                    "noassertion": "Describes no assertion. In other words, unknown.",
-                    "yes": "Indicates presence of the field"
-                },
-                "Metadata": {
-                    "name": "SensitivePersonalInformationType"
-                },
-                "Summary": "Categories of presence or absence",
-                "_title": "PresenceType"
-            },
             "SafetyRiskAssessmentType": {
                 "Description": "Describes the different safety risk type values that can be used to\ndescribe the safety risk of the AI software",
                 "Entries": {
@@ -281,6 +244,19 @@
                 },
                 "Summary": "Categories of safety risk impact of application ie. Serious, high,\nmedium low",
                 "_title": "SafetyRiskAssessmentType"
+            },
+            "SensitivePersonalInformationType": {
+                "Description": "This type is used to indicate if a given field is present or absent or\nunknown",
+                "Entries": {
+                    "no": "Indicates absence of the field",
+                    "noassertion": "Describes no assertion. In other words, unknown.",
+                    "yes": "Indicates presence of the field"
+                },
+                "Metadata": {
+                    "name": "SensitivePersonalInformationType"
+                },
+                "Summary": "Categories of presence or absence",
+                "_title": "SensitivePersonalInformationType"
             }
         },
         "_title": "AI Profile"
@@ -1588,17 +1564,17 @@
                     "isDeprecatedLicenseId": {
                         "maxCount": "1",
                         "minCount": "0",
-                        "type": "boolean"
+                        "type": "xsd:boolean"
                     },
                     "isFsfLibre": {
                         "maxCount": "1",
                         "minCount": "0",
-                        "type": "boolean"
+                        "type": "xsd:boolean"
                     },
                     "isOsiApproved": {
                         "maxCount": "1",
                         "minCount": "0",
-                        "type": "boolean"
+                        "type": "xsd:boolean"
                     },
                     "licenseId": {
                         "maxCount": "1",

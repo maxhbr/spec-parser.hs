@@ -39,13 +39,17 @@ class Pumlifyable a where
 
         return puml
 
-writeCommentForSummaryAndDescription :: BasicSpdx3 a => Handle -> a -> Text -> IO ()
-writeCommentForSummaryAndDescription h a n = do
-    T.hPutStrLn h ("note top of " <> n)
+writeCommentTextForSummaryAndDescription :: BasicSpdx3 a => Handle -> a -> Text -> IO ()
+writeCommentTextForSummaryAndDescription h a n = do
     hPutStrLn h "<b>Summary</b>"
     T.hPutStrLn h (summary a)
     hPutStrLn h "<b>Description</b>"
     T.hPutStrLn h (description a)
+
+writeCommentForSummaryAndDescription :: BasicSpdx3 a => Handle -> a -> Text -> IO ()
+writeCommentForSummaryAndDescription h a n = do
+    T.hPutStrLn h ("note top of " <> n)
+    writeCommentTextForSummaryAndDescription h a n
     T.hPutStrLn h "end note"
 
 instance Pumlifyable Spdx3Vocabulary where
@@ -53,9 +57,10 @@ instance Pumlifyable Spdx3Vocabulary where
     writeInnerPumlToH h vocabulary@Spdx3Vocabulary{_vocabularyEntries = ves } = do
         let vocabularyName = name vocabulary
         T.hPutStrLn h ("enum " <> vocabularyName <> " {")
+        writeCommentTextForSummaryAndDescription h vocabulary vocabularyName
+        hPutStrLn h ".. entries .."
         mapM_ (\(k,v) -> T.hPutStrLn h ("    " <> k <> " : " <> v)) (Map.toList ves) 
         hPutStrLn h "}"
-        writeCommentForSummaryAndDescription h vocabulary vocabularyName
 
         return []
 
@@ -66,6 +71,7 @@ instance Pumlifyable Spdx3Class where
         if cls `metadata` "Instantiability" == Just "Abstract"
             then T.hPutStrLn h ("abstract " <> className <> " {")
             else T.hPutStrLn h ("class " <> className <> " {")
+        writeCommentTextForSummaryAndDescription h cls className
         hPutStrLn h ".. metadata .."
         mapM_ (\(k,v) -> T.hPutStrLn h ("    " <> k <> " : " <> v)) (Map.toList (rawMetadata cls)) 
         hPutStrLn h ".. properties .."
@@ -79,19 +85,18 @@ instance Pumlifyable Spdx3Class where
                 T.hPutStrLn h ("    " <> T.unwords [k, ":", ty, numsToRange minCount maxCount])
             ) (Map.toList props) 
         hPutStrLn h "}"
-        writeCommentForSummaryAndDescription h cls className
 
         let additionalLines = case cls `metadata` "SubclassOf" of
                 Just sco -> if sco == "none" || isBasicType sco
                             then []
                             else case T.splitOn ":" sco of
-                                [ns, sco'] -> ["\"" <> sco' <> "\" <|-[thickness=4]-- \"" <> className <> "\" : " <> sco]
+                                [ns, sco'] -> ["\"" <> sco' <> "\" <|-[thickness=4]--- \"" <> className <> "\" : " <> sco]
                                 _ -> ["\"" <> sco <> "\" <|-[thickness=4]- \"" <> className <> "\""]
                 Nothing -> []
 
         mapM_ (\(k,Spdx3ClassPropertyParameters ty _ _) ->
             unless (isBasicType ty) $
-                T.hPutStrLn h ("\"" <> ty <> "\" <-[dotted,thickness=4]-- \"" <> className <> "::" <> k <> "\"")
+                T.hPutStrLn h ("\"" <> ty <> "\" <-[dashed,thickness=4]-- \"" <> className <> "::" <> k <> "\"")
                 ) (Map.toList props)
 
         return additionalLines
@@ -107,9 +112,11 @@ instance Pumlifyable Spdx3Profile where
                 writeInnerPumlToH h vocabulary
                 ) (Map.assocs pvs)
             hPutStrLn h "' classes"
+            T.hPutStrLn h "together {"
             fromPcs <- mapM (\(className,cls) -> do
                 writeInnerPumlToH h cls
                 ) (Map.assocs pcs)
+            T.hPutStrLn h "}"
 
             return (concat $ fromPvs ++ fromPcs)
 
@@ -118,6 +125,7 @@ instance Pumlifyable Spdx3Model where
     getPumlFilePath a = getKind a <.> "puml"
     writeInnerPumlToH h (Spdx3Model profiles) = do
         concat <$> mapM (\(profileName,profile) -> do
+            -- T.hPutStrLn h "together {"
             -- T.hPutStrLn h ("package " <> profileName <> " {")
             additionalLines <- writeInnerPumlToH h profile
             -- T.hPutStrLn h "}"

@@ -38,6 +38,7 @@ library
       Glob
     , aeson
     , aeson-pretty
+    , aeson-yaml
     , base >=4.7 && <5
     , bytestring
     , containers
@@ -47,6 +48,7 @@ library
     , hslogger
     , pandoc
     , process
+    , rdf4h
     , text
     , unordered-containers
     , vector
@@ -63,6 +65,7 @@ executable spec-parser-exe
       Glob
     , aeson
     , aeson-pretty
+    , aeson-yaml
     , base >=4.7 && <5
     , bytestring
     , containers
@@ -72,6 +75,7 @@ executable spec-parser-exe
     , hslogger
     , pandoc
     , process
+    , rdf4h
     , spec-parser
     , text
     , unordered-containers
@@ -90,6 +94,7 @@ test-suite spec-parser-test
       Glob
     , aeson
     , aeson-pretty
+    , aeson-yaml
     , base >=4.7 && <5
     , bytestring
     , containers
@@ -99,6 +104,7 @@ test-suite spec-parser-test
     , hslogger
     , pandoc
     , process
+    , rdf4h
     , spec-parser
     , text
     , unordered-containers

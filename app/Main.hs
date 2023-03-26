@@ -1,39 +1,37 @@
+{-# LANGUAGE LambdaCase #-}
 module Main (main) where
 
 import           Data.Aeson
 import           Data.Aeson.Encode.Pretty
 import qualified Data.ByteString.Lazy as BSL
+import           System.Environment (getArgs)
+import           System.FilePath
+import           System.Directory
 
 import MarkdownToJSON
 import MetaModel
 import PumlWriter
 
-main :: IO ()
-main = do
+main' :: FilePath -> FilePath -> IO ()
+main' inDir outDir =  do
+    createDirectoryIfMissing True outDir
     putStrLn "## start MarkdownToJSON"
-    json <- profilesToJSON "spdx-3-model/model"
-    BSL.writeFile "gh-pages/index.json" (encodePretty json)
+    json <- profilesToJSON inDir
+    BSL.writeFile (outDir </> "index.json") (encodePretty json)
     putStrLn "## end MarkdownToJSON"
     putStrLn "## start parse JSON"
     case fromJSON json :: (Result Spdx3Model) of 
         Error err -> fail err
         Success a -> do
             putStrLn "## show model"
-            writeFile "gh-pages/model.show" (show a)
+            writeFile (outDir </> "model.show") (show a)
             putStrLn "## start generate PUML"
-            writePumlsToDir "gh-pages" a
+            writePumlsToDir outDir a
 
-
-    -- putStrLn "start parsing"
-    -- spec <- parseSpecIO "spdx-3-model/model/Core/"
-    -- putStrLn "done parsing"
-
-    -- print spec
-
-    -- putStrLn "generate pumls"
-    -- specToPuml "gh-pages" spec
-
-    -- putStrLn "generate jsons"
-
-
+main :: IO ()
+main = getArgs >>= \case
+                        [] -> main' "spdx-3-model/model" "gh-pages"
+                        [inDir] -> main' inDir (inDir ++ "_out")
+                        [inDir, outDir] -> main' inDir outDir
+                        _ -> undefined
 

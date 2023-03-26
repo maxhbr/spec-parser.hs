@@ -5,6 +5,7 @@ module MyPrelude
 import           Control.Monad as X
 import           Data.Aeson as X
 import           Data.Aeson.Encode.Pretty as X
+import qualified Data.Aeson.Yaml as Y
 import           Data.Either as X (fromRight)
 import           Data.List as X (isInfixOf, isSuffixOf, nub)
 import           Data.Maybe as X (fromMaybe, fromJust, isJust)

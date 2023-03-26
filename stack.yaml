@@ -5,6 +5,9 @@ resolver:
 packages:
 - .
 
+extra-deps:
+- rdf4h-5.0.1@sha256:76ecd4aa6b536add8d7c6c13aedd3e028d492d0044f28dba9eb130cfed063fdc,6470
+
 nix:
   # enable: true
   packages: [plantuml,graphviz,zlib]

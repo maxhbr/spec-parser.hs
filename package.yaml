@@ -34,7 +34,9 @@ dependencies:
 - process
 - aeson
 - aeson-pretty
+- aeson-yaml
 - hslogger
+- rdf4h
 
 ghc-options:
 - -Wall

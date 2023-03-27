@@ -1,5 +1,16 @@
 @startuml
 ' vocabulary
+enum SensitivePersonalInformationType {
+<b>Summary</b>
+Categories of presence or absence
+<b>Description</b>
+This type is used to indicate if a given field is present or absent or
+unknown
+.. entries ..
+    no : Indicates absence of the field
+    noassertion : Describes no assertion. In other words, unknown.
+    yes : Indicates presence of the field
+}
 enum SafetyRiskAssessmentType {
 <b>Summary</b>
 Categories of safety risk impact of application ie. Serious, high,
@@ -16,17 +27,6 @@ Regulation
 No 765/2008.
     serious : The highest level of risk that is contained for a AI software as given
 by Article 20 of Regulation 765/2008/EC
-}
-enum SensitivePersonalInformationType {
-<b>Summary</b>
-Categories of presence or absence
-<b>Description</b>
-This type is used to indicate if a given field is present or absent or
-unknown
-.. entries ..
-    no : Indicates absence of the field
-    noassertion : Describes no assertion. In other words, unknown.
-    yes : Indicates presence of the field
 }
 ' classes
 together {
@@ -354,11 +354,13 @@ Element, and when and how it was created.
     comment : xsd:string [0..1]
     created : xsd:dateTime 
     createdBy : Entity [1..]
+    createdUsing : Tool [0..]
     dataLicense : xsd:string 
     profile : ProfileIdentifier [1..]
     specVersion : SemVer 
 }
 "Entity" <-[dashed,thickness=4]-- "CreationInformation::createdBy"
+"Tool" <-[dashed,thickness=4]-- "CreationInformation::createdUsing"
 "ProfileIdentifier" <-[dashed,thickness=4]-- "CreationInformation::profile"
 "SemVer" <-[dashed,thickness=4]-- "CreationInformation::specVersion"
 abstract Element {
@@ -383,7 +385,7 @@ all explicit and inter-relatable content objects.
     externalIdentifiers : ExternalIdentifier 
     externalReferences : ExternalReference 
     name : xsd:string [..1]
-    spdxId : anyURI [1..1]
+    spdxId : xsd:anyURI [1..1]
     summary : xsd:string [..1]
     verifiedUsing : IntegrityMethod 
 }
@@ -453,8 +455,8 @@ provenance, where to retrieve it, and how to verify its integrity.
     SubclassOf : none
     name : ExternalMap
 .. properties ..
-    externalId : anyURI [1..1]
-    locationHint : anyURI [..1]
+    externalId : xsd:anyURI [1..1]
+    locationHint : xsd:anyURI [..1]
     verifiedUsing : IntegrityMethod 
 }
 "IntegrityMethod" <-[dashed,thickness=4]-- "ExternalMap::verifiedUsing"
@@ -472,7 +474,7 @@ SPDX-3.0 content that provides additional characteristics of an Element.
     comment : xsd:string [..1]
     contentType : MediaType [..1]
     externalReferenceType : ExternalReferenceType [..1]
-    locator : anyURI 
+    locator : xsd:anyURI 
 }
 "MediaType" <-[dashed,thickness=4]-- "ExternalReference::contentType"
 "ExternalReferenceType" <-[dashed,thickness=4]-- "ExternalReference::externalReferenceType"
@@ -547,7 +549,7 @@ human-readable and smaller serialized representation of the Elements.
     Instantiability : Concrete
     name : NamespaceMap
 .. properties ..
-    namespace : anyURI [..1]
+    namespace : xsd:anyURI [..1]
     prefix : xsd:string [..1]
 }
 class Organization {
@@ -804,7 +806,7 @@ rather than xsd:string
     licenseText : xsd:string [1..1]
     name : xsd:string [1..1]
     obsoletedBy : xsd:string [0..1]
-    seeAlso : anyURI [0..1]
+    seeAlso : xsd:anyURI [0..1]
     standardLicenseHeader : xsd:string [0..1]
 }
 abstract LicenseException {
@@ -1085,7 +1087,7 @@ TODO This is about the File class.
     SubclassOf : Core:Artifact
     name : File
 .. properties ..
-    contentIdentifier : anyURI [0..1]
+    contentIdentifier : xsd:anyURI [0..1]
     contentType : MediaType [0..1]
     filePurpose : SoftwarePurpose [0..]
 }
@@ -1129,11 +1131,11 @@ Cardinality: Optional, zero or many.
     SubclassOf : Core:Artifact
     name : Package
 .. properties ..
-    contentIdentifier : anyURI [0..1]
-    downloadLocation : anyURI [0..1]
-    homePage : anyURI [0..1]
+    contentIdentifier : xsd:anyURI [0..1]
+    downloadLocation : xsd:anyURI [0..1]
+    homePage : xsd:anyURI [0..1]
     packagePurpose : SoftwarePurpose [0..]
-    packageUrl : anyURI [0..1]
+    packageUrl : xsd:anyURI [0..1]
     packageVersion : xsd:string [0..1]
 }
 "SoftwarePurpose" <-[dashed,thickness=4]-- "Package::packagePurpose"
@@ -1161,7 +1163,7 @@ TODO
     name : Snippet
 .. properties ..
     byteRange : positiveIntegerRange [0..1]
-    contentIdentifier : anyURI [0..1]
+    contentIdentifier : xsd:anyURI [0..1]
     lineRange : positiveIntegerRange [0..1]
     snippetPurpose : SoftwarePurpose [0..]
 }

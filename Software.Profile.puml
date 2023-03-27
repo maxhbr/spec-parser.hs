@@ -1,0 +1,183 @@
+@startuml
+' vocabulary
+enum DependencyLinkType {
+<b>Summary</b>
+TODO
+<b>Description</b>
+TODO
+.. entries ..
+    dynamic : TODOdescription
+    noAssertion : TODOdescription
+    other : TODOdescription
+    static : TODOdescription
+    tool : TODOdescription
+}
+enum DependencyRequirement {
+<b>Summary</b>
+TODO
+<b>Description</b>
+TODO
+.. entries ..
+    noAssertion : TODOdescription
+    optional : TODOdescription
+    preRequisite : TODOdescription
+    provided : TODOdescription
+    required : TODOdescription
+}
+enum DependencyScope {
+<b>Summary</b>
+TODO
+<b>Description</b>
+TODO
+.. entries ..
+    build : TODOdescription
+    dev : TODOdescription
+    noAssertion : TODOdescription
+    other : TODOdescription
+    runtime : TODOdescription
+    test : TODOdescription
+}
+enum SoftwarePurpose {
+<b>Summary</b>
+TODO
+<b>Description</b>
+TODO
+.. entries ..
+    application : TODOdescription
+    archive : TODOdescription
+    bom : TODOdescription
+    configuration : TODOdescription
+    container : TODOdescription
+    data : TODOdescription
+    device : TODOdescription
+    documentation : TODOdescription
+    executable : TODOdescription
+    file : TODOdescription
+    firmware : TODOdescription
+    framework : TODOdescription
+    install : TODOdescription
+    library : TODOdescription
+    module : TODOdescription
+    operatingSystem : TODOdescription
+    other : TODOdescription
+    patch : TODOdescription
+    source : TODOdescription
+}
+' classes
+together {
+class File {
+<b>Summary</b>
+MISSING
+<b>Description</b>
+TODO This is about the File class.
+.. metadata ..
+    SubclassOf : Core:Artifact
+    name : File
+.. properties ..
+    contentIdentifier : xsd:anyURI [0..1]
+    contentType : MediaType [0..1]
+    filePurpose : SoftwarePurpose [0..]
+}
+"MediaType" <-[dashed,thickness=4]-- "File::contentType"
+"SoftwarePurpose" <-[dashed,thickness=4]-- "File::filePurpose"
+class Package {
+<b>Summary</b>
+MISSING
+<b>Description</b>
+If SPDX information is being used to describe packages, then one
+instance of the package information per package being described shall
+exist. It provides important meta information about the package as a
+whole. Packages are an abstract concept that can be used to refer to any
+distribution of software, typically consisting of one or more files and
+capable of containing sub-packages. Starting with SPDX 2.0, it is not
+necessary to have a package wrapping a set of files.
+
+A package refers to any unit of content that can be associated with a
+distribution of software. Typically, a package is composed of one or
+more files. An SPDX document may, but is not required to, provide
+details about the individual files comprising a package (see File.md).
+
+Any of the following non-limiting examples may be (but are not required
+to be) represented in SPDX as a package:
+
+-   a tarball, zip file or other archive
+-   a directory or sub-directory
+-   a separately distributed piece of software which another Package or
+    File uses or depends upon (e.g., a Python package, a Go module, ...)
+-   a container image, and/or each image layer within a container image
+-   a collection of one or more sub-packages
+-   a Git repository snapshot from a particular point in time
+
+Note that some of these could be represented in SPDX as a file as well.
+
+In an SPDX document, relationship elements can be used to indicate
+relationships between packages, such as dependency relationships.
+
+Cardinality: Optional, zero or many.
+.. metadata ..
+    SubclassOf : Core:Artifact
+    name : Package
+.. properties ..
+    contentIdentifier : xsd:anyURI [0..1]
+    downloadLocation : xsd:anyURI [0..1]
+    homePage : xsd:anyURI [0..1]
+    packagePurpose : SoftwarePurpose [0..]
+    packageUrl : xsd:anyURI [0..1]
+    packageVersion : xsd:string [0..1]
+}
+"SoftwarePurpose" <-[dashed,thickness=4]-- "Package::packagePurpose"
+class Sbom {
+<b>Summary</b>
+MISSING
+<b>Description</b>
+A Software Bill of Materials (SBOM) is a container for a grouping of
+SPDX-3.0 content characterizing details about a software product. This
+could include details of the content and composition of the product,
+provenence details of the product and/or its composition, licensing
+information, known quality or security issues, etc.
+.. metadata ..
+    SubclassOf : Core:Bom
+    name : Sbom
+.. properties ..
+}
+class Snippet {
+<b>Summary</b>
+MISSING
+<b>Description</b>
+TODO
+.. metadata ..
+    SubclassOf : Core:Artifact
+    name : Snippet
+.. properties ..
+    byteRange : positiveIntegerRange [0..1]
+    contentIdentifier : xsd:anyURI [0..1]
+    lineRange : positiveIntegerRange [0..1]
+    snippetPurpose : SoftwarePurpose [0..]
+}
+"positiveIntegerRange" <-[dashed,thickness=4]-- "Snippet::byteRange"
+"positiveIntegerRange" <-[dashed,thickness=4]-- "Snippet::lineRange"
+"SoftwarePurpose" <-[dashed,thickness=4]-- "Snippet::snippetPurpose"
+class SoftwareDependencyRelationship {
+<b>Summary</b>
+MISSING
+<b>Description</b>
+TODO
+.. metadata ..
+    Instantiability : Concrete
+    SubclassOf : Core:Relationship
+    name : SoftwareDependencyRelationship
+.. properties ..
+    linkType : DependencyLinkType [1..1]
+    requirement : DependencyRequirement [1..1]
+    scope : DependencyScope [1..1]
+}
+"DependencyLinkType" <-[dashed,thickness=4]-- "SoftwareDependencyRelationship::linkType"
+"DependencyRequirement" <-[dashed,thickness=4]-- "SoftwareDependencyRelationship::requirement"
+"DependencyScope" <-[dashed,thickness=4]-- "SoftwareDependencyRelationship::scope"
+}
+"Artifact" <|-[thickness=4]--- "File" : Core:Artifact
+"Artifact" <|-[thickness=4]--- "Package" : Core:Artifact
+"Bom" <|-[thickness=4]--- "Sbom" : Core:Bom
+"Artifact" <|-[thickness=4]--- "Snippet" : Core:Artifact
+"Relationship" <|-[thickness=4]--- "SoftwareDependencyRelationship" : Core:Relationship
+@enduml

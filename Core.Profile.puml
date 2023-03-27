@@ -1,0 +1,577 @@
+@startuml
+' vocabulary
+enum AnnotationType {
+<b>Summary</b>
+Specifies the type of an annotation.
+<b>Description</b>
+AnnotationType specifies the type of an annotation.
+.. entries ..
+    other : Used to store extra information about an Element which is not part of a
+Review (e.g. extra information provided during the creation of the
+Element).
+    review : Used when someone reviews the Element.
+}
+enum ExternalIdentifierType {
+<b>Summary</b>
+Specifies the type of an external identifier.
+<b>Description</b>
+ExteralIdentifierType specifies the type of an external identifier.
+.. entries ..
+    cpe22 : https://cpe.mitre.org/files/cpe-specification\_2.2.pdf
+    cpe23 : https://nvlpubs.nist.gov/nistpubs/Legacy/IR/nistir7695.pdf
+    email : TODOdescription
+    gitoid : gitoid stands for Git Object ID. A gitoid of typeblob is a unique hash
+of a software artifact. Git relies on a Merkle Tree to index stored
+objects. See https://git-scm.com/book/en/v2/Git-Internals-Git-Objects.
+GitBOM is an amalgam of the terms "Git" and "SBOM". GitBOM is a
+minimalistic schema to describe software dependency graphs using a
+Merkle Tree, and is inspired by Git. A gitoid may refer to either the
+software artifact or its GitBOM document; this ambiguity exists because
+the GitBOM document is itself an artifact, and the gitoid of that
+artifact is its valid locator.
+    other : Used when the type doesn't match any of the other options.
+    pkgUrl : https://github.com/package-url/purl-spec
+    swhid : https://docs.softwareheritage.org/devel/swh-model/persistent-identifiers.html
+    swid : https://www.ietf.org/archive/id/draft-ietf-sacm-coswid-21.html#section-2.3
+    urlScheme : TODOdescription
+}
+enum ExternalReferenceType {
+<b>Summary</b>
+Specifies the type of an external reference.
+<b>Description</b>
+ExteralReferenceType specifies the type of an external reference.
+.. entries ..
+    altDownloadLocation : A reference to an alternative download location.
+    altWebPage : A reference to an alternative web page.
+    other : Used when the type doesn't match any of the other options.
+    securityAdvisory : A reference to the published security advisory (where advisory as
+defined per ISO 29147:2018). It may contain an impact statement whether
+a package (e.g. a product) is or is not affected by vulnerabilities.
+    securityFix : A reference to the source code with a fix for the vulnerability (e.g., a
+GitHub commit).
+    securityOther : Used when the reference is security related but doesn't match any of the
+other types.
+}
+enum HashAlgorithm {
+<b>Summary</b>
+A mathematical algorithm that maps data of arbitrary size to a bit
+string.
+<b>Description</b>
+A HashAlgorithm is a mathematical algorithm that maps data of arbitrary
+size to a bit string (the hash) and is a one-way function, that is, a
+function which is practically infeasible to invert.
+.. entries ..
+    blake2b256 : TODOdescription
+    blake2b384 : TODOdescription
+    blake2b512 : TODOdescription
+    blake3 : TODOdescription
+    md2 : TODOdescription
+    md4 : TODOdescription
+    md5 : TODOdescription
+    md6 : TODOdescription
+    other : TODOdescription
+    sha1 : TODOdescription
+    sha224 : TODOdescription
+    sha256 : TODOdescription
+    sha384 : TODOdescription
+    sha3_224 : TODOdescription
+    sha3_256 : TODOdescription
+    sha3_384 : TODOdescription
+    sha3_512 : TODOdescription
+    sha512 : TODOdescription
+    spdxPvcSha1 : TODOdescription
+    spdxPvcSha256 : TODOdescription
+}
+enum RelationshipCompleteness {
+<b>Summary</b>
+Indicates whether a relationship is complete or known to be incomplete
+or if there is made no assertion either way.
+<b>Description</b>
+RelationshipCompleteness indicates whether a relationship is complete or
+known to be incomplete or if there is made no assertion either way.
+.. entries ..
+    complete : The relationship is known to be exhaustive.
+    incomplete : The relationship is known not to be exhaustive.
+    unknown : There can be made no assertion about the completeness of the
+relationship.
+}
+enum RelationshipType {
+<b>Summary</b>
+Information about the relationship between two Elements.
+<b>Description</b>
+Provides information about the relationship between two Elements. For
+example, you can represent a relationship between two different Files,
+between a Package and a File, between two Packages, or between one
+SPDXDocument and another SPDXDocument.
+
+Build Profile specific RelationshipType descriptions can be found
+[here](https://github.com/spdx/spdx-3-build-profile/blob/main/model/relationships.md)
+.. entries ..
+    amends : TODOdescription
+    ancestor : TODOdescription
+    buildChildOf : Build instance that was created from another build instance
+    buildConfigOf : Build configuration of the build instance
+    buildDependency : TODOdescription
+    buildHostOf : Element in which the build instance runs on
+    buildInputOf : Input to the build instance
+    buildInvokedBy : Agent that invoked the build
+    buildOnBehalfOf : Person for which buildInvokedBy is acting on behalf of
+    buildOutputOf : Output of the build instance
+    buildTool : TODOdescription
+    buildToolOf : Build tool used in the build instance
+    contains : TODOdescription
+    copy : TODOdescription
+    dataFile : TODOdescription
+    dependencyManifest : TODOdescription
+    dependsOn : TODOdescription
+    descendant : TODOdescription
+    describes : TODOdescription
+    devDependency : TODOdescription
+    devTool : TODOdescription
+    distributionArtifact : TODOdescription
+    documentation : TODOdescription
+    dynamicLink : TODOdescription
+    example : TODOdescription
+    expandedFromArchive : TODOdescription
+    fileAdded : TODOdescription
+    fileDeleted : TODOdescription
+    fileModified : TODOdescription
+    generates : TODOdescription
+    metafile : TODOdescription
+    optionalComponent : TODOdescription
+    optionalDependency : TODOdescription
+    other : TODOdescription
+    packages : TODOdescription
+    patch : TODOdescription
+    prerequisite : TODOdescription
+    providedDependency : TODOdescription
+    requirementFor : TODOdescription
+    runtimeDependency : TODOdescription
+    specificationFor : TODOdescription
+    staticLink : TODOdescription
+    suppliedBy : TODOdescription
+    test : TODOdescription
+    testCase : TODOdescription
+    testDependency : TODOdescription
+    testTool : TODOdescription
+    variant : TODOdescription
+}
+' classes
+together {
+class Annotation {
+<b>Summary</b>
+An assertion made in relation to one or more elements.
+<b>Description</b>
+An Annotation is an assertion made in relation to one or more elements.
+.. metadata ..
+    Instantiability : Concrete
+    SubclassOf : Element
+    name : Annotation
+.. properties ..
+    annotationType : AnnotationType [1..1]
+    contentType : MediaType 
+    statement : xsd:string [0..1]
+    subject : Element [1..1]
+}
+"AnnotationType" <-[dashed,thickness=4]-- "Annotation::annotationType"
+"MediaType" <-[dashed,thickness=4]-- "Annotation::contentType"
+"Element" <-[dashed,thickness=4]-- "Annotation::subject"
+class AnonymousPayload {
+<b>Summary</b>
+TODO
+<b>Description</b>
+TODO
+.. metadata ..
+    Instantiability : Concrete
+    SubclassOf : Payload
+    name : AnonymousPayload
+.. properties ..
+    creationInfo : CreationInformation [0..1]
+    imports : ExternalMap 
+    namespaces : NamespaceMap 
+}
+"CreationInformation" <-[dashed,thickness=4]-- "AnonymousPayload::creationInfo"
+"ExternalMap" <-[dashed,thickness=4]-- "AnonymousPayload::imports"
+"NamespaceMap" <-[dashed,thickness=4]-- "AnonymousPayload::namespaces"
+abstract Artifact {
+<b>Summary</b>
+A distinct article or unit within the digital domain.
+<b>Description</b>
+An artifact is a distinct article or unit within the digital domain,
+such as an electronic file, a software package, a device or an element
+of data.
+.. metadata ..
+    Instantiability : Abstract
+    SubclassOf : Element
+    name : Artifact
+.. properties ..
+    originatedBy : Identity [0..]
+}
+"Identity" <-[dashed,thickness=4]-- "Artifact::originatedBy"
+class Bom {
+<b>Summary</b>
+A container for a grouping of SPDX-3.0 content characterizing details
+(provenence, composition, licensing, etc.) about a product.
+<b>Description</b>
+A Bill Of Materials (BOM) is a container for a grouping of SPDX-3.0
+content characterizing details about a product. This could include
+details of the content and composition of the product, provenence
+details of the product and/or its composition, licensing information,
+known quality or security issues, etc.
+.. metadata ..
+    Instantiability : Concrete
+    SubclassOf : Bundle
+    name : Bom
+.. properties ..
+}
+class Bundle {
+<b>Summary</b>
+A collection of Elements that have a shared context.
+<b>Description</b>
+A bundle is a collection of Elements that have a shared context.
+.. metadata ..
+    Instantiability : Concrete
+    SubclassOf : ElementCollection
+    name : Bundle
+.. properties ..
+    context : xsd:string [..1]
+}
+class CreationInformation {
+<b>Summary</b>
+Provides information about the creation of the Element.
+<b>Description</b>
+The CreationInformation provides information about who created the
+Element, and when and how it was created.
+.. metadata ..
+    Instantiability : Concrete
+    name : CreationInformation
+.. properties ..
+    comment : xsd:string [0..1]
+    created : xsd:dateTime 
+    createdBy : Entity [1..]
+    createdUsing : Tool [0..]
+    dataLicense : xsd:string 
+    profile : ProfileIdentifier [1..]
+    specVersion : SemVer 
+}
+"Entity" <-[dashed,thickness=4]-- "CreationInformation::createdBy"
+"Tool" <-[dashed,thickness=4]-- "CreationInformation::createdUsing"
+"ProfileIdentifier" <-[dashed,thickness=4]-- "CreationInformation::profile"
+"SemVer" <-[dashed,thickness=4]-- "CreationInformation::specVersion"
+abstract Element {
+<b>Summary</b>
+Base domain class from which all other SPDX-3.0 domain classes derive.
+<b>Description</b>
+An Element is a representation of a fundamental concept either directly
+inherent to the Bill of Materials (BOM) domain or indirectly related to
+the BOM domain and necessary for contextually characterizing BOM
+concepts and relationships. Within SPDX-3.0 structure this is the base
+class acting as a consistent, unifying, and interoperable foundation for
+all explicit and inter-relatable content objects.
+.. metadata ..
+    Instantiability : Abstract
+    SubclassOf : Payload
+    name : Element
+.. properties ..
+    comment : xsd:string [..1]
+    creationInfo : CreationInformation [1..1]
+    description : xsd:string [..1]
+    extensions : Extension 
+    externalIdentifiers : ExternalIdentifier 
+    externalReferences : ExternalReference 
+    name : xsd:string [..1]
+    spdxId : xsd:anyURI [1..1]
+    summary : xsd:string [..1]
+    verifiedUsing : IntegrityMethod 
+}
+"CreationInformation" <-[dashed,thickness=4]-- "Element::creationInfo"
+"Extension" <-[dashed,thickness=4]-- "Element::extensions"
+"ExternalIdentifier" <-[dashed,thickness=4]-- "Element::externalIdentifiers"
+"ExternalReference" <-[dashed,thickness=4]-- "Element::externalReferences"
+"IntegrityMethod" <-[dashed,thickness=4]-- "Element::verifiedUsing"
+abstract ElementCollection {
+<b>Summary</b>
+A collection of Elements, not necessarily with unifying context.
+<b>Description</b>
+An SpdxCollection is a collection of Elements, not necessarily with
+unifying context.
+.. metadata ..
+    Instantiability : Abstract
+    SubclassOf : Element
+    name : ElementCollection
+.. properties ..
+    element : Element [1..]
+    imports : ExternalMap 
+    namespaces : NamespaceMap 
+    rootElement : Element [1..]
+}
+"Element" <-[dashed,thickness=4]-- "ElementCollection::element"
+"ExternalMap" <-[dashed,thickness=4]-- "ElementCollection::imports"
+"NamespaceMap" <-[dashed,thickness=4]-- "ElementCollection::namespaces"
+"Element" <-[dashed,thickness=4]-- "ElementCollection::rootElement"
+class Entity {
+<b>Summary</b>
+TODO
+<b>Description</b>
+TODO
+.. metadata ..
+    Instantiability : Concrete
+    SubclassOf : Element
+    name : Entity
+.. properties ..
+}
+class ExternalIdentifier {
+<b>Summary</b>
+A reference to a resource outside the scope of SPDX-3.0 content that
+uniquely identifies an Element.
+<b>Description</b>
+An ExternalIdentifier is a reference to a resource outside the scope of
+SPDX-3.0 content that uniquely identifies an Element.
+.. metadata ..
+    Instantiability : Concrete
+    name : ExternalIdentifier
+.. properties ..
+    comment : xsd:string [0..1]
+    externalIdentifierType : ExternalIdentifierType [1..1]
+    identifier : xsd:string [1..1]
+}
+"ExternalIdentifierType" <-[dashed,thickness=4]-- "ExternalIdentifier::externalIdentifierType"
+class ExternalMap {
+<b>Summary</b>
+A map of Element identifiers that are used within a Document but defined
+external to that Document.
+<b>Description</b>
+An External Map is a map of Element identifiers that are used within a
+Document but defined external to that Document. The external map
+provides details about the externally-defined Element such as its
+provenance, where to retrieve it, and how to verify its integrity.
+.. metadata ..
+    Instantiability : Concrete
+    SubclassOf : none
+    name : ExternalMap
+.. properties ..
+    externalId : xsd:anyURI [1..1]
+    locationHint : xsd:anyURI [..1]
+    verifiedUsing : IntegrityMethod 
+}
+"IntegrityMethod" <-[dashed,thickness=4]-- "ExternalMap::verifiedUsing"
+class ExternalReference {
+<b>Summary</b>
+A reference to a resource outside the scope of SPDX-3.0 content.
+<b>Description</b>
+An External Reference points to a resource outside the scope of the
+SPDX-3.0 content that provides additional characteristics of an Element.
+.. metadata ..
+    Instantiability : Concrete
+    SubclassOf : none
+    name : ExternalReference
+.. properties ..
+    comment : xsd:string [..1]
+    contentType : MediaType [..1]
+    externalReferenceType : ExternalReferenceType [..1]
+    locator : xsd:anyURI 
+}
+"MediaType" <-[dashed,thickness=4]-- "ExternalReference::contentType"
+"ExternalReferenceType" <-[dashed,thickness=4]-- "ExternalReference::externalReferenceType"
+class Hash {
+<b>Summary</b>
+A mathematically calculated representation of a grouping of data.
+<b>Description</b>
+A hash is a grouping of characteristics unique to the result of applying
+a mathematical algorithm that maps data of arbitrary size to a bit
+string (the hash) and is a one-way function, that is, a function which
+is practically infeasible to invert. This is commonly used for integrity
+checking of data.
+.. metadata ..
+    SubclassOf : IntegrityMethod
+    name : Hash
+.. properties ..
+    algorithm : HashAlgorithm [1..1]
+    hashValue : xsd:string [1..1]
+}
+"HashAlgorithm" <-[dashed,thickness=4]-- "Hash::algorithm"
+class Identity {
+<b>Summary</b>
+An individual or organization.
+<b>Description</b>
+An Identity is a grouping of identifying characteristics unique to an
+individual or organization.
+.. metadata ..
+    Instantiability : Concrete
+    SubclassOf : Entity
+    name : Identity
+.. properties ..
+}
+abstract IntegrityMethod {
+<b>Summary</b>
+Provides an independently reproducible mechanism that permits
+identification of a specific Element.
+<b>Description</b>
+An IntegrityMethod provides an independently reproducible mechanism that
+permits identification of a specific Element that correlates to the data
+in this SPDX document. This identifier enables a recipient to determine
+if anything in the original Element has been changed and eliminates
+confusion over which version or modification of a specific Element is
+referenced.
+.. metadata ..
+    Instantiability : Abstract
+    name : IntegrityMethod
+.. properties ..
+    comment : xsd:string [..1]
+}
+class MediaType {
+<b>Summary</b>
+Standardized way of indicating the type of content of an Element. A
+String constrained to the RFC 2046 specification.
+<b>Description</b>
+The MediaType is a String constrained to the RFC 2046 specification. It
+provides a standardized way of indicating the type of content of an
+Element. A list of all possible media types is available at
+https://www.iana.org/assignments/media-types/media-types.xhtml.
+.. metadata ..
+    SubclassOf : xsd:string
+    name : MediaType
+.. properties ..
+}
+class NamespaceMap {
+<b>Summary</b>
+A mapping between prefixes and namespace URIs.
+<b>Description</b>
+A namespace map allows the creator of a collection of Elements to use
+shorter identifiers ("prefixes") instead of URIs to provide a more
+human-readable and smaller serialized representation of the Elements.
+.. metadata ..
+    Instantiability : Concrete
+    name : NamespaceMap
+.. properties ..
+    namespace : xsd:anyURI [..1]
+    prefix : xsd:string [..1]
+}
+class Organization {
+<b>Summary</b>
+A group of people who work together in an organized way for a shared
+purpose.
+<b>Description</b>
+An Organization is a group of people who work together in an organized
+way for a shared purpose.
+.. metadata ..
+    Instantiability : Concrete
+    SubclassOf : Identity
+    name : Organization
+.. properties ..
+}
+abstract Payload {
+<b>Summary</b>
+TODO
+<b>Description</b>
+TODO
+.. metadata ..
+    Instantiability : Abstract
+    SubclassOf : none
+    name : Payload
+.. properties ..
+    creationInfo : CreationInformation [0..1]
+    imports : ExternalMap 
+    namespaces : NamespaceMap 
+}
+"CreationInformation" <-[dashed,thickness=4]-- "Payload::creationInfo"
+"ExternalMap" <-[dashed,thickness=4]-- "Payload::imports"
+"NamespaceMap" <-[dashed,thickness=4]-- "Payload::namespaces"
+class Person {
+<b>Summary</b>
+An individual human being.
+<b>Description</b>
+A Person is an individual human being.
+.. metadata ..
+    Instantiability : Concrete
+    SubclassOf : Identity
+    name : Person
+.. properties ..
+}
+class ProfileIdentifier {
+<b>Summary</b>
+Provides the profile that the Element is specified in.
+<b>Description</b>
+A profile identifier provides the profile that the Element is specified
+in.
+.. metadata ..
+    SubclassOf : xsd:string
+    name : ProfileIdentifier
+.. properties ..
+}
+class Relationship {
+<b>Summary</b>
+Describes a relationship between one or more elements.
+<b>Description</b>
+A Relationship is a grouping of characteristics unique to an assertion
+that one Element is related to one or more other Elements in some way.
+.. metadata ..
+    Instantiability : Concrete
+    SubclassOf : Element
+    name : Relationship
+.. properties ..
+    completeness : RelationshipCompleteness [0..1]
+    from : Element [1..1]
+    relationshipType : RelationshipType [..1]
+    to : Element [1..]
+}
+"RelationshipCompleteness" <-[dashed,thickness=4]-- "Relationship::completeness"
+"Element" <-[dashed,thickness=4]-- "Relationship::from"
+"RelationshipType" <-[dashed,thickness=4]-- "Relationship::relationshipType"
+"Element" <-[dashed,thickness=4]-- "Relationship::to"
+class SemVer {
+<b>Summary</b>
+A String constrained to the SemVer 2.0.0 specification.
+<b>Description</b>
+The semantic version is a String constrained to the SemVer 2.0.0
+specification.
+.. metadata ..
+    SubclassOf : xsd:string
+    name : SemVer
+.. properties ..
+}
+class SpdxDocument {
+<b>Summary</b>
+Assembles a collection of Elements under a common string, the name of
+the document.
+<b>Description</b>
+An SpdxDocument assembles a collection of Elements under a common
+string, the name of the document. Commonly used when representing a unit
+of transfer of SPDX Elements.
+.. metadata ..
+    Instantiability : Concrete
+    SubclassOf : Bundle
+    name : SpdxDocument
+.. properties ..
+    name : xsd:string [1..1]
+}
+class Tool {
+<b>Summary</b>
+An element of hardware and/or software utilized to carry out a
+particular function.
+<b>Description</b>
+A Tool is an element of hardware and/or software utilized to carry out a
+particular function.
+.. metadata ..
+    Instantiability : Concrete
+    SubclassOf : Entity
+    name : Tool
+.. properties ..
+}
+}
+"Element" <|-[thickness=4]- "Annotation"
+"Payload" <|-[thickness=4]- "AnonymousPayload"
+"Element" <|-[thickness=4]- "Artifact"
+"Bundle" <|-[thickness=4]- "Bom"
+"ElementCollection" <|-[thickness=4]- "Bundle"
+"Payload" <|-[thickness=4]- "Element"
+"Element" <|-[thickness=4]- "ElementCollection"
+"Element" <|-[thickness=4]- "Entity"
+"IntegrityMethod" <|-[thickness=4]- "Hash"
+"Entity" <|-[thickness=4]- "Identity"
+"Identity" <|-[thickness=4]- "Organization"
+"Identity" <|-[thickness=4]- "Person"
+"Element" <|-[thickness=4]- "Relationship"
+"Bundle" <|-[thickness=4]- "SpdxDocument"
+"Entity" <|-[thickness=4]- "Tool"
+@enduml

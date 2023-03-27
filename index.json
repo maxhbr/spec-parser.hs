@@ -231,6 +231,19 @@
         },
         "Summary": "Additional metadata based on software profile, that is useful for ai\napplications and models.",
         "Vocabularies": {
+            "PresenceType": {
+                "Description": "This type is used to indicate if a given field is present or absent or\nunknown",
+                "Entries": {
+                    "no": "Indicates absence of the field",
+                    "noassertion": "Describes no assertion. In other words, unknown.",
+                    "yes": "Indicates presence of the field"
+                },
+                "Metadata": {
+                    "name": "SensitivePersonalInformationType"
+                },
+                "Summary": "Categories of presence or absence",
+                "_title": "PresenceType"
+            },
             "SafetyRiskAssessmentType": {
                 "Description": "Describes the different safety risk type values that can be used to\ndescribe the safety risk of the AI software",
                 "Entries": {
@@ -244,19 +257,6 @@
                 },
                 "Summary": "Categories of safety risk impact of application ie. Serious, high,\nmedium low",
                 "_title": "SafetyRiskAssessmentType"
-            },
-            "SensitivePersonalInformationType": {
-                "Description": "This type is used to indicate if a given field is present or absent or\nunknown",
-                "Entries": {
-                    "no": "Indicates absence of the field",
-                    "noassertion": "Describes no assertion. In other words, unknown.",
-                    "yes": "Indicates presence of the field"
-                },
-                "Metadata": {
-                    "name": "SensitivePersonalInformationType"
-                },
-                "Summary": "Categories of presence or absence",
-                "_title": "SensitivePersonalInformationType"
             }
         },
         "_title": "AI Profile"
@@ -544,6 +544,10 @@
                         "minCount": "1",
                         "type": "Entity"
                     },
+                    "createdUsing": {
+                        "minCount": "0",
+                        "type": "Tool"
+                    },
                     "dataLicense": {
                         "type": "xsd:string"
                     },
@@ -595,7 +599,7 @@
                     "spdxId": {
                         "maxCount": "1",
                         "minCount": "1",
-                        "type": "anyURI"
+                        "type": "xsd:anyURI"
                     },
                     "summary": {
                         "maxCount": "1",
@@ -682,11 +686,11 @@
                     "externalId": {
                         "maxCount": "1",
                         "minCount": "1",
-                        "type": "anyURI"
+                        "type": "xsd:anyURI"
                     },
                     "locationHint": {
                         "maxCount": "1",
-                        "type": "anyURI"
+                        "type": "xsd:anyURI"
                     },
                     "verifiedUsing": {
                         "type": "IntegrityMethod"
@@ -716,7 +720,7 @@
                         "type": "ExternalReferenceType"
                     },
                     "locator": {
-                        "type": "anyURI"
+                        "type": "xsd:anyURI"
                     }
                 },
                 "Summary": "A reference to a resource outside the scope of SPDX-3.0 content.",
@@ -788,7 +792,7 @@
                 "Properties": {
                     "namespace": {
                         "maxCount": "1",
-                        "type": "anyURI"
+                        "type": "xsd:anyURI"
                     },
                     "prefix": {
                         "maxCount": "1",
@@ -1008,6 +1012,16 @@
                 "Summary": "Identifies who or what created the Element.",
                 "_title": "createdBy"
             },
+            "createdUsing": {
+                "Description": "CreatedUsing identifies the tooling that was used during the creation of\nthe Element. The generation method will assist the recipient of the\nElement in assessing the general reliability/accuracy of the analysis\ninformation.",
+                "Metadata": {
+                    "Nature": "ObjectProperty",
+                    "Range": "Tool",
+                    "name": "createdUsing"
+                },
+                "Summary": "Identifies the tooling that was used during the creation of the Element.",
+                "_title": "createdUsing"
+            },
             "creationInfo": {
                 "Description": "CreationInfo provides information about the creation of the Element.",
                 "Metadata": {
@@ -1029,13 +1043,13 @@
                 "_title": "dataLicense"
             },
             "description": {
-                "Description": "A description is TODO",
+                "Description": "This field is a detailed description of the Element. It may also be\nextracted from the Element itself. The intent is to provide recipients\nof the SPDX file with a detailed technical explanation of the\nfunctionality, anticipated use, and anticipated implementation of the\nElement. This field may also include a description of improvements over\nprior versions of the Element.",
                 "Metadata": {
                     "Nature": "DataProperty",
                     "Range": "xsd:string",
                     "name": "description"
                 },
-                "Summary": "TODO",
+                "Summary": "Provides a detailed description of the Element.",
                 "_title": "description"
             },
             "element": {
@@ -1060,7 +1074,7 @@
                 "Description": "ExternalId identifies an external Element used within a Document but\ndefined external to that Document.",
                 "Metadata": {
                     "Nature": "DataProperty",
-                    "Range": "anyURI",
+                    "Range": "xsd:anyURI",
                     "name": "externalId"
                 },
                 "Summary": "Identifies an external Element used within a Document but defined\nexternal to that Document.",
@@ -1140,7 +1154,7 @@
                 "Description": "A locationHint provides an indication of where to retrieve an external\nElement.",
                 "Metadata": {
                     "Nature": "DataProperty",
-                    "Range": "anyURI",
+                    "Range": "xsd:anyURI",
                     "name": "locationHint"
                 },
                 "Summary": "Provides an indication of where to retrieve an external Element.",
@@ -1150,27 +1164,27 @@
                 "Description": "A locator provides the location of an external reference.",
                 "Metadata": {
                     "Nature": "DataProperty",
-                    "Range": "anyURI",
+                    "Range": "xsd:anyURI",
                     "name": "locator"
                 },
                 "Summary": "Provides the location of an external reference.",
                 "_title": "locator"
             },
             "name": {
-                "Description": "A name is TODO",
+                "Description": "This field identifies the name of an Element as designated by the\ncreator. The name of an Element is an important convention and easier to\nrefer to than the URI.",
                 "Metadata": {
                     "Nature": "DataProperty",
                     "Range": "xsd:string",
                     "name": "name"
                 },
-                "Summary": "TODO",
+                "Summary": "Identifies the name of an Element as designated by the creator.",
                 "_title": "name"
             },
             "namespace": {
                 "Description": "A namespace provides an unambiguous mechanism for other documents to\nreference Elements within this document.",
                 "Metadata": {
                     "Nature": "DataProperty",
-                    "Range": "anyURI",
+                    "Range": "xsd:anyURI",
                     "name": "namespace"
                 },
                 "Summary": "Provides an unambiguous mechanism for other documents to reference\nElements within this document.",
@@ -1187,13 +1201,13 @@
                 "_title": "namespaces"
             },
             "originatedBy": {
-                "Description": "A originatedBy is TODO",
+                "Description": "OriginatedBy identifies from where or whom the Element originally came.",
                 "Metadata": {
                     "Nature": "ObjectProperty",
                     "Range": "Identity",
                     "name": "originatedBy"
                 },
-                "Summary": "TODO",
+                "Summary": "Identifies from where or whom the Element originally came.",
                 "_title": "originatedBy"
             },
             "prefix": {
@@ -1237,13 +1251,13 @@
                 "_title": "rootElement"
             },
             "spdxId": {
-                "Description": "A spdxId is TODO",
+                "Description": "SpdxId uniquely identifies an Element which may thereby be referenced by\nother Elements. These references may be internal or external. While\nthere may be several versions of the same Element, each one needs to be\nable to be referred to uniquely so that relationships between Elements\ncan be clearly articulated.",
                 "Metadata": {
                     "Nature": "DataProperty",
-                    "Range": "anyURI",
+                    "Range": "xsd:anyURI",
                     "name": "spdxId"
                 },
-                "Summary": "TODO",
+                "Summary": "Identifies an Element to be referenced by other Elements.",
                 "_title": "spdxId"
             },
             "specVersion": {
@@ -1277,13 +1291,13 @@
                 "_title": "subject"
             },
             "summary": {
-                "Description": "A summary is TODO",
+                "Description": "A summary is a short description of an Element. Here, the intent is to\nallow the Element creator to provide concise information about the\nfunction or use of the Element.",
                 "Metadata": {
                     "Nature": "DataProperty",
                     "Range": "xsd:string",
                     "name": "summary"
                 },
-                "Summary": "TODO",
+                "Summary": "A short description of an Element.",
                 "_title": "summary"
             },
             "to": {
@@ -1599,7 +1613,7 @@
                     "seeAlso": {
                         "maxCount": "1",
                         "minCount": "0",
-                        "type": "anyURI"
+                        "type": "xsd:anyURI"
                     },
                     "standardLicenseHeader": {
                         "maxCount": "1",
@@ -1819,7 +1833,7 @@
                     "contentIdentifier": {
                         "maxCount": "1",
                         "minCount": "0",
-                        "type": "anyURI"
+                        "type": "xsd:anyURI"
                     },
                     "contentType": {
                         "maxCount": "1",
@@ -1843,17 +1857,17 @@
                     "contentIdentifier": {
                         "maxCount": "1",
                         "minCount": "0",
-                        "type": "anyURI"
+                        "type": "xsd:anyURI"
                     },
                     "downloadLocation": {
                         "maxCount": "1",
                         "minCount": "0",
-                        "type": "anyURI"
+                        "type": "xsd:anyURI"
                     },
                     "homePage": {
                         "maxCount": "1",
                         "minCount": "0",
-                        "type": "anyURI"
+                        "type": "xsd:anyURI"
                     },
                     "packagePurpose": {
                         "minCount": "0",
@@ -1862,7 +1876,7 @@
                     "packageUrl": {
                         "maxCount": "1",
                         "minCount": "0",
-                        "type": "anyURI"
+                        "type": "xsd:anyURI"
                     },
                     "packageVersion": {
                         "maxCount": "1",
@@ -1896,7 +1910,7 @@
                     "contentIdentifier": {
                         "maxCount": "1",
                         "minCount": "0",
-                        "type": "anyURI"
+                        "type": "xsd:anyURI"
                     },
                     "lineRange": {
                         "maxCount": "1",
@@ -1957,7 +1971,7 @@
                 "Description": "A contentIdentifier is TODO",
                 "Metadata": {
                     "Nature": "DataProperty",
-                    "Range": "anyURI",
+                    "Range": "xsd:anyURI",
                     "name": "contentIdentifier"
                 },
                 "Summary": "TODO",
@@ -1977,7 +1991,7 @@
                 "Description": "A downloadLocation is TODO",
                 "Metadata": {
                     "Nature": "DataProperty",
-                    "Range": "anyURI",
+                    "Range": "xsd:anyURI",
                     "name": "downloadLocation"
                 },
                 "Summary": "TODO",
@@ -1997,7 +2011,7 @@
                 "Description": "A homePage is TODO",
                 "Metadata": {
                     "Nature": "DataProperty",
-                    "Range": "anyURI",
+                    "Range": "xsd:anyURI",
                     "name": "homePage"
                 },
                 "Summary": "TODO",
@@ -2027,7 +2041,7 @@
                 "Description": "A packageUrl is TODO",
                 "Metadata": {
                     "Nature": "DataProperty",
-                    "Range": "anyURI",
+                    "Range": "xsd:anyURI",
                     "name": "packageUrl"
                 },
                 "Summary": "TODO",

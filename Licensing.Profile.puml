@@ -1,0 +1,365 @@
+@startuml
+' vocabulary
+' classes
+together {
+class ConjunctiveLicenseSet {
+<b>Summary</b>
+Portion of a LicenseExpression representing a set of licensing
+information where all elements apply.
+<b>Description</b>
+A ConjunctiveLicenseSet indicates that *each* of its subsidiary
+LicenseExpressions apply. In other words, a ConjunctiveLicenseSet of two
+or more licenses represents a licensing situation where *all* of the
+specified licenses are to be complied with. It is represented in the
+SPDX License Expression Syntax by the `AND` operator.
+
+It is syntactically correct to specify a ConjunctiveLicenseSet where the
+subsidiary LicenseExpressions may be "incompatible" according to a
+particular interpretation of the corresponding Licenses. The SPDX
+License Expression Syntax does not take into account interpretation of
+license texts, which is left to the consumer of SPDX data to determine
+for themselves.
+.. metadata ..
+    Instantiability : Concrete
+    SubclassOf : LicenseExpression
+    name : ConjunctiveLicenseSet
+.. properties ..
+    child : LicenseExpression [2..]
+}
+"LicenseExpression" <-[dashed,thickness=4]-- "ConjunctiveLicenseSet::child"
+class CopyrightText {
+<b>Summary</b>
+Concrete class representing copyright text that has actually been found.
+<b>Description</b>
+A CopyrightText is the primary value that is used by a copyrightText
+field that indicates copyright text being found, i.e. with a value other
+than NONE or NOASSERTION.
+.. metadata ..
+    Instantiability : Concrete
+    SubclassOf : CopyrightTextField
+    name : CopyrightText
+.. properties ..
+    text : xsd:string [1..1]
+}
+abstract CopyrightTextField {
+<b>Summary</b>
+Base abstract class used for the copyrightText field that can take a
+value of either a text value (via CopyrightText), NOASSERTION, or NONE.
+<b>Description</b>
+A CopyrightTextField is the primary value that is used by a copyright
+text field for a software Package, File or Snippet. It represents either
+actual text (represented via a concrete CopyrightText), or the values
+NOASSERTION or NONE.
+
+**FIXME** The specific meanings of NOASSERTION or NONE are defined in
+the copyrightText property description. (**INCORRECT** - change to
+NoAssertionText or NoneText)
+.. metadata ..
+    Instantiability : Abstract
+    SubclassOf : none
+    name : CopyrightTextField
+.. properties ..
+}
+class CustomLicense {
+<b>Summary</b>
+A license that is not listed on the SPDX License List.
+<b>Description</b>
+A CustomLicense represents a License that is not listed on the SPDX
+License List at https://spdx.org/licenses, and is therefore defined by
+an SPDX data creator.
+
+**TBD** whether to define the meaning and purpose for each of the
+properties
+
+**TBD** how to indicate that the License ID must have the prefix
+"LicenseRef-"
+.. metadata ..
+    Instantiability : Concrete
+    SubclassOf : License
+    name : CustomLicense
+.. properties ..
+}
+class CustomLicenseException {
+<b>Summary</b>
+**TBD** Not to be completed until the Change Proposal at
+https://github.com/spdx/change-proposal/issues/4 is decided upon. Should
+be treated as unconfirmed since this class and its name or meaning is
+subject to change.
+<b>Description</b>
+MISSING
+.. metadata ..
+    Instantiability : Concrete
+    SubclassOf : LicenseException
+    name : CustomLicenseException
+.. properties ..
+}
+class DisjunctiveLicenseSet {
+<b>Summary</b>
+Portion of a LicenseExpression representing a set of licensing
+information where only any one of the elements applies.
+<b>Description</b>
+A DisjunctiveLicenseSet indicates that *only one* of its subsidiary
+LicenseExpressions is required to apply. In other words, a
+DisjunctiveLicenseSet of two or more licenses represents a licensing
+situation where *only one* of the specified licenses are to be complied
+with. A consumer of SPDX data would typically understand this to permit
+the recipient of the licensed content to choose which of the
+corresponding license they would prefer to use. It is represented in the
+SPDX License Expression Syntax by the `OR` operator.
+.. metadata ..
+    Instantiability : Concrete
+    SubclassOf : LicenseExpression
+    name : DisjunctiveLicenseSet
+.. properties ..
+    child : LicenseExpression [2..]
+}
+"LicenseExpression" <-[dashed,thickness=4]-- "DisjunctiveLicenseSet::child"
+abstract License {
+<b>Summary</b>
+Abstract class for the portion of a LicenseExpression representing a
+license.
+<b>Description</b>
+A License represents a license text, whether listed on the SPDX License
+List (ListedLicense) or defined by an SPDX data creator (CustomLicense).
+
+**TBD** whether to define the meaning and purpose for each of the
+properties
+
+**TBD** whether licenseID should be a separately defined property,
+rather than xsd:string
+.. metadata ..
+    Instantiability : Abstract
+    SubclassOf : LicenseExpression
+    name : License
+.. properties ..
+    comment : xsd:string [0..1]
+    example : xsd:string [0..1]
+    isDeprecatedLicenseId : xsd:boolean [0..1]
+    isFsfLibre : xsd:boolean [0..1]
+    isOsiApproved : xsd:boolean [0..1]
+    licenseId : xsd:string [1..1]
+    licenseText : xsd:string [1..1]
+    name : xsd:string [1..1]
+    obsoletedBy : xsd:string [0..1]
+    seeAlso : xsd:anyURI [0..1]
+    standardLicenseHeader : xsd:string [0..1]
+}
+abstract LicenseException {
+<b>Summary</b>
+**TBD** Not to be completed until the Change Proposal at
+https://github.com/spdx/change-proposal/issues/4 is decided upon. Should
+be treated as unconfirmed since this class and its name or meaning is
+subject to change.
+<b>Description</b>
+MISSING
+.. metadata ..
+    Instantiability : Abstract
+    SubclassOf : none
+    name : LicenseException
+.. properties ..
+}
+abstract LicenseExpression {
+<b>Summary</b>
+Abstract class representing a license expression consisting of one or
+more licenses (optionally including exceptions), which may be combined
+according to the SPDX license expression syntax.
+<b>Description</b>
+A LicenseExpression is used by a licensing field for a software package,
+file or snippet when its value is not NOASSERTION or NONE. It can be a
+single license (either on the SPDX License List or a custom-defined
+license); a single license with an "or later" operator applied; the
+foregoing with an exception applied; or a set of licenses combined by
+applying "AND" and "OR" operators recursively.
+.. metadata ..
+    Instantiability : Abstract
+    SubclassOf : LicenseField
+    name : LicenseExpression
+.. properties ..
+}
+abstract LicenseField {
+<b>Summary</b>
+Base abstract class used for all fields that can take a value of either
+a license expression, NOASSERTION, or NONE.
+<b>Description</b>
+A LicenseField is the primary value that is used by a licensing field
+for a software Package, File or Snippet. It represents either a license
+expression, or the values NOASSERTION or NONE. The specific meanings of
+NOASSERTION or NONE for the particular licensing field are defined in
+the corresponding property description.
+.. metadata ..
+    Instantiability : Abstract
+    SubclassOf : none
+    name : LicenseField
+.. properties ..
+}
+class ListedLicense {
+<b>Summary</b>
+A license that is listed on the SPDX License List.
+<b>Description</b>
+A ListedLicense represents a License that is listed on the SPDX License
+List at https://spdx.org/licenses.
+
+**TBD** whether to define the meaning and purpose for each of the
+properties
+.. metadata ..
+    Instantiability : Concrete
+    SubclassOf : License
+    name : ListedLicense
+.. properties ..
+    deprecatedVersion : xsd:string [0..1]
+    listVersionAdded : xsd:string [0..1]
+}
+class ListedLicenseException {
+<b>Summary</b>
+**TBD** Not to be completed until the Change Proposal at
+https://github.com/spdx/change-proposal/issues/4 is decided upon. Should
+be treated as unconfirmed since this class and its name or meaning is
+subject to change.
+<b>Description</b>
+MISSING
+.. metadata ..
+    Instantiability : Concrete
+    SubclassOf : LicenseException
+    name : ListedLicenseException
+.. properties ..
+}
+class NoAssertionLicense {
+<b>Summary</b>
+Concrete class representing an absence of an assertion about license
+information.
+<b>Description</b>
+**TBD** whether the meaning of NoAssertionLicense in the context of the
+concludedLicense and declaredLicense properties should be here rather
+than in those property definitions
+
+A NoAssertionLicense is the primary value that is used by a
+concludedLicense or declaredLicense field that indicates that the SPDX
+data creator is making no assertion about the license information for
+the corresponding software Package, File or Snippet.
+
+The specific meaning of NoAssertionLicense in the context of a
+concludedLicense or declaredLicense field is more fully set forth in the
+Property definitions for those fields.
+.. metadata ..
+    Instantiability : Concrete
+    SubclassOf : LicenseField
+    name : NoAssertionLicense
+.. properties ..
+}
+class NoAssertionText {
+<b>Summary</b>
+Concrete class representing an absence of an assertion about the
+presence of copyright text.
+<b>Description</b>
+**TBD** whether these details should be defined in the copyrightText
+property instead of here
+
+A NoAssertionText is the primary value that is used by a copyrightText
+field that indicates that the SPDX data creator is making no assertion
+about whether any copyright information is present, or what its contents
+are if it is present.
+
+If a copyrightText has a NOASSERTION value, this indicates that one of
+the following applies: \* the SPDX data creator has made no attempt to
+determine this field; or \* the SPDX data creator has intentionally
+provided no information (no meaning should be implied from the absence
+of an assertion).
+.. metadata ..
+    Instantiability : Concrete
+    SubclassOf : CopyrightTextField
+    name : NoAssertionText
+.. properties ..
+}
+class NoneLicense {
+<b>Summary</b>
+Concrete class representing an assertion that no license information is
+present, as applicable.
+<b>Description</b>
+**TBD** whether the meaning of NoneLicense in the context of the
+concludedLicense and declaredLicense properties should be here rather
+than in those property definitions
+
+A NoneLicense is the primary value that is used by a concludedLicense or
+declaredLicense field that indicates the absence of license information
+from the corresponding software Package, File or Snippet.
+
+The specific meaning of NoneLicense in the context of a concludedLicense
+or declaredLicense field is more fully set forth in the Property
+definitions for those fields.
+.. metadata ..
+    Instantiability : Concrete
+    SubclassOf : LicenseField
+    name : NoneLicense
+.. properties ..
+}
+class NoneText {
+<b>Summary</b>
+Concrete class representing an assertion that no copyright text is
+present.
+<b>Description</b>
+**TBD** whether these details should be defined in the copyrightText
+property instead of here
+
+A NoneText is the primary value that is used by a copyrightText field
+that indicates that the corresponding software Package, File or Snippet
+does not contain any copyright information.
+.. metadata ..
+    Instantiability : Concrete
+    SubclassOf : CopyrightTextField
+    name : NoneText
+.. properties ..
+}
+class OrLaterOperator {
+<b>Summary</b>
+Portion of a LicenseExpression representing this version, or any later
+version, of the indicated License.
+<b>Description</b>
+An OrLaterOperator indicates that this portion of the LicenseExpression
+represents either (1) the specified version of the corresponding
+License, or (2) any later version of that License. It is represented in
+the SPDX License Expression Syntax by the `+` operator.
+
+It is context-dependent, and unspecified by SPDX, as to what constitutes
+a "later version" of any particular License. Some Licenses may not be
+versioned, or may not have clearly-defined ordering for versions. The
+consumer of SPDX data will need to determine for themselves what meaning
+to attribute to a "later version" operator for a particular License.
+.. metadata ..
+    Instantiability : Concrete
+    SubclassOf : LicenseExpression
+    name : OrLaterOperator
+.. properties ..
+    license : License [1..1]
+}
+"License" <-[dashed,thickness=4]-- "OrLaterOperator::license"
+class WithExceptionOperator {
+<b>Summary</b>
+**TBD** Not to be completed until the Change Proposal at
+https://github.com/spdx/change-proposal/issues/4 is decided upon. Should
+be treated as unconfirmed since this class and its name or meaning is
+subject to change.
+<b>Description</b>
+MISSING
+.. metadata ..
+    Instantiability : Concrete
+    SubclassOf : LicenseExpression
+    name : WithExceptionOperator
+.. properties ..
+}
+}
+"LicenseExpression" <|-[thickness=4]- "ConjunctiveLicenseSet"
+"CopyrightTextField" <|-[thickness=4]- "CopyrightText"
+"License" <|-[thickness=4]- "CustomLicense"
+"LicenseException" <|-[thickness=4]- "CustomLicenseException"
+"LicenseExpression" <|-[thickness=4]- "DisjunctiveLicenseSet"
+"LicenseExpression" <|-[thickness=4]- "License"
+"LicenseField" <|-[thickness=4]- "LicenseExpression"
+"License" <|-[thickness=4]- "ListedLicense"
+"LicenseException" <|-[thickness=4]- "ListedLicenseException"
+"LicenseField" <|-[thickness=4]- "NoAssertionLicense"
+"CopyrightTextField" <|-[thickness=4]- "NoAssertionText"
+"LicenseField" <|-[thickness=4]- "NoneLicense"
+"CopyrightTextField" <|-[thickness=4]- "NoneText"
+"LicenseExpression" <|-[thickness=4]- "OrLaterOperator"
+"LicenseExpression" <|-[thickness=4]- "WithExceptionOperator"
+@enduml

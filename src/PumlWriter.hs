@@ -31,6 +31,11 @@ class Pumlifyable a where
 
         withFile puml WriteMode $ \h -> do
             hPutStrLn h "@startuml"
+            hPutStrLn h "skinparam packageStyle rectangle"
+            -- hPutStrLn h "skinparam linetype polyline"
+            -- hPutStrLn h "skinparam linetype ortho"
+            -- hPutStrLn h "skinparam groupInheritance 2"
+            hPutStrLn h "set separator none"
             additionalLines <- writeInnerPumlToH h a
             mapM_ (T.hPutStrLn h) (nub additionalLines)
             hPutStrLn h "@enduml"
@@ -68,7 +73,7 @@ instance Pumlifyable Spdx3Vocabulary where
         T.hPutStrLn h ("enum " <> vocabularyName <> " {")
         writeCommentTextForSummaryAndDescription h vocabulary vocabularyName
         hPutStrLn h ".. entries .."
-        mapM_ (\(k,v) -> T.hPutStrLn h ("    " <> k <> " : " <> v)) (Map.toList ves) 
+        mapM_ (\(k,v) -> T.hPutStrLn h ("    <b>" <> k <> "</b>: " <> v)) (Map.toList ves) 
         hPutStrLn h "}"
 
         return []
@@ -91,7 +96,7 @@ instance Pumlifyable Spdx3Class where
                 numsToRange Nothing Nothing = ""
                 numsToRange low up = "[" <> numToStr low <> ".." <> numToStr up <> "]"
             in do
-                T.hPutStrLn h ("    " <> T.unwords [k, ":", ty, numsToRange minCount maxCount])
+                T.hPutStrLn h ("    <b>" <> T.unwords [k, "</b>:", ty, numsToRange minCount maxCount])
             ) (Map.toList props) 
         hPutStrLn h "}"
 
@@ -134,10 +139,10 @@ instance Pumlifyable Spdx3Model where
     getPumlFilePath a = getKind a <.> "puml"
     writeInnerPumlToH h (Spdx3Model profiles) = do
         concat <$> mapM (\(profileName,profile) -> do
-            -- T.hPutStrLn h "together {"
+            T.hPutStrLn h "together {"
             -- T.hPutStrLn h ("package " <> profileName <> " {")
             additionalLines <- writeInnerPumlToH h profile
-            -- T.hPutStrLn h "}"
+            T.hPutStrLn h "}"
             -- writeCommentForSummaryAndDescription h profile profileName
             return additionalLines
             ) (Map.assocs profiles)
@@ -147,4 +152,4 @@ writePumlsToDir outDir model = do
     createDirectoryIfMissing True outDir
     setCurrentDirectory outDir
     _ <- writeAndRenderPumlToFile model
-    mapM_ writeAndRenderPumlToFile ((map snd . Map.assocs . _profiles) model)
+    mapM_ (writeAndRenderPumlToFile . snd) ((Map.assocs . _profiles) model)

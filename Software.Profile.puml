@@ -1,4 +1,6 @@
 @startuml
+skinparam packageStyle rectangle
+set separator none
 ' vocabulary
 enum DependencyLinkType {
 <b>Summary</b>
@@ -6,11 +8,11 @@ TODO
 <b>Description</b>
 TODO
 .. entries ..
-    dynamic : TODOdescription
-    noAssertion : TODOdescription
-    other : TODOdescription
-    static : TODOdescription
-    tool : TODOdescription
+    <b>dynamic</b>: TODOdescription
+    <b>noAssertion</b>: TODOdescription
+    <b>other</b>: TODOdescription
+    <b>static</b>: TODOdescription
+    <b>tool</b>: TODOdescription
 }
 enum DependencyRequirement {
 <b>Summary</b>
@@ -18,11 +20,11 @@ TODO
 <b>Description</b>
 TODO
 .. entries ..
-    noAssertion : TODOdescription
-    optional : TODOdescription
-    preRequisite : TODOdescription
-    provided : TODOdescription
-    required : TODOdescription
+    <b>noAssertion</b>: TODOdescription
+    <b>optional</b>: TODOdescription
+    <b>preRequisite</b>: TODOdescription
+    <b>provided</b>: TODOdescription
+    <b>required</b>: TODOdescription
 }
 enum DependencyScope {
 <b>Summary</b>
@@ -30,12 +32,12 @@ TODO
 <b>Description</b>
 TODO
 .. entries ..
-    build : TODOdescription
-    dev : TODOdescription
-    noAssertion : TODOdescription
-    other : TODOdescription
-    runtime : TODOdescription
-    test : TODOdescription
+    <b>build</b>: TODOdescription
+    <b>dev</b>: TODOdescription
+    <b>noAssertion</b>: TODOdescription
+    <b>other</b>: TODOdescription
+    <b>runtime</b>: TODOdescription
+    <b>test</b>: TODOdescription
 }
 enum SoftwarePurpose {
 <b>Summary</b>
@@ -43,25 +45,25 @@ TODO
 <b>Description</b>
 TODO
 .. entries ..
-    application : TODOdescription
-    archive : TODOdescription
-    bom : TODOdescription
-    configuration : TODOdescription
-    container : TODOdescription
-    data : TODOdescription
-    device : TODOdescription
-    documentation : TODOdescription
-    executable : TODOdescription
-    file : TODOdescription
-    firmware : TODOdescription
-    framework : TODOdescription
-    install : TODOdescription
-    library : TODOdescription
-    module : TODOdescription
-    operatingSystem : TODOdescription
-    other : TODOdescription
-    patch : TODOdescription
-    source : TODOdescription
+    <b>application</b>: TODOdescription
+    <b>archive</b>: TODOdescription
+    <b>bom</b>: TODOdescription
+    <b>configuration</b>: TODOdescription
+    <b>container</b>: TODOdescription
+    <b>data</b>: TODOdescription
+    <b>device</b>: TODOdescription
+    <b>documentation</b>: TODOdescription
+    <b>executable</b>: TODOdescription
+    <b>file</b>: TODOdescription
+    <b>firmware</b>: TODOdescription
+    <b>framework</b>: TODOdescription
+    <b>install</b>: TODOdescription
+    <b>library</b>: TODOdescription
+    <b>module</b>: TODOdescription
+    <b>operatingSystem</b>: TODOdescription
+    <b>other</b>: TODOdescription
+    <b>patch</b>: TODOdescription
+    <b>source</b>: TODOdescription
 }
 ' classes
 together {
@@ -74,9 +76,9 @@ TODO This is about the File class.
     SubclassOf : Core:Artifact
     name : File
 .. properties ..
-    contentIdentifier : xsd:anyURI [0..1]
-    contentType : MediaType [0..1]
-    filePurpose : SoftwarePurpose [0..]
+    <b>contentIdentifier </b>: xsd:anyURI [0..1]
+    <b>contentType </b>: MediaType [0..1]
+    <b>filePurpose </b>: SoftwarePurpose [0..]
 }
 "MediaType" <-[dashed,thickness=4]-- "File::contentType"
 "SoftwarePurpose" <-[dashed,thickness=4]-- "File::filePurpose"
@@ -118,12 +120,12 @@ Cardinality: Optional, zero or many.
     SubclassOf : Core:Artifact
     name : Package
 .. properties ..
-    contentIdentifier : xsd:anyURI [0..1]
-    downloadLocation : xsd:anyURI [0..1]
-    homePage : xsd:anyURI [0..1]
-    packagePurpose : SoftwarePurpose [0..]
-    packageUrl : xsd:anyURI [0..1]
-    packageVersion : xsd:string [0..1]
+    <b>contentIdentifier </b>: xsd:anyURI [0..1]
+    <b>downloadLocation </b>: xsd:anyURI [0..1]
+    <b>homePage </b>: xsd:anyURI [0..1]
+    <b>packagePurpose </b>: SoftwarePurpose [0..]
+    <b>packageUrl </b>: xsd:anyURI [0..1]
+    <b>packageVersion </b>: xsd:string [0..1]
 }
 "SoftwarePurpose" <-[dashed,thickness=4]-- "Package::packagePurpose"
 class Sbom {
@@ -149,10 +151,10 @@ TODO
     SubclassOf : Core:Artifact
     name : Snippet
 .. properties ..
-    byteRange : positiveIntegerRange [0..1]
-    contentIdentifier : xsd:anyURI [0..1]
-    lineRange : positiveIntegerRange [0..1]
-    snippetPurpose : SoftwarePurpose [0..]
+    <b>byteRange </b>: positiveIntegerRange [0..1]
+    <b>contentIdentifier </b>: xsd:anyURI [0..1]
+    <b>lineRange </b>: positiveIntegerRange [0..1]
+    <b>snippetPurpose </b>: SoftwarePurpose [0..]
 }
 "positiveIntegerRange" <-[dashed,thickness=4]-- "Snippet::byteRange"
 "positiveIntegerRange" <-[dashed,thickness=4]-- "Snippet::lineRange"
@@ -167,9 +169,9 @@ TODO
     SubclassOf : Core:Relationship
     name : SoftwareDependencyRelationship
 .. properties ..
-    linkType : DependencyLinkType [1..1]
-    requirement : DependencyRequirement [1..1]
-    scope : DependencyScope [1..1]
+    <b>linkType </b>: DependencyLinkType [1..1]
+    <b>requirement </b>: DependencyRequirement [1..1]
+    <b>scope </b>: DependencyScope [1..1]
 }
 "DependencyLinkType" <-[dashed,thickness=4]-- "SoftwareDependencyRelationship::linkType"
 "DependencyRequirement" <-[dashed,thickness=4]-- "SoftwareDependencyRelationship::requirement"

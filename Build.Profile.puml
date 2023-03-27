@@ -1,4 +1,6 @@
 @startuml
+skinparam packageStyle rectangle
+set separator none
 ' vocabulary
 enum BuildTypeVocab {
 <b>Summary</b>
@@ -30,15 +32,15 @@ logs. Comment should be "LogReference".
     SubclassOf : Core:Element
     name : Build
 .. properties ..
-    buildId : xsd:string [0..1]
-    buildType : anyURI [1..1]
-    configSourceDigest : Hash [0..]
-    configSourceEntrypoint : xsd:string [0..]
-    configSourceUri : anyURI [0..]
-    endTime : xsd:DateTime 
-    environment : xsd:map&lt;string&gt;string [0..]
-    parameters : xsd:map&lt;string&gt;string [0..]
-    startTime : xsd:DateTime 
+    <b>buildId </b>: xsd:string [0..1]
+    <b>buildType </b>: anyURI [1..1]
+    <b>configSourceDigest </b>: Hash [0..]
+    <b>configSourceEntrypoint </b>: xsd:string [0..]
+    <b>configSourceUri </b>: anyURI [0..]
+    <b>endTime </b>: xsd:DateTime 
+    <b>environment </b>: xsd:map&lt;string&gt;string [0..]
+    <b>parameters </b>: xsd:map&lt;string&gt;string [0..]
+    <b>startTime </b>: xsd:DateTime 
 }
 "Hash" <-[dashed,thickness=4]-- "Build::configSourceDigest"
 }

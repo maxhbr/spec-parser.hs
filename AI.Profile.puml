@@ -1,4 +1,6 @@
 @startuml
+skinparam packageStyle rectangle
+set separator none
 ' vocabulary
 enum SensitivePersonalInformationType {
 <b>Summary</b>
@@ -7,9 +9,9 @@ Categories of presence or absence
 This type is used to indicate if a given field is present or absent or
 unknown
 .. entries ..
-    no : Indicates absence of the field
-    noassertion : Describes no assertion. In other words, unknown.
-    yes : Indicates presence of the field
+    <b>no</b>: Indicates absence of the field
+    <b>noassertion</b>: Describes no assertion. In other words, unknown.
+    <b>yes</b>: Indicates presence of the field
 }
 enum SafetyRiskAssessmentType {
 <b>Summary</b>
@@ -19,13 +21,13 @@ medium low
 Describes the different safety risk type values that can be used to
 describe the safety risk of the AI software
 .. entries ..
-    high : The second highest level of risk posed by the AI software as given by
+    <b>high</b>: The second highest level of risk posed by the AI software as given by
 Article 20 of EC Regulation No 765/2008.
-    low : Low/no risk is contained in the AI software.
-    medium : The third highest level of risk as given by Article 20 of EC
+    <b>low</b>: Low/no risk is contained in the AI software.
+    <b>medium</b>: The third highest level of risk as given by Article 20 of EC
 Regulation  
 No 765/2008.
-    serious : The highest level of risk that is contained for a AI software as given
+    <b>serious</b>: The highest level of risk that is contained for a AI software as given
 by Article 20 of Regulation 765/2008/EC
 }
 ' classes
@@ -41,21 +43,21 @@ application or trained AI model.
     SubclassOf : Software:Package
     name : AIPackage
 .. properties ..
-    autonomyType : PresenceType [0..1]
-    dataPreprocessingSteps : xsd:string [0..1]
-    domain : xsd:string [0..]
-    energyConsumption : xsd:string [0..1]
-    hyperparameters : xsd:string [0..]
-    informationAboutApplication : xsd:string [0..1]
-    informationAboutTraining : xsd:string [0..1]
-    limitations : xsd:string [0..]
-    metrics : xsd:string [0..]
-    metricsDecisionThresholds : xsd:string [0..]
-    modelExplainabilityMechanisms : xsd:string [0..1]
-    safetyRiskAssessment : SafetyRiskAssessmentType [0..1]
-    sensitivePersonalInformation : SensitivePersonalInformationType [0..1]
-    standardsCompliance : xsd:string [0..]
-    typeOfModel : xsd:string [0..]
+    <b>autonomyType </b>: PresenceType [0..1]
+    <b>dataPreprocessingSteps </b>: xsd:string [0..1]
+    <b>domain </b>: xsd:string [0..]
+    <b>energyConsumption </b>: xsd:string [0..1]
+    <b>hyperparameters </b>: xsd:string [0..]
+    <b>informationAboutApplication </b>: xsd:string [0..1]
+    <b>informationAboutTraining </b>: xsd:string [0..1]
+    <b>limitations </b>: xsd:string [0..]
+    <b>metrics </b>: xsd:string [0..]
+    <b>metricsDecisionThresholds </b>: xsd:string [0..]
+    <b>modelExplainabilityMechanisms </b>: xsd:string [0..1]
+    <b>safetyRiskAssessment </b>: SafetyRiskAssessmentType [0..1]
+    <b>sensitivePersonalInformation </b>: SensitivePersonalInformationType [0..1]
+    <b>standardsCompliance </b>: xsd:string [0..]
+    <b>typeOfModel </b>: xsd:string [0..]
 }
 "PresenceType" <-[dashed,thickness=4]-- "AIPackage::autonomyType"
 "SafetyRiskAssessmentType" <-[dashed,thickness=4]-- "AIPackage::safetyRiskAssessment"

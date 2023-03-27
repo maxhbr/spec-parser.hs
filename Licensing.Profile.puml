@@ -1,4 +1,6 @@
 @startuml
+skinparam packageStyle rectangle
+set separator none
 ' vocabulary
 ' classes
 together {
@@ -24,7 +26,7 @@ for themselves.
     SubclassOf : LicenseExpression
     name : ConjunctiveLicenseSet
 .. properties ..
-    child : LicenseExpression [2..]
+    <b>child </b>: LicenseExpression [2..]
 }
 "LicenseExpression" <-[dashed,thickness=4]-- "ConjunctiveLicenseSet::child"
 class CopyrightText {
@@ -39,7 +41,7 @@ than NONE or NOASSERTION.
     SubclassOf : CopyrightTextField
     name : CopyrightText
 .. properties ..
-    text : xsd:string [1..1]
+    <b>text </b>: xsd:string [1..1]
 }
 abstract CopyrightTextField {
 <b>Summary</b>
@@ -111,7 +113,7 @@ SPDX License Expression Syntax by the `OR` operator.
     SubclassOf : LicenseExpression
     name : DisjunctiveLicenseSet
 .. properties ..
-    child : LicenseExpression [2..]
+    <b>child </b>: LicenseExpression [2..]
 }
 "LicenseExpression" <-[dashed,thickness=4]-- "DisjunctiveLicenseSet::child"
 abstract License {
@@ -132,17 +134,17 @@ rather than xsd:string
     SubclassOf : LicenseExpression
     name : License
 .. properties ..
-    comment : xsd:string [0..1]
-    example : xsd:string [0..1]
-    isDeprecatedLicenseId : xsd:boolean [0..1]
-    isFsfLibre : xsd:boolean [0..1]
-    isOsiApproved : xsd:boolean [0..1]
-    licenseId : xsd:string [1..1]
-    licenseText : xsd:string [1..1]
-    name : xsd:string [1..1]
-    obsoletedBy : xsd:string [0..1]
-    seeAlso : xsd:anyURI [0..1]
-    standardLicenseHeader : xsd:string [0..1]
+    <b>comment </b>: xsd:string [0..1]
+    <b>example </b>: xsd:string [0..1]
+    <b>isDeprecatedLicenseId </b>: xsd:boolean [0..1]
+    <b>isFsfLibre </b>: xsd:boolean [0..1]
+    <b>isOsiApproved </b>: xsd:boolean [0..1]
+    <b>licenseId </b>: xsd:string [1..1]
+    <b>licenseText </b>: xsd:string [1..1]
+    <b>name </b>: xsd:string [1..1]
+    <b>obsoletedBy </b>: xsd:string [0..1]
+    <b>seeAlso </b>: xsd:anyURI [0..1]
+    <b>standardLicenseHeader </b>: xsd:string [0..1]
 }
 abstract LicenseException {
 <b>Summary</b>
@@ -206,8 +208,8 @@ properties
     SubclassOf : License
     name : ListedLicense
 .. properties ..
-    deprecatedVersion : xsd:string [0..1]
-    listVersionAdded : xsd:string [0..1]
+    <b>deprecatedVersion </b>: xsd:string [0..1]
+    <b>listVersionAdded </b>: xsd:string [0..1]
 }
 class ListedLicenseException {
 <b>Summary</b>
@@ -329,7 +331,7 @@ to attribute to a "later version" operator for a particular License.
     SubclassOf : LicenseExpression
     name : OrLaterOperator
 .. properties ..
-    license : License [1..1]
+    <b>license </b>: License [1..1]
 }
 "License" <-[dashed,thickness=4]-- "OrLaterOperator::license"
 class WithExceptionOperator {

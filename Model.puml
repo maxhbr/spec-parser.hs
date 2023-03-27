@@ -1,4 +1,7 @@
 @startuml
+skinparam packageStyle rectangle
+set separator none
+together {
 ' vocabulary
 enum SensitivePersonalInformationType {
 <b>Summary</b>
@@ -7,9 +10,9 @@ Categories of presence or absence
 This type is used to indicate if a given field is present or absent or
 unknown
 .. entries ..
-    no : Indicates absence of the field
-    noassertion : Describes no assertion. In other words, unknown.
-    yes : Indicates presence of the field
+    <b>no</b>: Indicates absence of the field
+    <b>noassertion</b>: Describes no assertion. In other words, unknown.
+    <b>yes</b>: Indicates presence of the field
 }
 enum SafetyRiskAssessmentType {
 <b>Summary</b>
@@ -19,13 +22,13 @@ medium low
 Describes the different safety risk type values that can be used to
 describe the safety risk of the AI software
 .. entries ..
-    high : The second highest level of risk posed by the AI software as given by
+    <b>high</b>: The second highest level of risk posed by the AI software as given by
 Article 20 of EC Regulation No 765/2008.
-    low : Low/no risk is contained in the AI software.
-    medium : The third highest level of risk as given by Article 20 of EC
+    <b>low</b>: Low/no risk is contained in the AI software.
+    <b>medium</b>: The third highest level of risk as given by Article 20 of EC
 Regulation  
 No 765/2008.
-    serious : The highest level of risk that is contained for a AI software as given
+    <b>serious</b>: The highest level of risk that is contained for a AI software as given
 by Article 20 of Regulation 765/2008/EC
 }
 ' classes
@@ -41,26 +44,28 @@ application or trained AI model.
     SubclassOf : Software:Package
     name : AIPackage
 .. properties ..
-    autonomyType : PresenceType [0..1]
-    dataPreprocessingSteps : xsd:string [0..1]
-    domain : xsd:string [0..]
-    energyConsumption : xsd:string [0..1]
-    hyperparameters : xsd:string [0..]
-    informationAboutApplication : xsd:string [0..1]
-    informationAboutTraining : xsd:string [0..1]
-    limitations : xsd:string [0..]
-    metrics : xsd:string [0..]
-    metricsDecisionThresholds : xsd:string [0..]
-    modelExplainabilityMechanisms : xsd:string [0..1]
-    safetyRiskAssessment : SafetyRiskAssessmentType [0..1]
-    sensitivePersonalInformation : SensitivePersonalInformationType [0..1]
-    standardsCompliance : xsd:string [0..]
-    typeOfModel : xsd:string [0..]
+    <b>autonomyType </b>: PresenceType [0..1]
+    <b>dataPreprocessingSteps </b>: xsd:string [0..1]
+    <b>domain </b>: xsd:string [0..]
+    <b>energyConsumption </b>: xsd:string [0..1]
+    <b>hyperparameters </b>: xsd:string [0..]
+    <b>informationAboutApplication </b>: xsd:string [0..1]
+    <b>informationAboutTraining </b>: xsd:string [0..1]
+    <b>limitations </b>: xsd:string [0..]
+    <b>metrics </b>: xsd:string [0..]
+    <b>metricsDecisionThresholds </b>: xsd:string [0..]
+    <b>modelExplainabilityMechanisms </b>: xsd:string [0..1]
+    <b>safetyRiskAssessment </b>: SafetyRiskAssessmentType [0..1]
+    <b>sensitivePersonalInformation </b>: SensitivePersonalInformationType [0..1]
+    <b>standardsCompliance </b>: xsd:string [0..]
+    <b>typeOfModel </b>: xsd:string [0..]
 }
 "PresenceType" <-[dashed,thickness=4]-- "AIPackage::autonomyType"
 "SafetyRiskAssessmentType" <-[dashed,thickness=4]-- "AIPackage::safetyRiskAssessment"
 "SensitivePersonalInformationType" <-[dashed,thickness=4]-- "AIPackage::sensitivePersonalInformation"
 }
+}
+together {
 ' vocabulary
 enum BuildTypeVocab {
 <b>Summary</b>
@@ -92,18 +97,20 @@ logs. Comment should be "LogReference".
     SubclassOf : Core:Element
     name : Build
 .. properties ..
-    buildId : xsd:string [0..1]
-    buildType : anyURI [1..1]
-    configSourceDigest : Hash [0..]
-    configSourceEntrypoint : xsd:string [0..]
-    configSourceUri : anyURI [0..]
-    endTime : xsd:DateTime 
-    environment : xsd:map&lt;string&gt;string [0..]
-    parameters : xsd:map&lt;string&gt;string [0..]
-    startTime : xsd:DateTime 
+    <b>buildId </b>: xsd:string [0..1]
+    <b>buildType </b>: anyURI [1..1]
+    <b>configSourceDigest </b>: Hash [0..]
+    <b>configSourceEntrypoint </b>: xsd:string [0..]
+    <b>configSourceUri </b>: anyURI [0..]
+    <b>endTime </b>: xsd:DateTime 
+    <b>environment </b>: xsd:map&lt;string&gt;string [0..]
+    <b>parameters </b>: xsd:map&lt;string&gt;string [0..]
+    <b>startTime </b>: xsd:DateTime 
 }
 "Hash" <-[dashed,thickness=4]-- "Build::configSourceDigest"
 }
+}
+together {
 ' vocabulary
 enum AnnotationType {
 <b>Summary</b>
@@ -111,10 +118,10 @@ Specifies the type of an annotation.
 <b>Description</b>
 AnnotationType specifies the type of an annotation.
 .. entries ..
-    other : Used to store extra information about an Element which is not part of a
+    <b>other</b>: Used to store extra information about an Element which is not part of a
 Review (e.g. extra information provided during the creation of the
 Element).
-    review : Used when someone reviews the Element.
+    <b>review</b>: Used when someone reviews the Element.
 }
 enum ExternalIdentifierType {
 <b>Summary</b>
@@ -122,10 +129,10 @@ Specifies the type of an external identifier.
 <b>Description</b>
 ExteralIdentifierType specifies the type of an external identifier.
 .. entries ..
-    cpe22 : https://cpe.mitre.org/files/cpe-specification\_2.2.pdf
-    cpe23 : https://nvlpubs.nist.gov/nistpubs/Legacy/IR/nistir7695.pdf
-    email : TODOdescription
-    gitoid : gitoid stands for Git Object ID. A gitoid of typeblob is a unique hash
+    <b>cpe22</b>: https://cpe.mitre.org/files/cpe-specification\_2.2.pdf
+    <b>cpe23</b>: https://nvlpubs.nist.gov/nistpubs/Legacy/IR/nistir7695.pdf
+    <b>email</b>: TODOdescription
+    <b>gitoid</b>: gitoid stands for Git Object ID. A gitoid of typeblob is a unique hash
 of a software artifact. Git relies on a Merkle Tree to index stored
 objects. See https://git-scm.com/book/en/v2/Git-Internals-Git-Objects.
 GitBOM is an amalgam of the terms "Git" and "SBOM". GitBOM is a
@@ -134,11 +141,11 @@ Merkle Tree, and is inspired by Git. A gitoid may refer to either the
 software artifact or its GitBOM document; this ambiguity exists because
 the GitBOM document is itself an artifact, and the gitoid of that
 artifact is its valid locator.
-    other : Used when the type doesn't match any of the other options.
-    pkgUrl : https://github.com/package-url/purl-spec
-    swhid : https://docs.softwareheritage.org/devel/swh-model/persistent-identifiers.html
-    swid : https://www.ietf.org/archive/id/draft-ietf-sacm-coswid-21.html#section-2.3
-    urlScheme : TODOdescription
+    <b>other</b>: Used when the type doesn't match any of the other options.
+    <b>pkgUrl</b>: https://github.com/package-url/purl-spec
+    <b>swhid</b>: https://docs.softwareheritage.org/devel/swh-model/persistent-identifiers.html
+    <b>swid</b>: https://www.ietf.org/archive/id/draft-ietf-sacm-coswid-21.html#section-2.3
+    <b>urlScheme</b>: TODOdescription
 }
 enum ExternalReferenceType {
 <b>Summary</b>
@@ -146,15 +153,15 @@ Specifies the type of an external reference.
 <b>Description</b>
 ExteralReferenceType specifies the type of an external reference.
 .. entries ..
-    altDownloadLocation : A reference to an alternative download location.
-    altWebPage : A reference to an alternative web page.
-    other : Used when the type doesn't match any of the other options.
-    securityAdvisory : A reference to the published security advisory (where advisory as
+    <b>altDownloadLocation</b>: A reference to an alternative download location.
+    <b>altWebPage</b>: A reference to an alternative web page.
+    <b>other</b>: Used when the type doesn't match any of the other options.
+    <b>securityAdvisory</b>: A reference to the published security advisory (where advisory as
 defined per ISO 29147:2018). It may contain an impact statement whether
 a package (e.g. a product) is or is not affected by vulnerabilities.
-    securityFix : A reference to the source code with a fix for the vulnerability (e.g., a
+    <b>securityFix</b>: A reference to the source code with a fix for the vulnerability (e.g., a
 GitHub commit).
-    securityOther : Used when the reference is security related but doesn't match any of the
+    <b>securityOther</b>: Used when the reference is security related but doesn't match any of the
 other types.
 }
 enum HashAlgorithm {
@@ -166,26 +173,26 @@ A HashAlgorithm is a mathematical algorithm that maps data of arbitrary
 size to a bit string (the hash) and is a one-way function, that is, a
 function which is practically infeasible to invert.
 .. entries ..
-    blake2b256 : TODOdescription
-    blake2b384 : TODOdescription
-    blake2b512 : TODOdescription
-    blake3 : TODOdescription
-    md2 : TODOdescription
-    md4 : TODOdescription
-    md5 : TODOdescription
-    md6 : TODOdescription
-    other : TODOdescription
-    sha1 : TODOdescription
-    sha224 : TODOdescription
-    sha256 : TODOdescription
-    sha384 : TODOdescription
-    sha3_224 : TODOdescription
-    sha3_256 : TODOdescription
-    sha3_384 : TODOdescription
-    sha3_512 : TODOdescription
-    sha512 : TODOdescription
-    spdxPvcSha1 : TODOdescription
-    spdxPvcSha256 : TODOdescription
+    <b>blake2b256</b>: TODOdescription
+    <b>blake2b384</b>: TODOdescription
+    <b>blake2b512</b>: TODOdescription
+    <b>blake3</b>: TODOdescription
+    <b>md2</b>: TODOdescription
+    <b>md4</b>: TODOdescription
+    <b>md5</b>: TODOdescription
+    <b>md6</b>: TODOdescription
+    <b>other</b>: TODOdescription
+    <b>sha1</b>: TODOdescription
+    <b>sha224</b>: TODOdescription
+    <b>sha256</b>: TODOdescription
+    <b>sha384</b>: TODOdescription
+    <b>sha3_224</b>: TODOdescription
+    <b>sha3_256</b>: TODOdescription
+    <b>sha3_384</b>: TODOdescription
+    <b>sha3_512</b>: TODOdescription
+    <b>sha512</b>: TODOdescription
+    <b>spdxPvcSha1</b>: TODOdescription
+    <b>spdxPvcSha256</b>: TODOdescription
 }
 enum RelationshipCompleteness {
 <b>Summary</b>
@@ -195,9 +202,9 @@ or if there is made no assertion either way.
 RelationshipCompleteness indicates whether a relationship is complete or
 known to be incomplete or if there is made no assertion either way.
 .. entries ..
-    complete : The relationship is known to be exhaustive.
-    incomplete : The relationship is known not to be exhaustive.
-    unknown : There can be made no assertion about the completeness of the
+    <b>complete</b>: The relationship is known to be exhaustive.
+    <b>incomplete</b>: The relationship is known not to be exhaustive.
+    <b>unknown</b>: There can be made no assertion about the completeness of the
 relationship.
 }
 enum RelationshipType {
@@ -212,54 +219,54 @@ SPDXDocument and another SPDXDocument.
 Build Profile specific RelationshipType descriptions can be found
 [here](https://github.com/spdx/spdx-3-build-profile/blob/main/model/relationships.md)
 .. entries ..
-    amends : TODOdescription
-    ancestor : TODOdescription
-    buildChildOf : Build instance that was created from another build instance
-    buildConfigOf : Build configuration of the build instance
-    buildDependency : TODOdescription
-    buildHostOf : Element in which the build instance runs on
-    buildInputOf : Input to the build instance
-    buildInvokedBy : Agent that invoked the build
-    buildOnBehalfOf : Person for which buildInvokedBy is acting on behalf of
-    buildOutputOf : Output of the build instance
-    buildTool : TODOdescription
-    buildToolOf : Build tool used in the build instance
-    contains : TODOdescription
-    copy : TODOdescription
-    dataFile : TODOdescription
-    dependencyManifest : TODOdescription
-    dependsOn : TODOdescription
-    descendant : TODOdescription
-    describes : TODOdescription
-    devDependency : TODOdescription
-    devTool : TODOdescription
-    distributionArtifact : TODOdescription
-    documentation : TODOdescription
-    dynamicLink : TODOdescription
-    example : TODOdescription
-    expandedFromArchive : TODOdescription
-    fileAdded : TODOdescription
-    fileDeleted : TODOdescription
-    fileModified : TODOdescription
-    generates : TODOdescription
-    metafile : TODOdescription
-    optionalComponent : TODOdescription
-    optionalDependency : TODOdescription
-    other : TODOdescription
-    packages : TODOdescription
-    patch : TODOdescription
-    prerequisite : TODOdescription
-    providedDependency : TODOdescription
-    requirementFor : TODOdescription
-    runtimeDependency : TODOdescription
-    specificationFor : TODOdescription
-    staticLink : TODOdescription
-    suppliedBy : TODOdescription
-    test : TODOdescription
-    testCase : TODOdescription
-    testDependency : TODOdescription
-    testTool : TODOdescription
-    variant : TODOdescription
+    <b>amends</b>: TODOdescription
+    <b>ancestor</b>: TODOdescription
+    <b>buildChildOf</b>: Build instance that was created from another build instance
+    <b>buildConfigOf</b>: Build configuration of the build instance
+    <b>buildDependency</b>: TODOdescription
+    <b>buildHostOf</b>: Element in which the build instance runs on
+    <b>buildInputOf</b>: Input to the build instance
+    <b>buildInvokedBy</b>: Agent that invoked the build
+    <b>buildOnBehalfOf</b>: Person for which buildInvokedBy is acting on behalf of
+    <b>buildOutputOf</b>: Output of the build instance
+    <b>buildTool</b>: TODOdescription
+    <b>buildToolOf</b>: Build tool used in the build instance
+    <b>contains</b>: TODOdescription
+    <b>copy</b>: TODOdescription
+    <b>dataFile</b>: TODOdescription
+    <b>dependencyManifest</b>: TODOdescription
+    <b>dependsOn</b>: TODOdescription
+    <b>descendant</b>: TODOdescription
+    <b>describes</b>: TODOdescription
+    <b>devDependency</b>: TODOdescription
+    <b>devTool</b>: TODOdescription
+    <b>distributionArtifact</b>: TODOdescription
+    <b>documentation</b>: TODOdescription
+    <b>dynamicLink</b>: TODOdescription
+    <b>example</b>: TODOdescription
+    <b>expandedFromArchive</b>: TODOdescription
+    <b>fileAdded</b>: TODOdescription
+    <b>fileDeleted</b>: TODOdescription
+    <b>fileModified</b>: TODOdescription
+    <b>generates</b>: TODOdescription
+    <b>metafile</b>: TODOdescription
+    <b>optionalComponent</b>: TODOdescription
+    <b>optionalDependency</b>: TODOdescription
+    <b>other</b>: TODOdescription
+    <b>packages</b>: TODOdescription
+    <b>patch</b>: TODOdescription
+    <b>prerequisite</b>: TODOdescription
+    <b>providedDependency</b>: TODOdescription
+    <b>requirementFor</b>: TODOdescription
+    <b>runtimeDependency</b>: TODOdescription
+    <b>specificationFor</b>: TODOdescription
+    <b>staticLink</b>: TODOdescription
+    <b>suppliedBy</b>: TODOdescription
+    <b>test</b>: TODOdescription
+    <b>testCase</b>: TODOdescription
+    <b>testDependency</b>: TODOdescription
+    <b>testTool</b>: TODOdescription
+    <b>variant</b>: TODOdescription
 }
 ' classes
 together {
@@ -273,10 +280,10 @@ An Annotation is an assertion made in relation to one or more elements.
     SubclassOf : Element
     name : Annotation
 .. properties ..
-    annotationType : AnnotationType [1..1]
-    contentType : MediaType 
-    statement : xsd:string [0..1]
-    subject : Element [1..1]
+    <b>annotationType </b>: AnnotationType [1..1]
+    <b>contentType </b>: MediaType 
+    <b>statement </b>: xsd:string [0..1]
+    <b>subject </b>: Element [1..1]
 }
 "AnnotationType" <-[dashed,thickness=4]-- "Annotation::annotationType"
 "MediaType" <-[dashed,thickness=4]-- "Annotation::contentType"
@@ -291,9 +298,9 @@ TODO
     SubclassOf : Payload
     name : AnonymousPayload
 .. properties ..
-    creationInfo : CreationInformation [0..1]
-    imports : ExternalMap 
-    namespaces : NamespaceMap 
+    <b>creationInfo </b>: CreationInformation [0..1]
+    <b>imports </b>: ExternalMap 
+    <b>namespaces </b>: NamespaceMap 
 }
 "CreationInformation" <-[dashed,thickness=4]-- "AnonymousPayload::creationInfo"
 "ExternalMap" <-[dashed,thickness=4]-- "AnonymousPayload::imports"
@@ -310,7 +317,7 @@ of data.
     SubclassOf : Element
     name : Artifact
 .. properties ..
-    originatedBy : Identity [0..]
+    <b>originatedBy </b>: Identity [0..]
 }
 "Identity" <-[dashed,thickness=4]-- "Artifact::originatedBy"
 class Bom {
@@ -339,7 +346,7 @@ A bundle is a collection of Elements that have a shared context.
     SubclassOf : ElementCollection
     name : Bundle
 .. properties ..
-    context : xsd:string [..1]
+    <b>context </b>: xsd:string [..1]
 }
 class CreationInformation {
 <b>Summary</b>
@@ -351,13 +358,13 @@ Element, and when and how it was created.
     Instantiability : Concrete
     name : CreationInformation
 .. properties ..
-    comment : xsd:string [0..1]
-    created : xsd:dateTime 
-    createdBy : Entity [1..]
-    createdUsing : Tool [0..]
-    dataLicense : xsd:string 
-    profile : ProfileIdentifier [1..]
-    specVersion : SemVer 
+    <b>comment </b>: xsd:string [0..1]
+    <b>created </b>: xsd:dateTime 
+    <b>createdBy </b>: Entity [1..]
+    <b>createdUsing </b>: Tool [0..]
+    <b>dataLicense </b>: xsd:string 
+    <b>profile </b>: ProfileIdentifier [1..]
+    <b>specVersion </b>: SemVer 
 }
 "Entity" <-[dashed,thickness=4]-- "CreationInformation::createdBy"
 "Tool" <-[dashed,thickness=4]-- "CreationInformation::createdUsing"
@@ -378,16 +385,16 @@ all explicit and inter-relatable content objects.
     SubclassOf : Payload
     name : Element
 .. properties ..
-    comment : xsd:string [..1]
-    creationInfo : CreationInformation [1..1]
-    description : xsd:string [..1]
-    extensions : Extension 
-    externalIdentifiers : ExternalIdentifier 
-    externalReferences : ExternalReference 
-    name : xsd:string [..1]
-    spdxId : xsd:anyURI [1..1]
-    summary : xsd:string [..1]
-    verifiedUsing : IntegrityMethod 
+    <b>comment </b>: xsd:string [..1]
+    <b>creationInfo </b>: CreationInformation [1..1]
+    <b>description </b>: xsd:string [..1]
+    <b>extensions </b>: Extension 
+    <b>externalIdentifiers </b>: ExternalIdentifier 
+    <b>externalReferences </b>: ExternalReference 
+    <b>name </b>: xsd:string [..1]
+    <b>spdxId </b>: xsd:anyURI [1..1]
+    <b>summary </b>: xsd:string [..1]
+    <b>verifiedUsing </b>: IntegrityMethod 
 }
 "CreationInformation" <-[dashed,thickness=4]-- "Element::creationInfo"
 "Extension" <-[dashed,thickness=4]-- "Element::extensions"
@@ -405,10 +412,10 @@ unifying context.
     SubclassOf : Element
     name : ElementCollection
 .. properties ..
-    element : Element [1..]
-    imports : ExternalMap 
-    namespaces : NamespaceMap 
-    rootElement : Element [1..]
+    <b>element </b>: Element [1..]
+    <b>imports </b>: ExternalMap 
+    <b>namespaces </b>: NamespaceMap 
+    <b>rootElement </b>: Element [1..]
 }
 "Element" <-[dashed,thickness=4]-- "ElementCollection::element"
 "ExternalMap" <-[dashed,thickness=4]-- "ElementCollection::imports"
@@ -436,9 +443,9 @@ SPDX-3.0 content that uniquely identifies an Element.
     Instantiability : Concrete
     name : ExternalIdentifier
 .. properties ..
-    comment : xsd:string [0..1]
-    externalIdentifierType : ExternalIdentifierType [1..1]
-    identifier : xsd:string [1..1]
+    <b>comment </b>: xsd:string [0..1]
+    <b>externalIdentifierType </b>: ExternalIdentifierType [1..1]
+    <b>identifier </b>: xsd:string [1..1]
 }
 "ExternalIdentifierType" <-[dashed,thickness=4]-- "ExternalIdentifier::externalIdentifierType"
 class ExternalMap {
@@ -455,9 +462,9 @@ provenance, where to retrieve it, and how to verify its integrity.
     SubclassOf : none
     name : ExternalMap
 .. properties ..
-    externalId : xsd:anyURI [1..1]
-    locationHint : xsd:anyURI [..1]
-    verifiedUsing : IntegrityMethod 
+    <b>externalId </b>: xsd:anyURI [1..1]
+    <b>locationHint </b>: xsd:anyURI [..1]
+    <b>verifiedUsing </b>: IntegrityMethod 
 }
 "IntegrityMethod" <-[dashed,thickness=4]-- "ExternalMap::verifiedUsing"
 class ExternalReference {
@@ -471,10 +478,10 @@ SPDX-3.0 content that provides additional characteristics of an Element.
     SubclassOf : none
     name : ExternalReference
 .. properties ..
-    comment : xsd:string [..1]
-    contentType : MediaType [..1]
-    externalReferenceType : ExternalReferenceType [..1]
-    locator : xsd:anyURI 
+    <b>comment </b>: xsd:string [..1]
+    <b>contentType </b>: MediaType [..1]
+    <b>externalReferenceType </b>: ExternalReferenceType [..1]
+    <b>locator </b>: xsd:anyURI 
 }
 "MediaType" <-[dashed,thickness=4]-- "ExternalReference::contentType"
 "ExternalReferenceType" <-[dashed,thickness=4]-- "ExternalReference::externalReferenceType"
@@ -491,8 +498,8 @@ checking of data.
     SubclassOf : IntegrityMethod
     name : Hash
 .. properties ..
-    algorithm : HashAlgorithm [1..1]
-    hashValue : xsd:string [1..1]
+    <b>algorithm </b>: HashAlgorithm [1..1]
+    <b>hashValue </b>: xsd:string [1..1]
 }
 "HashAlgorithm" <-[dashed,thickness=4]-- "Hash::algorithm"
 class Identity {
@@ -522,7 +529,7 @@ referenced.
     Instantiability : Abstract
     name : IntegrityMethod
 .. properties ..
-    comment : xsd:string [..1]
+    <b>comment </b>: xsd:string [..1]
 }
 class MediaType {
 <b>Summary</b>
@@ -549,8 +556,8 @@ human-readable and smaller serialized representation of the Elements.
     Instantiability : Concrete
     name : NamespaceMap
 .. properties ..
-    namespace : xsd:anyURI [..1]
-    prefix : xsd:string [..1]
+    <b>namespace </b>: xsd:anyURI [..1]
+    <b>prefix </b>: xsd:string [..1]
 }
 class Organization {
 <b>Summary</b>
@@ -575,9 +582,9 @@ TODO
     SubclassOf : none
     name : Payload
 .. properties ..
-    creationInfo : CreationInformation [0..1]
-    imports : ExternalMap 
-    namespaces : NamespaceMap 
+    <b>creationInfo </b>: CreationInformation [0..1]
+    <b>imports </b>: ExternalMap 
+    <b>namespaces </b>: NamespaceMap 
 }
 "CreationInformation" <-[dashed,thickness=4]-- "Payload::creationInfo"
 "ExternalMap" <-[dashed,thickness=4]-- "Payload::imports"
@@ -615,10 +622,10 @@ that one Element is related to one or more other Elements in some way.
     SubclassOf : Element
     name : Relationship
 .. properties ..
-    completeness : RelationshipCompleteness [0..1]
-    from : Element [1..1]
-    relationshipType : RelationshipType [..1]
-    to : Element [1..]
+    <b>completeness </b>: RelationshipCompleteness [0..1]
+    <b>from </b>: Element [1..1]
+    <b>relationshipType </b>: RelationshipType [..1]
+    <b>to </b>: Element [1..]
 }
 "RelationshipCompleteness" <-[dashed,thickness=4]-- "Relationship::completeness"
 "Element" <-[dashed,thickness=4]-- "Relationship::from"
@@ -648,7 +655,7 @@ of transfer of SPDX Elements.
     SubclassOf : Bundle
     name : SpdxDocument
 .. properties ..
-    name : xsd:string [1..1]
+    <b>name </b>: xsd:string [1..1]
 }
 class Tool {
 <b>Summary</b>
@@ -664,6 +671,8 @@ particular function.
 .. properties ..
 }
 }
+}
+together {
 ' vocabulary
 ' classes
 together {
@@ -689,7 +698,7 @@ for themselves.
     SubclassOf : LicenseExpression
     name : ConjunctiveLicenseSet
 .. properties ..
-    child : LicenseExpression [2..]
+    <b>child </b>: LicenseExpression [2..]
 }
 "LicenseExpression" <-[dashed,thickness=4]-- "ConjunctiveLicenseSet::child"
 class CopyrightText {
@@ -704,7 +713,7 @@ than NONE or NOASSERTION.
     SubclassOf : CopyrightTextField
     name : CopyrightText
 .. properties ..
-    text : xsd:string [1..1]
+    <b>text </b>: xsd:string [1..1]
 }
 abstract CopyrightTextField {
 <b>Summary</b>
@@ -776,7 +785,7 @@ SPDX License Expression Syntax by the `OR` operator.
     SubclassOf : LicenseExpression
     name : DisjunctiveLicenseSet
 .. properties ..
-    child : LicenseExpression [2..]
+    <b>child </b>: LicenseExpression [2..]
 }
 "LicenseExpression" <-[dashed,thickness=4]-- "DisjunctiveLicenseSet::child"
 abstract License {
@@ -797,17 +806,17 @@ rather than xsd:string
     SubclassOf : LicenseExpression
     name : License
 .. properties ..
-    comment : xsd:string [0..1]
-    example : xsd:string [0..1]
-    isDeprecatedLicenseId : xsd:boolean [0..1]
-    isFsfLibre : xsd:boolean [0..1]
-    isOsiApproved : xsd:boolean [0..1]
-    licenseId : xsd:string [1..1]
-    licenseText : xsd:string [1..1]
-    name : xsd:string [1..1]
-    obsoletedBy : xsd:string [0..1]
-    seeAlso : xsd:anyURI [0..1]
-    standardLicenseHeader : xsd:string [0..1]
+    <b>comment </b>: xsd:string [0..1]
+    <b>example </b>: xsd:string [0..1]
+    <b>isDeprecatedLicenseId </b>: xsd:boolean [0..1]
+    <b>isFsfLibre </b>: xsd:boolean [0..1]
+    <b>isOsiApproved </b>: xsd:boolean [0..1]
+    <b>licenseId </b>: xsd:string [1..1]
+    <b>licenseText </b>: xsd:string [1..1]
+    <b>name </b>: xsd:string [1..1]
+    <b>obsoletedBy </b>: xsd:string [0..1]
+    <b>seeAlso </b>: xsd:anyURI [0..1]
+    <b>standardLicenseHeader </b>: xsd:string [0..1]
 }
 abstract LicenseException {
 <b>Summary</b>
@@ -871,8 +880,8 @@ properties
     SubclassOf : License
     name : ListedLicense
 .. properties ..
-    deprecatedVersion : xsd:string [0..1]
-    listVersionAdded : xsd:string [0..1]
+    <b>deprecatedVersion </b>: xsd:string [0..1]
+    <b>listVersionAdded </b>: xsd:string [0..1]
 }
 class ListedLicenseException {
 <b>Summary</b>
@@ -994,7 +1003,7 @@ to attribute to a "later version" operator for a particular License.
     SubclassOf : LicenseExpression
     name : OrLaterOperator
 .. properties ..
-    license : License [1..1]
+    <b>license </b>: License [1..1]
 }
 "License" <-[dashed,thickness=4]-- "OrLaterOperator::license"
 class WithExceptionOperator {
@@ -1012,6 +1021,8 @@ MISSING
 .. properties ..
 }
 }
+}
+together {
 ' vocabulary
 enum DependencyLinkType {
 <b>Summary</b>
@@ -1019,11 +1030,11 @@ TODO
 <b>Description</b>
 TODO
 .. entries ..
-    dynamic : TODOdescription
-    noAssertion : TODOdescription
-    other : TODOdescription
-    static : TODOdescription
-    tool : TODOdescription
+    <b>dynamic</b>: TODOdescription
+    <b>noAssertion</b>: TODOdescription
+    <b>other</b>: TODOdescription
+    <b>static</b>: TODOdescription
+    <b>tool</b>: TODOdescription
 }
 enum DependencyRequirement {
 <b>Summary</b>
@@ -1031,11 +1042,11 @@ TODO
 <b>Description</b>
 TODO
 .. entries ..
-    noAssertion : TODOdescription
-    optional : TODOdescription
-    preRequisite : TODOdescription
-    provided : TODOdescription
-    required : TODOdescription
+    <b>noAssertion</b>: TODOdescription
+    <b>optional</b>: TODOdescription
+    <b>preRequisite</b>: TODOdescription
+    <b>provided</b>: TODOdescription
+    <b>required</b>: TODOdescription
 }
 enum DependencyScope {
 <b>Summary</b>
@@ -1043,12 +1054,12 @@ TODO
 <b>Description</b>
 TODO
 .. entries ..
-    build : TODOdescription
-    dev : TODOdescription
-    noAssertion : TODOdescription
-    other : TODOdescription
-    runtime : TODOdescription
-    test : TODOdescription
+    <b>build</b>: TODOdescription
+    <b>dev</b>: TODOdescription
+    <b>noAssertion</b>: TODOdescription
+    <b>other</b>: TODOdescription
+    <b>runtime</b>: TODOdescription
+    <b>test</b>: TODOdescription
 }
 enum SoftwarePurpose {
 <b>Summary</b>
@@ -1056,25 +1067,25 @@ TODO
 <b>Description</b>
 TODO
 .. entries ..
-    application : TODOdescription
-    archive : TODOdescription
-    bom : TODOdescription
-    configuration : TODOdescription
-    container : TODOdescription
-    data : TODOdescription
-    device : TODOdescription
-    documentation : TODOdescription
-    executable : TODOdescription
-    file : TODOdescription
-    firmware : TODOdescription
-    framework : TODOdescription
-    install : TODOdescription
-    library : TODOdescription
-    module : TODOdescription
-    operatingSystem : TODOdescription
-    other : TODOdescription
-    patch : TODOdescription
-    source : TODOdescription
+    <b>application</b>: TODOdescription
+    <b>archive</b>: TODOdescription
+    <b>bom</b>: TODOdescription
+    <b>configuration</b>: TODOdescription
+    <b>container</b>: TODOdescription
+    <b>data</b>: TODOdescription
+    <b>device</b>: TODOdescription
+    <b>documentation</b>: TODOdescription
+    <b>executable</b>: TODOdescription
+    <b>file</b>: TODOdescription
+    <b>firmware</b>: TODOdescription
+    <b>framework</b>: TODOdescription
+    <b>install</b>: TODOdescription
+    <b>library</b>: TODOdescription
+    <b>module</b>: TODOdescription
+    <b>operatingSystem</b>: TODOdescription
+    <b>other</b>: TODOdescription
+    <b>patch</b>: TODOdescription
+    <b>source</b>: TODOdescription
 }
 ' classes
 together {
@@ -1087,9 +1098,9 @@ TODO This is about the File class.
     SubclassOf : Core:Artifact
     name : File
 .. properties ..
-    contentIdentifier : xsd:anyURI [0..1]
-    contentType : MediaType [0..1]
-    filePurpose : SoftwarePurpose [0..]
+    <b>contentIdentifier </b>: xsd:anyURI [0..1]
+    <b>contentType </b>: MediaType [0..1]
+    <b>filePurpose </b>: SoftwarePurpose [0..]
 }
 "MediaType" <-[dashed,thickness=4]-- "File::contentType"
 "SoftwarePurpose" <-[dashed,thickness=4]-- "File::filePurpose"
@@ -1131,12 +1142,12 @@ Cardinality: Optional, zero or many.
     SubclassOf : Core:Artifact
     name : Package
 .. properties ..
-    contentIdentifier : xsd:anyURI [0..1]
-    downloadLocation : xsd:anyURI [0..1]
-    homePage : xsd:anyURI [0..1]
-    packagePurpose : SoftwarePurpose [0..]
-    packageUrl : xsd:anyURI [0..1]
-    packageVersion : xsd:string [0..1]
+    <b>contentIdentifier </b>: xsd:anyURI [0..1]
+    <b>downloadLocation </b>: xsd:anyURI [0..1]
+    <b>homePage </b>: xsd:anyURI [0..1]
+    <b>packagePurpose </b>: SoftwarePurpose [0..]
+    <b>packageUrl </b>: xsd:anyURI [0..1]
+    <b>packageVersion </b>: xsd:string [0..1]
 }
 "SoftwarePurpose" <-[dashed,thickness=4]-- "Package::packagePurpose"
 class Sbom {
@@ -1162,10 +1173,10 @@ TODO
     SubclassOf : Core:Artifact
     name : Snippet
 .. properties ..
-    byteRange : positiveIntegerRange [0..1]
-    contentIdentifier : xsd:anyURI [0..1]
-    lineRange : positiveIntegerRange [0..1]
-    snippetPurpose : SoftwarePurpose [0..]
+    <b>byteRange </b>: positiveIntegerRange [0..1]
+    <b>contentIdentifier </b>: xsd:anyURI [0..1]
+    <b>lineRange </b>: positiveIntegerRange [0..1]
+    <b>snippetPurpose </b>: SoftwarePurpose [0..]
 }
 "positiveIntegerRange" <-[dashed,thickness=4]-- "Snippet::byteRange"
 "positiveIntegerRange" <-[dashed,thickness=4]-- "Snippet::lineRange"
@@ -1180,13 +1191,14 @@ TODO
     SubclassOf : Core:Relationship
     name : SoftwareDependencyRelationship
 .. properties ..
-    linkType : DependencyLinkType [1..1]
-    requirement : DependencyRequirement [1..1]
-    scope : DependencyScope [1..1]
+    <b>linkType </b>: DependencyLinkType [1..1]
+    <b>requirement </b>: DependencyRequirement [1..1]
+    <b>scope </b>: DependencyScope [1..1]
 }
 "DependencyLinkType" <-[dashed,thickness=4]-- "SoftwareDependencyRelationship::linkType"
 "DependencyRequirement" <-[dashed,thickness=4]-- "SoftwareDependencyRelationship::requirement"
 "DependencyScope" <-[dashed,thickness=4]-- "SoftwareDependencyRelationship::scope"
+}
 }
 "Package" <|-[thickness=4]--- "AIPackage" : Software:Package
 "Element" <|-[thickness=4]--- "Build" : Core:Element

@@ -1,4 +1,6 @@
 @startuml
+skinparam packageStyle rectangle
+set separator none
 ' vocabulary
 enum AnnotationType {
 <b>Summary</b>
@@ -6,10 +8,10 @@ Specifies the type of an annotation.
 <b>Description</b>
 AnnotationType specifies the type of an annotation.
 .. entries ..
-    other : Used to store extra information about an Element which is not part of a
+    <b>other</b>: Used to store extra information about an Element which is not part of a
 Review (e.g. extra information provided during the creation of the
 Element).
-    review : Used when someone reviews the Element.
+    <b>review</b>: Used when someone reviews the Element.
 }
 enum ExternalIdentifierType {
 <b>Summary</b>
@@ -17,10 +19,10 @@ Specifies the type of an external identifier.
 <b>Description</b>
 ExteralIdentifierType specifies the type of an external identifier.
 .. entries ..
-    cpe22 : https://cpe.mitre.org/files/cpe-specification\_2.2.pdf
-    cpe23 : https://nvlpubs.nist.gov/nistpubs/Legacy/IR/nistir7695.pdf
-    email : TODOdescription
-    gitoid : gitoid stands for Git Object ID. A gitoid of typeblob is a unique hash
+    <b>cpe22</b>: https://cpe.mitre.org/files/cpe-specification\_2.2.pdf
+    <b>cpe23</b>: https://nvlpubs.nist.gov/nistpubs/Legacy/IR/nistir7695.pdf
+    <b>email</b>: TODOdescription
+    <b>gitoid</b>: gitoid stands for Git Object ID. A gitoid of typeblob is a unique hash
 of a software artifact. Git relies on a Merkle Tree to index stored
 objects. See https://git-scm.com/book/en/v2/Git-Internals-Git-Objects.
 GitBOM is an amalgam of the terms "Git" and "SBOM". GitBOM is a
@@ -29,11 +31,11 @@ Merkle Tree, and is inspired by Git. A gitoid may refer to either the
 software artifact or its GitBOM document; this ambiguity exists because
 the GitBOM document is itself an artifact, and the gitoid of that
 artifact is its valid locator.
-    other : Used when the type doesn't match any of the other options.
-    pkgUrl : https://github.com/package-url/purl-spec
-    swhid : https://docs.softwareheritage.org/devel/swh-model/persistent-identifiers.html
-    swid : https://www.ietf.org/archive/id/draft-ietf-sacm-coswid-21.html#section-2.3
-    urlScheme : TODOdescription
+    <b>other</b>: Used when the type doesn't match any of the other options.
+    <b>pkgUrl</b>: https://github.com/package-url/purl-spec
+    <b>swhid</b>: https://docs.softwareheritage.org/devel/swh-model/persistent-identifiers.html
+    <b>swid</b>: https://www.ietf.org/archive/id/draft-ietf-sacm-coswid-21.html#section-2.3
+    <b>urlScheme</b>: TODOdescription
 }
 enum ExternalReferenceType {
 <b>Summary</b>
@@ -41,15 +43,15 @@ Specifies the type of an external reference.
 <b>Description</b>
 ExteralReferenceType specifies the type of an external reference.
 .. entries ..
-    altDownloadLocation : A reference to an alternative download location.
-    altWebPage : A reference to an alternative web page.
-    other : Used when the type doesn't match any of the other options.
-    securityAdvisory : A reference to the published security advisory (where advisory as
+    <b>altDownloadLocation</b>: A reference to an alternative download location.
+    <b>altWebPage</b>: A reference to an alternative web page.
+    <b>other</b>: Used when the type doesn't match any of the other options.
+    <b>securityAdvisory</b>: A reference to the published security advisory (where advisory as
 defined per ISO 29147:2018). It may contain an impact statement whether
 a package (e.g. a product) is or is not affected by vulnerabilities.
-    securityFix : A reference to the source code with a fix for the vulnerability (e.g., a
+    <b>securityFix</b>: A reference to the source code with a fix for the vulnerability (e.g., a
 GitHub commit).
-    securityOther : Used when the reference is security related but doesn't match any of the
+    <b>securityOther</b>: Used when the reference is security related but doesn't match any of the
 other types.
 }
 enum HashAlgorithm {
@@ -61,26 +63,26 @@ A HashAlgorithm is a mathematical algorithm that maps data of arbitrary
 size to a bit string (the hash) and is a one-way function, that is, a
 function which is practically infeasible to invert.
 .. entries ..
-    blake2b256 : TODOdescription
-    blake2b384 : TODOdescription
-    blake2b512 : TODOdescription
-    blake3 : TODOdescription
-    md2 : TODOdescription
-    md4 : TODOdescription
-    md5 : TODOdescription
-    md6 : TODOdescription
-    other : TODOdescription
-    sha1 : TODOdescription
-    sha224 : TODOdescription
-    sha256 : TODOdescription
-    sha384 : TODOdescription
-    sha3_224 : TODOdescription
-    sha3_256 : TODOdescription
-    sha3_384 : TODOdescription
-    sha3_512 : TODOdescription
-    sha512 : TODOdescription
-    spdxPvcSha1 : TODOdescription
-    spdxPvcSha256 : TODOdescription
+    <b>blake2b256</b>: TODOdescription
+    <b>blake2b384</b>: TODOdescription
+    <b>blake2b512</b>: TODOdescription
+    <b>blake3</b>: TODOdescription
+    <b>md2</b>: TODOdescription
+    <b>md4</b>: TODOdescription
+    <b>md5</b>: TODOdescription
+    <b>md6</b>: TODOdescription
+    <b>other</b>: TODOdescription
+    <b>sha1</b>: TODOdescription
+    <b>sha224</b>: TODOdescription
+    <b>sha256</b>: TODOdescription
+    <b>sha384</b>: TODOdescription
+    <b>sha3_224</b>: TODOdescription
+    <b>sha3_256</b>: TODOdescription
+    <b>sha3_384</b>: TODOdescription
+    <b>sha3_512</b>: TODOdescription
+    <b>sha512</b>: TODOdescription
+    <b>spdxPvcSha1</b>: TODOdescription
+    <b>spdxPvcSha256</b>: TODOdescription
 }
 enum RelationshipCompleteness {
 <b>Summary</b>
@@ -90,9 +92,9 @@ or if there is made no assertion either way.
 RelationshipCompleteness indicates whether a relationship is complete or
 known to be incomplete or if there is made no assertion either way.
 .. entries ..
-    complete : The relationship is known to be exhaustive.
-    incomplete : The relationship is known not to be exhaustive.
-    unknown : There can be made no assertion about the completeness of the
+    <b>complete</b>: The relationship is known to be exhaustive.
+    <b>incomplete</b>: The relationship is known not to be exhaustive.
+    <b>unknown</b>: There can be made no assertion about the completeness of the
 relationship.
 }
 enum RelationshipType {
@@ -107,54 +109,54 @@ SPDXDocument and another SPDXDocument.
 Build Profile specific RelationshipType descriptions can be found
 [here](https://github.com/spdx/spdx-3-build-profile/blob/main/model/relationships.md)
 .. entries ..
-    amends : TODOdescription
-    ancestor : TODOdescription
-    buildChildOf : Build instance that was created from another build instance
-    buildConfigOf : Build configuration of the build instance
-    buildDependency : TODOdescription
-    buildHostOf : Element in which the build instance runs on
-    buildInputOf : Input to the build instance
-    buildInvokedBy : Agent that invoked the build
-    buildOnBehalfOf : Person for which buildInvokedBy is acting on behalf of
-    buildOutputOf : Output of the build instance
-    buildTool : TODOdescription
-    buildToolOf : Build tool used in the build instance
-    contains : TODOdescription
-    copy : TODOdescription
-    dataFile : TODOdescription
-    dependencyManifest : TODOdescription
-    dependsOn : TODOdescription
-    descendant : TODOdescription
-    describes : TODOdescription
-    devDependency : TODOdescription
-    devTool : TODOdescription
-    distributionArtifact : TODOdescription
-    documentation : TODOdescription
-    dynamicLink : TODOdescription
-    example : TODOdescription
-    expandedFromArchive : TODOdescription
-    fileAdded : TODOdescription
-    fileDeleted : TODOdescription
-    fileModified : TODOdescription
-    generates : TODOdescription
-    metafile : TODOdescription
-    optionalComponent : TODOdescription
-    optionalDependency : TODOdescription
-    other : TODOdescription
-    packages : TODOdescription
-    patch : TODOdescription
-    prerequisite : TODOdescription
-    providedDependency : TODOdescription
-    requirementFor : TODOdescription
-    runtimeDependency : TODOdescription
-    specificationFor : TODOdescription
-    staticLink : TODOdescription
-    suppliedBy : TODOdescription
-    test : TODOdescription
-    testCase : TODOdescription
-    testDependency : TODOdescription
-    testTool : TODOdescription
-    variant : TODOdescription
+    <b>amends</b>: TODOdescription
+    <b>ancestor</b>: TODOdescription
+    <b>buildChildOf</b>: Build instance that was created from another build instance
+    <b>buildConfigOf</b>: Build configuration of the build instance
+    <b>buildDependency</b>: TODOdescription
+    <b>buildHostOf</b>: Element in which the build instance runs on
+    <b>buildInputOf</b>: Input to the build instance
+    <b>buildInvokedBy</b>: Agent that invoked the build
+    <b>buildOnBehalfOf</b>: Person for which buildInvokedBy is acting on behalf of
+    <b>buildOutputOf</b>: Output of the build instance
+    <b>buildTool</b>: TODOdescription
+    <b>buildToolOf</b>: Build tool used in the build instance
+    <b>contains</b>: TODOdescription
+    <b>copy</b>: TODOdescription
+    <b>dataFile</b>: TODOdescription
+    <b>dependencyManifest</b>: TODOdescription
+    <b>dependsOn</b>: TODOdescription
+    <b>descendant</b>: TODOdescription
+    <b>describes</b>: TODOdescription
+    <b>devDependency</b>: TODOdescription
+    <b>devTool</b>: TODOdescription
+    <b>distributionArtifact</b>: TODOdescription
+    <b>documentation</b>: TODOdescription
+    <b>dynamicLink</b>: TODOdescription
+    <b>example</b>: TODOdescription
+    <b>expandedFromArchive</b>: TODOdescription
+    <b>fileAdded</b>: TODOdescription
+    <b>fileDeleted</b>: TODOdescription
+    <b>fileModified</b>: TODOdescription
+    <b>generates</b>: TODOdescription
+    <b>metafile</b>: TODOdescription
+    <b>optionalComponent</b>: TODOdescription
+    <b>optionalDependency</b>: TODOdescription
+    <b>other</b>: TODOdescription
+    <b>packages</b>: TODOdescription
+    <b>patch</b>: TODOdescription
+    <b>prerequisite</b>: TODOdescription
+    <b>providedDependency</b>: TODOdescription
+    <b>requirementFor</b>: TODOdescription
+    <b>runtimeDependency</b>: TODOdescription
+    <b>specificationFor</b>: TODOdescription
+    <b>staticLink</b>: TODOdescription
+    <b>suppliedBy</b>: TODOdescription
+    <b>test</b>: TODOdescription
+    <b>testCase</b>: TODOdescription
+    <b>testDependency</b>: TODOdescription
+    <b>testTool</b>: TODOdescription
+    <b>variant</b>: TODOdescription
 }
 ' classes
 together {
@@ -168,10 +170,10 @@ An Annotation is an assertion made in relation to one or more elements.
     SubclassOf : Element
     name : Annotation
 .. properties ..
-    annotationType : AnnotationType [1..1]
-    contentType : MediaType 
-    statement : xsd:string [0..1]
-    subject : Element [1..1]
+    <b>annotationType </b>: AnnotationType [1..1]
+    <b>contentType </b>: MediaType 
+    <b>statement </b>: xsd:string [0..1]
+    <b>subject </b>: Element [1..1]
 }
 "AnnotationType" <-[dashed,thickness=4]-- "Annotation::annotationType"
 "MediaType" <-[dashed,thickness=4]-- "Annotation::contentType"
@@ -186,9 +188,9 @@ TODO
     SubclassOf : Payload
     name : AnonymousPayload
 .. properties ..
-    creationInfo : CreationInformation [0..1]
-    imports : ExternalMap 
-    namespaces : NamespaceMap 
+    <b>creationInfo </b>: CreationInformation [0..1]
+    <b>imports </b>: ExternalMap 
+    <b>namespaces </b>: NamespaceMap 
 }
 "CreationInformation" <-[dashed,thickness=4]-- "AnonymousPayload::creationInfo"
 "ExternalMap" <-[dashed,thickness=4]-- "AnonymousPayload::imports"
@@ -205,7 +207,7 @@ of data.
     SubclassOf : Element
     name : Artifact
 .. properties ..
-    originatedBy : Identity [0..]
+    <b>originatedBy </b>: Identity [0..]
 }
 "Identity" <-[dashed,thickness=4]-- "Artifact::originatedBy"
 class Bom {
@@ -234,7 +236,7 @@ A bundle is a collection of Elements that have a shared context.
     SubclassOf : ElementCollection
     name : Bundle
 .. properties ..
-    context : xsd:string [..1]
+    <b>context </b>: xsd:string [..1]
 }
 class CreationInformation {
 <b>Summary</b>
@@ -246,13 +248,13 @@ Element, and when and how it was created.
     Instantiability : Concrete
     name : CreationInformation
 .. properties ..
-    comment : xsd:string [0..1]
-    created : xsd:dateTime 
-    createdBy : Entity [1..]
-    createdUsing : Tool [0..]
-    dataLicense : xsd:string 
-    profile : ProfileIdentifier [1..]
-    specVersion : SemVer 
+    <b>comment </b>: xsd:string [0..1]
+    <b>created </b>: xsd:dateTime 
+    <b>createdBy </b>: Entity [1..]
+    <b>createdUsing </b>: Tool [0..]
+    <b>dataLicense </b>: xsd:string 
+    <b>profile </b>: ProfileIdentifier [1..]
+    <b>specVersion </b>: SemVer 
 }
 "Entity" <-[dashed,thickness=4]-- "CreationInformation::createdBy"
 "Tool" <-[dashed,thickness=4]-- "CreationInformation::createdUsing"
@@ -273,16 +275,16 @@ all explicit and inter-relatable content objects.
     SubclassOf : Payload
     name : Element
 .. properties ..
-    comment : xsd:string [..1]
-    creationInfo : CreationInformation [1..1]
-    description : xsd:string [..1]
-    extensions : Extension 
-    externalIdentifiers : ExternalIdentifier 
-    externalReferences : ExternalReference 
-    name : xsd:string [..1]
-    spdxId : xsd:anyURI [1..1]
-    summary : xsd:string [..1]
-    verifiedUsing : IntegrityMethod 
+    <b>comment </b>: xsd:string [..1]
+    <b>creationInfo </b>: CreationInformation [1..1]
+    <b>description </b>: xsd:string [..1]
+    <b>extensions </b>: Extension 
+    <b>externalIdentifiers </b>: ExternalIdentifier 
+    <b>externalReferences </b>: ExternalReference 
+    <b>name </b>: xsd:string [..1]
+    <b>spdxId </b>: xsd:anyURI [1..1]
+    <b>summary </b>: xsd:string [..1]
+    <b>verifiedUsing </b>: IntegrityMethod 
 }
 "CreationInformation" <-[dashed,thickness=4]-- "Element::creationInfo"
 "Extension" <-[dashed,thickness=4]-- "Element::extensions"
@@ -300,10 +302,10 @@ unifying context.
     SubclassOf : Element
     name : ElementCollection
 .. properties ..
-    element : Element [1..]
-    imports : ExternalMap 
-    namespaces : NamespaceMap 
-    rootElement : Element [1..]
+    <b>element </b>: Element [1..]
+    <b>imports </b>: ExternalMap 
+    <b>namespaces </b>: NamespaceMap 
+    <b>rootElement </b>: Element [1..]
 }
 "Element" <-[dashed,thickness=4]-- "ElementCollection::element"
 "ExternalMap" <-[dashed,thickness=4]-- "ElementCollection::imports"
@@ -331,9 +333,9 @@ SPDX-3.0 content that uniquely identifies an Element.
     Instantiability : Concrete
     name : ExternalIdentifier
 .. properties ..
-    comment : xsd:string [0..1]
-    externalIdentifierType : ExternalIdentifierType [1..1]
-    identifier : xsd:string [1..1]
+    <b>comment </b>: xsd:string [0..1]
+    <b>externalIdentifierType </b>: ExternalIdentifierType [1..1]
+    <b>identifier </b>: xsd:string [1..1]
 }
 "ExternalIdentifierType" <-[dashed,thickness=4]-- "ExternalIdentifier::externalIdentifierType"
 class ExternalMap {
@@ -350,9 +352,9 @@ provenance, where to retrieve it, and how to verify its integrity.
     SubclassOf : none
     name : ExternalMap
 .. properties ..
-    externalId : xsd:anyURI [1..1]
-    locationHint : xsd:anyURI [..1]
-    verifiedUsing : IntegrityMethod 
+    <b>externalId </b>: xsd:anyURI [1..1]
+    <b>locationHint </b>: xsd:anyURI [..1]
+    <b>verifiedUsing </b>: IntegrityMethod 
 }
 "IntegrityMethod" <-[dashed,thickness=4]-- "ExternalMap::verifiedUsing"
 class ExternalReference {
@@ -366,10 +368,10 @@ SPDX-3.0 content that provides additional characteristics of an Element.
     SubclassOf : none
     name : ExternalReference
 .. properties ..
-    comment : xsd:string [..1]
-    contentType : MediaType [..1]
-    externalReferenceType : ExternalReferenceType [..1]
-    locator : xsd:anyURI 
+    <b>comment </b>: xsd:string [..1]
+    <b>contentType </b>: MediaType [..1]
+    <b>externalReferenceType </b>: ExternalReferenceType [..1]
+    <b>locator </b>: xsd:anyURI 
 }
 "MediaType" <-[dashed,thickness=4]-- "ExternalReference::contentType"
 "ExternalReferenceType" <-[dashed,thickness=4]-- "ExternalReference::externalReferenceType"
@@ -386,8 +388,8 @@ checking of data.
     SubclassOf : IntegrityMethod
     name : Hash
 .. properties ..
-    algorithm : HashAlgorithm [1..1]
-    hashValue : xsd:string [1..1]
+    <b>algorithm </b>: HashAlgorithm [1..1]
+    <b>hashValue </b>: xsd:string [1..1]
 }
 "HashAlgorithm" <-[dashed,thickness=4]-- "Hash::algorithm"
 class Identity {
@@ -417,7 +419,7 @@ referenced.
     Instantiability : Abstract
     name : IntegrityMethod
 .. properties ..
-    comment : xsd:string [..1]
+    <b>comment </b>: xsd:string [..1]
 }
 class MediaType {
 <b>Summary</b>
@@ -444,8 +446,8 @@ human-readable and smaller serialized representation of the Elements.
     Instantiability : Concrete
     name : NamespaceMap
 .. properties ..
-    namespace : xsd:anyURI [..1]
-    prefix : xsd:string [..1]
+    <b>namespace </b>: xsd:anyURI [..1]
+    <b>prefix </b>: xsd:string [..1]
 }
 class Organization {
 <b>Summary</b>
@@ -470,9 +472,9 @@ TODO
     SubclassOf : none
     name : Payload
 .. properties ..
-    creationInfo : CreationInformation [0..1]
-    imports : ExternalMap 
-    namespaces : NamespaceMap 
+    <b>creationInfo </b>: CreationInformation [0..1]
+    <b>imports </b>: ExternalMap 
+    <b>namespaces </b>: NamespaceMap 
 }
 "CreationInformation" <-[dashed,thickness=4]-- "Payload::creationInfo"
 "ExternalMap" <-[dashed,thickness=4]-- "Payload::imports"
@@ -510,10 +512,10 @@ that one Element is related to one or more other Elements in some way.
     SubclassOf : Element
     name : Relationship
 .. properties ..
-    completeness : RelationshipCompleteness [0..1]
-    from : Element [1..1]
-    relationshipType : RelationshipType [..1]
-    to : Element [1..]
+    <b>completeness </b>: RelationshipCompleteness [0..1]
+    <b>from </b>: Element [1..1]
+    <b>relationshipType </b>: RelationshipType [..1]
+    <b>to </b>: Element [1..]
 }
 "RelationshipCompleteness" <-[dashed,thickness=4]-- "Relationship::completeness"
 "Element" <-[dashed,thickness=4]-- "Relationship::from"
@@ -543,7 +545,7 @@ of transfer of SPDX Elements.
     SubclassOf : Bundle
     name : SpdxDocument
 .. properties ..
-    name : xsd:string [1..1]
+    <b>name </b>: xsd:string [1..1]
 }
 class Tool {
 <b>Summary</b>

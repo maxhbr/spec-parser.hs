@@ -38,6 +38,15 @@ class Pumlifyable a where
         debugM "writePumlToFile" ("writePumlToFile: done write " ++ puml)
 
         return puml
+    writeAndRenderPumlToFile :: a -> IO FilePath
+    writeAndRenderPumlToFile a = do
+        puml <- writePumlToFile a
+
+        debugM "writePumlsToDir" "writePumlsToDir: render svg ..."
+        callProcess "plantuml" ["-tsvg", puml] 
+        debugM "writePumlsToDir" "writePumlsToDir: done"
+
+        return puml
 
 writeCommentTextForSummaryAndDescription :: BasicSpdx3 a => Handle -> a -> Text -> IO ()
 writeCommentTextForSummaryAndDescription h a n = do
@@ -137,7 +146,5 @@ writePumlsToDir :: FilePath -> Spdx3Model -> IO ()
 writePumlsToDir outDir model = do
     createDirectoryIfMissing True outDir
     setCurrentDirectory outDir
-    puml <- writePumlToFile model
-    debugM "writePumlsToDir" "writePumlsToDir: render svg ..."
-    callProcess "plantuml" ["-tsvg", puml] 
-    debugM "writePumlsToDir" "writePumlsToDir: done"
+    _ <- writeAndRenderPumlToFile model
+    mapM_ writeAndRenderPumlToFile ((map snd . Map.assocs . _profiles) model)

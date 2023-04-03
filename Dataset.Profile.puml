@@ -1,0 +1,34 @@
+@startuml
+skinparam packageStyle rectangle
+set separator none
+' vocabulary
+' classes
+together {
+class Dataset {
+<b>Summary</b>
+Provides information about the fields in the Dataset profile.
+<b>Description</b>
+Metadata information that can be added to a a dataset that maybe used in
+a software or to train/test an AI package
+.. metadata ..
+    Instatiability : Concrete
+    SubclassOf : Software:Package
+    name : Dataset
+.. properties ..
+    <b>anonymizationMethodUsed </b>: xsd:string [0..]
+    <b>confidentialityLevelType </b>: ConfidentialityLevelType [0..]
+    <b>dataCollectionProcess </b>: xsd:string [0..]
+    <b>dataPreprocessingSteps </b>: xsd:string [0..1]
+    <b>datasetNoise </b>: xsd:string [0..1]
+    <b>datasetSize </b>: xsd:string [0..1]
+    <b>datasetUpdateMechanism </b>: xsd:string [0..1]
+    <b>intendedUse </b>: xsd:string [0..1]
+    <b>knownBiases </b>: xsd:string [0..1]
+    <b>sensitivePersonalInformationType </b>: PresenceType [0..]
+    <b>sensors </b>: xsd:string [0..]
+}
+"ConfidentialityLevelType" <-[dashed,thickness=4]-- "Dataset::confidentialityLevelType"
+"PresenceType" <-[dashed,thickness=4]-- "Dataset::sensitivePersonalInformationType"
+}
+"Package" <|-[thickness=4]--- "Dataset" : Software:Package
+@enduml

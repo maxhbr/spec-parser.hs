@@ -1,0 +1,280 @@
+@startuml
+skinparam packageStyle rectangle
+set separator none
+' vocabulary
+enum CvssV2SeverityType {
+<b>Summary</b>
+TODO
+<b>Description</b>
+A CvssV2SeverityType is TODO
+.. entries ..
+    <b>high</b>: TODOdescription
+    <b>low</b>: TODOdescription
+    <b>medium</b>: TODOdescription
+    <b>noAssertion</b>: TODOdescription
+}
+enum CvssV3SeverityType {
+<b>Summary</b>
+TODO
+<b>Description</b>
+A CvssV3SeverityType is TODO
+.. entries ..
+    <b>critical</b>: TODOdescription
+    <b>high</b>: TODOdescription
+    <b>low</b>: TODOdescription
+    <b>medium</b>: TODOdescription
+    <b>noAssertion</b>: TODOdescription
+    <b>none</b>: TODOdescription
+}
+enum ExploitCatalogListedType {
+<b>Summary</b>
+TODO
+<b>Description</b>
+A ExploitCatalogListedType is TODO
+.. entries ..
+    <b>no</b>: TODOdescription
+    <b>noAssertion</b>: TODOdescription
+    <b>yes</b>: TODOdescription
+}
+enum GenericVulnerabilitySeverityType {
+<b>Summary</b>
+TODO
+<b>Description</b>
+A GenericVulnerabilitySeverityType is TODO
+.. entries ..
+    <b>critical</b>: TODOdescription
+    <b>high</b>: TODOdescription
+    <b>low</b>: TODOdescription
+    <b>medium</b>: TODOdescription
+    <b>noAssertion</b>: TODOdescription
+}
+enum SsvcDecisionType {
+<b>Summary</b>
+TODO
+<b>Description</b>
+A SsvcDecisionType is TODO
+.. entries ..
+    <b>act</b>: TODOdescription
+    <b>attend</b>: TODOdescription
+    <b>track</b>: TODOdescription
+    <b>track*</b>: TODOdescription - TODO: can entries have asterisks?
+}
+enum VexJustificationType {
+<b>Summary</b>
+TODO
+<b>Description</b>
+A VexJustificationType is TODO
+.. entries ..
+    <b>componentNotPresent</b>: TODOdescription
+    <b>inlineMitigationsAlreadyExist</b>: TODOdescription
+    <b>vulnerableCodeCannotBeControlledByAdversary</b>: TODOdescription
+    <b>vulnerableCodeNotInExecutePath</b>: TODOdescription
+    <b>vulnerableCodeNotPresent</b>: TODOdescription
+}
+enum VexStatusType {
+<b>Summary</b>
+TODO
+<b>Description</b>
+A VexStatusType is TODO
+.. entries ..
+    <b>affected</b>: TODOdescription
+    <b>fixed</b>: TODOdescription
+    <b>notAffected</b>: TODOdescription
+    <b>underInvestigation</b>: TODOdescription
+}
+' classes
+together {
+class CvssV2VulnerabilityCategorization {
+<b>Summary</b>
+TODO
+<b>Description</b>
+A CvssV2VulnerabilityCategorization is TODO
+.. metadata ..
+    Instantiability : Concrete
+    SubclassOf : VulnerabilityCategorization
+    name : CvssV2VulnerabilityCategorization
+.. properties ..
+    <b>score </b>: xsd:string [0..1]
+    <b>severity - TODO: there are more properties of this name </b>: CvssV2SeverityType [1..1]
+    <b>vector </b>: xsd:string [0..1]
+}
+"CvssV2SeverityType" <-[dashed,thickness=4]-- "CvssV2VulnerabilityCategorization::severity - TODO: there are more properties of this name"
+class CvssV3VulnerabilityCategorization {
+<b>Summary</b>
+TODO
+<b>Description</b>
+A CvssV3VulnerabilityCategorization is TODO
+.. metadata ..
+    Instantiability : Concrete
+    SubclassOf : VulnerabilityCategorization
+    name : CvssV3VulnerabilityCategorization
+.. properties ..
+    <b>score </b>: xsd:string [0..1]
+    <b>severity - TODO: there are more properties of this name </b>: CvssV3SeverityType [1..1]
+    <b>vector </b>: xsd:string [0..1]
+}
+"CvssV3SeverityType" <-[dashed,thickness=4]-- "CvssV3VulnerabilityCategorization::severity - TODO: there are more properties of this name"
+class EpssVulnerabilityCategorization {
+<b>Summary</b>
+TODO
+<b>Description</b>
+An EpssVulnerabilityCategorization is TODO
+.. metadata ..
+    Instantiability : Concrete
+    SubclassOf : VulnerabilityCategorization
+    name : EpssVulnerabilityCategorization
+.. properties ..
+    <b>probability </b>: xsd:nonNegativeInteger [1..1]
+    <b>severity - TODO: there are more properties of this name </b>: xsd:string [0..1]
+}
+class ExploitCatalogVulnerabilityCategorization {
+<b>Summary</b>
+TODO
+<b>Description</b>
+An ExploitCatalogVulnerabilityCategorization is TODO
+.. metadata ..
+    Instantiability : Concrete
+    SubclassOf : VulnerabilityCategorization
+    name : ExploitCatalogVulnerabilityCategorization
+.. properties ..
+    <b>listed </b>: ExploitCatalogListedType [1..1]
+    <b>locator - TODO: there is already a property of this name in
+core:ExternalReference </b>: xsd:anyURI [1..1]
+}
+"ExploitCatalogListedType" <-[dashed,thickness=4]-- "ExploitCatalogVulnerabilityCategorization::listed"
+class ExternalSecurityIdentifier {
+<b>Summary</b>
+TODO
+<b>Description</b>
+An ExternalSecurityIdentifier is TODO
+.. metadata ..
+    Instantiability : Concrete
+    SubclassOf : ExternalIdentifier
+    name : ExternalSecurityIdentifier
+.. properties ..
+    <b>source - TODO: there is already a property of that name in
+VulnerabilityCategorization </b>: xsd:string 
+}
+class GenericVulnerabilityCategorization {
+<b>Summary</b>
+TODO
+<b>Description</b>
+A GenericVulnerabilityCategorization is TODO
+.. metadata ..
+    Instantiability : Concrete
+    SubclassOf : VulnerabilityCategorization
+    name : GenericVulnerabilityCategorization
+.. properties ..
+    <b>exploitability </b>: xsd:string [0..1]
+    <b>severity - TODO: there are more properties of this name </b>: GenericVulnerabilitySeverityType [0..1]
+}
+"GenericVulnerabilitySeverityType" <-[dashed,thickness=4]-- "GenericVulnerabilityCategorization::severity - TODO: there are more properties of this name"
+class OtherVulnerabilityCategorization {
+<b>Summary</b>
+TODO
+<b>Description</b>
+An OtherVulnerabilityCategorization is TODO
+.. metadata ..
+    Instantiability : Concrete
+    SubclassOf : VulnerabilityCategorization
+    name : OtherVulnerabilityCategorization
+.. properties ..
+    <b>categorizationType </b>: xsd:string [1..1]
+    <b>categorizationValue </b>: xsd:string [1..1]
+}
+class SsvcVulnerabilityCategorization {
+<b>Summary</b>
+TODO
+<b>Description</b>
+An SsvcVulnerabilityCategorization is TODO
+.. metadata ..
+    Instantiability : Concrete
+    SubclassOf : VulnerabilityCategorization
+    name : SsvcVulnerabilityCategorization
+.. properties ..
+    <b>decision </b>: SsvcDecisionType [1..1]
+}
+"SsvcDecisionType" <-[dashed,thickness=4]-- "SsvcVulnerabilityCategorization::decision"
+class VexAffectedVulnerabilityCategorization {
+<b>Summary</b>
+TODO
+<b>Description</b>
+An VexAffectedVulnerabilityCategorization is TODO
+.. metadata ..
+    Instantiability : Concrete
+    SubclassOf : VexVulnerabilityCategorization
+    name : VexAffectedVulnerabilityCategorization
+.. properties ..
+    <b>actionStatement </b>: xsd:string [1..1]
+}
+class VexNotAffectedVulnerabilityCategorization {
+<b>Summary</b>
+TODO
+<b>Description</b>
+An VexNotAffectedVulnerabilityCategorization is TODO
+.. metadata ..
+    Instantiability : Concrete
+    SubclassOf : VexVulnerabilityCategorization
+    name : VexNotAffectedVulnerabilityCategorization
+.. properties ..
+    <b>impact </b>: xsd:string [1..1]
+    <b>justification </b>: VexJustificationType [1..1]
+}
+"VexJustificationType" <-[dashed,thickness=4]-- "VexNotAffectedVulnerabilityCategorization::justification"
+class VexVulnerabilityCategorization {
+<b>Summary</b>
+TODO
+<b>Description</b>
+An VexVulnerabilityCategorization is TODO
+.. metadata ..
+    Instantiability : Concrete
+    SubclassOf : VulnerabilityCategorization
+    name : VexVulnerabilityCategorization
+.. properties ..
+    <b>status </b>: VexStatusType [1..1]
+}
+"VexStatusType" <-[dashed,thickness=4]-- "VexVulnerabilityCategorization::status"
+class Vulnerability {
+<b>Summary</b>
+TODO
+<b>Description</b>
+A Vulnerability is TODO
+.. metadata ..
+    Instantiability : Concrete
+    SubclassOf : Artifact
+    name : Vulnerability
+.. properties ..
+    <b>categorizations </b>: VulnerabilityCategorization [0..]
+    <b>modified </b>: xsd:datetime [0..1]
+    <b>published </b>: xsd:datetime [0..1]
+    <b>withdrawn </b>: xsd:datetime [0..1]
+}
+"VulnerabilityCategorization" <-[dashed,thickness=4]-- "Vulnerability::categorizations"
+class VulnerabilityCategorization {
+<b>Summary</b>
+TODO
+<b>Description</b>
+A VulnerabilityCategorization is TODO
+.. metadata ..
+    Instantiability : Concrete
+    SubclassOf : none
+    name : VulnerabilityCategorization
+.. properties ..
+    <b>categorizationDate </b>: xsd:datetime [1..1]
+    <b>source - TODO: there is already a property of that name in
+ExternalSecurityIdentifier </b>: xsd:anyURI [0..1]
+}
+}
+"VulnerabilityCategorization" <|-[thickness=4]- "CvssV2VulnerabilityCategorization"
+"VulnerabilityCategorization" <|-[thickness=4]- "CvssV3VulnerabilityCategorization"
+"VulnerabilityCategorization" <|-[thickness=4]- "EpssVulnerabilityCategorization"
+"VulnerabilityCategorization" <|-[thickness=4]- "ExploitCatalogVulnerabilityCategorization"
+"ExternalIdentifier" <|-[thickness=4]- "ExternalSecurityIdentifier"
+"VulnerabilityCategorization" <|-[thickness=4]- "GenericVulnerabilityCategorization"
+"VulnerabilityCategorization" <|-[thickness=4]- "OtherVulnerabilityCategorization"
+"VulnerabilityCategorization" <|-[thickness=4]- "SsvcVulnerabilityCategorization"
+"VexVulnerabilityCategorization" <|-[thickness=4]- "VexAffectedVulnerabilityCategorization"
+"VexVulnerabilityCategorization" <|-[thickness=4]- "VexNotAffectedVulnerabilityCategorization"
+"VulnerabilityCategorization" <|-[thickness=4]- "VexVulnerabilityCategorization"
+"Artifact" <|-[thickness=4]- "Vulnerability"
+@enduml

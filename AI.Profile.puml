@@ -15,31 +15,33 @@ unknown
 }
 enum SafetyRiskAssessmentType {
 <b>Summary</b>
-Categories of safety risk impact of application ie. Serious, high,
-medium low
+Categories of safety risk impact of application ie. serious, high,
+medium, low.
 <b>Description</b>
 Describes the different safety risk type values that can be used to
 describe the safety risk of the AI software
 .. entries ..
     <b>high</b>: The second highest level of risk posed by the AI software as given by
-Article 20 of EC Regulation No 765/2008.
+[Article 20 of EC Regulation No
+765/2008](https://ec.europa.eu/docsroom/documents/17107/attachments/1/translations/en/renditions/pdf).
     <b>low</b>: Low/no risk is contained in the AI software.
-    <b>medium</b>: The third highest level of risk as given by Article 20 of EC
-Regulation  
-No 765/2008.
+    <b>medium</b>: The third highest level of risk as given by [Article 20 of EC Regulation
+No
+765/2008](https://ec.europa.eu/docsroom/documents/17107/attachments/1/translations/en/renditions/pdf).
     <b>serious</b>: The highest level of risk that is contained for a AI software as given
-by Article 20 of Regulation 765/2008/EC
+by [Article 20 of Regulation
+765/2008/EC](https://ec.europa.eu/docsroom/documents/17107/attachments/1/translations/en/renditions/pdf).
 }
 ' classes
 together {
 class AIPackage {
 <b>Summary</b>
-MISSING
+Provides information about the fields in the AI package profile.
 <b>Description</b>
 Metadata information that can be added to a package to describe an AI
 application or trained AI model.
 .. metadata ..
-    Instantiability : Concrete
+    Instatiability : Concrete
     SubclassOf : Software:Package
     name : AIPackage
 .. properties ..
@@ -55,13 +57,13 @@ application or trained AI model.
     <b>metricsDecisionThresholds </b>: xsd:string [0..]
     <b>modelExplainabilityMechanisms </b>: xsd:string [0..1]
     <b>safetyRiskAssessment </b>: SafetyRiskAssessmentType [0..1]
-    <b>sensitivePersonalInformation </b>: SensitivePersonalInformationType [0..1]
+    <b>sensitivePersonalInformation </b>: PresenceType [0..1]
     <b>standardsCompliance </b>: xsd:string [0..]
     <b>typeOfModel </b>: xsd:string [0..]
 }
 "PresenceType" <-[dashed,thickness=4]-- "AIPackage::autonomyType"
 "SafetyRiskAssessmentType" <-[dashed,thickness=4]-- "AIPackage::safetyRiskAssessment"
-"SensitivePersonalInformationType" <-[dashed,thickness=4]-- "AIPackage::sensitivePersonalInformation"
+"PresenceType" <-[dashed,thickness=4]-- "AIPackage::sensitivePersonalInformation"
 }
 "Package" <|-[thickness=4]--- "AIPackage" : Software:Package
 @enduml

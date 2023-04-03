@@ -16,31 +16,33 @@ unknown
 }
 enum SafetyRiskAssessmentType {
 <b>Summary</b>
-Categories of safety risk impact of application ie. Serious, high,
-medium low
+Categories of safety risk impact of application ie. serious, high,
+medium, low.
 <b>Description</b>
 Describes the different safety risk type values that can be used to
 describe the safety risk of the AI software
 .. entries ..
     <b>high</b>: The second highest level of risk posed by the AI software as given by
-Article 20 of EC Regulation No 765/2008.
+[Article 20 of EC Regulation No
+765/2008](https://ec.europa.eu/docsroom/documents/17107/attachments/1/translations/en/renditions/pdf).
     <b>low</b>: Low/no risk is contained in the AI software.
-    <b>medium</b>: The third highest level of risk as given by Article 20 of EC
-Regulation  
-No 765/2008.
+    <b>medium</b>: The third highest level of risk as given by [Article 20 of EC Regulation
+No
+765/2008](https://ec.europa.eu/docsroom/documents/17107/attachments/1/translations/en/renditions/pdf).
     <b>serious</b>: The highest level of risk that is contained for a AI software as given
-by Article 20 of Regulation 765/2008/EC
+by [Article 20 of Regulation
+765/2008/EC](https://ec.europa.eu/docsroom/documents/17107/attachments/1/translations/en/renditions/pdf).
 }
 ' classes
 together {
 class AIPackage {
 <b>Summary</b>
-MISSING
+Provides information about the fields in the AI package profile.
 <b>Description</b>
 Metadata information that can be added to a package to describe an AI
 application or trained AI model.
 .. metadata ..
-    Instantiability : Concrete
+    Instatiability : Concrete
     SubclassOf : Software:Package
     name : AIPackage
 .. properties ..
@@ -56,13 +58,13 @@ application or trained AI model.
     <b>metricsDecisionThresholds </b>: xsd:string [0..]
     <b>modelExplainabilityMechanisms </b>: xsd:string [0..1]
     <b>safetyRiskAssessment </b>: SafetyRiskAssessmentType [0..1]
-    <b>sensitivePersonalInformation </b>: SensitivePersonalInformationType [0..1]
+    <b>sensitivePersonalInformation </b>: PresenceType [0..1]
     <b>standardsCompliance </b>: xsd:string [0..]
     <b>typeOfModel </b>: xsd:string [0..]
 }
 "PresenceType" <-[dashed,thickness=4]-- "AIPackage::autonomyType"
 "SafetyRiskAssessmentType" <-[dashed,thickness=4]-- "AIPackage::safetyRiskAssessment"
-"SensitivePersonalInformationType" <-[dashed,thickness=4]-- "AIPackage::sensitivePersonalInformation"
+"PresenceType" <-[dashed,thickness=4]-- "AIPackage::sensitivePersonalInformation"
 }
 }
 together {
@@ -676,6 +678,37 @@ together {
 ' vocabulary
 ' classes
 together {
+class Dataset {
+<b>Summary</b>
+Provides information about the fields in the Dataset profile.
+<b>Description</b>
+Metadata information that can be added to a a dataset that maybe used in
+a software or to train/test an AI package
+.. metadata ..
+    Instatiability : Concrete
+    SubclassOf : Software:Package
+    name : Dataset
+.. properties ..
+    <b>anonymizationMethodUsed </b>: xsd:string [0..]
+    <b>confidentialityLevelType </b>: ConfidentialityLevelType [0..]
+    <b>dataCollectionProcess </b>: xsd:string [0..]
+    <b>dataPreprocessingSteps </b>: xsd:string [0..1]
+    <b>datasetNoise </b>: xsd:string [0..1]
+    <b>datasetSize </b>: xsd:string [0..1]
+    <b>datasetUpdateMechanism </b>: xsd:string [0..1]
+    <b>intendedUse </b>: xsd:string [0..1]
+    <b>knownBiases </b>: xsd:string [0..1]
+    <b>sensitivePersonalInformationType </b>: PresenceType [0..]
+    <b>sensors </b>: xsd:string [0..]
+}
+"ConfidentialityLevelType" <-[dashed,thickness=4]-- "Dataset::confidentialityLevelType"
+"PresenceType" <-[dashed,thickness=4]-- "Dataset::sensitivePersonalInformationType"
+}
+}
+together {
+' vocabulary
+' classes
+together {
 class ConjunctiveLicenseSet {
 <b>Summary</b>
 Portion of a LicenseExpression representing a set of licensing
@@ -1024,6 +1057,272 @@ MISSING
 }
 together {
 ' vocabulary
+enum CvssV2SeverityType {
+<b>Summary</b>
+TODO
+<b>Description</b>
+A CvssV2SeverityType is TODO
+.. entries ..
+    <b>high</b>: TODOdescription
+    <b>low</b>: TODOdescription
+    <b>medium</b>: TODOdescription
+    <b>noAssertion</b>: TODOdescription
+}
+enum CvssV3SeverityType {
+<b>Summary</b>
+TODO
+<b>Description</b>
+A CvssV3SeverityType is TODO
+.. entries ..
+    <b>critical</b>: TODOdescription
+    <b>high</b>: TODOdescription
+    <b>low</b>: TODOdescription
+    <b>medium</b>: TODOdescription
+    <b>noAssertion</b>: TODOdescription
+    <b>none</b>: TODOdescription
+}
+enum ExploitCatalogListedType {
+<b>Summary</b>
+TODO
+<b>Description</b>
+A ExploitCatalogListedType is TODO
+.. entries ..
+    <b>no</b>: TODOdescription
+    <b>noAssertion</b>: TODOdescription
+    <b>yes</b>: TODOdescription
+}
+enum GenericVulnerabilitySeverityType {
+<b>Summary</b>
+TODO
+<b>Description</b>
+A GenericVulnerabilitySeverityType is TODO
+.. entries ..
+    <b>critical</b>: TODOdescription
+    <b>high</b>: TODOdescription
+    <b>low</b>: TODOdescription
+    <b>medium</b>: TODOdescription
+    <b>noAssertion</b>: TODOdescription
+}
+enum SsvcDecisionType {
+<b>Summary</b>
+TODO
+<b>Description</b>
+A SsvcDecisionType is TODO
+.. entries ..
+    <b>act</b>: TODOdescription
+    <b>attend</b>: TODOdescription
+    <b>track</b>: TODOdescription
+    <b>track*</b>: TODOdescription - TODO: can entries have asterisks?
+}
+enum VexJustificationType {
+<b>Summary</b>
+TODO
+<b>Description</b>
+A VexJustificationType is TODO
+.. entries ..
+    <b>componentNotPresent</b>: TODOdescription
+    <b>inlineMitigationsAlreadyExist</b>: TODOdescription
+    <b>vulnerableCodeCannotBeControlledByAdversary</b>: TODOdescription
+    <b>vulnerableCodeNotInExecutePath</b>: TODOdescription
+    <b>vulnerableCodeNotPresent</b>: TODOdescription
+}
+enum VexStatusType {
+<b>Summary</b>
+TODO
+<b>Description</b>
+A VexStatusType is TODO
+.. entries ..
+    <b>affected</b>: TODOdescription
+    <b>fixed</b>: TODOdescription
+    <b>notAffected</b>: TODOdescription
+    <b>underInvestigation</b>: TODOdescription
+}
+' classes
+together {
+class CvssV2VulnerabilityCategorization {
+<b>Summary</b>
+TODO
+<b>Description</b>
+A CvssV2VulnerabilityCategorization is TODO
+.. metadata ..
+    Instantiability : Concrete
+    SubclassOf : VulnerabilityCategorization
+    name : CvssV2VulnerabilityCategorization
+.. properties ..
+    <b>score </b>: xsd:string [0..1]
+    <b>severity - TODO: there are more properties of this name </b>: CvssV2SeverityType [1..1]
+    <b>vector </b>: xsd:string [0..1]
+}
+"CvssV2SeverityType" <-[dashed,thickness=4]-- "CvssV2VulnerabilityCategorization::severity - TODO: there are more properties of this name"
+class CvssV3VulnerabilityCategorization {
+<b>Summary</b>
+TODO
+<b>Description</b>
+A CvssV3VulnerabilityCategorization is TODO
+.. metadata ..
+    Instantiability : Concrete
+    SubclassOf : VulnerabilityCategorization
+    name : CvssV3VulnerabilityCategorization
+.. properties ..
+    <b>score </b>: xsd:string [0..1]
+    <b>severity - TODO: there are more properties of this name </b>: CvssV3SeverityType [1..1]
+    <b>vector </b>: xsd:string [0..1]
+}
+"CvssV3SeverityType" <-[dashed,thickness=4]-- "CvssV3VulnerabilityCategorization::severity - TODO: there are more properties of this name"
+class EpssVulnerabilityCategorization {
+<b>Summary</b>
+TODO
+<b>Description</b>
+An EpssVulnerabilityCategorization is TODO
+.. metadata ..
+    Instantiability : Concrete
+    SubclassOf : VulnerabilityCategorization
+    name : EpssVulnerabilityCategorization
+.. properties ..
+    <b>probability </b>: xsd:nonNegativeInteger [1..1]
+    <b>severity - TODO: there are more properties of this name </b>: xsd:string [0..1]
+}
+class ExploitCatalogVulnerabilityCategorization {
+<b>Summary</b>
+TODO
+<b>Description</b>
+An ExploitCatalogVulnerabilityCategorization is TODO
+.. metadata ..
+    Instantiability : Concrete
+    SubclassOf : VulnerabilityCategorization
+    name : ExploitCatalogVulnerabilityCategorization
+.. properties ..
+    <b>listed </b>: ExploitCatalogListedType [1..1]
+    <b>locator - TODO: there is already a property of this name in
+core:ExternalReference </b>: xsd:anyURI [1..1]
+}
+"ExploitCatalogListedType" <-[dashed,thickness=4]-- "ExploitCatalogVulnerabilityCategorization::listed"
+class ExternalSecurityIdentifier {
+<b>Summary</b>
+TODO
+<b>Description</b>
+An ExternalSecurityIdentifier is TODO
+.. metadata ..
+    Instantiability : Concrete
+    SubclassOf : ExternalIdentifier
+    name : ExternalSecurityIdentifier
+.. properties ..
+    <b>source - TODO: there is already a property of that name in
+VulnerabilityCategorization </b>: xsd:string 
+}
+class GenericVulnerabilityCategorization {
+<b>Summary</b>
+TODO
+<b>Description</b>
+A GenericVulnerabilityCategorization is TODO
+.. metadata ..
+    Instantiability : Concrete
+    SubclassOf : VulnerabilityCategorization
+    name : GenericVulnerabilityCategorization
+.. properties ..
+    <b>exploitability </b>: xsd:string [0..1]
+    <b>severity - TODO: there are more properties of this name </b>: GenericVulnerabilitySeverityType [0..1]
+}
+"GenericVulnerabilitySeverityType" <-[dashed,thickness=4]-- "GenericVulnerabilityCategorization::severity - TODO: there are more properties of this name"
+class OtherVulnerabilityCategorization {
+<b>Summary</b>
+TODO
+<b>Description</b>
+An OtherVulnerabilityCategorization is TODO
+.. metadata ..
+    Instantiability : Concrete
+    SubclassOf : VulnerabilityCategorization
+    name : OtherVulnerabilityCategorization
+.. properties ..
+    <b>categorizationType </b>: xsd:string [1..1]
+    <b>categorizationValue </b>: xsd:string [1..1]
+}
+class SsvcVulnerabilityCategorization {
+<b>Summary</b>
+TODO
+<b>Description</b>
+An SsvcVulnerabilityCategorization is TODO
+.. metadata ..
+    Instantiability : Concrete
+    SubclassOf : VulnerabilityCategorization
+    name : SsvcVulnerabilityCategorization
+.. properties ..
+    <b>decision </b>: SsvcDecisionType [1..1]
+}
+"SsvcDecisionType" <-[dashed,thickness=4]-- "SsvcVulnerabilityCategorization::decision"
+class VexAffectedVulnerabilityCategorization {
+<b>Summary</b>
+TODO
+<b>Description</b>
+An VexAffectedVulnerabilityCategorization is TODO
+.. metadata ..
+    Instantiability : Concrete
+    SubclassOf : VexVulnerabilityCategorization
+    name : VexAffectedVulnerabilityCategorization
+.. properties ..
+    <b>actionStatement </b>: xsd:string [1..1]
+}
+class VexNotAffectedVulnerabilityCategorization {
+<b>Summary</b>
+TODO
+<b>Description</b>
+An VexNotAffectedVulnerabilityCategorization is TODO
+.. metadata ..
+    Instantiability : Concrete
+    SubclassOf : VexVulnerabilityCategorization
+    name : VexNotAffectedVulnerabilityCategorization
+.. properties ..
+    <b>impact </b>: xsd:string [1..1]
+    <b>justification </b>: VexJustificationType [1..1]
+}
+"VexJustificationType" <-[dashed,thickness=4]-- "VexNotAffectedVulnerabilityCategorization::justification"
+class VexVulnerabilityCategorization {
+<b>Summary</b>
+TODO
+<b>Description</b>
+An VexVulnerabilityCategorization is TODO
+.. metadata ..
+    Instantiability : Concrete
+    SubclassOf : VulnerabilityCategorization
+    name : VexVulnerabilityCategorization
+.. properties ..
+    <b>status </b>: VexStatusType [1..1]
+}
+"VexStatusType" <-[dashed,thickness=4]-- "VexVulnerabilityCategorization::status"
+class Vulnerability {
+<b>Summary</b>
+TODO
+<b>Description</b>
+A Vulnerability is TODO
+.. metadata ..
+    Instantiability : Concrete
+    SubclassOf : Artifact
+    name : Vulnerability
+.. properties ..
+    <b>categorizations </b>: VulnerabilityCategorization [0..]
+    <b>modified </b>: xsd:datetime [0..1]
+    <b>published </b>: xsd:datetime [0..1]
+    <b>withdrawn </b>: xsd:datetime [0..1]
+}
+"VulnerabilityCategorization" <-[dashed,thickness=4]-- "Vulnerability::categorizations"
+class VulnerabilityCategorization {
+<b>Summary</b>
+TODO
+<b>Description</b>
+A VulnerabilityCategorization is TODO
+.. metadata ..
+    Instantiability : Concrete
+    SubclassOf : none
+    name : VulnerabilityCategorization
+.. properties ..
+    <b>categorizationDate </b>: xsd:datetime [1..1]
+    <b>source - TODO: there is already a property of that name in
+ExternalSecurityIdentifier </b>: xsd:anyURI [0..1]
+}
+}
+}
+together {
+' vocabulary
 enum DependencyLinkType {
 <b>Summary</b>
 TODO
@@ -1063,35 +1362,43 @@ TODO
 }
 enum SoftwarePurpose {
 <b>Summary</b>
-TODO
+Provides information about the primary purpose of an Element.
 <b>Description</b>
-TODO
+This field provides information about the primary purpose of an Element.
+Software Purpose is intrinsic to how the Element is being used rather
+than the content of the Element. This field is a reasonable estimate of
+the most likely usage of the Element from the producer and consumer
+perspective from which both parties can draw conclusions about the
+context in which the Element exists.
 .. entries ..
-    <b>application</b>: TODOdescription
-    <b>archive</b>: TODOdescription
+    <b>application</b>: the Element is a software application
+    <b>archive</b>: the Element refers to an archived collection of files (.tar, .zip, etc)
     <b>bom</b>: TODOdescription
     <b>configuration</b>: TODOdescription
-    <b>container</b>: TODOdescription
+    <b>container</b>: the Element refers to a container image which can be used by a container
+runtime application
     <b>data</b>: TODOdescription
-    <b>device</b>: TODOdescription
+    <b>device</b>: the Element refers to a chipset, processor, or electronic board
     <b>documentation</b>: TODOdescription
     <b>executable</b>: TODOdescription
-    <b>file</b>: TODOdescription
-    <b>firmware</b>: TODOdescription
-    <b>framework</b>: TODOdescription
-    <b>install</b>: TODOdescription
-    <b>library</b>: TODOdescription
+    <b>file</b>: the Element is a single file which can be independently distributed
+(configuration file, statically linked binary, Kubernetes deployment,
+etc)
+    <b>firmware</b>: the Element provides low level control over a device's hardware
+    <b>framework</b>: the Element is a software framework
+    <b>install</b>: the Element is used to install software on disk
+    <b>library</b>: the Element is a software library
     <b>module</b>: TODOdescription
-    <b>operatingSystem</b>: TODOdescription
-    <b>other</b>: TODOdescription
+    <b>operatingSystem</b>: the Element refers to an operating system
+    <b>other</b>: the Element doesn't fit into any of the other categories
     <b>patch</b>: TODOdescription
-    <b>source</b>: TODOdescription
+    <b>source</b>: the Element is a collection of source files
 }
 ' classes
 together {
 class File {
 <b>Summary</b>
-MISSING
+TODO
 <b>Description</b>
 TODO This is about the File class.
 .. metadata ..
@@ -1106,21 +1413,12 @@ TODO This is about the File class.
 "SoftwarePurpose" <-[dashed,thickness=4]-- "File::filePurpose"
 class Package {
 <b>Summary</b>
-MISSING
+Refers to any unit of content that can be associated with a distribution
+of software.
 <b>Description</b>
-If SPDX information is being used to describe packages, then one
-instance of the package information per package being described shall
-exist. It provides important meta information about the package as a
-whole. Packages are an abstract concept that can be used to refer to any
-distribution of software, typically consisting of one or more files and
-capable of containing sub-packages. Starting with SPDX 2.0, it is not
-necessary to have a package wrapping a set of files.
-
 A package refers to any unit of content that can be associated with a
 distribution of software. Typically, a package is composed of one or
-more files. An SPDX document may, but is not required to, provide
-details about the individual files comprising a package (see File.md).
-
+more files.  
 Any of the following non-limiting examples may be (but are not required
 to be) represented in SPDX as a package:
 
@@ -1133,11 +1431,6 @@ to be) represented in SPDX as a package:
 -   a Git repository snapshot from a particular point in time
 
 Note that some of these could be represented in SPDX as a file as well.
-
-In an SPDX document, relationship elements can be used to indicate
-relationships between packages, such as dependency relationships.
-
-Cardinality: Optional, zero or many.
 .. metadata ..
     SubclassOf : Core:Artifact
     name : Package
@@ -1152,13 +1445,13 @@ Cardinality: Optional, zero or many.
 "SoftwarePurpose" <-[dashed,thickness=4]-- "Package::packagePurpose"
 class Sbom {
 <b>Summary</b>
-MISSING
+A collection of SPDX Elements describing a single package.
 <b>Description</b>
-A Software Bill of Materials (SBOM) is a container for a grouping of
-SPDX-3.0 content characterizing details about a software product. This
-could include details of the content and composition of the product,
-provenence details of the product and/or its composition, licensing
-information, known quality or security issues, etc.
+A Software Bill of Materials (SBOM) is a collection of SPDX Elements
+describing a single package. This could include details of the content
+and composition of the product, provenance details of the product and/or
+its composition, licensing information, known quality or security
+issues, etc.
 .. metadata ..
     SubclassOf : Core:Bom
     name : Sbom
@@ -1166,9 +1459,13 @@ information, known quality or security issues, etc.
 }
 class Snippet {
 <b>Summary</b>
-MISSING
+Describes a certain part of a file.
 <b>Description</b>
-TODO
+A Snippet describes a certain part of a file and can be used when the
+file is known to have some content that has been included from another
+original source. Snippets are useful for denoting when part of a file
+may have been originally created under another license or copied from a
+place with a known vulnerability.
 .. metadata ..
     SubclassOf : Core:Artifact
     name : Snippet
@@ -1217,6 +1514,7 @@ TODO
 "Element" <|-[thickness=4]- "Relationship"
 "Bundle" <|-[thickness=4]- "SpdxDocument"
 "Entity" <|-[thickness=4]- "Tool"
+"Package" <|-[thickness=4]--- "Dataset" : Software:Package
 "LicenseExpression" <|-[thickness=4]- "ConjunctiveLicenseSet"
 "CopyrightTextField" <|-[thickness=4]- "CopyrightText"
 "License" <|-[thickness=4]- "CustomLicense"
@@ -1232,6 +1530,18 @@ TODO
 "CopyrightTextField" <|-[thickness=4]- "NoneText"
 "LicenseExpression" <|-[thickness=4]- "OrLaterOperator"
 "LicenseExpression" <|-[thickness=4]- "WithExceptionOperator"
+"VulnerabilityCategorization" <|-[thickness=4]- "CvssV2VulnerabilityCategorization"
+"VulnerabilityCategorization" <|-[thickness=4]- "CvssV3VulnerabilityCategorization"
+"VulnerabilityCategorization" <|-[thickness=4]- "EpssVulnerabilityCategorization"
+"VulnerabilityCategorization" <|-[thickness=4]- "ExploitCatalogVulnerabilityCategorization"
+"ExternalIdentifier" <|-[thickness=4]- "ExternalSecurityIdentifier"
+"VulnerabilityCategorization" <|-[thickness=4]- "GenericVulnerabilityCategorization"
+"VulnerabilityCategorization" <|-[thickness=4]- "OtherVulnerabilityCategorization"
+"VulnerabilityCategorization" <|-[thickness=4]- "SsvcVulnerabilityCategorization"
+"VexVulnerabilityCategorization" <|-[thickness=4]- "VexAffectedVulnerabilityCategorization"
+"VexVulnerabilityCategorization" <|-[thickness=4]- "VexNotAffectedVulnerabilityCategorization"
+"VulnerabilityCategorization" <|-[thickness=4]- "VexVulnerabilityCategorization"
+"Artifact" <|-[thickness=4]- "Vulnerability"
 "Artifact" <|-[thickness=4]--- "File" : Core:Artifact
 "Artifact" <|-[thickness=4]--- "Package" : Core:Artifact
 "Bom" <|-[thickness=4]--- "Sbom" : Core:Bom

@@ -4,7 +4,7 @@
             "AIPackage": {
                 "Description": "Metadata information that can be added to a package to describe an AI\napplication or trained AI model.",
                 "Metadata": {
-                    "Instantiability": "Concrete",
+                    "Instatiability": "Concrete",
                     "SubclassOf": "Software:Package",
                     "name": "AIPackage"
                 },
@@ -68,7 +68,7 @@
                     "sensitivePersonalInformation": {
                         "maxCount": "1",
                         "minCount": "0",
-                        "type": "SensitivePersonalInformationType"
+                        "type": "PresenceType"
                     },
                     "standardsCompliance": {
                         "minCount": "0",
@@ -79,6 +79,7 @@
                         "type": "xsd:string"
                     }
                 },
+                "Summary": "Provides information about the fields in the AI package profile.",
                 "_title": "AIPackage"
             }
         },
@@ -98,16 +99,6 @@
                 "Summary": "Field captures if a human is in the in the loop",
                 "_title": "autonomyType"
             },
-            "dataPreprocessingSteps": {
-                "Description": "This is a free form text field that describes the preprocessing steps\ndone to the data before training the model(s) contained in the AI\nsoftware",
-                "Metadata": {
-                    "Nature": "DataProperty",
-                    "Range": "xsd:string",
-                    "name": "dataPreprocessingSteps"
-                },
-                "Summary": "Field captures Capture all the preprocessing steps done before the model\ntraining",
-                "_title": "dataPreprocessingSteps"
-            },
             "energyConsumption": {
                 "Description": "Text field that captures the energy consumption during training and\noperation of the AI model. a.k.a training energy consumption, inference\nenergy consumption",
                 "Metadata": {
@@ -119,7 +110,7 @@
                 "_title": "energyConsumption"
             },
             "hyperparameters": {
-                "Description": "The field records all or the important hyperparameters of each model.\nThe hyperparmeters are listed as\nhyperparameter1*name:hyperparameter1*value, hyperparameter2*name:\nhyperparameter2*value etc. If there are multiple models, the\nhyperparameters of each model are listed in a separate line.",
+                "Description": "The field records all or the important hyperparameters (i.e., parameter\nvalues of the machine learning model that are used to control the\nlearning process. For example, the optimizer and learning rate used used\nduring the training of the machine learning model) of each model. The\nhyperparmeters are listed as hyperparameter1*name:hyperparameter1*value,\nhyperparameter2*name: hyperparameter2*value etc. If there are multiple\nmodels, the hyperparameters of each model are listed in a separate line.",
                 "Metadata": {
                     "Nature": "DataProperty",
                     "Range": "xsd:string",
@@ -149,13 +140,13 @@
                 "_title": "informationAboutTraining"
             },
             "limitations": {
-                "Description": "Text field that captures the limitations of the AI software. The\nlimitations are expressed as free form text.",
+                "Description": "Field captures any limitations of the AI Package (or of the AI models\npresent in the AI package) one wishes to note down. For instance, if the\nAI package cannot be used on datasets from certain demography. The\nlimitations are expressed as free form text.",
                 "Metadata": {
                     "Nature": "DataProperty",
                     "Range": "xsd:string",
                     "name": "limitations"
                 },
-                "Summary": "Field captures any limitations of the AI Package (the AI models\ncontained) one wishes to note down.",
+                "Summary": "Text field that captures the limitations of the AI software.",
                 "_title": "limitations"
             },
             "metrics": {
@@ -169,14 +160,24 @@
                 "_title": "metrics"
             },
             "metricsDecisionThresholds": {
-                "Description": "Each metric might be computed based on a decision threshold (for\ninstance precision or recall is typically computed by splitting checking\nif the probability of the outcome is &gt;0.5). This field records the\ndecision threshold in comma separated values. E.g.,\nmetric*1:decsion*threshold, metric\\_2:decision threshold. If there are\nmultiple models each line represents each model’s metrics and decision\nthreshold.",
+                "Description": "Each metric might be computed based on a decision threshold (for\ninstance precision or recall is typically computed by splitting checking\nif the probability of the outcome is &gt;0.5). This field records the\ndecision threshold in comma separated values. E.g.,\nmetric*1:decsion*threshold, metric\\_2:decision threshold. If there are\nmultiple models each line represents each model’s metrics and decision\nthreshold. Each decision threshold should match with the metrics field\ndefined in the AI Package.",
                 "Metadata": {
                     "Nature": "DataProperty",
                     "Range": "xsd:string",
                     "name": "metricsDecisionThresholds"
                 },
-                "Summary": "Field captures the thresholds that are being used for metric computation\nof the metrics described in the metrics field. Should match with the\nMetrics field and depends on the metrics field",
+                "Summary": "Field that captures the thresholds being used for computation of those\nmetrics described in the Metrics field.",
                 "_title": "metricsDecisionThresholds"
+            },
+            "modelDataPreprocessingSteps": {
+                "Description": "This is a free form text field that describes the preprocessing steps\ndone to the data before training the model(s) contained in the AI\nsoftware",
+                "Metadata": {
+                    "Nature": "DataProperty",
+                    "Range": "xsd:string",
+                    "name": "modelDataPreprocessingSteps"
+                },
+                "Summary": "Field captures all the preprocessing steps done before the model\ntraining",
+                "_title": "modelDataPreprocessingSteps"
             },
             "modelExplainabilityMechanisms": {
                 "Description": "This is a free form text field that lists the different explainability\nmechanisms (such a SHAP, or other model specific explainability\nmechanisms) that can be used to explain the model in a comma separated\nfashion.",
@@ -189,13 +190,13 @@
                 "_title": "modelExplainabilityMechanisms"
             },
             "safetyRiskAssessmentType": {
-                "Description": "It is a field of type safeRiskAssessment and the possible values are\nserious, high, medium, low. These risk types are defined in accordance\nwith Article 20 of EC Regulation  \nNo 765/2008.",
+                "Description": "It is a field of type safeRiskAssessment and the possible values are\nserious, high, medium, low. These risk types are defined in accordance\nwith Article 20 of [EC Regulation No\n765/2008](https://ec.europa.eu/docsroom/documents/17107/attachments/1/translations/en/renditions/pdf).",
                 "Metadata": {
                     "Nature": "DataProperty",
                     "Range": "SafetyRiskAssessmentType",
                     "name": "safetyRiskAssessment"
                 },
-                "Summary": "Field categorizes safety risk impact of AI software in the terms of\nSerious, high, medium low",
+                "Summary": "Field categorizes safety risk impact of AI software in the terms of\nserious, high, medium, low.",
                 "_title": "safetyRiskAssessmentType"
             },
             "sensitivePersonalInformationType": {
@@ -209,13 +210,13 @@
                 "_title": "sensitivePersonalInformationType"
             },
             "standardsCompliance": {
-                "Description": "Text field that captures the list of standards that the AI software\ncomplies with. This could include both published and unpublished\nstandards including ISO, IEEE, ETSI standards. Each standard is listed\non a separate line or in a single line with each standard being comma\nseparated.",
+                "Description": "Text field that captures the list of standards that the AI software\ncomplies with. This could include both published and unpublished\nstandards including ISO, IEEE, ETSI standards. These standards could\n(but not neccessarily) be used staisfy to a legal or regulatory\nrequirement. Each standard is listed on a separate line or in a single\nline with each standard being comma separated.",
                 "Metadata": {
                     "Nature": "DataProperty",
                     "Range": "xsd:string",
                     "name": "standardsCompliance"
                 },
-                "Summary": "Field captures What laws and regulations are being adhered to.",
+                "Summary": "Field captures what standards are being complied with.",
                 "_title": "standardsCompliance"
             },
             "typeOfModel": {
@@ -247,15 +248,15 @@
             "SafetyRiskAssessmentType": {
                 "Description": "Describes the different safety risk type values that can be used to\ndescribe the safety risk of the AI software",
                 "Entries": {
-                    "high": "The second highest level of risk posed by the AI software as given by\nArticle 20 of EC Regulation No 765/2008.",
+                    "high": "The second highest level of risk posed by the AI software as given by\n[Article 20 of EC Regulation No\n765/2008](https://ec.europa.eu/docsroom/documents/17107/attachments/1/translations/en/renditions/pdf).",
                     "low": "Low/no risk is contained in the AI software.",
-                    "medium": "The third highest level of risk as given by Article 20 of EC\nRegulation  \nNo 765/2008.",
-                    "serious": "The highest level of risk that is contained for a AI software as given\nby Article 20 of Regulation 765/2008/EC"
+                    "medium": "The third highest level of risk as given by [Article 20 of EC Regulation\nNo\n765/2008](https://ec.europa.eu/docsroom/documents/17107/attachments/1/translations/en/renditions/pdf).",
+                    "serious": "The highest level of risk that is contained for a AI software as given\nby [Article 20 of Regulation\n765/2008/EC](https://ec.europa.eu/docsroom/documents/17107/attachments/1/translations/en/renditions/pdf)."
                 },
                 "Metadata": {
                     "name": "SafetyRiskAssessmentType"
                 },
-                "Summary": "Categories of safety risk impact of application ie. Serious, high,\nmedium low",
+                "Summary": "Categories of safety risk impact of application ie. serious, high,\nmedium, low.",
                 "_title": "SafetyRiskAssessmentType"
             }
         },
@@ -1474,6 +1475,163 @@
         },
         "_title": "Core"
     },
+    "Dataset": {
+        "Classes": {
+            "Dataset": {
+                "Description": "Metadata information that can be added to a a dataset that maybe used in\na software or to train/test an AI package",
+                "Metadata": {
+                    "Instatiability": "Concrete",
+                    "SubclassOf": "Software:Package",
+                    "name": "Dataset"
+                },
+                "Properties": {
+                    "anonymizationMethodUsed": {
+                        "minCount": "0",
+                        "type": "xsd:string"
+                    },
+                    "confidentialityLevelType": {
+                        "minCount": "0",
+                        "type": "ConfidentialityLevelType"
+                    },
+                    "dataCollectionProcess": {
+                        "maxCount:1": "",
+                        "minCount": "0",
+                        "type": "xsd:string"
+                    },
+                    "dataPreprocessingSteps": {
+                        "maxCount": "1",
+                        "minCount": "0",
+                        "type": "xsd:string"
+                    },
+                    "datasetNoise": {
+                        "maxCount": "1",
+                        "minCount": "0",
+                        "type": "xsd:string"
+                    },
+                    "datasetSize": {
+                        "maxCount": "1",
+                        "minCount": "0",
+                        "type": "xsd:string"
+                    },
+                    "datasetUpdateMechanism": {
+                        "maxCount": "1",
+                        "minCount": "0",
+                        "type": "xsd:string"
+                    },
+                    "intendedUse": {
+                        "maxCount": "1",
+                        "minCount": "0",
+                        "type": "xsd:string"
+                    },
+                    "knownBiases": {
+                        "maxCount": "1",
+                        "minCount": "0",
+                        "type": "xsd:string"
+                    },
+                    "sensitivePersonalInformationType": {
+                        "minCount": "0",
+                        "type": "PresenceType"
+                    },
+                    "sensors": {
+                        "minCount": "0",
+                        "type": "xsd:string"
+                    }
+                },
+                "Summary": "Provides information about the fields in the Dataset profile.",
+                "_title": "Dataset"
+            }
+        },
+        "Description": "TODO",
+        "Metadata": {
+            "id": "https://rdf.spdx.org/v3#Dataset",
+            "name": "Dataset"
+        },
+        "Properties": {
+            "confidentialityLevelType": {
+                "Description": "The field describes the levels of confidentiality of the data points\ncontained in the dataset with values RED, AMBER, CLEAR or GREEN to\nindicate levels of confidentiality as outlined by [Traffic Light\nProtocol](https://en.wikipedia.org/wiki/Traffic_Light_Protocol)",
+                "Metadata": {
+                    "Nature": "DataProperty",
+                    "Range": "ConfidentialityLevelType",
+                    "name": "confidentialityLevelType"
+                },
+                "Summary": "The field describes the confidentiality level of the data points\ncontained in the dataset.",
+                "_title": "confidentialityLevelType"
+            },
+            "dataCollectionProcess": {
+                "Description": "The field describes how a dataset was collected (e.g., the sources from\nwhich a dataset was scrapped, or the interview protocol used for data\ncollection)",
+                "Metadata": {
+                    "Nature": "DataProperty",
+                    "Range": "xsd:string",
+                    "name": "dataCollectionProcess"
+                },
+                "Summary": "The field describes how the dataset was collected.",
+                "_title": "dataCollectionProcess"
+            },
+            "dataPreprocessingSteps": {
+                "Description": "The field describes using free form text, the various preprocessing\nsteps that were applied to the raw data to create the dataset.",
+                "Metadata": {
+                    "Nature": "DataProperty",
+                    "Range": "xsd:string",
+                    "name": "dataPreprocessingSteps"
+                },
+                "Summary": "The field describes the preprocessing steps that were on the raw data to\ncreate the given dataset.",
+                "_title": "dataPreprocessingSteps"
+            },
+            "datasetNoise": {
+                "Description": "The field describes what kinds of noises that a dataset might encompass.\nThe field uses free form text to specify the fields or the samples that\nmight be noisy. Alternatively, the field can also be used to describe\nvarious noises that could impact the whole dataset.",
+                "Metadata": {
+                    "Nature": "DataProperty",
+                    "Range": "xsd:string",
+                    "name": "datasetNoise"
+                },
+                "Summary": "The field describes potentially noisy elements of the dataset.",
+                "_title": "datasetNoise"
+            },
+            "intendedUse": {
+                "Description": "Some datasets are collected to be used only for particular purposes. For\nexample, medical data collected from a specific demography might only be\napplicable for training machine learning models to make predictions for\nthat demography. In such a case, the intendedUse field would capture\nthis information. Similarly, if a dataset is collected for building a\nfacial recognition model, the intendedUse field would specify that.",
+                "Metadata": {
+                    "Nature": "DataProperty",
+                    "Range": "xsd:string",
+                    "name": "intendedUse"
+                },
+                "Summary": "The field describes what the given dataset should be used for.",
+                "_title": "intendedUse"
+            },
+            "knownBiases": {
+                "Description": "Free form text field that describes the different biases that the\ndataset encompasses.",
+                "Metadata": {
+                    "Nature": "DataProperty",
+                    "Range": "xsd:string",
+                    "name": "knownBiases"
+                },
+                "Summary": "The field records that biases that the dataset is known to encompass.",
+                "_title": "knownBiases"
+            },
+            "sensors": {
+                "Description": "Each sensor and their callibration value in form Sensor:calibration is\nnoted. If multiple sensors are used, each sensor and thier callibration\nvalue is noted ina new line",
+                "Metadata": {
+                    "Nature": "DataProperty",
+                    "Range": "xsd:string",
+                    "name": "sensors"
+                },
+                "Summary": "The field describes what sensors where used for collecting the data (if\nany sensors were used)",
+                "_title": "sensors"
+            },
+            "senstivePersonalInformationType": {
+                "Description": "The field takes either a Yes, None or no assertion value indicating the\npresence of sentive personal or personally identifiable data.",
+                "Metadata": {
+                    "Nature": "DataProperty",
+                    "Range": "PresenceType",
+                    "name": "sensors"
+                },
+                "Summary": "The field describes if any senstive personal (or personally\nidentifiable) information is present in the dataset.",
+                "_title": "senstivePersonalInformationType"
+            }
+        },
+        "Summary": "Everything having to do with the dataset profile.",
+        "Vocabularies": {},
+        "_title": "Dataset"
+    },
     "Licensing": {
         "Classes": {
             "ConjunctiveLicenseSet": {
@@ -1821,6 +1979,605 @@
         "Vocabularies": {},
         "_title": "Licensing"
     },
+    "Security": {
+        "Classes": {
+            "CvssV2VulnerabilityCategorization": {
+                "Description": "A CvssV2VulnerabilityCategorization is TODO",
+                "Metadata": {
+                    "Instantiability": "Concrete",
+                    "SubclassOf": "VulnerabilityCategorization",
+                    "name": "CvssV2VulnerabilityCategorization"
+                },
+                "Properties": {
+                    "score": {
+                        "maxCount": "1",
+                        "minCount": "0",
+                        "type": "xsd:string"
+                    },
+                    "severity - TODO: there are more properties of this name": {
+                        "maxCount": "1",
+                        "minCount": "1",
+                        "type": "CvssV2SeverityType"
+                    },
+                    "vector": {
+                        "maxCount": "1",
+                        "minCount": "0",
+                        "type": "xsd:string"
+                    }
+                },
+                "Summary": "TODO",
+                "_title": "CvssV2VulnerabilityCategorization"
+            },
+            "CvssV3VulnerabilityCategorization": {
+                "Description": "A CvssV3VulnerabilityCategorization is TODO",
+                "Metadata": {
+                    "Instantiability": "Concrete",
+                    "SubclassOf": "VulnerabilityCategorization",
+                    "name": "CvssV3VulnerabilityCategorization"
+                },
+                "Properties": {
+                    "score": {
+                        "maxCount": "1",
+                        "minCount": "0",
+                        "type": "xsd:string"
+                    },
+                    "severity - TODO: there are more properties of this name": {
+                        "maxCount": "1",
+                        "minCount": "1",
+                        "type": "CvssV3SeverityType"
+                    },
+                    "vector": {
+                        "maxCount": "1",
+                        "minCount": "0",
+                        "type": "xsd:string"
+                    }
+                },
+                "Summary": "TODO",
+                "_title": "CvssV3VulnerabilityCategorization"
+            },
+            "EpssVulnerabilityCategorization": {
+                "Description": "An EpssVulnerabilityCategorization is TODO",
+                "Metadata": {
+                    "Instantiability": "Concrete",
+                    "SubclassOf": "VulnerabilityCategorization",
+                    "name": "EpssVulnerabilityCategorization"
+                },
+                "Properties": {
+                    "probability": {
+                        "maxCount": "1",
+                        "minCount": "1",
+                        "type": "xsd:nonNegativeInteger"
+                    },
+                    "severity - TODO: there are more properties of this name": {
+                        "maxCount": "1",
+                        "minCount": "0",
+                        "type": "xsd:string"
+                    }
+                },
+                "Summary": "TODO",
+                "_title": "EpssVulnerabilityCategorization"
+            },
+            "ExploitCatalogVulnerabilityCategorization": {
+                "Description": "An ExploitCatalogVulnerabilityCategorization is TODO",
+                "Metadata": {
+                    "Instantiability": "Concrete",
+                    "SubclassOf": "VulnerabilityCategorization",
+                    "name": "ExploitCatalogVulnerabilityCategorization"
+                },
+                "Properties": {
+                    "listed": {
+                        "maxCount": "1",
+                        "minCount": "1",
+                        "type": "ExploitCatalogListedType"
+                    },
+                    "locator - TODO: there is already a property of this name in\ncore:ExternalReference": {
+                        "maxCount": "1",
+                        "minCount": "1",
+                        "type": "xsd:anyURI"
+                    }
+                },
+                "Summary": "TODO",
+                "_title": "ExploitCatalogVulnerabilityCategorization"
+            },
+            "ExternalSecurityIdentifier": {
+                "Description": "An ExternalSecurityIdentifier is TODO",
+                "Metadata": {
+                    "Instantiability": "Concrete",
+                    "SubclassOf": "ExternalIdentifier",
+                    "name": "ExternalSecurityIdentifier"
+                },
+                "Properties": {
+                    "source - TODO: there is already a property of that name in\nVulnerabilityCategorization": {
+                        "type": "xsd:string"
+                    }
+                },
+                "Summary": "TODO",
+                "_title": "ExternalSecurityIdentifier"
+            },
+            "GenericVulnerabilityCategorization": {
+                "Description": "A GenericVulnerabilityCategorization is TODO",
+                "Metadata": {
+                    "Instantiability": "Concrete",
+                    "SubclassOf": "VulnerabilityCategorization",
+                    "name": "GenericVulnerabilityCategorization"
+                },
+                "Properties": {
+                    "exploitability": {
+                        "maxCount": "1",
+                        "minCount": "0",
+                        "type": "xsd:string"
+                    },
+                    "severity - TODO: there are more properties of this name": {
+                        "maxCount": "1",
+                        "minCount": "0",
+                        "type": "GenericVulnerabilitySeverityType"
+                    }
+                },
+                "Summary": "TODO",
+                "_title": "GenericVulnerabilityCategorization"
+            },
+            "OtherVulnerabilityCategorization": {
+                "Description": "An OtherVulnerabilityCategorization is TODO",
+                "Metadata": {
+                    "Instantiability": "Concrete",
+                    "SubclassOf": "VulnerabilityCategorization",
+                    "name": "OtherVulnerabilityCategorization"
+                },
+                "Properties": {
+                    "categorizationType": {
+                        "maxCount": "1",
+                        "minCount": "1",
+                        "type": "xsd:string"
+                    },
+                    "categorizationValue": {
+                        "maxCount": "1",
+                        "minCount": "1",
+                        "type": "xsd:string"
+                    }
+                },
+                "Summary": "TODO",
+                "_title": "OtherVulnerabilityCategorization"
+            },
+            "SsvcVulnerabilityCategorization": {
+                "Description": "An SsvcVulnerabilityCategorization is TODO",
+                "Metadata": {
+                    "Instantiability": "Concrete",
+                    "SubclassOf": "VulnerabilityCategorization",
+                    "name": "SsvcVulnerabilityCategorization"
+                },
+                "Properties": {
+                    "decision": {
+                        "maxCount": "1",
+                        "minCount": "1",
+                        "type": "SsvcDecisionType"
+                    }
+                },
+                "Summary": "TODO",
+                "_title": "SsvcVulnerabilityCategorization"
+            },
+            "VexAffectedVulnerabilityCategorization": {
+                "Description": "An VexAffectedVulnerabilityCategorization is TODO",
+                "Metadata": {
+                    "Instantiability": "Concrete",
+                    "SubclassOf": "VexVulnerabilityCategorization",
+                    "name": "VexAffectedVulnerabilityCategorization"
+                },
+                "Properties": {
+                    "actionStatement": {
+                        "maxCount": "1",
+                        "minCount": "1",
+                        "type": "xsd:string"
+                    }
+                },
+                "Summary": "TODO",
+                "_title": "VexAffectedVulnerabilityCategorization"
+            },
+            "VexNotAffectedVulnerabilityCategorization": {
+                "Description": "An VexNotAffectedVulnerabilityCategorization is TODO",
+                "Metadata": {
+                    "Instantiability": "Concrete",
+                    "SubclassOf": "VexVulnerabilityCategorization",
+                    "name": "VexNotAffectedVulnerabilityCategorization"
+                },
+                "Properties": {
+                    "impact": {
+                        "maxCount": "1",
+                        "minCount": "1",
+                        "type": "xsd:string"
+                    },
+                    "justification": {
+                        "maxCount": "1",
+                        "minCount": "1",
+                        "type": "VexJustificationType"
+                    }
+                },
+                "Summary": "TODO",
+                "_title": "VexNotAffectedVulnerabilityCategorization"
+            },
+            "VexVulnerabilityCategorization": {
+                "Description": "An VexVulnerabilityCategorization is TODO",
+                "Metadata": {
+                    "Instantiability": "Concrete",
+                    "SubclassOf": "VulnerabilityCategorization",
+                    "name": "VexVulnerabilityCategorization"
+                },
+                "Properties": {
+                    "status": {
+                        "maxCount": "1",
+                        "minCount": "1",
+                        "type": "VexStatusType"
+                    }
+                },
+                "Summary": "TODO",
+                "_title": "VexVulnerabilityCategorization"
+            },
+            "Vulnerability": {
+                "Description": "A Vulnerability is TODO",
+                "Metadata": {
+                    "Instantiability": "Concrete",
+                    "SubclassOf": "Artifact",
+                    "name": "Vulnerability"
+                },
+                "Properties": {
+                    "categorizations": {
+                        "minCount": "0",
+                        "type": "VulnerabilityCategorization"
+                    },
+                    "modified": {
+                        "maxCount": "1",
+                        "minCount": "0",
+                        "type": "xsd:datetime"
+                    },
+                    "published": {
+                        "maxCount": "1",
+                        "minCount": "0",
+                        "type": "xsd:datetime"
+                    },
+                    "withdrawn": {
+                        "maxCount": "1",
+                        "minCount": "0",
+                        "type": "xsd:datetime"
+                    }
+                },
+                "Summary": "TODO",
+                "_title": "Vulnerability"
+            },
+            "VulnerabilityCategorization": {
+                "Description": "A VulnerabilityCategorization is TODO",
+                "Metadata": {
+                    "Instantiability": "Concrete",
+                    "SubclassOf": "none",
+                    "name": "VulnerabilityCategorization"
+                },
+                "Properties": {
+                    "categorizationDate": {
+                        "maxCount": "1",
+                        "minCount": "1",
+                        "type": "xsd:datetime"
+                    },
+                    "source - TODO: there is already a property of that name in\nExternalSecurityIdentifier": {
+                        "maxCount": "1",
+                        "minCount": "0",
+                        "type": "xsd:anyURI"
+                    }
+                },
+                "Summary": "TODO",
+                "_title": "VulnerabilityCategorization"
+            }
+        },
+        "Description": "The Security namespace defines concepts related to security artifacts.",
+        "Metadata": {
+            "id": "https://rdf.spdx.org/v3#Security",
+            "name": "Security"
+        },
+        "Properties": {
+            "actionStatement": {
+                "Description": "An actionStatement is TODO",
+                "Metadata": {
+                    "Nature": "DataProperty",
+                    "Range": "xsd:string",
+                    "name": "actionStatement"
+                },
+                "Summary": "TODO",
+                "_title": "actionStatement"
+            },
+            "categorizationDate": {
+                "Description": "A categorizationDate is TODO",
+                "Metadata": {
+                    "Nature": "DataProperty",
+                    "Range": "xsd:datetime",
+                    "name": "categorizationDate"
+                },
+                "Summary": "TODO",
+                "_title": "categorizationDate"
+            },
+            "categorizationType": {
+                "Description": "A categorizationType is TODO",
+                "Metadata": {
+                    "Nature": "DataProperty",
+                    "Range": "xsd:string",
+                    "name": "categorizationType"
+                },
+                "Summary": "TODO",
+                "_title": "categorizationType"
+            },
+            "categorizationValue": {
+                "Description": "A categorizationValue is TODO",
+                "Metadata": {
+                    "Nature": "DataProperty",
+                    "Range": "xsd:string",
+                    "name": "categorizationValue"
+                },
+                "Summary": "TODO",
+                "_title": "categorizationValue"
+            },
+            "categorizations": {
+                "Description": "A categorizations is TODO",
+                "Metadata": {
+                    "Nature": "DataProperty",
+                    "Range": "VulnerabilityCategorization",
+                    "name": "categorizations"
+                },
+                "Summary": "TODO",
+                "_title": "categorizations"
+            },
+            "decision": {
+                "Description": "A decision is TODO",
+                "Metadata": {
+                    "Nature": "DataProperty",
+                    "Range": "SsvcDecisionType",
+                    "name": "decision"
+                },
+                "Summary": "TODO",
+                "_title": "decision"
+            },
+            "exploitability": {
+                "Description": "A exploitability is TODO",
+                "Metadata": {
+                    "Nature": "DataProperty",
+                    "Range": "xsd:string",
+                    "name": "exploitability"
+                },
+                "Summary": "TODO",
+                "_title": "exploitability"
+            },
+            "impact": {
+                "Description": "An impact is TODO",
+                "Metadata": {
+                    "Nature": "DataProperty",
+                    "Range": "xsd:string",
+                    "name": "impact"
+                },
+                "Summary": "TODO",
+                "_title": "impact"
+            },
+            "justification": {
+                "Description": "A justification is TODO",
+                "Metadata": {
+                    "Nature": "DataProperty",
+                    "Range": "VexJustificationType",
+                    "name": "justification"
+                },
+                "Summary": "TODO",
+                "_title": "justification"
+            },
+            "listed": {
+                "Description": "A listed is TODO",
+                "Metadata": {
+                    "Nature": "DataProperty",
+                    "Range": "ExploitCatalogListedType",
+                    "name": "listed"
+                },
+                "Summary": "TODO",
+                "_title": "listed"
+            },
+            "locator": {
+                "Description": "A locator is TODO",
+                "Metadata": {
+                    "Nature": "DataProperty",
+                    "Range": "xsd:anyURI",
+                    "name": "locator - TODO: there is already a locator property defined in\nExternalReference"
+                },
+                "Summary": "TODO",
+                "_title": "locator"
+            },
+            "modified": {
+                "Description": "A modified is TODO",
+                "Metadata": {
+                    "Nature": "DataProperty",
+                    "Range": "xsd:datetime",
+                    "name": "modified"
+                },
+                "Summary": "TODO",
+                "_title": "modified"
+            },
+            "probability": {
+                "Description": "A probability is TODO",
+                "Metadata": {
+                    "Nature": "DataProperty",
+                    "Range": "xsd:nonNegativeInteger",
+                    "name": "probability"
+                },
+                "Summary": "TODO",
+                "_title": "probability"
+            },
+            "published": {
+                "Description": "A published is TODO",
+                "Metadata": {
+                    "Nature": "DataProperty",
+                    "Range": "xsd:datetime",
+                    "name": "published"
+                },
+                "Summary": "TODO",
+                "_title": "published"
+            },
+            "score": {
+                "Description": "A score is TODO",
+                "Metadata": {
+                    "Nature": "DataProperty",
+                    "Range": "xsd:string",
+                    "name": "score"
+                },
+                "Summary": "TODO",
+                "_title": "score"
+            },
+            "severity": {
+                "Description": "A severity is TODO",
+                "Metadata": {
+                    "Nature": "DataProperty",
+                    "Range": "TODO: multiple classes contain this, each with a different type",
+                    "name": "severity"
+                },
+                "Summary": "TODO",
+                "_title": "severity"
+            },
+            "source": {
+                "Description": "A source is TODO",
+                "Metadata": {
+                    "Nature": "DataProperty",
+                    "Range": "xsd:anyURI - TODO: multiple possible types",
+                    "name": "source"
+                },
+                "Summary": "TODO",
+                "_title": "source"
+            },
+            "status": {
+                "Description": "A status is TODO",
+                "Metadata": {
+                    "Nature": "DataProperty",
+                    "Range": "VexStatusType",
+                    "name": "status"
+                },
+                "Summary": "TODO",
+                "_title": "status"
+            },
+            "vector": {
+                "Description": "A vector is TODO",
+                "Metadata": {
+                    "Nature": "DataProperty",
+                    "Range": "xsd:string",
+                    "name": "vector"
+                },
+                "Summary": "TODO",
+                "_title": "vector"
+            },
+            "withdrawn": {
+                "Description": "A withdrawn is TODO",
+                "Metadata": {
+                    "Nature": "DataProperty",
+                    "Range": "xsd:datetime",
+                    "name": "withdrawn"
+                },
+                "Summary": "TODO",
+                "_title": "withdrawn"
+            }
+        },
+        "Summary": "TODO",
+        "Vocabularies": {
+            "CvssV2SeverityType": {
+                "Description": "A CvssV2SeverityType is TODO",
+                "Entries": {
+                    "high": "TODOdescription",
+                    "low": "TODOdescription",
+                    "medium": "TODOdescription",
+                    "noAssertion": "TODOdescription"
+                },
+                "Metadata": {
+                    "name": "CvssV2SeverityType"
+                },
+                "Summary": "TODO",
+                "_title": "CvssV2SeverityType"
+            },
+            "CvssV3SeverityType": {
+                "Description": "A CvssV3SeverityType is TODO",
+                "Entries": {
+                    "critical": "TODOdescription",
+                    "high": "TODOdescription",
+                    "low": "TODOdescription",
+                    "medium": "TODOdescription",
+                    "noAssertion": "TODOdescription",
+                    "none": "TODOdescription"
+                },
+                "Metadata": {
+                    "name": "CvssV3SeverityType"
+                },
+                "Summary": "TODO",
+                "_title": "CvssV3SeverityType"
+            },
+            "ExploitCatalogListedType": {
+                "Description": "A ExploitCatalogListedType is TODO",
+                "Entries": {
+                    "no": "TODOdescription",
+                    "noAssertion": "TODOdescription",
+                    "yes": "TODOdescription"
+                },
+                "Metadata": {
+                    "name": "ExploitCatalogListedType"
+                },
+                "Summary": "TODO",
+                "_title": "ExploitCatalogListedType"
+            },
+            "GenericVulnerabilitySeverityType": {
+                "Description": "A GenericVulnerabilitySeverityType is TODO",
+                "Entries": {
+                    "critical": "TODOdescription",
+                    "high": "TODOdescription",
+                    "low": "TODOdescription",
+                    "medium": "TODOdescription",
+                    "noAssertion": "TODOdescription"
+                },
+                "Metadata": {
+                    "name": "GenericVulnerabilitySeverityType"
+                },
+                "Summary": "TODO",
+                "_title": "GenericVulnerabilitySeverityType"
+            },
+            "SsvcDecisionType": {
+                "Description": "A SsvcDecisionType is TODO",
+                "Entries": {
+                    "act": "TODOdescription",
+                    "attend": "TODOdescription",
+                    "track": "TODOdescription",
+                    "track*": "TODOdescription - TODO: can entries have asterisks?"
+                },
+                "Metadata": {
+                    "name": "SsvcDecisionType"
+                },
+                "Summary": "TODO",
+                "_title": "SsvcDecisionType"
+            },
+            "VexJustificationType": {
+                "Description": "A VexJustificationType is TODO",
+                "Entries": {
+                    "componentNotPresent": "TODOdescription",
+                    "inlineMitigationsAlreadyExist": "TODOdescription",
+                    "vulnerableCodeCannotBeControlledByAdversary": "TODOdescription",
+                    "vulnerableCodeNotInExecutePath": "TODOdescription",
+                    "vulnerableCodeNotPresent": "TODOdescription"
+                },
+                "Metadata": {
+                    "name": "VexJustificationType"
+                },
+                "Summary": "TODO",
+                "_title": "VexJustificationType"
+            },
+            "VexStatusType": {
+                "Description": "A VexStatusType is TODO",
+                "Entries": {
+                    "affected": "TODOdescription",
+                    "fixed": "TODOdescription",
+                    "notAffected": "TODOdescription",
+                    "underInvestigation": "TODOdescription"
+                },
+                "Metadata": {
+                    "name": "VexStatusType"
+                },
+                "Summary": "TODO",
+                "_title": "VexStatusType"
+            }
+        },
+        "_title": "Security"
+    },
     "Software": {
         "Classes": {
             "File": {
@@ -1845,10 +2602,11 @@
                         "type": "SoftwarePurpose"
                     }
                 },
+                "Summary": "TODO",
                 "_title": "File"
             },
             "Package": {
-                "Description": "If SPDX information is being used to describe packages, then one\ninstance of the package information per package being described shall\nexist. It provides important meta information about the package as a\nwhole. Packages are an abstract concept that can be used to refer to any\ndistribution of software, typically consisting of one or more files and\ncapable of containing sub-packages. Starting with SPDX 2.0, it is not\nnecessary to have a package wrapping a set of files.\n\nA package refers to any unit of content that can be associated with a\ndistribution of software. Typically, a package is composed of one or\nmore files. An SPDX document may, but is not required to, provide\ndetails about the individual files comprising a package (see File.md).\n\nAny of the following non-limiting examples may be (but are not required\nto be) represented in SPDX as a package:\n\n-   a tarball, zip file or other archive\n-   a directory or sub-directory\n-   a separately distributed piece of software which another Package or\n    File uses or depends upon (e.g., a Python package, a Go module, ...)\n-   a container image, and/or each image layer within a container image\n-   a collection of one or more sub-packages\n-   a Git repository snapshot from a particular point in time\n\nNote that some of these could be represented in SPDX as a file as well.\n\nIn an SPDX document, relationship elements can be used to indicate\nrelationships between packages, such as dependency relationships.\n\nCardinality: Optional, zero or many.",
+                "Description": "A package refers to any unit of content that can be associated with a\ndistribution of software. Typically, a package is composed of one or\nmore files.  \nAny of the following non-limiting examples may be (but are not required\nto be) represented in SPDX as a package:\n\n-   a tarball, zip file or other archive\n-   a directory or sub-directory\n-   a separately distributed piece of software which another Package or\n    File uses or depends upon (e.g., a Python package, a Go module, ...)\n-   a container image, and/or each image layer within a container image\n-   a collection of one or more sub-packages\n-   a Git repository snapshot from a particular point in time\n\nNote that some of these could be represented in SPDX as a file as well.",
                 "Metadata": {
                     "SubclassOf": "Core:Artifact",
                     "name": "Package"
@@ -1884,19 +2642,21 @@
                         "type": "xsd:string"
                     }
                 },
+                "Summary": "Refers to any unit of content that can be associated with a distribution\nof software.",
                 "_title": "Package"
             },
             "Sbom": {
-                "Description": "A Software Bill of Materials (SBOM) is a container for a grouping of\nSPDX-3.0 content characterizing details about a software product. This\ncould include details of the content and composition of the product,\nprovenence details of the product and/or its composition, licensing\ninformation, known quality or security issues, etc.",
+                "Description": "A Software Bill of Materials (SBOM) is a collection of SPDX Elements\ndescribing a single package. This could include details of the content\nand composition of the product, provenance details of the product and/or\nits composition, licensing information, known quality or security\nissues, etc.",
                 "Metadata": {
                     "SubclassOf": "Core:Bom",
                     "name": "Sbom"
                 },
                 "Properties": {},
+                "Summary": "A collection of SPDX Elements describing a single package.",
                 "_title": "Sbom"
             },
             "Snippet": {
-                "Description": "TODO",
+                "Description": "A Snippet describes a certain part of a file and can be used when the\nfile is known to have some content that has been included from another\noriginal source. Snippets are useful for denoting when part of a file\nmay have been originally created under another license or copied from a\nplace with a known vulnerability.",
                 "Metadata": {
                     "SubclassOf": "Core:Artifact",
                     "name": "Snippet"
@@ -1922,6 +2682,7 @@
                         "type": "SoftwarePurpose"
                     }
                 },
+                "Summary": "Describes a certain part of a file.",
                 "_title": "Snippet"
             },
             "SoftwareDependencyRelationship": {
@@ -1958,13 +2719,13 @@
         },
         "Properties": {
             "byteRange": {
-                "Description": "A byteRange is TODO",
+                "Description": "This field defines the byte range in the original host file that the\nsnippet information applies to. A range of bytes is independent of\nvarious formatting concerns, and the most accurate way of referring to\nthe differences. The choice was made to start the numbering of the byte\nrange at 1 to be consistent with the W3C pointer method vocabulary.",
                 "Metadata": {
                     "Nature": "DataProperty",
                     "Range": "positiveIntegerRange",
                     "name": "byteRange"
                 },
-                "Summary": "TODO",
+                "Summary": "Defines the byte range in the original host file that the snippet\ninformation applies to.",
                 "_title": "byteRange"
             },
             "contentIdentifier": {
@@ -1978,63 +2739,63 @@
                 "_title": "contentIdentifier"
             },
             "contentType": {
-                "Description": "A contentType is TODO",
+                "Description": "This field is a reasonable estimation of the content type of the\nElement, from a creator perspective. Content type is intrinsic to the\nElement, independent of how the Element is being used.",
                 "Metadata": {
                     "Nature": "DataProperty",
                     "Range": "mediaType",
                     "name": "contentType"
                 },
-                "Summary": "TODO",
+                "Summary": "Provides information about the content type of an Element.",
                 "_title": "contentType"
             },
             "downloadLocation": {
-                "Description": "A downloadLocation is TODO",
+                "Description": "DownloadLocation identifies the download Uniform Resource Identifier for\nthe package at the time that the document was created. Where and how to\ndownload the exact package being referenced is critical for verification\nand tracking data.",
                 "Metadata": {
                     "Nature": "DataProperty",
                     "Range": "xsd:anyURI",
                     "name": "downloadLocation"
                 },
-                "Summary": "TODO",
+                "Summary": "Identifies the download Uniform Resource Identifier for the package at\nthe time that the document was created.",
                 "_title": "downloadLocation"
             },
             "filePurpose": {
-                "Description": "A filePurpose is TODO",
+                "Description": "FilePurpose provides information about the primary purpose of the file.",
                 "Metadata": {
                     "Nature": "DataProperty",
                     "Range": "SoftwarePurpose",
                     "name": "filePurpose"
                 },
-                "Summary": "TODO",
+                "Summary": "Provides information about the primary purpose of the file.",
                 "_title": "filePurpose"
             },
             "homePage": {
-                "Description": "A homePage is TODO",
+                "Description": "HomePage is a place for the SPDX document creator to record a website\nthat serves as the package's home page. This saves the recipient of the\nSPDX document who is looking for more info from having to search for and\nverify a match between the package and the associated project home page.\nThis link can also be used to reference further information about the\npackage referenced by the SPDX document creator.",
                 "Metadata": {
                     "Nature": "DataProperty",
                     "Range": "xsd:anyURI",
                     "name": "homePage"
                 },
-                "Summary": "TODO",
+                "Summary": "A place for the SPDX document creator to record a website that serves as\nthe package's home page.",
                 "_title": "homePage"
             },
             "lineRange": {
-                "Description": "A lineRange is TODO",
+                "Description": "This field defines the line range in the original host file that the\nsnippet information applies to. If there is a disagreement between the\nbyte range and line range, the byte range values will take precedence. A\nrange of lines is a convenient reference for those files where there is\na known line delimiter. The choice was made to start the numbering of\nthe lines at 1 to be consistent with the W3C pointer method vocabulary.",
                 "Metadata": {
                     "Nature": "DataProperty",
                     "Range": "positiveIntegerRange",
                     "name": "lineRange"
                 },
-                "Summary": "TODO",
+                "Summary": "Defines the line range in the original host file that the snippet\ninformation applies to.",
                 "_title": "lineRange"
             },
             "packagePurpose": {
-                "Description": "A packagePurpose is TODO",
+                "Description": "PackagePurpose provides information about the primary purpose of the\npackage.",
                 "Metadata": {
                     "Nature": "DataProperty",
                     "Range": "SoftwarePurpose",
                     "name": "packagePurpose"
                 },
-                "Summary": "TODO",
+                "Summary": "Provides information about the primary purpose of the package.",
                 "_title": "packagePurpose"
             },
             "packageUrl": {
@@ -2058,13 +2819,13 @@
                 "_title": "packageVersion"
             },
             "snippetPurpose": {
-                "Description": "A snippetPurpose is TODO",
+                "Description": "SnippetPurpose provides information about the primary purpose of the\nsnippet.",
                 "Metadata": {
                     "Nature": "DataProperty",
                     "Range": "SoftwarePurpose",
                     "name": "snippetPurpose"
                 },
-                "Summary": "TODO",
+                "Summary": "Provides information about the primary purpose of the snippet.",
                 "_title": "snippetPurpose"
             }
         },
@@ -2117,32 +2878,32 @@
                 "_title": "DependencyScope"
             },
             "SoftwarePurpose": {
-                "Description": "TODO",
+                "Description": "This field provides information about the primary purpose of an Element.\nSoftware Purpose is intrinsic to how the Element is being used rather\nthan the content of the Element. This field is a reasonable estimate of\nthe most likely usage of the Element from the producer and consumer\nperspective from which both parties can draw conclusions about the\ncontext in which the Element exists.",
                 "Entries": {
-                    "application": "TODOdescription",
-                    "archive": "TODOdescription",
+                    "application": "the Element is a software application",
+                    "archive": "the Element refers to an archived collection of files (.tar, .zip, etc)",
                     "bom": "TODOdescription",
                     "configuration": "TODOdescription",
-                    "container": "TODOdescription",
+                    "container": "the Element refers to a container image which can be used by a container\nruntime application",
                     "data": "TODOdescription",
-                    "device": "TODOdescription",
+                    "device": "the Element refers to a chipset, processor, or electronic board",
                     "documentation": "TODOdescription",
                     "executable": "TODOdescription",
-                    "file": "TODOdescription",
-                    "firmware": "TODOdescription",
-                    "framework": "TODOdescription",
-                    "install": "TODOdescription",
-                    "library": "TODOdescription",
+                    "file": "the Element is a single file which can be independently distributed\n(configuration file, statically linked binary, Kubernetes deployment,\netc)",
+                    "firmware": "the Element provides low level control over a device's hardware",
+                    "framework": "the Element is a software framework",
+                    "install": "the Element is used to install software on disk",
+                    "library": "the Element is a software library",
                     "module": "TODOdescription",
-                    "operatingSystem": "TODOdescription",
-                    "other": "TODOdescription",
+                    "operatingSystem": "the Element refers to an operating system",
+                    "other": "the Element doesn't fit into any of the other categories",
                     "patch": "TODOdescription",
-                    "source": "TODOdescription"
+                    "source": "the Element is a collection of source files"
                 },
                 "Metadata": {
                     "name": "SoftwarePurpose"
                 },
-                "Summary": "TODO",
+                "Summary": "Provides information about the primary purpose of an Element.",
                 "_title": "SoftwarePurpose"
             }
         },

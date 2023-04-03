@@ -41,35 +41,43 @@ TODO
 }
 enum SoftwarePurpose {
 <b>Summary</b>
-TODO
+Provides information about the primary purpose of an Element.
 <b>Description</b>
-TODO
+This field provides information about the primary purpose of an Element.
+Software Purpose is intrinsic to how the Element is being used rather
+than the content of the Element. This field is a reasonable estimate of
+the most likely usage of the Element from the producer and consumer
+perspective from which both parties can draw conclusions about the
+context in which the Element exists.
 .. entries ..
-    <b>application</b>: TODOdescription
-    <b>archive</b>: TODOdescription
+    <b>application</b>: the Element is a software application
+    <b>archive</b>: the Element refers to an archived collection of files (.tar, .zip, etc)
     <b>bom</b>: TODOdescription
     <b>configuration</b>: TODOdescription
-    <b>container</b>: TODOdescription
+    <b>container</b>: the Element refers to a container image which can be used by a container
+runtime application
     <b>data</b>: TODOdescription
-    <b>device</b>: TODOdescription
+    <b>device</b>: the Element refers to a chipset, processor, or electronic board
     <b>documentation</b>: TODOdescription
     <b>executable</b>: TODOdescription
-    <b>file</b>: TODOdescription
-    <b>firmware</b>: TODOdescription
-    <b>framework</b>: TODOdescription
-    <b>install</b>: TODOdescription
-    <b>library</b>: TODOdescription
+    <b>file</b>: the Element is a single file which can be independently distributed
+(configuration file, statically linked binary, Kubernetes deployment,
+etc)
+    <b>firmware</b>: the Element provides low level control over a device's hardware
+    <b>framework</b>: the Element is a software framework
+    <b>install</b>: the Element is used to install software on disk
+    <b>library</b>: the Element is a software library
     <b>module</b>: TODOdescription
-    <b>operatingSystem</b>: TODOdescription
-    <b>other</b>: TODOdescription
+    <b>operatingSystem</b>: the Element refers to an operating system
+    <b>other</b>: the Element doesn't fit into any of the other categories
     <b>patch</b>: TODOdescription
-    <b>source</b>: TODOdescription
+    <b>source</b>: the Element is a collection of source files
 }
 ' classes
 together {
 class File {
 <b>Summary</b>
-MISSING
+TODO
 <b>Description</b>
 TODO This is about the File class.
 .. metadata ..
@@ -84,21 +92,12 @@ TODO This is about the File class.
 "SoftwarePurpose" <-[dashed,thickness=4]-- "File::filePurpose"
 class Package {
 <b>Summary</b>
-MISSING
+Refers to any unit of content that can be associated with a distribution
+of software.
 <b>Description</b>
-If SPDX information is being used to describe packages, then one
-instance of the package information per package being described shall
-exist. It provides important meta information about the package as a
-whole. Packages are an abstract concept that can be used to refer to any
-distribution of software, typically consisting of one or more files and
-capable of containing sub-packages. Starting with SPDX 2.0, it is not
-necessary to have a package wrapping a set of files.
-
 A package refers to any unit of content that can be associated with a
 distribution of software. Typically, a package is composed of one or
-more files. An SPDX document may, but is not required to, provide
-details about the individual files comprising a package (see File.md).
-
+more files.  
 Any of the following non-limiting examples may be (but are not required
 to be) represented in SPDX as a package:
 
@@ -111,11 +110,6 @@ to be) represented in SPDX as a package:
 -   a Git repository snapshot from a particular point in time
 
 Note that some of these could be represented in SPDX as a file as well.
-
-In an SPDX document, relationship elements can be used to indicate
-relationships between packages, such as dependency relationships.
-
-Cardinality: Optional, zero or many.
 .. metadata ..
     SubclassOf : Core:Artifact
     name : Package
@@ -130,13 +124,13 @@ Cardinality: Optional, zero or many.
 "SoftwarePurpose" <-[dashed,thickness=4]-- "Package::packagePurpose"
 class Sbom {
 <b>Summary</b>
-MISSING
+A collection of SPDX Elements describing a single package.
 <b>Description</b>
-A Software Bill of Materials (SBOM) is a container for a grouping of
-SPDX-3.0 content characterizing details about a software product. This
-could include details of the content and composition of the product,
-provenence details of the product and/or its composition, licensing
-information, known quality or security issues, etc.
+A Software Bill of Materials (SBOM) is a collection of SPDX Elements
+describing a single package. This could include details of the content
+and composition of the product, provenance details of the product and/or
+its composition, licensing information, known quality or security
+issues, etc.
 .. metadata ..
     SubclassOf : Core:Bom
     name : Sbom
@@ -144,9 +138,13 @@ information, known quality or security issues, etc.
 }
 class Snippet {
 <b>Summary</b>
-MISSING
+Describes a certain part of a file.
 <b>Description</b>
-TODO
+A Snippet describes a certain part of a file and can be used when the
+file is known to have some content that has been included from another
+original source. Snippets are useful for denoting when part of a file
+may have been originally created under another license or copied from a
+place with a known vulnerability.
 .. metadata ..
     SubclassOf : Core:Artifact
     name : Snippet

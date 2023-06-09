@@ -2,279 +2,415 @@
 skinparam packageStyle rectangle
 set separator none
 ' vocabulary
-enum CvssV2SeverityType {
+enum ExploitCatalogType {
 <b>Summary</b>
-TODO
+Specifies the exploit catalog type.
 <b>Description</b>
-A CvssV2SeverityType is TODO
+ExploitCatalogType specifies the type of exploit catalog that a
+vulnerability is listed in.
 .. entries ..
-    <b>high</b>: TODOdescription
-    <b>low</b>: TODOdescription
-    <b>medium</b>: TODOdescription
-    <b>noAssertion</b>: TODOdescription
-}
-enum CvssV3SeverityType {
-<b>Summary</b>
-TODO
-<b>Description</b>
-A CvssV3SeverityType is TODO
-.. entries ..
-    <b>critical</b>: TODOdescription
-    <b>high</b>: TODOdescription
-    <b>low</b>: TODOdescription
-    <b>medium</b>: TODOdescription
-    <b>noAssertion</b>: TODOdescription
-    <b>none</b>: TODOdescription
-}
-enum ExploitCatalogListedType {
-<b>Summary</b>
-TODO
-<b>Description</b>
-A ExploitCatalogListedType is TODO
-.. entries ..
-    <b>no</b>: TODOdescription
-    <b>noAssertion</b>: TODOdescription
-    <b>yes</b>: TODOdescription
-}
-enum GenericVulnerabilitySeverityType {
-<b>Summary</b>
-TODO
-<b>Description</b>
-A GenericVulnerabilitySeverityType is TODO
-.. entries ..
-    <b>critical</b>: TODOdescription
-    <b>high</b>: TODOdescription
-    <b>low</b>: TODOdescription
-    <b>medium</b>: TODOdescription
-    <b>noAssertion</b>: TODOdescription
+    <b>kev</b>: CISA's Known Exploited Vulnerability (KEV) Catalog
+    <b>other</b>: Other exploit catalogs
 }
 enum SsvcDecisionType {
 <b>Summary</b>
-TODO
+Specifies the SSVC decision type.
 <b>Description</b>
-A SsvcDecisionType is TODO
+SsvcDecisionType specifies the type of decision that's been made
+according to the Stakeholder-Specific Vulnerability Categorization
+(SSVC) system
+<https://www.cisa.gov/stakeholder-specific-vulnerability-categorization-ssvc>
 .. entries ..
-    <b>act</b>: TODOdescription
-    <b>attend</b>: TODOdescription
-    <b>track</b>: TODOdescription
-    <b>track*</b>: TODOdescription - TODO: can entries have asterisks?
+    <b>act</b>: The vulnerability requires attention from the organization's internal,
+supervisory-level and leadership-level individuals. Necessary actions
+include requesting assistance or information about the vulnerability, as
+well as publishing a notification either internally and/or externally.
+Typically, internal groups would meet to determine the overall response
+and then execute agreed upon actions. CISA recommends remediating Act
+vulnerabilities as soon as possible.
+    <b>attend</b>: The vulnerability requires attention from the organization's internal,
+supervisory-level individuals. Necessary actions include requesting
+assistance or information about the vulnerability, and may involve
+publishing a notification either internally and/or externally. CISA
+recommends remediating Attend vulnerabilities sooner than standard
+update timelines.
+    <b>track</b>: The vulnerability does not require action at this time. The organization
+would continue to track the vulnerability and reassess it if new
+information becomes available. CISA recommends remediating Track
+vulnerabilities within standard update timelines.
+    <b>trackStar</b>: (Track\* in the SSVC spec) The vulnerability contains specific
+characteristics that may require closer monitoring for changes. CISA
+recommends remediating Track\* vulnerabilities within standard update
+timelines.
 }
 enum VexJustificationType {
 <b>Summary</b>
-TODO
+Specifies the VEX justification type.
 <b>Description</b>
-A VexJustificationType is TODO
+VexJustificationType specifies the type of Vulnerability Exploitability
+eXchange (VEX) justification.
 .. entries ..
-    <b>componentNotPresent</b>: TODOdescription
-    <b>inlineMitigationsAlreadyExist</b>: TODOdescription
-    <b>vulnerableCodeCannotBeControlledByAdversary</b>: TODOdescription
-    <b>vulnerableCodeNotInExecutePath</b>: TODOdescription
-    <b>vulnerableCodeNotPresent</b>: TODOdescription
-}
-enum VexStatusType {
-<b>Summary</b>
-TODO
-<b>Description</b>
-A VexStatusType is TODO
-.. entries ..
-    <b>affected</b>: TODOdescription
-    <b>fixed</b>: TODOdescription
-    <b>notAffected</b>: TODOdescription
-    <b>underInvestigation</b>: TODOdescription
+    <b>componentNotPresent</b>: The software is not affected because the vulnerable component is not in
+the product.
+    <b>inlineMitigationsAlreadyExist</b>: Built-in inline controls or mitigations prevent an adversary from
+leveraging the vulnerability.
+    <b>vulnerableCodeCannotBeControlledByAdversary</b>: The vulnerable component is present, and the component contains the
+vulnerable code. However, vulnerable code is used in such a way that an
+attacker cannot mount any anticipated attack.
+    <b>vulnerableCodeNotInExecutePath</b>: The affected code is not reachable through the execution of the code,
+including non-anticipated states of the product.
+    <b>vulnerableCodeNotPresent</b>: The product is not affected because the code underlying the
+vulnerability is not present in the product.
 }
 ' classes
 together {
-class CvssV2VulnerabilityCategorization {
+class CvssV2VulnAssessmentRelationship {
 <b>Summary</b>
-TODO
+Provides a CVSS version 2.0 assessment for a vulnerability.
 <b>Description</b>
-A CvssV2VulnerabilityCategorization is TODO
+A CvssV2VulnAssessmentRelationship relationship describes the determined
+score and vector of a vulnerability using version 2.0 of the Common
+Vulnerability Scoring System (CVSS) as defined on
+<https://www.first.org/cvss/v2/guide>. It is intented to communicate the
+results of using a CVSS calculator.
+
+**Constraints**
+
+-   The value of severity must be one of 'low', 'medium' or 'high'
+-   The relationship type must be set to hasAssessmentFor.
+
+**Syntax**
+
+`json {   "@type": "CvssV2VulnAssessmentRelationship",   "@id": "urn:spdx.dev:cvssv2-cve-2020-28498",   "relationshipType": "hasAssessmentFor",   "score": 4.3,   "vector": "(AV:N/AC:M/Au:N/C:P/I:N/A:N)",   "severity": "low",   "from": "urn:spdx.dev:vuln-cve-2020-28498",   "to": ["urn:product-acme-application-1.3"],   "assessedElement": "urn:npm-elliptic-6.5.2",   "externalReferences": [     {       "@type": "ExternalReference",       "externalReferenceType": "securityAdvisory",       "locator": "https://nvd.nist.gov/vuln/detail/CVE-2020-28498"     },     {       "@type": "ExternalReference",       "externalReferenceType": "securityAdvisory",       "locator": "https://snyk.io/vuln/SNYK-JS-ELLIPTIC-1064899"     },     {       "@type": "ExternalReference",       "externalReferenceType": "securityFix",       "locator": "https://github.com/indutny/elliptic/commit/441b742"     }   ],   "suppliedBy": ["urn:spdx.dev:agent-my-security-vendor"],   "publishedTime": "2023-05-06T10:06:13Z" }, {   "@type": "Relationship",   "@id": "urn:spdx.dev:vulnAgentRel-1",     "relationshipType": "publishedBy",     "from": "urn:spdx.dev:cvssv2-cve-2020-28498",   "to": ["urn:spdx.dev:agent-snyk"],   "startTime": "2021-03-08T16:06:50Z" }`
 .. metadata ..
     Instantiability : Concrete
-    SubclassOf : VulnerabilityCategorization
-    name : CvssV2VulnerabilityCategorization
+    SubclassOf : VulnAssessmentRelationship
+    name : CvssV2VulnAssessmentRelationship
 .. properties ..
-    <b>score </b>: xsd:string [0..1]
-    <b>severity - TODO: there are more properties of this name </b>: CvssV2SeverityType [1..1]
+    <b>score </b>: xsd:decimal [1..1]
+    <b>severity </b>: xsd:string [0..1]
     <b>vector </b>: xsd:string [0..1]
 }
-"CvssV2SeverityType" <-[dashed,thickness=4]-- "CvssV2VulnerabilityCategorization::severity - TODO: there are more properties of this name"
-class CvssV3VulnerabilityCategorization {
+class CvssV3VulnAssessmentRelationship {
 <b>Summary</b>
-TODO
+Provides a CVSS version 3.x assessment for a vulnerability.
 <b>Description</b>
-A CvssV3VulnerabilityCategorization is TODO
+A CvssV3VulnAssessmentRelationship relationship describes the determined
+score, severity, and vector of a vulnerability using version 3.1 of the
+Common Vulnerability Scoring System (CVSS) as defined on
+<https://www.first.org/cvss/v3.1/specification-document>. It is intented
+to communicate the results of using a CVSS calculator.
+
+**Constraints**
+
+-   The value of severity must be one of 'none', 'low', 'medium', 'high'
+    or 'critical'.
+-   Absence of the property shall be interpreted as 'none'.
+-   The relationship type must be set to hasAssessmentFor.
+
+**Syntax**
+
+`json {   "@type": "CvssV3VulnAssessmentRelationship",   "@id": "urn:spdx.dev:cvssv3-cve-2020-28498",   "relationshipType": "hasAssessmentFor",   "severity": "medium",   "score": 6.8,   "vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:C/C:H/I:N/A:N",   "from": "urn:spdx.dev:vuln-cve-2020-28498",   "to": ["urn:product-acme-application-1.3"],   "assessedElement": "urn:npm-elliptic-6.5.2",   "externalReferences": [     {       "@type": "ExternalReference",       "externalReferenceType": "securityAdvisory",       "locator": "https://nvd.nist.gov/vuln/detail/CVE-2020-28498"     },     {       "@type": "ExternalReference",       "externalReferenceType": "securityAdvisory",       "locator": "https://snyk.io/vuln/SNYK-JS-ELLIPTIC-1064899"     },     {       "@type": "ExternalReference",       "externalReferenceType": "securityFix",       "locator": "https://github.com/indutny/elliptic/commit/441b742"     }   ],   "suppliedBy": ["urn:spdx.dev:agent-my-security-vendor"],   "publishedTime": "2023-05-06T10:06:13Z" }, {   "@type": "Relationship",   "@id": "urn:spdx.dev:vulnAgentRel-1",   "relationshipType": "publishedBy",   "from": "urn:spdx.dev:cvssv3-cve-2020-28498",   "to": "urn:spdx.dev:agent-snyk",   "startTime": "2021-03-08T16:06:50Z" }`
 .. metadata ..
     Instantiability : Concrete
-    SubclassOf : VulnerabilityCategorization
-    name : CvssV3VulnerabilityCategorization
+    SubclassOf : VulnAssessmentRelationship
+    name : CvssV3VulnAssessmentRelationship
 .. properties ..
-    <b>score </b>: xsd:string [0..1]
-    <b>severity - TODO: there are more properties of this name </b>: CvssV3SeverityType [1..1]
+    <b>score </b>: xsd:decimal [1..1]
+    <b>severity </b>: xsd:string [0..1]
     <b>vector </b>: xsd:string [0..1]
 }
-"CvssV3SeverityType" <-[dashed,thickness=4]-- "CvssV3VulnerabilityCategorization::severity - TODO: there are more properties of this name"
-class EpssVulnerabilityCategorization {
+class EpssVulnAssessmentRelationship {
 <b>Summary</b>
-TODO
+Provides an EPSS assessment for a vulnerability.
 <b>Description</b>
-An EpssVulnerabilityCategorization is TODO
+An EpssVulnAssessmentRelationship relationship describes the likelihood
+or probability that a vulnerability will be exploited in the wild using
+the Exploit Prediction Scoring System (EPSS) as defined on
+<https://www.first.org/epss/model>.
+
+**Constraints**
+
+-   The relationship type must be set to hasAssessmentFor.
+
+**Syntax**
+
+`json {   "@type": "EpssVulnAssessmentRelationship",   "@id": "urn:spdx.dev:epss-1",   "relationshipType": "hasAssessmentFor",   "probability": 80,   "from": "urn:spdx.dev:vuln-cve-2020-28498",   "to": ["urn:product-acme-application-1.3"],   "suppliedBy": ["urn:spdx.dev:agent-jane-doe"],   "publishedTime": "2021-03-09T11:04:53Z" }`
 .. metadata ..
     Instantiability : Concrete
-    SubclassOf : VulnerabilityCategorization
-    name : EpssVulnerabilityCategorization
+    SubclassOf : VulnAssessmentRelationship
+    name : EpssVulnAssessmentRelationship
 .. properties ..
     <b>probability </b>: xsd:nonNegativeInteger [1..1]
-    <b>severity - TODO: there are more properties of this name </b>: xsd:string [0..1]
+    <b>severity </b>: xsd:string [0..1]
 }
-class ExploitCatalogVulnerabilityCategorization {
+class ExploitCatalogVulnAssessmentRelationship {
 <b>Summary</b>
-TODO
+Provides an exploit assessment of a vulnerability.
 <b>Description</b>
-An ExploitCatalogVulnerabilityCategorization is TODO
+An ExploitCatalogVulnAssessmentRelationship describes if a vulnerability
+is listed in any exploit catalog such as the CISA Known Exploited
+Vulnerabilities Catalog (KEV)
+<https://www.cisa.gov/known-exploited-vulnerabilities-catalog>.
+
+**Constraints**
+
+-   The relationship type must be set to hasAssessmentFor.
+
+**Syntax**
+
+`json {   "@type": "ExploitCatalogVulnAssessmentRelationship",   "@id": "urn:spdx.dev:exploit-catalog-1",   "relationshipType": "hasAssessmentFor",   "catalogType": "kev",   "locator": "https://www.cisa.gov/known-exploited-vulnerabilities-catalog",   "exploited": "true",   "from": "urn:spdx.dev:vuln-cve-2023-2136",   "to": ["urn:product-google-chrome-112.0.5615.136"],   "suppliedBy": ["urn:spdx.dev:agent-jane-doe"],   "publishedTime": "2021-03-09T11:04:53Z" }`
 .. metadata ..
     Instantiability : Concrete
-    SubclassOf : VulnerabilityCategorization
-    name : ExploitCatalogVulnerabilityCategorization
+    SubclassOf : VulnAssessmentRelationship
+    name : ExploitCatalogVulnAssessmentRelationship
 .. properties ..
-    <b>listed </b>: ExploitCatalogListedType [1..1]
-    <b>locator - TODO: there is already a property of this name in
-core:ExternalReference </b>: xsd:anyURI [1..1]
+    <b>catalogType </b>: ExploitCatalogType [1..1]
+    <b>exploited </b>: xsd:boolean [1..1]
+    <b>locator </b>: xsd:anyURI [1..1]
 }
-"ExploitCatalogListedType" <-[dashed,thickness=4]-- "ExploitCatalogVulnerabilityCategorization::listed"
-class ExternalSecurityIdentifier {
+"ExploitCatalogType" <-[dashed,thickness=4]-- "ExploitCatalogVulnAssessmentRelationship::catalogType"
+class SsvcVulnAssessmentRelationship {
 <b>Summary</b>
-TODO
+Provides an SSVC assessment for a vulnerability.
 <b>Description</b>
-An ExternalSecurityIdentifier is TODO
+An SsvcVulnAssessmentRelationship describes the decision made using the
+Stakeholder-Specific Vulnerability Categorization (SSVC) decision tree
+as defined on
+<https://www.cisa.gov/stakeholder-specific-vulnerability-categorization-ssvc>.
+It is intended to communicate the results of using the CISA SSVC
+Calculator.
+
+**Constraints**
+
+-   The relationship type must be set to hasAssessmentFor.
+
+**Syntax**
+
+`json {   "@type": "SsvcVulnAssessmentRelationship",   "@id": "urn:spdx.dev:ssvc-1",   "relationshipType": "hasAssessmentFor",   "decisionType": "act",   "from": "urn:spdx.dev:vuln-cve-2020-28498",   "to": ["urn:product-acme-application-1.3"],   "assessedElement": "urn:npm-elliptic-6.5.2",   "suppliedBy": ["urn:spdx.dev:agent-jane-doe"],   "publishedTime": "2021-03-09T11:04:53Z" }`
 .. metadata ..
     Instantiability : Concrete
-    SubclassOf : ExternalIdentifier
-    name : ExternalSecurityIdentifier
+    SubclassOf : VulnAssessmentRelationship
+    name : SsvcVulnAssessmentRelationship
 .. properties ..
-    <b>source - TODO: there is already a property of that name in
-VulnerabilityCategorization </b>: xsd:string 
+    <b>decisionType </b>: SsvcDecisionType [1..1]
 }
-class GenericVulnerabilityCategorization {
+"SsvcDecisionType" <-[dashed,thickness=4]-- "SsvcVulnAssessmentRelationship::decisionType"
+class VexAffectedVulnAssessmentRelationship {
 <b>Summary</b>
-TODO
+Connects a vulnerability and an element designating the element as a
+product affected by the vulnerability.
 <b>Description</b>
-A GenericVulnerabilityCategorization is TODO
+VexAffectedVulnAssessmentRelationship connects a vulnerability and a
+number of elements. The relationship marks these elements as products
+affected by the vulnerability. This relationship corresponds to the VEX
+affected status.
+
+**Constraints**
+
+When linking elements using a VexAffectedVulnAssessmentRelationship, the
+following requirements must be observed:
+
+-   Elements linked with a VulnVexAffectedAssessmentRelationship are
+    constrained to the affects relationship type.
+
+**Syntax**
+
+`json {   "@type": "VexAffectedVulnAssessmentRelationship",   "@id": "urn:spdx.dev:vex-affected-1",   "relationshipType": "affects",   "from": "urn:spdx.dev:vuln-cve-2020-28498",   "to": ["urn:product-acme-application-1.3"],   "assessedElement": "urn:npm-elliptic-6.5.2",   "actionStatement": "Upgrade to version 1.4 of ACME application.",   "suppliedBy": ["urn:spdx.dev:agent-jane-doe"],   "publishedTime": "2021-03-09T11:04:53Z" }`
 .. metadata ..
     Instantiability : Concrete
-    SubclassOf : VulnerabilityCategorization
-    name : GenericVulnerabilityCategorization
+    SubclassOf : VexVulnAssessmentRelationship
+    name : VexAffectedVulnAssessmentRelationship
 .. properties ..
-    <b>exploitability </b>: xsd:string [0..1]
-    <b>severity - TODO: there are more properties of this name </b>: GenericVulnerabilitySeverityType [0..1]
+    <b>actionStatement </b>: xsd:string [0..1]
+    <b>actionStatementTime </b>: /Core/DateTime [0..]
 }
-"GenericVulnerabilitySeverityType" <-[dashed,thickness=4]-- "GenericVulnerabilityCategorization::severity - TODO: there are more properties of this name"
-class OtherVulnerabilityCategorization {
+"/Core/DateTime" <-[dashed,thickness=4]-- "VexAffectedVulnAssessmentRelationship::actionStatementTime"
+class VexFixedVulnAssessmentRelationship {
 <b>Summary</b>
-TODO
+Links a vulnerability and elements representing products (in the VEX
+sense) where a fix has been applied and are no longer affected.
 <b>Description</b>
-An OtherVulnerabilityCategorization is TODO
+VexFixedVulnAssessmentRelationship links a vulnerability to a number of
+elements representing VEX products where a vulnerability has been fixed
+and are no longer affected. It represents the VEX fixed status.
+
+**Constraints**
+
+When linking elements using a VexFixedVulnAssessmentRelationship, the
+following requirements must be observed:
+
+-   Elements linked with a VulnVexFixedAssessmentRelationship are
+    constrained to using the fixedIn relationship type.
+-   The from: end of the relationship must ve a /Security/Vulnerability
+    classed element.
+
+**Syntax**
+
+`json {   "@type": "VexFixedVulnAssessmentRelationship",   "@id": "urn:spdx.dev:vex-fixed-in-1",   "relationshipType": "fixedIn",   "from": "urn:spdx.dev:vuln-cve-2020-28498",   "to": ["urn:product-acme-application-1.3"],   "assessedElement": "urn:npm-elliptic-6.5.4",   "suppliedBy": ["urn:spdx.dev:agent-jane-doe"],   "publishedTime": "2021-03-09T11:04:53Z" }`
 .. metadata ..
     Instantiability : Concrete
-    SubclassOf : VulnerabilityCategorization
-    name : OtherVulnerabilityCategorization
+    SubclassOf : VexVulnAssessmentRelationship
+    name : VexFixedVulnAssessmentRelationship
 .. properties ..
-    <b>categorizationType </b>: xsd:string [1..1]
-    <b>categorizationValue </b>: xsd:string [1..1]
 }
-class SsvcVulnerabilityCategorization {
+class VexNotAffectedVulnAssessmentRelationship {
 <b>Summary</b>
-TODO
+Links a vulnerability and one or more elements designating the latter as
+products not affected by the vulnerability.
 <b>Description</b>
-An SsvcVulnerabilityCategorization is TODO
+VexNotAffectedVulnAssessmentRelationship connects a vulnerability and a
+number of elements designating them as products not affected by the
+vulnerability. This relationship corresponds to the VEX not\_affected
+status.
+
+**Constraints**
+
+When linking elements using a VexNotVulnAffectedAssessmentRelationship,
+the following requirements must be observed:
+
+-   Relating elements with a VexNotAffectedVulnAssessmentRelationship is
+    restricted to the doesNotAffect relationship type.
+-   The from: end of the relationship must be a /Security/Vulnerability
+    classed element.
+-   Both impactStatement and justificationType properties have a
+    cardinality of 0..1 making them optional. Nevertheless, to produce a
+    valid VEX not\_affected statement, one of them MUST be defined. This
+    is specified in the Minimum Elements for VEX.
+
+**Syntax**
+
+`json {   "@type": "VexNotAffectedVulnAssessmentRelationship",   "@id": "urn:spdx.dev:vex-not-affected-1",   "relationshipType": "doesNotAffect",   "from": "urn:spdx.dev:vuln-cve-2020-28498",   "to": ["urn:product-acme-application-1.3"],   "assessedElement": "urn:npm-elliptic-6.5.2",   "justificationType": "componentNotPresent",   "impactStatement": "Not using this vulnerable part of this library.",   "suppliedBy": ["urn:spdx.dev:agent-jane-doe"],   "publishedTime": "2021-03-09T11:04:53Z" }`
 .. metadata ..
     Instantiability : Concrete
-    SubclassOf : VulnerabilityCategorization
-    name : SsvcVulnerabilityCategorization
+    SubclassOf : VexVulnAssessmentRelationship
+    name : VexNotAffectedVulnAssessmentRelationship
 .. properties ..
-    <b>decision </b>: SsvcDecisionType [1..1]
+    <b>impactStatement </b>: xsd:string [0..1]
+    <b>impactStatementTime </b>: /Core/DateTime [0..1]
+    <b>justificationType </b>: VexJustificationType [0..1]
 }
-"SsvcDecisionType" <-[dashed,thickness=4]-- "SsvcVulnerabilityCategorization::decision"
-class VexAffectedVulnerabilityCategorization {
+"/Core/DateTime" <-[dashed,thickness=4]-- "VexNotAffectedVulnAssessmentRelationship::impactStatementTime"
+"VexJustificationType" <-[dashed,thickness=4]-- "VexNotAffectedVulnAssessmentRelationship::justificationType"
+class VexUnderInvestigationVulnAssessmentRelationship {
 <b>Summary</b>
-TODO
+Designates elements as products where the impact of a vulnerability is
+being investigated.
 <b>Description</b>
-An VexAffectedVulnerabilityCategorization is TODO
+VexUnderInvestigationVulnAssessmentRelationship links a vulnerability to
+a number of products stating the vulnerability's impact on them is being
+investigated. It represents the VEX under\_investigation status.
+
+**Constraints**
+
+When linking elements using a
+VexUnderInvestigationVulnAssessmentRelationship the following
+requirements must be observed:
+
+-   Elements linked with a
+    VexUnderInvestigationVulnAssessmentRelationship are constrained to
+    using the underInvestigationFor relationship type.
+-   The from: end of the relationship must ve a /Security/Vulnerability
+    classed element.
+
+**Syntax**
+
+`json {   "@type": "VexUnderInvestigationVulnAssessmentRelationship",   "@id": "urn:spdx.dev:vex-underInvestigation-1",   "relationshipType": "underInvestigationFor",   "from": "urn:spdx.dev:vuln-cve-2020-28498",   "to": ["urn:product-acme-application-1.3"],   "assessedElement": "urn:npm-elliptic-6.5.2",   "suppliedBy": ["urn:spdx.dev:agent-jane-doe"],   "publishedTime": "2021-03-09T11:04:53Z" }`
 .. metadata ..
     Instantiability : Concrete
-    SubclassOf : VexVulnerabilityCategorization
-    name : VexAffectedVulnerabilityCategorization
+    SubclassOf : VexVulnAssessmentRelationship
+    name : VexUnderInvestigationVulnAssessmentRelationship
 .. properties ..
-    <b>actionStatement </b>: xsd:string [1..1]
 }
-class VexNotAffectedVulnerabilityCategorization {
+abstract VexVulnAssessmentRelationship {
 <b>Summary</b>
-TODO
+Asbtract ancestor class for all VEX relationships
 <b>Description</b>
-An VexNotAffectedVulnerabilityCategorization is TODO
+VexVulnAssessmentRelationship is an abstract subclass that defined the
+common properties shared by all the SPDX-VEX status relationships.
+
+**Constraints**
+
+When linking elements using a VexVulnAssessmentRelationship, the
+following requirements must be observed:
+
+-   The from: end must be a /Security/Vulnerability classed element
+-   The to: end must point to elements representing the VEX *products*.
+    To specify a different element where the vulnerability was detected,
+    the VEX relationship can optionally specify *subcomponents* using
+    the assessedElement property.
+
+VEX inherits information from the document level down to its statements.
+When a statement is missing information it can be completed by reading
+the equivalent field from the containing document. For example, if a VEX
+relationship is missing data in its createdBy property, tools must
+consider the entity listed in the CreationInfo section of the document
+as the VEX author. In the same way, when a VEX relationship does not
+have a created property, the document's date must be considered as
+authoritative.
 .. metadata ..
-    Instantiability : Concrete
-    SubclassOf : VexVulnerabilityCategorization
-    name : VexNotAffectedVulnerabilityCategorization
+    Instantiability : Abstract
+    SubclassOf : VulnAssessmentRelationship
+    name : VexVulnAssessmentRelationship
 .. properties ..
-    <b>impact </b>: xsd:string [1..1]
-    <b>justification </b>: VexJustificationType [1..1]
+    <b>statusNotes </b>: xsd:string [0..1]
+    <b>vexVersion </b>: xsd:string [0..1]
 }
-"VexJustificationType" <-[dashed,thickness=4]-- "VexNotAffectedVulnerabilityCategorization::justification"
-class VexVulnerabilityCategorization {
+abstract VulnAssessmentRelationship {
 <b>Summary</b>
-TODO
+Abstract ancestor class for all vulnerability assessments
 <b>Description</b>
-An VexVulnerabilityCategorization is TODO
+VulnAssessmentRelationship is the ancestor class common to all
+vulnerability assessment relationships. It factors out the common
+properties shared by them.
 .. metadata ..
-    Instantiability : Concrete
-    SubclassOf : VulnerabilityCategorization
-    name : VexVulnerabilityCategorization
+    Instantiability : Abstract
+    SubclassOf : /Core/Relationship
+    name : VulnAssessmentRelationship
 .. properties ..
-    <b>status </b>: VexStatusType [1..1]
+    <b>assessedElement </b>: /Core/Element [0..1]
+    <b>modifiedTime </b>: /Core/DateTime [0..1]
+    <b>publishedTime </b>: /Core/DateTime [0..1]
+    <b>suppliedBy </b>: /Core/Agent [0..1]
+    <b>withdrawnTime </b>: /Core/DateTime [0..1]
 }
-"VexStatusType" <-[dashed,thickness=4]-- "VexVulnerabilityCategorization::status"
+"/Core/Element" <-[dashed,thickness=4]-- "VulnAssessmentRelationship::assessedElement"
+"/Core/DateTime" <-[dashed,thickness=4]-- "VulnAssessmentRelationship::modifiedTime"
+"/Core/DateTime" <-[dashed,thickness=4]-- "VulnAssessmentRelationship::publishedTime"
+"/Core/Agent" <-[dashed,thickness=4]-- "VulnAssessmentRelationship::suppliedBy"
+"/Core/DateTime" <-[dashed,thickness=4]-- "VulnAssessmentRelationship::withdrawnTime"
 class Vulnerability {
 <b>Summary</b>
-TODO
+Specifies a vulnerability and its associated information.
 <b>Description</b>
-A Vulnerability is TODO
+Specifies a vulnerability and its associated information.
+
+**Syntax**
+
+`` json {   "@type": "Vulnerability",   "@id": "urn:spdx.dev:vuln-1",   "summary": "Use of a Broken or Risky Cryptographic Algorithm",   "description": "The npm package `elliptic` before version 6.5.4 are vulnerable to Cryptographic Issues via the secp256k1 implementation in elliptic/ec/key.js. There is no check to confirm that the public key point passed into the derive function actually exists on the secp256k1 curve. This results in the potential for the private key used in this implementation to be revealed after a number of ECDH operations are performed.",         "modified": "2021-03-08T16:02:43Z",   "published": "2021-03-08T16:06:50Z",   "externalIdentifiers": [     {       "@type": "ExternalIdentifier",       "externalIdentifierType": "cve",       "identifier": "CVE-2020-2849",       "identifierLocator": [         "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-28498",         "https://www.cve.org/CVERecord?id=CVE-2020-28498"       ],       "issuingAuthority": "urn:spdx.dev:agent-cve.org"     },     {       "type": "ExternalIdentifier",       "externalIdentifierType": "securityOther",       "identifier": "GHSA-r9p9-mrjm-926w",       "identifierLocator": "https://github.com/advisories/GHSA-r9p9-mrjm-926w"     },     {       "type": "ExternalIdentifier",       "externalIdentifierType": "securityOther",       "identifier": "SNYK-JS-ELLIPTIC-1064899",       "identifierLocator": "https://security.snyk.io/vuln/SNYK-JS-ELLIPTIC-1064899"     }   ],   "externalReferences": [     {         "@type": "ExternalReference",         "externalReferenceType": "securityAdvisory",         "locator": "https://nvd.nist.gov/vuln/detail/CVE-2020-28498"     },     {       "@type": "ExternalReference",       "externalReferenceType": "securityAdvisory",       "locator": "https://ubuntu.com/security/CVE-2020-28498"     },     {       "@type": "ExternalReference",       "externalReferenceType": "securityOther",       "locator": "https://github.com/indutny/elliptic/pull/244/commits"     },     {       "@type": "ExternalReference",       "externalReferenceType": "securityOther",       "locator": "https://github.com/christianlundkvist/blog/blob/master/2020_05_26_secp256k1_twist_attacks/secp256k1_twist_attacks.md"     }   ] }, {   "@type": "Relationship",   "@id": "urn:spdx.dev:vulnRelationship-1",   "relationshipType": "hasAssociatedVulnerability",   "from": "urn:npm-elliptic-6.5.2",   "to": ["urn:spdx.dev:vuln-1"],   "startTime": "2021-03-08T16:06:50Z" }, {   "@type": "Relationship",   "@id": "urn:spdx.dev:vulnAgentRel-1",     "relationshipType": "publishedBy",     "from": "urn:spdx.dev:vuln-1",   "to": ["urn:spdx.dev:agent-snyk"],   "startTime": "2021-03-08T16:06:50Z" } ``
 .. metadata ..
     Instantiability : Concrete
-    SubclassOf : Artifact
+    SubclassOf : /Core/Element
     name : Vulnerability
 .. properties ..
-    <b>categorizations </b>: VulnerabilityCategorization [0..]
-    <b>modified </b>: xsd:datetime [0..1]
-    <b>published </b>: xsd:datetime [0..1]
-    <b>withdrawn </b>: xsd:datetime [0..1]
+    <b>modifiedTime </b>: /Core/DateTime [0..1]
+    <b>publishedTime </b>: /Core/DateTime [0..1]
+    <b>withdrawnTime </b>: /Core/DateTime [0..1]
 }
-"VulnerabilityCategorization" <-[dashed,thickness=4]-- "Vulnerability::categorizations"
-class VulnerabilityCategorization {
-<b>Summary</b>
-TODO
-<b>Description</b>
-A VulnerabilityCategorization is TODO
-.. metadata ..
-    Instantiability : Concrete
-    SubclassOf : none
-    name : VulnerabilityCategorization
-.. properties ..
-    <b>categorizationDate </b>: xsd:datetime [1..1]
-    <b>source - TODO: there is already a property of that name in
-ExternalSecurityIdentifier </b>: xsd:anyURI [0..1]
+"/Core/DateTime" <-[dashed,thickness=4]-- "Vulnerability::modifiedTime"
+"/Core/DateTime" <-[dashed,thickness=4]-- "Vulnerability::publishedTime"
+"/Core/DateTime" <-[dashed,thickness=4]-- "Vulnerability::withdrawnTime"
 }
-}
-"VulnerabilityCategorization" <|-[thickness=4]- "CvssV2VulnerabilityCategorization"
-"VulnerabilityCategorization" <|-[thickness=4]- "CvssV3VulnerabilityCategorization"
-"VulnerabilityCategorization" <|-[thickness=4]- "EpssVulnerabilityCategorization"
-"VulnerabilityCategorization" <|-[thickness=4]- "ExploitCatalogVulnerabilityCategorization"
-"ExternalIdentifier" <|-[thickness=4]- "ExternalSecurityIdentifier"
-"VulnerabilityCategorization" <|-[thickness=4]- "GenericVulnerabilityCategorization"
-"VulnerabilityCategorization" <|-[thickness=4]- "OtherVulnerabilityCategorization"
-"VulnerabilityCategorization" <|-[thickness=4]- "SsvcVulnerabilityCategorization"
-"VexVulnerabilityCategorization" <|-[thickness=4]- "VexAffectedVulnerabilityCategorization"
-"VexVulnerabilityCategorization" <|-[thickness=4]- "VexNotAffectedVulnerabilityCategorization"
-"VulnerabilityCategorization" <|-[thickness=4]- "VexVulnerabilityCategorization"
-"Artifact" <|-[thickness=4]- "Vulnerability"
+"VulnAssessmentRelationship" <|-[thickness=4]- "CvssV2VulnAssessmentRelationship"
+"VulnAssessmentRelationship" <|-[thickness=4]- "CvssV3VulnAssessmentRelationship"
+"VulnAssessmentRelationship" <|-[thickness=4]- "EpssVulnAssessmentRelationship"
+"VulnAssessmentRelationship" <|-[thickness=4]- "ExploitCatalogVulnAssessmentRelationship"
+"VulnAssessmentRelationship" <|-[thickness=4]- "SsvcVulnAssessmentRelationship"
+"VexVulnAssessmentRelationship" <|-[thickness=4]- "VexAffectedVulnAssessmentRelationship"
+"VexVulnAssessmentRelationship" <|-[thickness=4]- "VexFixedVulnAssessmentRelationship"
+"VexVulnAssessmentRelationship" <|-[thickness=4]- "VexNotAffectedVulnAssessmentRelationship"
+"VexVulnAssessmentRelationship" <|-[thickness=4]- "VexUnderInvestigationVulnAssessmentRelationship"
+"VulnAssessmentRelationship" <|-[thickness=4]- "VexVulnAssessmentRelationship"
+"/Core/Relationship" <|-[thickness=4]- "VulnAssessmentRelationship"
+"/Core/Element" <|-[thickness=4]- "Vulnerability"
 @enduml

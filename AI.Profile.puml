@@ -2,35 +2,29 @@
 skinparam packageStyle rectangle
 set separator none
 ' vocabulary
-enum SensitivePersonalInformationType {
+enum PresenceType {
 <b>Summary</b>
-Categories of presence or absence
+Categories of presence or absence.
 <b>Description</b>
 This type is used to indicate if a given field is present or absent or
-unknown
+unknown.
 .. entries ..
-    <b>no</b>: Indicates absence of the field
-    <b>noassertion</b>: Describes no assertion. In other words, unknown.
-    <b>yes</b>: Indicates presence of the field
+    <b>no</b>: Indicates absence of the field.
+    <b>noAssertion</b>: Makes no assertion about the field.
+    <b>yes</b>: Indicates presence of the field.
 }
 enum SafetyRiskAssessmentType {
 <b>Summary</b>
-Categories of safety risk impact of application ie. serious, high,
-medium, low.
+Categories of safety risk impact of the application.
 <b>Description</b>
-Describes the different safety risk type values that can be used to
-describe the safety risk of the AI software
-.. entries ..
-    <b>high</b>: The second highest level of risk posed by the AI software as given by
-[Article 20 of EC Regulation No
-765/2008](https://ec.europa.eu/docsroom/documents/17107/attachments/1/translations/en/renditions/pdf).
-    <b>low</b>: Low/no risk is contained in the AI software.
-    <b>medium</b>: The third highest level of risk as given by [Article 20 of EC Regulation
-No
-765/2008](https://ec.europa.eu/docsroom/documents/17107/attachments/1/translations/en/renditions/pdf).
-    <b>serious</b>: The highest level of risk that is contained for a AI software as given
-by [Article 20 of Regulation
+Lists the different safety risk type values that can be used to describe
+the safety risk of AI software according to [Article 20 of Regulation
 765/2008/EC](https://ec.europa.eu/docsroom/documents/17107/attachments/1/translations/en/renditions/pdf).
+.. entries ..
+    <b>high</b>: The second-highest level of risk posed by an AI software.
+    <b>low</b>: Low/no risk is posed by the AI software.
+    <b>medium</b>: The third-highest level of risk posed by an AI software.
+    <b>serious</b>: The highest level of risk posed by an AI software.
 }
 ' classes
 together {
@@ -41,29 +35,32 @@ Provides information about the fields in the AI package profile.
 Metadata information that can be added to a package to describe an AI
 application or trained AI model.
 .. metadata ..
-    Instatiability : Concrete
-    SubclassOf : Software:Package
+    Instantiability : Concrete
+    SubclassOf : /Software/Package
     name : AIPackage
 .. properties ..
     <b>autonomyType </b>: PresenceType [0..1]
-    <b>dataPreprocessingSteps </b>: xsd:string [0..1]
     <b>domain </b>: xsd:string [0..]
     <b>energyConsumption </b>: xsd:string [0..1]
-    <b>hyperparameters </b>: xsd:string [0..]
+    <b>hyperparameter </b>: /Core/DictionaryEntry [0..]
     <b>informationAboutApplication </b>: xsd:string [0..1]
     <b>informationAboutTraining </b>: xsd:string [0..1]
-    <b>limitations </b>: xsd:string [0..]
-    <b>metrics </b>: xsd:string [0..]
-    <b>metricsDecisionThresholds </b>: xsd:string [0..]
-    <b>modelExplainabilityMechanisms </b>: xsd:string [0..1]
+    <b>limitation </b>: xsd:string [0..1]
+    <b>metric </b>: /Core/DictionaryEntry [0..]
+    <b>metricDecisionThreshold </b>: /Core/DictionaryEntry [0..]
+    <b>modelDataPreprocessing </b>: xsd:string [0..]
+    <b>modelExplainability </b>: xsd:string [0..]
     <b>safetyRiskAssessment </b>: SafetyRiskAssessmentType [0..1]
     <b>sensitivePersonalInformation </b>: PresenceType [0..1]
-    <b>standardsCompliance </b>: xsd:string [0..]
+    <b>standardCompliance </b>: xsd:string [0..]
     <b>typeOfModel </b>: xsd:string [0..]
 }
 "PresenceType" <-[dashed,thickness=4]-- "AIPackage::autonomyType"
+"/Core/DictionaryEntry" <-[dashed,thickness=4]-- "AIPackage::hyperparameter"
+"/Core/DictionaryEntry" <-[dashed,thickness=4]-- "AIPackage::metric"
+"/Core/DictionaryEntry" <-[dashed,thickness=4]-- "AIPackage::metricDecisionThreshold"
 "SafetyRiskAssessmentType" <-[dashed,thickness=4]-- "AIPackage::safetyRiskAssessment"
 "PresenceType" <-[dashed,thickness=4]-- "AIPackage::sensitivePersonalInformation"
 }
-"Package" <|-[thickness=4]--- "AIPackage" : Software:Package
+"/Software/Package" <|-[thickness=4]- "AIPackage"
 @enduml

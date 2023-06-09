@@ -2,33 +2,72 @@
 skinparam packageStyle rectangle
 set separator none
 ' vocabulary
+enum ConfidentialityLevelType {
+<b>Summary</b>
+Categories of confidentiality level.
+<b>Description</b>
+Describes the different confidentiality levels as given by the [Traffic
+Light Protocol](https://en.wikipedia.org/wiki/Traffic_Light_Protocol).
+.. entries ..
+    <b>Amber</b>: Data points in the dataset can be shared only with specific
+organizations and their clients on a need to know basis.
+    <b>Clear</b>: Dataset may be distributed freely, without restriction.
+    <b>Green</b>: Dataset can be shared within a community of peers and partners.
+    <b>Red</b>: Data points in the dataset are highly confidential and can only be
+shared with named recipients.
+}
+enum DatasetAvailabilityType {
+<b>Summary</b>
+Availability of dataset
+<b>Description</b>
+Describes the possible types of availability of a dataset, indicating
+whether the dataset can be directly downloaded, can be assembled using a
+script for scraping the data, is only available after a clickthrough or
+a registration form.
+.. entries ..
+    <b>Clickthrough</b>: the dataset is not publicly available and can only be accessed after
+affirmatively accepting terms on a clickthrough webpage.
+    <b>Direct-Download</b>: the dataset is publicly available and can be downloaded directly.
+    <b>Query</b>: the dataset is publicly available, but not all at once, and can only be
+accessed through queries which return parts of the dataset.
+    <b>Registration</b>: the dataset is not publicly available and an email registration is
+required before accessing the dataset, although without an affirmative
+acceptance of terms.
+    <b>Scraping-Script</b>: the dataset provider is not making available the underlying data and the
+dataset must be reassembled, typically using the provided script for
+scraping the data.
+}
 ' classes
 together {
 class Dataset {
 <b>Summary</b>
 Provides information about the fields in the Dataset profile.
 <b>Description</b>
-Metadata information that can be added to a a dataset that maybe used in
-a software or to train/test an AI package
+Metadata information that can be added to a dataset that may be used in
+a software or to train/test an AI package.
 .. metadata ..
-    Instatiability : Concrete
-    SubclassOf : Software:Package
+    Instantiability : Concrete
+    SubclassOf : /Software/Package
     name : Dataset
 .. properties ..
     <b>anonymizationMethodUsed </b>: xsd:string [0..]
-    <b>confidentialityLevelType </b>: ConfidentialityLevelType [0..]
-    <b>dataCollectionProcess </b>: xsd:string [0..]
-    <b>dataPreprocessingSteps </b>: xsd:string [0..1]
+    <b>confidentialityLevel </b>: ConfidentialityLevelType [0..1]
+    <b>dataCollectionProcess </b>: xsd:string [0..1]
+    <b>dataPreprocessing </b>: xsd:string [0..]
+    <b>datasetAvailability </b>: DatasetAvailabilityType [0..1]
     <b>datasetNoise </b>: xsd:string [0..1]
-    <b>datasetSize </b>: xsd:string [0..1]
+    <b>datasetSize </b>: xsd:nonNegativeInteger [0..1]
+    <b>datasetType </b>: xsd:string [1..1]
     <b>datasetUpdateMechanism </b>: xsd:string [0..1]
     <b>intendedUse </b>: xsd:string [0..1]
-    <b>knownBiases </b>: xsd:string [0..1]
-    <b>sensitivePersonalInformationType </b>: PresenceType [0..]
-    <b>sensors </b>: xsd:string [0..]
+    <b>knownBias </b>: xsd:string [0..]
+    <b>sensitivePersonalInformation </b>: PresenceType [0..1]
+    <b>sensor </b>: /Core/DictionaryEntry [0..]
 }
-"ConfidentialityLevelType" <-[dashed,thickness=4]-- "Dataset::confidentialityLevelType"
-"PresenceType" <-[dashed,thickness=4]-- "Dataset::sensitivePersonalInformationType"
+"ConfidentialityLevelType" <-[dashed,thickness=4]-- "Dataset::confidentialityLevel"
+"DatasetAvailabilityType" <-[dashed,thickness=4]-- "Dataset::datasetAvailability"
+"PresenceType" <-[dashed,thickness=4]-- "Dataset::sensitivePersonalInformation"
+"/Core/DictionaryEntry" <-[dashed,thickness=4]-- "Dataset::sensor"
 }
-"Package" <|-[thickness=4]--- "Dataset" : Software:Package
+"/Software/Package" <|-[thickness=4]- "Dataset"
 @enduml

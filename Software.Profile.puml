@@ -2,42 +2,63 @@
 skinparam packageStyle rectangle
 set separator none
 ' vocabulary
-enum DependencyLinkType {
+enum DependencyConditionalityType {
+<b>Summary</b>
+TODO
+<b>Description</b>
+TODO
+.. entries ..
+    <b>optional</b>: TODOdescription
+    <b>other</b>: TODOdescription
+    <b>prerequisite</b>: TODOdescription
+    <b>provided</b>: TODOdescription
+    <b>required</b>: TODOdescription
+}
+enum SBOMType {
+<b>Summary</b>
+Provides a set of values to be used to describe the common types of
+SBOMs that tools may create.
+<b>Description</b>
+The set of SBOM types with definitions as defined in [Types of Software
+Bill of Material (SBOM)
+Documents](https://www.cisa.gov/sites/default/files/2023-04/sbom-types-document-508c.pdf),
+published on April 21, 2023. An SBOM type describes the most likely type
+of an SBOM from the producer perspective, so that consumers can draw
+conclusions about the data inside an SBOM. A single SBOM can have
+multiple SBOM document types associated with it.
+.. entries ..
+    <b>analyzed</b>: SBOM generated through analysis of artifacts (e.g., executables,
+packages, containers, and virtual machine images) after its build. Such
+analysis generally requires a variety of heuristics. In some contexts,
+this may also be referred to as a “3rd party” SBOM.
+    <b>build</b>: SBOM generated as part of the process of building the software to create
+a releasable artifact (e.g., executable or package) from data such as
+source files, dependencies, built components, build process ephemeral
+data, and other SBOMs.
+    <b>deployed</b>: SBOM provides an inventory of software that is present on a system. This
+may be an assembly of other SBOMs that combines analysis of
+configuration options, and examination of execution behavior in a
+(potentially simulated) deployment environment.
+    <b>design</b>: SBOM of intended, planned software project or product with included
+components (some of which may not yet exist) for a new software
+artifact.
+    <b>runtime</b>: SBOM generated through instrumenting the system running the software, to
+capture only components present in the system, as well as external
+call-outs or dynamically loaded components. In some contexts, this may
+also be referred to as an “Instrumented” or “Dynamic” SBOM.
+    <b>source</b>: SBOM created directly from the development environment, source files,
+and included dependencies used to build an product artifact.
+}
+enum SoftwareDependencyLinkType {
 <b>Summary</b>
 TODO
 <b>Description</b>
 TODO
 .. entries ..
     <b>dynamic</b>: TODOdescription
-    <b>noAssertion</b>: TODOdescription
     <b>other</b>: TODOdescription
     <b>static</b>: TODOdescription
     <b>tool</b>: TODOdescription
-}
-enum DependencyRequirement {
-<b>Summary</b>
-TODO
-<b>Description</b>
-TODO
-.. entries ..
-    <b>noAssertion</b>: TODOdescription
-    <b>optional</b>: TODOdescription
-    <b>preRequisite</b>: TODOdescription
-    <b>provided</b>: TODOdescription
-    <b>required</b>: TODOdescription
-}
-enum DependencyScope {
-<b>Summary</b>
-TODO
-<b>Description</b>
-TODO
-.. entries ..
-    <b>build</b>: TODOdescription
-    <b>dev</b>: TODOdescription
-    <b>noAssertion</b>: TODOdescription
-    <b>other</b>: TODOdescription
-    <b>runtime</b>: TODOdescription
-    <b>test</b>: TODOdescription
 }
 enum SoftwarePurpose {
 <b>Summary</b>
@@ -51,15 +72,18 @@ perspective from which both parties can draw conclusions about the
 context in which the Element exists.
 .. entries ..
     <b>application</b>: the Element is a software application
-    <b>archive</b>: the Element refers to an archived collection of files (.tar, .zip, etc)
-    <b>bom</b>: TODOdescription
-    <b>configuration</b>: TODOdescription
-    <b>container</b>: the Element refers to a container image which can be used by a container
+    <b>archive</b>: the Element is an archived collection of one or more files (.tar, .zip,
+etc)
+    <b>bom</b>: Element is a bill of materials
+    <b>configuration</b>: Element is configuration data
+    <b>container</b>: the Element is a container image which can be used by a container
 runtime application
-    <b>data</b>: TODOdescription
+    <b>data</b>: Element is data
     <b>device</b>: the Element refers to a chipset, processor, or electronic board
-    <b>documentation</b>: TODOdescription
-    <b>executable</b>: TODOdescription
+    <b>documentation</b>: Element is documentation
+    <b>evidence</b>: the Element is the evidence that a specification or requirement has been
+fulfilled
+    <b>executable</b>: Element is an Artifact that can be run on a computer
     <b>file</b>: the Element is a single file which can be independently distributed
 (configuration file, statically linked binary, Kubernetes deployment,
 etc)
@@ -67,29 +91,33 @@ etc)
     <b>framework</b>: the Element is a software framework
     <b>install</b>: the Element is used to install software on disk
     <b>library</b>: the Element is a software library
-    <b>module</b>: TODOdescription
-    <b>operatingSystem</b>: the Element refers to an operating system
+    <b>manifest</b>: the Element is a software manifest
+    <b>mlModel</b>: the Element is a machine learning model
+    <b>module</b>: the Element is a module of a piece of software
+    <b>operatingSystem</b>: the Element is an operating system
     <b>other</b>: the Element doesn't fit into any of the other categories
-    <b>patch</b>: TODOdescription
-    <b>source</b>: the Element is a collection of source files
+    <b>patch</b>: Element contains a set of changes to update, fix, or improve another
+Element
+    <b>requirement</b>: the Element provides a requirement needed as input for another Element
+    <b>source</b>: the Element is a single or a collection of source files
+    <b>specification</b>: the Element is a plan, guideline or strategy how to create, perform or
+analyse an application
 }
 ' classes
 together {
 class File {
 <b>Summary</b>
-TODO
+Refers to any object that stores content on a computer.
 <b>Description</b>
-TODO This is about the File class.
+Refers to any object that stores content on a computer. The type of
+content can optionally be provided in the contentType property.
 .. metadata ..
-    SubclassOf : Core:Artifact
+    SubclassOf : /Software/SoftwareArtifact
     name : File
 .. properties ..
-    <b>contentIdentifier </b>: xsd:anyURI [0..1]
-    <b>contentType </b>: MediaType [0..1]
-    <b>filePurpose </b>: SoftwarePurpose [0..]
+    <b>contentType </b>: /Core/MediaType [0..1]
 }
-"MediaType" <-[dashed,thickness=4]-- "File::contentType"
-"SoftwarePurpose" <-[dashed,thickness=4]-- "File::filePurpose"
+"/Core/MediaType" <-[dashed,thickness=4]-- "File::contentType"
 class Package {
 <b>Summary</b>
 Refers to any unit of content that can be associated with a distribution
@@ -111,17 +139,15 @@ to be) represented in SPDX as a package:
 
 Note that some of these could be represented in SPDX as a file as well.
 .. metadata ..
-    SubclassOf : Core:Artifact
+    SubclassOf : /Software/SoftwareArtifact
     name : Package
 .. properties ..
-    <b>contentIdentifier </b>: xsd:anyURI [0..1]
     <b>downloadLocation </b>: xsd:anyURI [0..1]
     <b>homePage </b>: xsd:anyURI [0..1]
-    <b>packagePurpose </b>: SoftwarePurpose [0..]
     <b>packageUrl </b>: xsd:anyURI [0..1]
     <b>packageVersion </b>: xsd:string [0..1]
+    <b>sourceInfo </b>: xsd:string [0..1]
 }
-"SoftwarePurpose" <-[dashed,thickness=4]-- "Package::packagePurpose"
 class Sbom {
 <b>Summary</b>
 A collection of SPDX Elements describing a single package.
@@ -132,10 +158,12 @@ and composition of the product, provenance details of the product and/or
 its composition, licensing information, known quality or security
 issues, etc.
 .. metadata ..
-    SubclassOf : Core:Bom
+    SubclassOf : /Core/Bom
     name : Sbom
 .. properties ..
+    <b>sbomType </b>: SBOMType [0..]
 }
+"SBOMType" <-[dashed,thickness=4]-- "Sbom::sbomType"
 class Snippet {
 <b>Summary</b>
 Describes a certain part of a file.
@@ -146,17 +174,37 @@ original source. Snippets are useful for denoting when part of a file
 may have been originally created under another license or copied from a
 place with a known vulnerability.
 .. metadata ..
-    SubclassOf : Core:Artifact
+    SubclassOf : /Software/SoftwareArtifact
     name : Snippet
 .. properties ..
-    <b>byteRange </b>: positiveIntegerRange [0..1]
-    <b>contentIdentifier </b>: xsd:anyURI [0..1]
-    <b>lineRange </b>: positiveIntegerRange [0..1]
-    <b>snippetPurpose </b>: SoftwarePurpose [0..]
+    <b>byteRange </b>: /Core/PositiveIntegerRange [0..1]
+    <b>lineRange </b>: /Core/PositiveIntegerRange [0..1]
 }
-"positiveIntegerRange" <-[dashed,thickness=4]-- "Snippet::byteRange"
-"positiveIntegerRange" <-[dashed,thickness=4]-- "Snippet::lineRange"
-"SoftwarePurpose" <-[dashed,thickness=4]-- "Snippet::snippetPurpose"
+"/Core/PositiveIntegerRange" <-[dashed,thickness=4]-- "Snippet::byteRange"
+"/Core/PositiveIntegerRange" <-[dashed,thickness=4]-- "Snippet::lineRange"
+abstract SoftwareArtifact {
+<b>Summary</b>
+A distinct article or unit related to Software.
+<b>Description</b>
+A software artifact is a distinct article or unit related to software
+such as a package, a file, or a snippet.
+.. metadata ..
+    Instantiability : Abstract
+    SubclassOf : /Core/Artifact
+    name : SoftwareArtifact
+.. properties ..
+    <b>additionalPurpose </b>: SoftwarePurpose [0..]
+    <b>attributionText </b>: xsd:string [0..1]
+    <b>concludedLicense </b>: /Licensing/LicenseField [0..1]
+    <b>contentIdentifier </b>: xsd:anyURI [0..1]
+    <b>copyrightText </b>: xsd:string [0..1]
+    <b>declaredLicense </b>: /Licensing/LicenseField [0..1]
+    <b>primaryPurpose </b>: SoftwarePurpose [0..1]
+}
+"SoftwarePurpose" <-[dashed,thickness=4]-- "SoftwareArtifact::additionalPurpose"
+"/Licensing/LicenseField" <-[dashed,thickness=4]-- "SoftwareArtifact::concludedLicense"
+"/Licensing/LicenseField" <-[dashed,thickness=4]-- "SoftwareArtifact::declaredLicense"
+"SoftwarePurpose" <-[dashed,thickness=4]-- "SoftwareArtifact::primaryPurpose"
 class SoftwareDependencyRelationship {
 <b>Summary</b>
 MISSING
@@ -164,20 +212,19 @@ MISSING
 TODO
 .. metadata ..
     Instantiability : Concrete
-    SubclassOf : Core:Relationship
+    SubclassOf : /Core/LifecycleScopedRelationship
     name : SoftwareDependencyRelationship
 .. properties ..
-    <b>linkType </b>: DependencyLinkType [1..1]
-    <b>requirement </b>: DependencyRequirement [1..1]
-    <b>scope </b>: DependencyScope [1..1]
+    <b>conditionality </b>: DependencyConditionalityType [0..1]
+    <b>softwareLinkage </b>: SoftwareDependencyLinkType [0..1]
 }
-"DependencyLinkType" <-[dashed,thickness=4]-- "SoftwareDependencyRelationship::linkType"
-"DependencyRequirement" <-[dashed,thickness=4]-- "SoftwareDependencyRelationship::requirement"
-"DependencyScope" <-[dashed,thickness=4]-- "SoftwareDependencyRelationship::scope"
+"DependencyConditionalityType" <-[dashed,thickness=4]-- "SoftwareDependencyRelationship::conditionality"
+"SoftwareDependencyLinkType" <-[dashed,thickness=4]-- "SoftwareDependencyRelationship::softwareLinkage"
 }
-"Artifact" <|-[thickness=4]--- "File" : Core:Artifact
-"Artifact" <|-[thickness=4]--- "Package" : Core:Artifact
-"Bom" <|-[thickness=4]--- "Sbom" : Core:Bom
-"Artifact" <|-[thickness=4]--- "Snippet" : Core:Artifact
-"Relationship" <|-[thickness=4]--- "SoftwareDependencyRelationship" : Core:Relationship
+"/Software/SoftwareArtifact" <|-[thickness=4]- "File"
+"/Software/SoftwareArtifact" <|-[thickness=4]- "Package"
+"/Core/Bom" <|-[thickness=4]- "Sbom"
+"/Software/SoftwareArtifact" <|-[thickness=4]- "Snippet"
+"/Core/Artifact" <|-[thickness=4]- "SoftwareArtifact"
+"/Core/LifecycleScopedRelationship" <|-[thickness=4]- "SoftwareDependencyRelationship"
 @enduml

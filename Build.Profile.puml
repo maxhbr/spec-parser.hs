@@ -2,13 +2,6 @@
 skinparam packageStyle rectangle
 set separator none
 ' vocabulary
-enum BuildTypeVocab {
-<b>Summary</b>
-MISSING
-<b>Description</b>
-This is about the vocabulary of build types.
-.. entries ..
-}
 ' classes
 together {
 class Build {
@@ -26,23 +19,31 @@ Definitions of "BuildType", "ConfigSource", "Parameters" and
 provenance](https://slsa.dev/provenance/v0.2).
 
 ExternalIdentifier of type "urlScheme" may be used to identify build
-logs. Comment should be "LogReference".
+logs. In this case, the comment of the ExternalIdentifier should be
+"LogReference".
+
+Note that buildStart and buildEnd are optional, and may be omitted to
+simplify creating reproducible builds.
 .. metadata ..
     Instantiability : Concrete
-    SubclassOf : Core:Element
+    SubclassOf : /Core/Element
     name : Build
 .. properties ..
+    <b>buildEndTime </b>: /Core/DateTime [0..1]
     <b>buildId </b>: xsd:string [0..1]
-    <b>buildType </b>: anyURI [1..1]
-    <b>configSourceDigest </b>: Hash [0..]
+    <b>buildStartTime </b>: /Core/DateTime [0..1]
+    <b>buildType </b>: xsd:anyURI [1..1]
+    <b>configSourceDigest </b>: /Core/Hash [0..]
     <b>configSourceEntrypoint </b>: xsd:string [0..]
-    <b>configSourceUri </b>: anyURI [0..]
-    <b>endTime </b>: xsd:DateTime 
-    <b>environment </b>: xsd:map&lt;string&gt;string [0..]
-    <b>parameters </b>: xsd:map&lt;string&gt;string [0..]
-    <b>startTime </b>: xsd:DateTime 
+    <b>configSourceUri </b>: xsd:anyURI [0..]
+    <b>environment </b>: /Core/DictionaryEntry [0..]
+    <b>parameters </b>: /Core/DictionaryEntry [0..]
 }
-"Hash" <-[dashed,thickness=4]-- "Build::configSourceDigest"
+"/Core/DateTime" <-[dashed,thickness=4]-- "Build::buildEndTime"
+"/Core/DateTime" <-[dashed,thickness=4]-- "Build::buildStartTime"
+"/Core/Hash" <-[dashed,thickness=4]-- "Build::configSourceDigest"
+"/Core/DictionaryEntry" <-[dashed,thickness=4]-- "Build::environment"
+"/Core/DictionaryEntry" <-[dashed,thickness=4]-- "Build::parameters"
 }
-"Element" <|-[thickness=4]--- "Build" : Core:Element
+"/Core/Element" <|-[thickness=4]- "Build"
 @enduml

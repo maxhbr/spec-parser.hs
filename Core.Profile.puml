@@ -21,7 +21,10 @@ ExteralIdentifierType specifies the type of an external identifier.
 .. entries ..
     <b>cpe22</b>: https://cpe.mitre.org/files/cpe-specification\_2.2.pdf
     <b>cpe23</b>: https://nvlpubs.nist.gov/nistpubs/Legacy/IR/nistir7695.pdf
-    <b>email</b>: TODOdescription
+    <b>cve</b>: An identifier for a specific software flaw defined within the official
+CVE Dictionary and that conforms to the CVE specification as defined by
+https://csrc.nist.gov/glossary/term/cve\_id.
+    <b>email</b>: https://datatracker.ietf.org/doc/html/rfc3696#section-3
     <b>gitoid</b>: gitoid stands for Git Object ID. A gitoid of typeblob is a unique hash
 of a software artifact. Git relies on a Merkle Tree to index stored
 objects. See https://git-scm.com/book/en/v2/Git-Internals-Git-Objects.
@@ -33,9 +36,11 @@ the GitBOM document is itself an artifact, and the gitoid of that
 artifact is its valid locator.
     <b>other</b>: Used when the type doesn't match any of the other options.
     <b>pkgUrl</b>: https://github.com/package-url/purl-spec
+    <b>securityOther</b>: Used when there is a security related identifier of unspecified type.
     <b>swhid</b>: https://docs.softwareheritage.org/devel/swh-model/persistent-identifiers.html
     <b>swid</b>: https://www.ietf.org/archive/id/draft-ietf-sacm-coswid-21.html#section-2.3
-    <b>urlScheme</b>: TODOdescription
+    <b>urlScheme</b>: the scheme used in order to locate a resource
+https://www.iana.org/assignments/uri-schemes/uri-schemes.xhtml
 }
 enum ExternalReferenceType {
 <b>Summary</b>
@@ -45,14 +50,66 @@ ExteralReferenceType specifies the type of an external reference.
 .. entries ..
     <b>altDownloadLocation</b>: A reference to an alternative download location.
     <b>altWebPage</b>: A reference to an alternative web page.
+    <b>binaryArtifact</b>: A reference to binary artifacts related to a package.
+    <b>buildMeta</b>: A reference build metadata related to a published package.
+    <b>buildSystem</b>: A reference build system used to create or publish the package.
+    <b>certificationReport</b>: A reference to a certification report for a package from an
+accredited/independent body.
+    <b>chat</b>: A reference to the instant messaging system used by the maintainer for a
+package.
+    <b>componentAnalysisReport</b>: A reference to a Software Composition Analysis (SCA) report.
+    <b>documentation</b>: A reference to the documentation for a package.
+    <b>dynamicAnalysisReport</b>: A reference to a dynamic analysis report for a package.
+    <b>eolNotice</b>: A reference to the End Of Sale (EOS) and/or End Of Life (EOL)
+information related to a package.
+    <b>funding</b>: A reference to funding information related to a package.
+    <b>issueTracker</b>: A reference to the issue tracker for a package.
+    <b>license</b>: A reference to additional license information related to an artifact.
+    <b>mailingList</b>: A reference to the mailing list used by the maintainer for a package.
+    <b>metrics</b>: A reference to metrics related to package such as OpenSSF scorecards.
     <b>other</b>: Used when the type doesn't match any of the other options.
-    <b>securityAdvisory</b>: A reference to the published security advisory (where advisory as
-defined per ISO 29147:2018). It may contain an impact statement whether
-a package (e.g. a product) is or is not affected by vulnerabilities.
-    <b>securityFix</b>: A reference to the source code with a fix for the vulnerability (e.g., a
-GitHub commit).
-    <b>securityOther</b>: Used when the reference is security related but doesn't match any of the
-other types.
+    <b>productMetadata</b>: A reference to additional product metadata such as reference within
+organization's product catalog.
+    <b>qualityAssessmentReport</b>: A reference to a quality assessment for a package.
+    <b>releaseHistory</b>: A reference to a published list of releases for a package.
+    <b>releaseNotes</b>: A reference to the release notes for a package.
+    <b>riskAssessment</b>: A reference to a risk assessment for a package.
+    <b>runtimeAnalysisReport</b>: A reference to a runtime analysis report for a package.
+    <b>secureSoftwareAttestation</b>: A reference to information assuring that the software is developed using
+security practices as defined by [NIST SP 800-218 Secure Software
+Development Framework
+(SSDF)](https://csrc.nist.gov/publications/detail/sp/800-218/final) or
+[CISA Secure Software Development Attestation
+Form](https://www.cisa.gov/sites/default/files/2023-04/secure-software-self-attestation_common-form_508.pdf).
+    <b>securityAdversaryModel</b>: A reference to the security adversary model for a package.
+    <b>securityAdvisory</b>: A reference to a published security advisory (where advisory as defined
+per ISO 29147:2018) that may affect one or more elements, e.g., vendor
+advisories or specific NVD entries.
+    <b>securityFix</b>: A reference to the patch or source code that fixes a vulnerability.
+    <b>securityOther</b>: A reference to related security information of unspecified type.
+    <b>securityPenTestReport</b>: A reference to a [penetration
+test](https://en.wikipedia.org/wiki/Penetration_test) report for a
+package.
+    <b>securityPolicy</b>: A reference to instructions for reporting newly discovered security
+vulnerabilities for a package.
+    <b>securityThreatModel</b>: A reference the [security threat
+model](https://en.wikipedia.org/wiki/Threat_model) for a package.
+    <b>socialMedia</b>: A reference to a social media channel for a package.
+    <b>sourceArtifact</b>: A reference to an artifact containing the sources for a package.
+    <b>staticAnalysisReport</b>: A reference to a static analysis report for a package.
+    <b>support</b>: A reference to the software support channel or other support information
+for a package.
+    <b>vcs</b>: A reference to a version control system related to a software artifact.
+    <b>vulnerabilityDisclosureReport</b>: A reference to a Vulnerability Disclosure Report (VDR) which provides
+the software supplier's analysis and findings describing the impact (or
+lack of impact) that reported vulnerabilities have on packages or
+products in the supplier's SBOM as defined in [NIST SP
+800-161](https://csrc.nist.gov/publications/detail/sp/800-161/rev-1/final).
+    <b>vulnerabilityExploitabilityAssessment</b>: A reference to a Vulnerability Exploitability eXchange (VEX) statement
+which provides information on whether a product is impacted by a
+specific vulnerability in an included package and, if affected, whether
+there are actions recommended to remediate. See also [NTIA VEX
+one-page](https://ntia.gov/files/ntia/publications/vex_one-page_summary.pdf)..
 }
 enum HashAlgorithm {
 <b>Summary</b>
@@ -63,26 +120,73 @@ A HashAlgorithm is a mathematical algorithm that maps data of arbitrary
 size to a bit string (the hash) and is a one-way function, that is, a
 function which is practically infeasible to invert.
 .. entries ..
-    <b>blake2b256</b>: TODOdescription
-    <b>blake2b384</b>: TODOdescription
-    <b>blake2b512</b>: TODOdescription
-    <b>blake3</b>: TODOdescription
-    <b>md2</b>: TODOdescription
-    <b>md4</b>: TODOdescription
-    <b>md5</b>: TODOdescription
-    <b>md6</b>: TODOdescription
-    <b>other</b>: TODOdescription
-    <b>sha1</b>: TODOdescription
-    <b>sha224</b>: TODOdescription
-    <b>sha256</b>: TODOdescription
-    <b>sha384</b>: TODOdescription
-    <b>sha3_224</b>: TODOdescription
-    <b>sha3_256</b>: TODOdescription
-    <b>sha3_384</b>: TODOdescription
-    <b>sha3_512</b>: TODOdescription
-    <b>sha512</b>: TODOdescription
+    <b>blake2b256</b>: blake2b algorithm with a digest size of 256
+https://datatracker.ietf.org/doc/html/rfc7693#section-4
+    <b>blake2b384</b>: blake2b algorithm with a digest size of 384
+https://datatracker.ietf.org/doc/html/rfc7693#section-4
+    <b>blake2b512</b>: blake2b algorithm with a digest size of 512
+https://datatracker.ietf.org/doc/html/rfc7693#section-4
+    <b>blake3</b>: https://github.com/BLAKE3-team/BLAKE3-specs/blob/master/blake3.pdf
+    <b>crystalsDilithium</b>: https://pq-crystals.org/dilithium/index.shtml
+    <b>crystalsKyber</b>: https://pq-crystals.org/kyber/index.shtml
+    <b>falcon</b>: https://falcon-sign.info/falcon.pdf
+    <b>md2</b>: https://datatracker.ietf.org/doc/rfc1319/
+    <b>md4</b>: https://datatracker.ietf.org/doc/html/rfc1186
+    <b>md5</b>: https://datatracker.ietf.org/doc/html/rfc1321
+    <b>md6</b>: https://people.csail.mit.edu/rivest/pubs/RABCx08.pdf
+    <b>other</b>: any hashing algorithm that does not exist in this list of entries
+    <b>sha1</b>: https://datatracker.ietf.org/doc/html/rfc3174
+    <b>sha224</b>: secure hashing algorithm with a digest length of 224
+https://datatracker.ietf.org/doc/html/draft-ietf-pkix-sha224-01
+    <b>sha256</b>: secure hashing algorithm with a digest length of 256
+https://www.rfc-editor.org/rfc/rfc4634
+    <b>sha384</b>: secure hashing algorithm with a digest length of 384
+https://www.rfc-editor.org/rfc/rfc4634
+    <b>sha3_224</b>: sha3 with a digest length of 224
+https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.202.pdf
+    <b>sha3_256</b>: sha3 with a digest length of 256
+https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.202.pdf
+    <b>sha3_384</b>: sha3 with a digest length of 384
+https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.202.pdf
+    <b>sha3_512</b>: sha3 with a digest length of 512
+https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.202.pdf
+    <b>sha512</b>: secure hashing algorithm with a digest length of 512
+https://www.rfc-editor.org/rfc/rfc4634
     <b>spdxPvcSha1</b>: TODOdescription
     <b>spdxPvcSha256</b>: TODOdescription
+    <b>sphincsPlus</b>: TODOdescription
+}
+enum LifecycleScopeType {
+<b>Summary</b>
+TODO
+<b>Description</b>
+TODO
+.. entries ..
+    <b>build</b>: TODOdescription
+    <b>design</b>: TODOdescription
+    <b>development</b>: TODOdescription
+    <b>other</b>: TODOdescription
+    <b>runtime</b>: TODOdescription
+    <b>test</b>: TODOdescription
+}
+enum ProfileIdentifierType {
+<b>Summary</b>
+Enumeration of the valid profiles that an element can be specified to be
+part of.
+<b>Description</b>
+There are a set of profiles that have been defined to be valid for a
+specific release This file enumerates the values that have been agreed
+on, and may be applied to the creation information for an an element.
+.. entries ..
+    <b>ai</b>: the element follows the AI profile specification
+    <b>build</b>: the element follows the Build profile specification
+    <b>core</b>: the element follows the Core profile specification
+    <b>dataset</b>: the element follows the Dataset profile specification
+    <b>extension</b>: the element follows the Extension profile specification
+    <b>licensing</b>: the element follows the Licensing profile specification
+    <b>security</b>: the element follows the Security profile specification
+    <b>software</b>: the element follows the Software profile specification
+    <b>usage</b>: the element follows the Usage profile specification
 }
 enum RelationshipCompleteness {
 <b>Summary</b>
@@ -94,7 +198,7 @@ known to be incomplete or if there is made no assertion either way.
 .. entries ..
     <b>complete</b>: The relationship is known to be exhaustive.
     <b>incomplete</b>: The relationship is known not to be exhaustive.
-    <b>unknown</b>: There can be made no assertion about the completeness of the
+    <b>noAssertion</b>: There can be made no assertion about the completeness of the
 relationship.
 }
 enum RelationshipType {
@@ -109,57 +213,104 @@ SPDXDocument and another SPDXDocument.
 Build Profile specific RelationshipType descriptions can be found
 [here](https://github.com/spdx/spdx-3-build-profile/blob/main/model/relationships.md)
 .. entries ..
-    <b>amends</b>: TODOdescription
-    <b>ancestor</b>: TODOdescription
-    <b>buildChildOf</b>: Build instance that was created from another build instance
+    <b>affects</b>: (Security/VEX) Designates one or more elements as affected by a
+vulnerability
+    <b>amends</b>: Every `to` Element amends the `from` Element
+    <b>ancestor</b>: Every `to` Element is an ancestor of the `from` Element
+    <b>availableFrom</b>: This relationship is used to identify additional suppliers where an
+artifact is available from.
     <b>buildConfigOf</b>: Build configuration of the build instance
-    <b>buildDependency</b>: TODOdescription
+    <b>buildDependency</b>: Every `to` Element is a build dependency of the `from` Element
     <b>buildHostOf</b>: Element in which the build instance runs on
     <b>buildInputOf</b>: Input to the build instance
     <b>buildInvokedBy</b>: Agent that invoked the build
-    <b>buildOnBehalfOf</b>: Person for which buildInvokedBy is acting on behalf of
+    <b>buildOnBehalfOf</b>: Actor for which buildInvokedBy is acting on behalf of
     <b>buildOutputOf</b>: Output of the build instance
-    <b>buildTool</b>: TODOdescription
-    <b>buildToolOf</b>: Build tool used in the build instance
-    <b>contains</b>: TODOdescription
-    <b>copy</b>: TODOdescription
-    <b>dataFile</b>: TODOdescription
-    <b>dependencyManifest</b>: TODOdescription
-    <b>dependsOn</b>: TODOdescription
-    <b>descendant</b>: TODOdescription
-    <b>describes</b>: TODOdescription
-    <b>devDependency</b>: TODOdescription
-    <b>devTool</b>: TODOdescription
-    <b>distributionArtifact</b>: TODOdescription
-    <b>documentation</b>: TODOdescription
-    <b>dynamicLink</b>: TODOdescription
-    <b>example</b>: TODOdescription
-    <b>expandedFromArchive</b>: TODOdescription
-    <b>fileAdded</b>: TODOdescription
-    <b>fileDeleted</b>: TODOdescription
-    <b>fileModified</b>: TODOdescription
-    <b>generates</b>: TODOdescription
-    <b>metafile</b>: TODOdescription
-    <b>optionalComponent</b>: TODOdescription
-    <b>optionalDependency</b>: TODOdescription
-    <b>other</b>: TODOdescription
-    <b>packages</b>: TODOdescription
-    <b>patch</b>: TODOdescription
-    <b>prerequisite</b>: TODOdescription
-    <b>providedDependency</b>: TODOdescription
-    <b>requirementFor</b>: TODOdescription
-    <b>runtimeDependency</b>: TODOdescription
-    <b>specificationFor</b>: TODOdescription
-    <b>staticLink</b>: TODOdescription
-    <b>suppliedBy</b>: TODOdescription
-    <b>test</b>: TODOdescription
-    <b>testCase</b>: TODOdescription
-    <b>testDependency</b>: TODOdescription
-    <b>testTool</b>: TODOdescription
-    <b>variant</b>: TODOdescription
+    <b>buildTool</b>: Build tool used to build an Element. This may be used to describe the
+build tool of a Build instance
+    <b>contains</b>: Every `to` Element is contained by the `from` Element
+    <b>coordinatedBy</b>: (Security) Used to identify the vendor, researcher, or consumer agent
+performing coordination for a vulnerability
+    <b>copy</b>: Every `to` Element is a copy of the `from` Element
+    <b>dataFile</b>: Every `to` Element is a data file related to the the `from` Element
+    <b>dependencyManifest</b>: Every `to` Element is manifest file containing dependency information
+related to the `from` Element
+    <b>dependsOn</b>: Every `to` Element is a dependecy of the `from` Element
+    <b>descendant</b>: This relationship may be used to describe child builds of a Build
+instance.
+    <b>describes</b>: Every `to` Element is described by the `from` Element. This can be used
+to denote the root(s) of a tree of elements contained in an SBOM.
+    <b>devDependency</b>: Every `to` Element is a development dependency for the `from` Element
+    <b>devTool</b>: Every `to` Element is a development tool for the `from` Element
+    <b>distributionArtifact</b>: Every `to` Element is an artifact intended for distribution of the
+`from` Element (e.g. an RPM or archive file)
+    <b>documentation</b>: Every `to` Element is documentation for the `from` Element
+    <b>doesNotAffect</b>: (Security/VEX) Specifies a vulnerability has no impact on one or more
+elements
+    <b>dynamicLink</b>: Every `to` Element is dynamically linked to the `from` Element
+    <b>evidenceFor</b>: (Dataset) Every `to` Element is can be considered as evidence for the
+`from` Element
+    <b>example</b>: Every `to` Element is an example for the `from` Element
+    <b>expandedFromArchive</b>: Every `to` Element is an artifact expanded from the `from` archive file
+    <b>exploitCreatedBy</b>: (Security) Designates an agent has created an exploit against a
+vulnerability
+    <b>fileAdded</b>: Every `to` Element is is a file added to the `from` Element
+    <b>fileDeleted</b>: Every `to` Element is a file deleted from the `from` Element
+    <b>fileModified</b>: Every `to` Element is a modification of the `from` Element
+    <b>fixedBy</b>: (Security) Designates a vulnerability has been fixed by an agent
+    <b>fixedIn</b>: (Security/VEX) A vulnerability has been fixed in one or more elements
+    <b>foundBy</b>: (Security) Designates an agent was the original discoverer of a security
+vulnerability
+    <b>generates</b>: Every `to` Element is generated from the `from` Element
+    <b>hasAssessmentFor</b>: (Security) Relates a Vulnerability and an Element with a security
+assessment.
+    <b>hasAssociatedVulnerability</b>: (Security) Used to associate a security vulnerability with a software
+artifact
+    <b>metafile</b>: Every `to` Element is is a file containing metadata about the `from`
+Element
+    <b>optionalComponent</b>: Every `to` Element is an optional component of the `from` Element
+    <b>optionalDependency</b>: Every `to` Element is an optional dependency of the `from` Element
+    <b>other</b>: Every `to` Element is related to the `from` Element where the
+relationship type is not described by any of the SPDX relationhip types
+    <b>packages</b>: Every `to` Element is a packaged form of the `from` Element
+    <b>patch</b>: Every `to` Element is a patch for the `from` Element
+    <b>prerequisite</b>: Every `to` Element is a prerequisite of the `from` Element
+    <b>providedDependency</b>: Every `to` Element is a dependency not included in the distributed
+artifact but is assumed to be provided the `from` Element
+    <b>publishedBy</b>: (Security) Designates the agent that made a vulnerability record
+available for public use or reference
+    <b>reportedBy</b>: (Security) Designates the agent that first reported a vulnerability to
+the project, vendor, or tracking database for formal identification
+    <b>republishedBy</b>: (Security) Designates the agent that tracked, aggregated, and/or
+enriched vulnerability details to improve context (i.e. NVD)
+    <b>requirementFor</b>: Every `to` Element is required for the `from` Element
+    <b>runtimeDependency</b>: Every `to` Element is a runtime dependency for the `from` Element
+    <b>specificationFor</b>: Every `to` Element is a specification for the `from` Element
+    <b>staticLink</b>: Every `to` Element is statically linked to the `from` Element
+    <b>test</b>: Every `to` Element is a test artifact for the `from` Element
+    <b>testCase</b>: Every `to` Element is a test case for the `from` Element
+    <b>testDependency</b>: Every `to` Element is a test dependency for the `from` Element
+    <b>testTool</b>: Every `to` Element is a test tool for the `from` Element
+    <b>testedOn</b>: (AI, Dataset) The `from` Element has been tested on the `to` Element
+    <b>trainedOn</b>: (AI, Dataset) The `from` Element has been trained by the `to` Element(s)
+    <b>underInvestigationFor</b>: (Security/VEX) The impact of a vulnerability is being investigated
+    <b>variant</b>: Every `to` Element is a variant the `from` Element
 }
 ' classes
 together {
+class Agent {
+<b>Summary</b>
+Agent represents anything with the potential to act on a system.
+<b>Description</b>
+The Agent class represents anything that has the potential to act on a
+system. This could be a person, organization, software agent, etc. This
+is not to be confused with tools that are used to perform tasks.
+.. metadata ..
+    Instantiability : Concrete
+    SubclassOf : Element
+    name : Agent
+.. properties ..
+}
 class Annotation {
 <b>Summary</b>
 An assertion made in relation to one or more elements.
@@ -188,11 +339,11 @@ TODO
     SubclassOf : Payload
     name : AnonymousPayload
 .. properties ..
-    <b>creationInfo </b>: CreationInformation [0..1]
+    <b>creationInfo </b>: CreationInfo [0..1]
     <b>imports </b>: ExternalMap 
     <b>namespaces </b>: NamespaceMap 
 }
-"CreationInformation" <-[dashed,thickness=4]-- "AnonymousPayload::creationInfo"
+"CreationInfo" <-[dashed,thickness=4]-- "AnonymousPayload::creationInfo"
 "ExternalMap" <-[dashed,thickness=4]-- "AnonymousPayload::imports"
 "NamespaceMap" <-[dashed,thickness=4]-- "AnonymousPayload::namespaces"
 abstract Artifact {
@@ -207,9 +358,18 @@ of data.
     SubclassOf : Element
     name : Artifact
 .. properties ..
-    <b>originatedBy </b>: Identity [0..]
+    <b>builtTime </b>: DateTime [0..1]
+    <b>originatedBy </b>: Agent [0..]
+    <b>releaseTime </b>: DateTime [0..1]
+    <b>standard </b>: xsd:string [0..]
+    <b>suppliedBy </b>: Agent [0..]
+    <b>validUntilTime </b>: DateTime [0..1]
 }
-"Identity" <-[dashed,thickness=4]-- "Artifact::originatedBy"
+"DateTime" <-[dashed,thickness=4]-- "Artifact::builtTime"
+"Agent" <-[dashed,thickness=4]-- "Artifact::originatedBy"
+"DateTime" <-[dashed,thickness=4]-- "Artifact::releaseTime"
+"Agent" <-[dashed,thickness=4]-- "Artifact::suppliedBy"
+"DateTime" <-[dashed,thickness=4]-- "Artifact::validUntilTime"
 class Bom {
 <b>Summary</b>
 A container for a grouping of SPDX-3.0 content characterizing details
@@ -238,28 +398,61 @@ A bundle is a collection of Elements that have a shared context.
 .. properties ..
     <b>context </b>: xsd:string [..1]
 }
-class CreationInformation {
+class CreationInfo {
 <b>Summary</b>
 Provides information about the creation of the Element.
 <b>Description</b>
-The CreationInformation provides information about who created the
-Element, and when and how it was created.
+The CreationInfo provides information about who created the Element, and
+when and how it was created.
+
+The dateTime created is often the date of last change (e.g., a git
+commit date), not the date when the SPDX data was created, as doing so
+supports reproducible builds.
 .. metadata ..
     Instantiability : Concrete
-    name : CreationInformation
+    name : CreationInfo
 .. properties ..
     <b>comment </b>: xsd:string [0..1]
-    <b>created </b>: xsd:dateTime 
-    <b>createdBy </b>: Entity [1..]
+    <b>created </b>: DateTime 
+    <b>createdBy </b>: Agent [1..]
     <b>createdUsing </b>: Tool [0..]
     <b>dataLicense </b>: xsd:string 
-    <b>profile </b>: ProfileIdentifier [1..]
+    <b>profile </b>: ProfileIdentifierType [1..]
     <b>specVersion </b>: SemVer 
 }
-"Entity" <-[dashed,thickness=4]-- "CreationInformation::createdBy"
-"Tool" <-[dashed,thickness=4]-- "CreationInformation::createdUsing"
-"ProfileIdentifier" <-[dashed,thickness=4]-- "CreationInformation::profile"
-"SemVer" <-[dashed,thickness=4]-- "CreationInformation::specVersion"
+"DateTime" <-[dashed,thickness=4]-- "CreationInfo::created"
+"Agent" <-[dashed,thickness=4]-- "CreationInfo::createdBy"
+"Tool" <-[dashed,thickness=4]-- "CreationInfo::createdUsing"
+"ProfileIdentifierType" <-[dashed,thickness=4]-- "CreationInfo::profile"
+"SemVer" <-[dashed,thickness=4]-- "CreationInfo::specVersion"
+class DateTime {
+<b>Summary</b>
+A string representing a specific date and time.
+<b>Description</b>
+A Datetime is a string representation of a specific date and time. It
+has resolution of seconds and is always expressed in UTC timezone. The
+specific format is one of the most commonly used ISO-8601 formats.
+.. metadata ..
+    SubclassOf : xsd:string
+    name : DateTime
+.. properties ..
+}
+class DictionaryEntry {
+<b>Summary</b>
+A key with an associated value.
+<b>Description</b>
+The class used for implementing a generic string mapping (also known as
+associative array, dictionary, or hash map) in SPDX. Each
+DictionaryEntry contains a key-value pair which maps the key to its
+associated value. To implement a dictionary, this class is to be used in
+a collection with unique keys.
+.. metadata ..
+    Instantiability : Concrete
+    name : DictionaryEntry
+.. properties ..
+    <b>key </b>: xsd:string [1..1]
+    <b>value </b>: xsd:string [..1]
+}
 abstract Element {
 <b>Summary</b>
 Base domain class from which all other SPDX-3.0 domain classes derive.
@@ -276,20 +469,20 @@ all explicit and inter-relatable content objects.
     name : Element
 .. properties ..
     <b>comment </b>: xsd:string [..1]
-    <b>creationInfo </b>: CreationInformation [1..1]
+    <b>creationInfo </b>: CreationInfo [0..1]
     <b>description </b>: xsd:string [..1]
-    <b>extensions </b>: Extension 
-    <b>externalIdentifiers </b>: ExternalIdentifier 
-    <b>externalReferences </b>: ExternalReference 
+    <b>extension </b>: Extension [0..]
+    <b>externalIdentifier </b>: ExternalIdentifier [0..]
+    <b>externalReference </b>: ExternalReference [0..]
     <b>name </b>: xsd:string [..1]
     <b>spdxId </b>: xsd:anyURI [1..1]
     <b>summary </b>: xsd:string [..1]
     <b>verifiedUsing </b>: IntegrityMethod 
 }
-"CreationInformation" <-[dashed,thickness=4]-- "Element::creationInfo"
-"Extension" <-[dashed,thickness=4]-- "Element::extensions"
-"ExternalIdentifier" <-[dashed,thickness=4]-- "Element::externalIdentifiers"
-"ExternalReference" <-[dashed,thickness=4]-- "Element::externalReferences"
+"CreationInfo" <-[dashed,thickness=4]-- "Element::creationInfo"
+"Extension" <-[dashed,thickness=4]-- "Element::extension"
+"ExternalIdentifier" <-[dashed,thickness=4]-- "Element::externalIdentifier"
+"ExternalReference" <-[dashed,thickness=4]-- "Element::externalReference"
 "IntegrityMethod" <-[dashed,thickness=4]-- "Element::verifiedUsing"
 abstract ElementCollection {
 <b>Summary</b>
@@ -311,17 +504,6 @@ unifying context.
 "ExternalMap" <-[dashed,thickness=4]-- "ElementCollection::imports"
 "NamespaceMap" <-[dashed,thickness=4]-- "ElementCollection::namespaces"
 "Element" <-[dashed,thickness=4]-- "ElementCollection::rootElement"
-class Entity {
-<b>Summary</b>
-TODO
-<b>Description</b>
-TODO
-.. metadata ..
-    Instantiability : Concrete
-    SubclassOf : Element
-    name : Entity
-.. properties ..
-}
 class ExternalIdentifier {
 <b>Summary</b>
 A reference to a resource outside the scope of SPDX-3.0 content that
@@ -336,6 +518,8 @@ SPDX-3.0 content that uniquely identifies an Element.
     <b>comment </b>: xsd:string [0..1]
     <b>externalIdentifierType </b>: ExternalIdentifierType [1..1]
     <b>identifier </b>: xsd:string [1..1]
+    <b>identifierLocator </b>: xsd:anyURI [0..]
+    <b>issuingAuthority </b>: xsd:anyURI [0..1]
 }
 "ExternalIdentifierType" <-[dashed,thickness=4]-- "ExternalIdentifier::externalIdentifierType"
 class ExternalMap {
@@ -352,6 +536,7 @@ provenance, where to retrieve it, and how to verify its integrity.
     SubclassOf : none
     name : ExternalMap
 .. properties ..
+    <b>definingDocument </b>: xsd:anyURI [..1]
     <b>externalId </b>: xsd:anyURI [1..1]
     <b>locationHint </b>: xsd:anyURI [..1]
     <b>verifiedUsing </b>: IntegrityMethod 
@@ -392,25 +577,13 @@ checking of data.
     <b>hashValue </b>: xsd:string [1..1]
 }
 "HashAlgorithm" <-[dashed,thickness=4]-- "Hash::algorithm"
-class Identity {
-<b>Summary</b>
-An individual or organization.
-<b>Description</b>
-An Identity is a grouping of identifying characteristics unique to an
-individual or organization.
-.. metadata ..
-    Instantiability : Concrete
-    SubclassOf : Entity
-    name : Identity
-.. properties ..
-}
 abstract IntegrityMethod {
 <b>Summary</b>
 Provides an independently reproducible mechanism that permits
-identification of a specific Element.
+verification of a specific Element.
 <b>Description</b>
 An IntegrityMethod provides an independently reproducible mechanism that
-permits identification of a specific Element that correlates to the data
+permits verification of a specific Element that correlates to the data
 in this SPDX document. This identifier enables a recipient to determine
 if anything in the original Element has been changed and eliminates
 confusion over which version or modification of a specific Element is
@@ -421,6 +594,19 @@ referenced.
 .. properties ..
     <b>comment </b>: xsd:string [..1]
 }
+class LifecycleScopedRelationship {
+<b>Summary</b>
+MISSING
+<b>Description</b>
+TODO
+.. metadata ..
+    Instantiability : Concrete
+    SubclassOf : Relationship
+    name : LifecycleScopedRelationship
+.. properties ..
+    <b>scope </b>: LifecycleScopeType [0..1]
+}
+"LifecycleScopeType" <-[dashed,thickness=4]-- "LifecycleScopedRelationship::scope"
 class MediaType {
 <b>Summary</b>
 Standardized way of indicating the type of content of an Element. A
@@ -446,8 +632,8 @@ human-readable and smaller serialized representation of the Elements.
     Instantiability : Concrete
     name : NamespaceMap
 .. properties ..
-    <b>namespace </b>: xsd:anyURI [..1]
-    <b>prefix </b>: xsd:string [..1]
+    <b>namespace </b>: xsd:anyURI [1..1]
+    <b>prefix </b>: xsd:string [1..1]
 }
 class Organization {
 <b>Summary</b>
@@ -458,7 +644,7 @@ An Organization is a group of people who work together in an organized
 way for a shared purpose.
 .. metadata ..
     Instantiability : Concrete
-    SubclassOf : Identity
+    SubclassOf : Agent
     name : Organization
 .. properties ..
 }
@@ -472,11 +658,11 @@ TODO
     SubclassOf : none
     name : Payload
 .. properties ..
-    <b>creationInfo </b>: CreationInformation [0..1]
+    <b>creationInfo </b>: CreationInfo [0..1]
     <b>imports </b>: ExternalMap 
     <b>namespaces </b>: NamespaceMap 
 }
-"CreationInformation" <-[dashed,thickness=4]-- "Payload::creationInfo"
+"CreationInfo" <-[dashed,thickness=4]-- "Payload::creationInfo"
 "ExternalMap" <-[dashed,thickness=4]-- "Payload::imports"
 "NamespaceMap" <-[dashed,thickness=4]-- "Payload::namespaces"
 class Person {
@@ -486,20 +672,23 @@ An individual human being.
 A Person is an individual human being.
 .. metadata ..
     Instantiability : Concrete
-    SubclassOf : Identity
+    SubclassOf : Agent
     name : Person
 .. properties ..
 }
-class ProfileIdentifier {
+class PositiveIntegerRange {
 <b>Summary</b>
-Provides the profile that the Element is specified in.
+A tuple of two positive integers that define a range.
 <b>Description</b>
-A profile identifier provides the profile that the Element is specified
-in.
+PositiveIntegerRange is a tuple of two positive integers that define a
+range. "begin" must be less than or equal to "end".
 .. metadata ..
-    SubclassOf : xsd:string
-    name : ProfileIdentifier
+    Instantiability : Concrete
+    SubclassOf : none
+    name : PositiveIntegerRange
 .. properties ..
+    <b>begin </b>: xsd:positiveInteger [1..1]
+    <b>end </b>: xsd:positiveInteger [1..1]
 }
 class Relationship {
 <b>Summary</b>
@@ -513,23 +702,39 @@ that one Element is related to one or more other Elements in some way.
     name : Relationship
 .. properties ..
     <b>completeness </b>: RelationshipCompleteness [0..1]
+    <b>endTime </b>: DateTime [0..1]
     <b>from </b>: Element [1..1]
-    <b>relationshipType </b>: RelationshipType [..1]
-    <b>to </b>: Element [1..]
+    <b>relationshipType </b>: RelationshipType [1..1]
+    <b>startTime </b>: DateTime [0..1]
+    <b>to </b>: Element [0..]
 }
 "RelationshipCompleteness" <-[dashed,thickness=4]-- "Relationship::completeness"
+"DateTime" <-[dashed,thickness=4]-- "Relationship::endTime"
 "Element" <-[dashed,thickness=4]-- "Relationship::from"
 "RelationshipType" <-[dashed,thickness=4]-- "Relationship::relationshipType"
+"DateTime" <-[dashed,thickness=4]-- "Relationship::startTime"
 "Element" <-[dashed,thickness=4]-- "Relationship::to"
 class SemVer {
 <b>Summary</b>
-A String constrained to the SemVer 2.0.0 specification.
+A string constrained to the SemVer 2.0.0 specification.
 <b>Description</b>
-The semantic version is a String constrained to the SemVer 2.0.0
-specification.
+The semantic version is a string that is following the specification of
+[Semantic Versioning 2.0.0](https://semver.org/).
 .. metadata ..
     SubclassOf : xsd:string
     name : SemVer
+.. properties ..
+}
+class SoftwareAgent {
+<b>Summary</b>
+A software agent.
+<b>Description</b>
+A SoftwareAgent is a software program that is given the authority
+(similar to a user's authority) to act on a system.
+.. metadata ..
+    Instantiability : Concrete
+    SubclassOf : Agent
+    name : SoftwareAgent
 .. properties ..
 }
 class SpdxDocument {
@@ -556,11 +761,12 @@ A Tool is an element of hardware and/or software utilized to carry out a
 particular function.
 .. metadata ..
     Instantiability : Concrete
-    SubclassOf : Entity
+    SubclassOf : Element
     name : Tool
 .. properties ..
 }
 }
+"Element" <|-[thickness=4]- "Agent"
 "Element" <|-[thickness=4]- "Annotation"
 "Payload" <|-[thickness=4]- "AnonymousPayload"
 "Element" <|-[thickness=4]- "Artifact"
@@ -568,12 +774,12 @@ particular function.
 "ElementCollection" <|-[thickness=4]- "Bundle"
 "Payload" <|-[thickness=4]- "Element"
 "Element" <|-[thickness=4]- "ElementCollection"
-"Element" <|-[thickness=4]- "Entity"
 "IntegrityMethod" <|-[thickness=4]- "Hash"
-"Entity" <|-[thickness=4]- "Identity"
-"Identity" <|-[thickness=4]- "Organization"
-"Identity" <|-[thickness=4]- "Person"
+"Relationship" <|-[thickness=4]- "LifecycleScopedRelationship"
+"Agent" <|-[thickness=4]- "Organization"
+"Agent" <|-[thickness=4]- "Person"
 "Element" <|-[thickness=4]- "Relationship"
+"Agent" <|-[thickness=4]- "SoftwareAgent"
 "Bundle" <|-[thickness=4]- "SpdxDocument"
-"Entity" <|-[thickness=4]- "Tool"
+"Element" <|-[thickness=4]- "Tool"
 @enduml
